@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Photon</title>
+    <link rel="stylesheet" href="css/photon.css">
+    <script src="js/main.js"></script>
+    <script src="js/vue.js" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="app" class="window">
+        <div class="window-content">
+            <div class="pane-group">
+                <div class="pane">
+                    <table class="table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Size</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(file, i) in files" v-bind:class="[file.sel ? 'sel' : '']">
+                                <td>
+                                    <span v-if="i == cur" class="icon icon-right-open"></span>
+                                </td>
+                                <td>
+                                    <span v-if="file.stat.isDirectory()" class="icon icon-folder"></span>
+                                    <span v-if="file.stat.isSymbolicLink()" class="icon icon-export"></span>
+                                </td>
+                                <td>{{file.name}}</td>
+                                <td>{{file.stat.size | fileSize}}</td>
+                                <td>{{file.stat.mtime | formatDate}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
