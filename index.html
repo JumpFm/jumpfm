@@ -1,0 +1,216 @@
+<html>
+
+<head>
+    <title>JumpFm</title>
+    <meta name="description" content="JumpFm - a minimalistic dual panel file manager that lets you jump"/>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="shortcut icon" href="favicon.ico">
+    <script src="https://use.fontawesome.com/219041236c.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <h1>JumpFm</h1>
+        <h2>A file manager that lets you jump</h2>
+        <div id="ss">
+            <img class="ss" src="jumpfm.gif" alt="JumpFm" />
+        </div>
+        <div id="download">
+            <a class="btn" href="https://github.com/Gilad-Kutiel-App/jumpfm/releases" target="_blank">
+                <i class="fa fa-download"></i>Download
+            </a>
+        </div>
+
+        <!-- ABOUT  -->
+        <h3>
+            <a name="about"></a><i class="fa fa-info"></i> About
+        </h3>
+        <p>
+            JumpFm is a minimalistic dual panel file manager (currently released only for Linux) that lets you navigate your file system very efficiently.
+        </p>
+
+        <section>
+            <a name="killer-features"></a>
+            <div class="cols">
+                <!-- JUMPING  -->
+                <div class="col">
+                    <h3>
+                        <a name="jumping"></a>
+                        <i class="fa fa-bolt"></i> Jumping
+                    </h3>
+                    <p>
+                        JumpFm learns. That is, whenever you visit a folder JumpFm remember that folder so you can jump directly to this folder later on. To do that just hit the <code>j</code> key and start typing.
+                    </p>
+                </div>
+
+                <!-- FILTERING  -->
+                <div class="col">
+                    <h3>
+                        <a name="filtering"></a>
+                        <i class="fa fa-filter"></i> Filtering
+                    </h3>
+                    <p>
+                        You can quickly find the files you are looking for in a directory using filters. To do that just hit the <code>f</code> key and start typing.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <h3>
+            <a name="keyboard-shortcuts"></a>
+            <i class="fa fa-keyboard-o"></i> Keyboard Shortcuts</h3>
+        <!-- ALERT  -->
+        <div class="alert">
+            <h4>
+                <a name="alert"></a>
+                <i class="fa fa-exclamation-triangle"></i> Alert
+            </h4>
+            <p>
+                There are no confirmation dialogs in JumpFm, whenever you hit the <code>DEL</code> key a file is gone.
+            </p>
+        </div>
+
+        <table>
+            <tbody>
+                <!-- POWER NAVIGATION  -->
+                <tr>
+                    <a name="power-navigation"></a>
+                    <th class="sep" colspan="2">power navigation</th>
+                </tr>
+                <tr>
+                    <td>j</td>
+                    <td>open the jump dialog</td>
+                </tr>
+                <tr>
+                    <td>f</td>
+                    <td>open the filter box</td>
+                </tr>
+
+                <!-- NAVIGATION  -->
+                <tr>
+                    <th class="sep" colspan="2">navigation</th>
+                </tr>
+                <tr>
+                    <td>home</td>
+                    <td>go to home directory</td>
+                </tr>
+                <tr>
+                    <td>tab</td>
+                    <td>switch panel</td>
+                </tr>
+                <tr>
+                    <td>up</td>
+                    <td>move cursor up one line</td>
+                </tr>
+                <tr>
+                    <td>page up</td>
+                    <td>move cursor up 10 lines</td>
+                </tr>
+                <tr>
+                    <td>down</td>
+                    <td>move cursor down one line</td>
+                </tr>
+                <tr>
+                    <td>page down</td>
+                    <td>move cursor down 10 lines</td>
+                </tr>
+                <tr>
+                    <td>enter</td>
+                    <td>enter a directory</td>
+                </tr>
+                <tr>
+                    <td>backspace</td>
+                    <td>move one directory up</td>
+                </tr>
+                <tr>
+                    <td>alt + right</td>
+                    <td>open directory in right panel</td>
+                </tr>
+                <tr>
+                    <td>alt + left</td>
+                    <td>open directory in left panel</td>
+                </tr>
+                <tr>
+                    <td>ctrl + s</td>
+                    <td>swipe panels</td>
+                </tr>
+
+                <!-- SELECTION  -->
+                <tr>
+                    <th class="sep" colspan="2">selection</th>
+                </tr>
+                <tr>
+                    <td>shift + up/down</td>
+                    <td>selects current file and move</td>
+                </tr>
+                <tr>
+                    <td>space</td>
+                    <td>toggle selection</td>
+                </tr>
+                <tr>
+                    <td>ctrl + a</td>
+                    <td>select all</td>
+                </tr>
+                <tr>
+                    <td>esc</td>
+                    <td>deselect all</td>
+                </tr>
+
+                <!-- FILE OPERATIONS  -->
+                <tr>
+                    <a name="file-operations"></a>
+                    <th class="sep" colspan="2">file operations</th>
+                </tr>
+                <tr>
+                    <td>F2</td>
+                    <td>rename file</td>
+                </tr>
+                <tr>
+                    <td>F4</td>
+                    <td>edit file</td>
+                </tr>
+                <tr>
+                    <td>F5</td>
+                    <td>copy selected files</td>
+                </tr>
+                <tr>
+                    <td>F6</td>
+                    <td>move selected files</td>
+                </tr>
+                <tr>
+                    <td>F7</td>
+                    <td>new folder</td>
+                </tr>
+                <tr>
+                    <td>Shift + F4</td>
+                    <td>new file</td>
+                </tr>
+                <tr>
+                    <td>del</td>
+                    <td>delete selected files</td>
+                </tr>
+                <tr>
+                    <td>p</td>
+                    <td>copy full path of current file to clipboard</td>
+                </tr>
+            </tbody>
+        </table>
+        <section>
+            <h3>
+                <a name="feature-request"></a>
+                <i class="fa fa-github-alt"></i> Feature Request</h3>
+            <p>Please feel free to
+                <a href="https://github.com/Gilad-Kutiel-App/jumpfm/issues/new" target="_blank">open an issue</a>.
+            </p>
+        </section>
+
+    </div>
+    <a href="https://github.com/Gilad-Kutiel-App/jumpfm"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67"
+            alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+    <footer>
+        JumpFm by Gilad Kutiel
+    </footer>
+</body>
+
+</html>
