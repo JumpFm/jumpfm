@@ -109,8 +109,6 @@
     "js": ["javascript"],
     "js_official": ["javascript"],
     "json": ["json", "textmatejson"],
-    "json_official": ["json", "textmatejson"],
-    "json2": ["json", "textmatejson"],
     "jsonld": ["jsonld", "json-ld"],
     "jsp": ["jsp"],
     "julia": ["julia"],
