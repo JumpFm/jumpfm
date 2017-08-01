@@ -1,0 +1,28 @@
+@import 'colors';
+table {
+    width: 100%;
+    text-align: left;
+    tr {
+        &:nth-child(even) {
+            background-color: $color-tr-even;
+        }
+    }
+    th {
+        &.sep {
+            text-transform: capitalize;
+            padding: 10px 0;
+            background-color: $color-bg;
+        }
+    }
+    td {
+        font-size: 85%;
+        padding: 5px;
+        &:first-child {
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+        &:nth-child(2) {
+            text-transform: capitalize;
+        }
+    }
+}

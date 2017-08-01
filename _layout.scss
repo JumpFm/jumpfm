@@ -1,0 +1,28 @@
+#ss {
+    margin: 20px 0;
+}
+
+#download {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 60px;
+    font-size: 120%;
+}
+
+section {
+    margin: 2em 0;
+}
+
+div.cols {
+    display: flex;
+}
+
+div.col {
+    flex-basis: 50%;
+    flex-grow: 1;
+    margin-right: 1em;
+}
+
+div.col:last-child {
+    margin-right: 0;
+}
