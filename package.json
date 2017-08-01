@@ -44,7 +44,8 @@
         "appId": "com.github.gkutiel.jumpfm",
         "linux": {
             "files": [
-                "**/*"
+                "**/*",
+                "build/icons/*"
             ],
             "target": "AppImage",
             "category": "Utility",
