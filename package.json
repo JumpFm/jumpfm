@@ -1,6 +1,6 @@
 {
     "name": "JumpFm",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "A file manager that lets you jump",
     "author": "Gilad Kutiel",
     "license": "ISC",
@@ -44,8 +44,7 @@
         "appId": "com.github.gkutiel.jumpfm",
         "linux": {
             "files": [
-                "**/*",
-                "build/icons/*"
+                "**/*"
             ],
             "target": "AppImage",
             "category": "Utility",
@@ -55,7 +54,6 @@
     "scripts": {
         "pack": "build --dir",
         "dist": "build",
-        "publish": "build --publish always",
-        "watch": "webpack --watch"
+        "publish": "build --publish always"
     }
 }

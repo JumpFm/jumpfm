@@ -26,12 +26,11 @@ export class FileInfo {
 
     private getIcon = (fullPath: string) => {
         const ext = path.extname(fullPath).substr(1).toLowerCase()
-
         const icon = extensions[ext]
-        if (icon) return 'file-icons/file_type_' + icon + '.svg'
-
-        const svg = 'file-icons/file_type_' + ext + '.svg'
-        if (fs.existsSync(svg)) return svg
+        console.log(ext, icon)
+        if (icon) {
+            return 'file-icons/file_type_' + icon + '.svg'
+        }
 
         return this.stat.isDirectory() ?
             'file-icons/default_folder.svg' :

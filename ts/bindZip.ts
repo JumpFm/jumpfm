@@ -8,11 +8,7 @@ import * as path from 'path'
 import * as archiver from 'archiver'
 
 export function bindZip(jumpFm: JumpFm) {
-
-    console.log('bindZip')
-
     mousetrap.bind('u', () => {
-        console.log('bindZip')
         const pan = jumpFm.panels.getActivePanel()
         const zipFile = pan.getCurFile()
 
@@ -33,7 +29,6 @@ export function bindZip(jumpFm: JumpFm) {
         const zip = archiver('zip', { zlib: { level: 1 } })
         const pan = jumpFm.panels.getActivePanel()
         pan.getSelectedFiles().forEach(file => {
-            console.log('adding', file.fullPath, file.name)
             if (file.stat.isDirectory()) zip.directory(file.fullPath, file.name)
             else zip.append(file.fullPath, { name: file.name })
         })
