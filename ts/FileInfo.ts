@@ -27,7 +27,6 @@ export class FileInfo {
     private getIcon = (fullPath: string) => {
         const ext = path.extname(fullPath).substr(1).toLowerCase()
         const icon = extensions[ext]
-        console.log(ext, icon)
         if (icon) {
             return 'file-icons/file_type_' + icon + '.svg'
         }
