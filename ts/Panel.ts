@@ -21,13 +21,16 @@ export class Panel {
         this.statusBar = jumpFm.statusBar
     }
 
+    private tbody = () => document.getElementById(this.tbodyId)
+    private rowHeight = () => this.tbody().scrollHeight / this.tbody().childNodes.length
+
     private scroll = () => {
-        const tbody = document.getElementById(this.tbodyId);
-        setTimeout(() => {
-            const rowHeight = tbody.scrollHeight / tbody.childNodes.length;
-            tbody.scrollTop = Math.max(0, this.cur() - 10) * rowHeight;
-        }, 100);
+        setTimeout(() =>
+            this.tbody().scrollTop = Math.max(0, this.getCur() - 10) * this.rowHeight()
+            , 100);
     }
+
+    getRowCountInPage = () => this.tbody().clientHeight / this.rowHeight()
 
     clear = () => {
         this.model.files = []
@@ -41,7 +44,7 @@ export class Panel {
         this.model.filter = filter
     }
 
-    cur = (): number => {
+    getCur = (): number => {
         return Math.min(
             this.getFiles().length - 1,
             Math.max(0, this.model.cur)
@@ -49,7 +52,7 @@ export class Panel {
     }
 
     getCurFile = (): FileInfo => {
-        return this.getFiles()[this.cur()]
+        return this.getFiles()[this.getCur()]
     }
 
     setFiles = (files: FileInfo[]): void => {
@@ -88,9 +91,22 @@ export class Panel {
         this.filter('')
     }
 
-    step = (d: number) => {
-        this.model.cur = this.cur() + d
+    selectRange = (a, b) => {
+        try {
+            if (a > b) return this.selectRange(b, a)
+            const files = this.getFiles()
+            for (var i = a; i <= b; i++) files[i].sel = true
+        } catch (e) {
+            console.log(a, b)
+        }
+    }
+
+    step = (d: number, select = false) => {
+        const i1 = this.getCur()
+        this.model.cur = this.getCur() + d
         this.scroll()
+
+        if (select) this.selectRange(i1, this.getCur())
     }
 
     back = (): void => {
@@ -137,7 +153,7 @@ export class Panel {
 
     getSelectedFiles = (): FileInfo[] => {
         return this.getFiles().filter((file, i) => {
-            return file.sel || this.cur() == i
+            return file.sel || this.getCur() == i
         })
     }
 
@@ -229,7 +245,7 @@ export class Panel {
         flatMode: false,
         showHidden: false,
         get: {
-            cur: this.cur,
+            cur: this.getCur,
             files: this.getFiles,
             title: this.title
         }

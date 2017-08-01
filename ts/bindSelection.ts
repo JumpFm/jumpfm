@@ -18,14 +18,4 @@ export function bindSelection(jumpFm: JumpFm) {
         return false;
     });
     mousetrap.bind('ctrl+a', () => { pan().selectAll(); return false; });
-    mousetrap.bind('shift+down', () => {
-        pan().select();
-        pan().step(1);
-        return false;
-    });
-    mousetrap.bind('shift+up', () => {
-        pan().select();
-        pan().step(-1);
-        return false;
-    });
 }

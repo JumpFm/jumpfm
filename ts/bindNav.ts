@@ -13,16 +13,34 @@ export function bindNav(jumpFm: JumpFm) {
     }
 
     // UP DOWN
-    function up() { pan().step(-1); return false }
-    function down() { pan().step(1); return false }
-    // mousetrap.bind('k', up)
-    mousetrap.bind('up', up)
-    mousetrap.bind('pageup', () => { pan().step(-10); return false })
-    // mousetrap.bind('j', down)
-    mousetrap.bind('down', down)
-    mousetrap.bind('pagedown', () => { pan().step(10); return false })
-    mousetrap.bind('home', () => { pan().step(-9999) })
-    mousetrap.bind('end', () => { pan().step(9999) })
+    const up = (select) => { pan().step(-1, select); return false }
+    const down = (select) => { pan().step(1, select); return false }
+    mousetrap.bind('up', () => up(false))
+    mousetrap.bind('shift+up', () => up(true))
+    mousetrap.bind('down', () => down(false))
+    mousetrap.bind('shift+down', () => down(true))
+
+    const pageUp = (select) => {
+        pan().step(-pan().getRowCountInPage(), select);
+        return false
+    }
+    const pageDown = (select) => {
+        pan().step(pan().getRowCountInPage(), select);
+        return false
+    }
+    mousetrap.bind('pageup', () => pageUp(false))
+    mousetrap.bind('shift+pageup', () => pageUp(true))
+    mousetrap.bind('pagedown', () => pageDown(false))
+    mousetrap.bind('shift+pagedown', () => pageDown(true))
+
+    const home = (select) => { pan().step(-9999, select); return false }
+    const end = (select) => { pan().step(9999, select); return false }
+
+    mousetrap.bind('home', () => home(false))
+    mousetrap.bind('shift+home', () => home(true))
+    mousetrap.bind('end', () => end(false))
+    mousetrap.bind('shift+end', () => end(true))
+
 
     // NAVIGATION
     mousetrap.bind('enter', () => {
