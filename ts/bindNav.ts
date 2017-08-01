@@ -21,11 +21,11 @@ export function bindNav(jumpFm: JumpFm) {
     mousetrap.bind('shift+down', () => down(true))
 
     const pageUp = (select) => {
-        pan().step(-pan().getRowCountInPage(), select);
+        pan().step(-pan().getRowCountInPage() + 1, select);
         return false
     }
     const pageDown = (select) => {
-        pan().step(pan().getRowCountInPage(), select);
+        pan().step(pan().getRowCountInPage() - 1, select);
         return false
     }
     mousetrap.bind('pageup', () => pageUp(false))

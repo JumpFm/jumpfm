@@ -25,7 +25,7 @@ export class Panel {
     private rowHeight = () => this.tbody().scrollHeight / this.tbody().childNodes.length
 
     private scroll = () => {
-        setTimeout(() =>
+        setImmediate(() =>
             this.tbody().scrollTop = Math.max(0, this.getCur() - 10) * this.rowHeight()
             , 100);
     }
@@ -103,7 +103,7 @@ export class Panel {
 
     step = (d: number, select = false) => {
         const i1 = this.getCur()
-        this.model.cur = this.getCur() + d
+        this.model.cur = this.getCur() + Math.floor(d)
         this.scroll()
 
         if (select) this.selectRange(i1, this.getCur())
