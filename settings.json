@@ -1,5 +1,5 @@
 {
     "editor": "gedit",
-    "maxFiles": 500,
-    "maxFlatModeSize": 400
+    "maxFiles": 999,
+    "maxFlatModeSize": 999
 }
