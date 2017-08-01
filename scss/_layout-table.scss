@@ -1,0 +1,39 @@
+table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    table-layout: fixed;
+    flex-grow: 1;
+}
+
+tbody {
+    display: block;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+thead,
+tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+th:first-child,
+td:first-child {
+    width: 1.5em;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 6em;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 10.5em;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

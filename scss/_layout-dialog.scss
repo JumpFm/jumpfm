@@ -1,0 +1,14 @@
+.dialog {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    right: 0;
+    width: 600px;
+    margin: 0 auto;
+    display: none;
+    align-items: center;
+    input {
+        display: block;
+        flex-grow: 1;
+    }
+}

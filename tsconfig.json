@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "outDir": "js",
+        "target": "es6",
+        "module": "commonjs",
+        "sourceMap": true,
+        "watch": true,
+        "allowSyntheticDefaultImports": true,
+        "lib": [
+            "dom",
+            "es5",
+            "es2015.promise"
+        ]
+    }
+}

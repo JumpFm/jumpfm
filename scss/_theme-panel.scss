@@ -1,0 +1,31 @@
+.panel {
+    tr {
+        &[cur] {
+            background-color: $color-border;
+            font-weight: bold;
+            color: lighten($color-warn, 10%);
+        }
+        &.sel {
+            color: $color-warn;
+        }
+    }
+    &[sel] {
+        .title {
+            background-color: $color-info;
+            font-weight: bold;
+        }
+        tr {
+            &[cur] {
+                // background-color: lighten($color-07, 5%);
+                background-color: $color-info;
+            }
+        }
+    }
+    .title {
+        display: block;
+        width: 100%;
+    }
+    &:first-child {
+        border-right: 3px solid $color-border;
+    }
+}

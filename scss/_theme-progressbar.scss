@@ -1,0 +1,14 @@
+@import 'colors';
+#progress-bar,
+#progress-bar-complete {
+    height: 3px;
+}
+
+#progress-bar {
+    background-color: $color-border;
+}
+
+#progress-bar-complete {
+    background-color: $color-natural;
+    transition: width 2s;
+}

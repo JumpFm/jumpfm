@@ -1,0 +1,31 @@
+@import 'colors';
+#statusbar {
+    display: flex;
+    flex-shrink: 0;
+    margin-top: .2em;
+}
+
+#statusbar-msg {
+    padding: .1em .3em;
+    flex-grow: 1;
+    font-size: 90%;
+    &.info {
+        color: $color-info;
+    }
+    &.warn {
+        color: $color-warn;
+    }
+    &.err {
+        color: $color-err;
+    }
+}
+
+#buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-basis: 4em;
+    flex-shrink: 0;
+    .btn {
+        padding-right: .3em;
+    }
+}

@@ -1,0 +1,52 @@
+@import 'colors';
+@import 'theme-table';
+@import 'theme-button';
+@import 'theme-dialog';
+@import 'theme-input';
+@import 'theme-panel';
+@import 'theme-filter';
+@import 'theme-statusbar';
+@import 'theme-progressbar';
+@font-face {
+    font-family: DroidSansMono;
+    src: url('../fonts/DroidSansMono.ttf');
+}
+
+@font-face {
+    font-family: SpaceMono-Regular;
+    src: url('../fonts/SpaceMono-Regular.ttf');
+}
+
+@font-face {
+    font-family: RobotoMono-Regular;
+    src: url('../fonts/RobotoMono-Regular.ttf');
+}
+
+body,
+input,
+table {
+    font-family: 'DroidSansMono';
+    background-color: $color-bg;
+    color: $color-fg;
+}
+
+td,
+#progress-txt {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+i.fa {
+    color: $color-natural;
+}
+
+input {
+    font-size: inherit;
+}
+
+.file-icon {
+    width: 1em;
+    height: 1em;
+    color: red;
+}

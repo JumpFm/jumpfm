@@ -1,10 +1,61 @@
 {
-  "name": "proton-template-app",
-  "version": "1.0.0",
-  "description": "A simple template app for Proton",
-  "main": "app.js",
-  "author": "Connor Sears",
-  "scripts": {
-    "start": "electron ."
-  }
+    "name": "JumpFm",
+    "version": "0.0.0",
+    "description": "A file manager that lets you jump",
+    "author": "Gilad Kutiel",
+    "license": "ISC",
+    "dependencies": {
+        "archiver": "^2.0.0",
+        "electron-log": "^2.2.7",
+        "electron-simple-updater": "^1.2.1",
+        "filesize": "^3.5.10",
+        "fs": "^0.0.1-security",
+        "homedir": "^0.6.0",
+        "js-autocomplete": "^1.0.4",
+        "keycode": "^2.1.9",
+        "moment": "^2.18.1",
+        "mousetrap": "^1.6.1",
+        "node-cmd": "^3.0.0",
+        "node-watch": "^0.5.5",
+        "node.os": "^1.2.4",
+        "progress-stream": "^2.0.0",
+        "replace-ext": "^1.0.0",
+        "request": "^2.81.0",
+        "shelljs": "^0.7.8",
+        "unzip": "^0.1.11",
+        "vue": "^2.4.2"
+    },
+    "devDependencies": {
+        "@types/node": "^8.0.17",
+        "electron-builder": "^19.18.1",
+        "ts-loader": "^2.3.2",
+        "webpack": "^3.4.1"
+    },
+    "homepage": "https://jumpfm.org",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Gilad-Kutiel-App/jumpfm.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Gilad-Kutiel-App/jumpfm/issues"
+    },
+    "main": "app.js",
+    "build": {
+        "appId": "com.github.gkutiel.jumpfm",
+        "linux": {
+            "files": [
+                "**/*",
+                "build/icons/*"
+            ],
+            "target": "AppImage",
+            "category": "Utility",
+            "publish": "github"
+        }
+    },
+    "scripts": {
+        "pack": "build --dir",
+        "dist": "build",
+        "publish": "build --publish always",
+        "watch": "webpack --watch"
+    }
 }

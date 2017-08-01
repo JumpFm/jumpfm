@@ -1,0 +1,3 @@
+find {{pwd}} -name {{input}}
+find {{sel}} -name {{input}}
+cat ~/favorits.txt

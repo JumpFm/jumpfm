@@ -1,0 +1,16 @@
+.btn {
+    font-size: 1em;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    color: $color-fg;
+    background-color: $color-bg;
+    border: none;
+    outline: none;
+    opacity: .8;
+    text-decoration: none;
+    &:hover {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,20 @@
+tl;dr
+I made JumpFm (http://bit.ly/2uBFWIC), need your feedback
+
+Hi,
+
+I decided to format my machine last weekend. 
+Then, after reinstalling almost everything, I was about to reinstall double commander.
+Basically, I like double commander but it takes me a lot of configuration to bring it to a state that I can work with it.
+I also came across fman (http://bit.ly/2uBwIw6) couple of weeks ago, and it seems really great but it is not an open source and requires a subscription fee.
+Also, I haven't done any programming for quite a while and wanted to refresh my memory a bit.
+For all the above reasons I decided to start a new side project and create my own file manager - JumpFm (http://bit.ly/2uBFWIC).
+It is currently in a very early stage but there is already a working version. It was only tested on my machine but it seems to do what is suppose to do.
+I'm planning to keep working on this project and would really appreciate your feedback:
+- Which FM are you using ?
+- What features do you like/need/must ?
+- Feedback about the site/help/etc...
+- Bugs
+
+Thank you very much,
+Gilad
