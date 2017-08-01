@@ -43,7 +43,7 @@ export function bindPanelOperations(jumpFm: JumpFm) {
 
 
     // SWIPE
-    mousetrap.bind('ctrl+s', () => {
+    mousetrap.bind('s', () => {
         const pwd0 = act().getCurDir()
         const pwd1 = pas().getCurDir()
         act().cd(pwd1)
