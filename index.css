@@ -85,15 +85,24 @@ a {
   a:hover {
     color: #4db6ac; }
 
-.content {
+.header {
   max-width: 1100px;
   margin: auto; }
 
-.alert {
+.content {
+  max-width: 800px;
+  margin: auto; }
+
+.alert, .panic {
+  font-size: 80%;
   border: 2px solid orange;
   padding: 1em;
   background-color: gold;
   margin: 1em 0; }
+
+.panic {
+  border-color: red;
+  background-color: #ff9999; }
 
 img.ss {
   box-shadow: 0px 0px 30px #666; }

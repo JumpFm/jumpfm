@@ -46,16 +46,28 @@ a {
     }
 }
 
-.content {
+.header {
     max-width: 1100px;
     margin: auto;
 }
 
+.content {
+    max-width: 800px;
+    margin: auto;
+}
+
 .alert {
+    font-size: 80%;
     border: 2px solid orange;
     padding: 1em;
     background-color: gold;
     margin: 1em 0;
+}
+
+.panic {
+    @extend .alert;
+    border-color: red;
+    background-color: lighten(red, 30%);
 }
 
 img.ss {

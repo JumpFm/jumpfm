@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="content">
+    <div class="header">
         <h1>JumpFm</h1>
         <h2>A file manager that lets you jump</h2>
         <div id="ss">
@@ -20,7 +20,8 @@
                 <i class="fa fa-download"></i>Download
             </a>
         </div>
-
+    </div>
+    <div class="content">
         <!-- ABOUT  -->
         <h3>
             <a name="about"></a><i class="fa fa-info-circle"></i> About
@@ -53,6 +54,19 @@
                         Press <code>f</code> to quickly find the files you are looking for.
                     </p>
                 </div>
+            </div>
+
+            <div class="cols">
+                <!-- Instant Gist  -->
+                <div class="col">
+                    <h3>
+                        <a name="gist"></a>
+                        <i class="fa fa-github"></i> Instant Gist
+                    </h3>
+                    <p>
+                        Create instant gist from selected files, just press <code>g</code>.
+                    </p>
+                </div>
 
                 <!-- Flat Mode  -->
                 <div class="col">
@@ -65,33 +79,29 @@
                     </p>
                 </div>
 
-                <!-- Instant Gist  -->
-                <div class="col">
-                    <h3>
-                        <a name="gist"></a>
-                        <i class="fa fa-github"></i> Instant Gist
-                    </h3>
-                    <p>
-                        Create instant gist from selected files, just press <code>g</code>.
-                    </p>
-                </div>
             </div>
+
         </section>
 
+        <!-- ALERTS  -->
+        <h3>
+            <a name="alert"></a>
+            <i class="fa fa-exclamation-triangle"></i> Alerts
+        </h3>
+        <div class="cols">
+            <div class="col panic">
+                <i class="fa fa-globe"></i> Instant gists are public !!! don't gist your private ssh key or any other private information.
+            </div>
+            <div class="col alert">
+                <i class="fa fa-trash"></i> There are no confirmation dialogs in JumpFm, whenever you hit the <code>DEL</code> key a file is gone.
+            </div>
+        </div>
 
+
+        <!-- SHORTCUTS  -->
         <h3>
             <a name="keyboard-shortcuts"></a>
             <i class="fa fa-keyboard-o"></i> Keyboard Shortcuts</h3>
-        <!-- ALERT  -->
-        <div class="alert">
-            <h4>
-                <a name="alert"></a>
-                <i class="fa fa-exclamation-triangle"></i> Alert
-            </h4>
-            <p>
-                There are no confirmation dialogs in JumpFm, whenever you hit the <code>DEL</code> key a file is gone.
-            </p>
-        </div>
 
         <table>
             <tbody>
