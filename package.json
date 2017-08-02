@@ -18,6 +18,7 @@
         "node-cmd": "^3.0.0",
         "node-watch": "^0.5.5",
         "node.os": "^1.2.4",
+        "open": "0.0.5",
         "progress-stream": "^2.0.0",
         "replace-ext": "^1.0.0",
         "request": "^2.81.0",
@@ -28,6 +29,7 @@
     "devDependencies": {
         "@types/node": "^8.0.17",
         "electron-builder": "^19.18.1",
+        "request-debug": "^0.2.0",
         "ts-loader": "^2.3.2",
         "webpack": "^3.4.1"
     },

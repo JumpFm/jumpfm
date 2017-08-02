@@ -5,10 +5,12 @@ import { Panels } from './Panels'
 import { Panel } from './Panel'
 import { Dialog } from './Dialog'
 import { Jump } from './Jump'
+import { Gist, newPublicGist } from './gist'
 
 import * as path from 'path';
 import * as mousetrap from 'mousetrap';
 import * as keycode from 'keycode';
+import * as open from 'open';
 
 export function bindMisc(jumpFm: JumpFm) {
     function pan(): Panel {
@@ -19,13 +21,13 @@ export function bindMisc(jumpFm: JumpFm) {
     // CLIPBOARD
     mousetrap.bind('p', () => {
         const fullPath = pan().getCurFile().fullPath
-        statusBar.info("Clipboard: " + fullPath)
+        statusBar.info('Clipboard: ' + fullPath)
         clipboard.writeText(fullPath);
     });
 
     // FILTER
     mousetrap.bind('f', () => {
-        const filter = document.getElementById("filter" + jumpFm.panels.model.active)
+        const filter = document.getElementById('filter' + jumpFm.panels.model.active)
         filter.focus()
         return false;
     });
@@ -34,7 +36,7 @@ export function bindMisc(jumpFm: JumpFm) {
     mousetrap.bind('l', () => {
         const pan = jumpFm.panels.getActivePanel()
         const ext = path.extname(pan.getCurFile().fullPath)
-        statusBar.warn("Filter: " + ext)
+        statusBar.warn('Filter: ' + ext)
         pan.filter(ext)
     })
 
@@ -57,4 +59,27 @@ export function bindMisc(jumpFm: JumpFm) {
         });
         return false;
     });
+
+    // GIST
+    mousetrap.bind('g', () => {
+        console.log('open dialog')
+        jumpFm.dialog.open({
+            title: 'New Gist',
+            init: (input) => {
+                input.value = 'Gist Description'
+                input.select()
+            },
+            ok: (description) => {
+                jumpFm.statusBar.info('Creating Gist...')
+                newPublicGist({
+                    description: description,
+                    filesFullPath: jumpFm.panels.getActivePanel().getSelectedFilesFullPath()
+                }, (err, url) => {
+                    jumpFm.statusBar.info('Gist created at ' + url)
+                    open(url)
+                })
+            }
+        })
+        return false
+    })
 }
