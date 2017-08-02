@@ -87,7 +87,8 @@ a {
 
 .header {
   max-width: 1100px;
-  margin: auto; }
+  margin: auto;
+  text-align: center; }
 
 .content {
   max-width: 800px;
