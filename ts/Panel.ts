@@ -75,14 +75,19 @@ export class Panel {
 
     loadFiles = (cb: () => void = undefined): void => {
         const dirFullPath = this.model.pwd
+        const fp = file => path.join(dirFullPath, file)
         fs.readdir(dirFullPath, (err, files) => {
             if (err) {
                 console.log(err)
                 return
             }
-            this.setFiles(files.map((file) => {
-                return new FileInfo(path.join(dirFullPath, file))
-            }))
+            this.setFiles(
+                files.filter(
+                    file => fs.existsSync(fp(file))
+                ).map(file =>
+                    new FileInfo(fp(file))
+                    )
+            )
             if (cb) cb()
         })
     }
