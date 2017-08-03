@@ -13,16 +13,19 @@ export function bindFilter(jumpFm: JumpFm) {
     const pan = () => jumpFm.panels.getActivePanel()
 
     const show = () => {
-        const filter = document.getElementById('filter' + jumpFm.panels.model.active)
-        filter.focus()
+        const id = 'filter' + jumpFm.panels.model.active
+        const filter = document.getElementById(id) as HTMLInputElement
+        filter.select()
         return false;
     }
 
     const likeThis = () => {
-        const pan = jumpFm.panels.getActivePanel()
-        const ext = path.extname(pan.getCurFile().fullPath)
+        const curFile = pan().getCurFile()
+        if (!curFile) return
+        const ext = path.extname(curFile.fullPath)
+        if (!ext) return
         jumpFm.statusBar.warn('Filter: ' + ext)
-        pan.filter(ext)
+        pan().filter(ext)
     }
 
     const toggleFlatMode = () => {
@@ -36,12 +39,10 @@ export function bindFilter(jumpFm: JumpFm) {
     }
 
 
-    const filter = keys.filter
-
-    filter.show.forEach(key => mousetrap.bind(key, show))
-    filter.likeThis.forEach(key => mousetrap.bind(key, likeThis))
-    filter.toggleFlatMode.forEach(key => mousetrap.bind(key, toggleFlatMode))
-    filter.toggleHidden.forEach(key => mousetrap.bind(key, toggleHidden))
+    keys.show.forEach(key => mousetrap.bind(key, show))
+    keys.likeThis.forEach(key => mousetrap.bind(key, likeThis))
+    keys.toggleFlatMode.forEach(key => mousetrap.bind(key, toggleFlatMode))
+    keys.toggleHidden.forEach(key => mousetrap.bind(key, toggleHidden))
 
     const blur = (e: KeyboardEvent) => {
         (e.target as HTMLInputElement).blur()
@@ -49,8 +50,17 @@ export function bindFilter(jumpFm: JumpFm) {
     }
 
     ['filter0', 'filter1'].forEach(filterId => {
+        const trap = new mousetrap(document.getElementById(filterId));
         ['esc', 'tab'].forEach(key => {
-            mousetrap(document.getElementById(filterId)).bind(key, blur)
+            trap.bind(key, blur)
+        })
+        Object.keys(keys.filter).forEach(cmd => {
+            keys.filter[cmd].forEach(key => {
+                trap.bind(key, () => {
+                    mousetrap.trigger(keys[cmd][0])
+                    return false
+                })
+            })
         })
     })
 }

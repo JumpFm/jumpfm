@@ -136,14 +136,12 @@ export function bindFileOperations(jumpFm: JumpFm) {
         clipboard.writeText(fullPath);
     }
 
-    const file = keys.file
-
-    file.del.forEach(key => mousetrap.bind(key, del))
-    file.edit.forEach(key => mousetrap.bind(key, edit))
-    file.newFile.forEach(key => mousetrap.bind(key, newFile))
-    file.newDir.forEach(key => mousetrap.bind(key, newDir))
-    file.rename.forEach(key => mousetrap.bind(key, rename))
-    file.zip.forEach(key => mousetrap.bind(key, zip))
-    file.unzip.forEach(key => mousetrap.bind(key, unzip))
-    file.copyFullPath.forEach(key => mousetrap.bind(key, ))
+    keys.del.forEach(key => mousetrap.bind(key, del))
+    keys.edit.forEach(key => mousetrap.bind(key, edit))
+    keys.newFile.forEach(key => mousetrap.bind(key, newFile))
+    keys.newDir.forEach(key => mousetrap.bind(key, newDir))
+    keys.rename.forEach(key => mousetrap.bind(key, rename))
+    keys.zip.forEach(key => mousetrap.bind(key, zip))
+    keys.unzip.forEach(key => mousetrap.bind(key, unzip))
+    keys.copyFullPath.forEach(key => mousetrap.bind(key, ))
 }

@@ -25,9 +25,7 @@ export function bindSelection(jumpFm: JumpFm) {
         return false;
     }
 
-    const selection = keys.selection
-
-    selection.toggle.forEach(key => mousetrap.bind(key, toggle))
-    selection.clear.forEach(key => mousetrap.bind(key, clear))
-    selection.all.forEach(key => mousetrap.bind(key, all))
+    keys.toggle.forEach(key => mousetrap.bind(key, toggle))
+    keys.clear.forEach(key => mousetrap.bind(key, clear))
+    keys.all.forEach(key => mousetrap.bind(key, all))
 }

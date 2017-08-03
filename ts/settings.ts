@@ -59,56 +59,108 @@ export const plugins = load(pluginsFullPath, {
 })
 
 export const keys = load(keysFullPath, {
-    nav: {
+    // NAV
+    jump: ['alt+j'],
+    down: ['down', 'j'],
+    downSelect: ['shift+down', 'shift+j'],
+    pgDown: ['pagedown', 'ctrl+j'],
+    pgDownSelect: ['shift+pagedown', 'shift+ctrl+j'],
+    up: ['up', 'k'],
+    upSelect: ['shift+up', 'shift+k'],
+    pgUp: ['pageup', 'ctrl+k'],
+    pgUpSelect: ['shift+pageup', 'shift+ctrl+k'],
+    home: ['home'],
+    homeSelect: ['shift+home'],
+    end: ['end'],
+    endSelect: ['shift+end'],
+    enter: ['enter'],
+    back: ['backspace'],
+    homeDir: ['ctrl+home', 'ctrl+h'],
+    openToRight: ['ctrl+right'],
+    openToLeft: ['ctrl+left'],
+    historyBack: ['alt+left'],
+    historyForward: ['alt+right'],
+
+    // SELECTION
+    toggle: ['space'],
+    all: ['ctrl+a'],
+    clear: ['esc'],
+
+    // FILE
+    del: ['del'],
+    edit: ['f4'],
+    newFile: ['shift+f4'],
+    newDir: ['f7'],
+    rename: ['f2'],
+    zip: ['z'],
+    unzip: ['u'],
+    copyFullPath: ['p'],
+
+    // PANELS
+    switch: ['tab'],
+    copy: ['f5'],
+    move: ['f6'],
+    swap: ['s'],
+
+    // FILTER
+    show: ['f'],
+    likeThis: ['l'],
+    toggleHidden: ['h'],
+    toggleFlatMode: ['r'],
+
+    // GIST
+    gist: ['ctrl+g'],
+
+    filter: {
+        // NAV
         jump: ['alt+j'],
-        down: ['down', 'j'],
-        downSelect: ['shift+down', 'shift+j'],
+        down: ['down'],
+        downSelect: ['shift+down'],
         pgDown: ['pagedown', 'ctrl+j'],
         pgDownSelect: ['shift+pagedown', 'shift+ctrl+j'],
-        up: ['up', 'k'],
-        upSelect: ['shift+up', 'shift+k'],
+        up: ['up'],
+        upSelect: ['shift+up'],
         pgUp: ['pageup', 'ctrl+k'],
         pgUpSelect: ['shift+pageup', 'shift+ctrl+k'],
-        home: ['home'],
-        homeSelect: ['shift+home'],
-        end: ['end'],
-        endSelect: ['shift+end'],
+        home: [],
+        homeSelect: [],
+        end: [],
+        endSelect: [],
         enter: ['enter'],
-        back: ['backspace'],
+        back: [],
         homeDir: ['ctrl+home'],
-        openToRight: ['ctrl+right'],
-        openToLeft: ['ctrl+left'],
+        openToRight: [],
+        openToLeft: [],
         historyBack: ['alt+left'],
         historyForward: ['alt+right'],
-    },
-    selection: {
-        toggle: ['space'],
-        all: ['ctrl+a'],
-        clear: ['esc'],
-    },
-    file: {
-        del: ['del'],
+
+        // SELECTION
+        toggle: [],
+        all: [],
+        clear: [],
+
+        // FILE
+        del: [],
         edit: ['f4'],
         newFile: ['shift+f4'],
         newDir: ['f7'],
         rename: ['f2'],
-        zip: ['z'],
-        unzip: ['u'],
-        copyFullPath: ['p'],
-    },
-    panels: {
+        zip: ['ctrl+z'],
+        unzip: ['ctrl+u'],
+        copyFullPath: ['ctrl+p'],
+
+        // PANELS
         switch: ['tab'],
         copy: ['f5'],
         move: ['f6'],
-        swap: ['s'],
-    },
-    filter: {
-        show: ['f'],
-        likeThis: ['l'],
-        toggleHidden: ['h'],
-        toggleFlatMode: ['r']
-    },
-    misc: {
-        gist: ['ctrl+g']
+        swap: ['ctrl+s'],
+
+        // FILTER
+        likeThis: ['ctrl+l'],
+        toggleHidden: ['ctrl+h'],
+        toggleFlatMode: ['ctrl+r'],
+
+        // GIST
+        gist: ['ctrl+g'],
     }
 })

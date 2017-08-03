@@ -42,10 +42,8 @@ export function bindPanelOperations(jumpFm: JumpFm) {
         return false
     }
 
-    const panels = keys.panels
-
-    panels.switch.forEach(key => mousetrap.bind(key, switchPanel))
-    panels.copy.forEach(key => mousetrap.bind(key, copy))
-    panels.move.forEach(key => mousetrap.bind(key, move))
-    panels.swap.forEach(key => mousetrap.bind(key, swap))
+    keys.switch.forEach(key => mousetrap.bind(key, switchPanel))
+    keys.copy.forEach(key => mousetrap.bind(key, copy))
+    keys.move.forEach(key => mousetrap.bind(key, move))
+    keys.swap.forEach(key => mousetrap.bind(key, swap))
 }

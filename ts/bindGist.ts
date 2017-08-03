@@ -65,5 +65,5 @@ export function bindGist(jumpFm: JumpFm) {
         return false
     }
 
-    keys.misc.gist.forEach(key => mousetrap.bind(key, gist))
+    keys.gist.forEach(key => mousetrap.bind(key, gist))
 }

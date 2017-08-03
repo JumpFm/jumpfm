@@ -74,37 +74,35 @@ export function bindNav(jumpFm: JumpFm) {
         return false;
     }
 
-    const nav = keys.nav
+    keys.up.forEach(key => mousetrap.bind(key, () => up(false)))
+    keys.upSelect.forEach(key => mousetrap.bind(key, () => up(true)))
 
-    nav.up.forEach(key => mousetrap.bind(key, () => up(false)))
-    nav.upSelect.forEach(key => mousetrap.bind(key, () => up(true)))
+    keys.down.forEach(key => mousetrap.bind(key, () => down(false)))
+    keys.downSelect.forEach(key => mousetrap.bind(key, () => down(true)))
 
-    nav.down.forEach(key => mousetrap.bind(key, () => down(false)))
-    nav.downSelect.forEach(key => mousetrap.bind(key, () => down(true)))
+    keys.pgUp.forEach(key => mousetrap.bind(key, () => pageUp(false)))
+    keys.pgUpSelect.forEach(key => mousetrap.bind(key, () => pageUp(true)))
 
-    nav.pgUp.forEach(key => mousetrap.bind(key, () => pageUp(false)))
-    nav.pgUpSelect.forEach(key => mousetrap.bind(key, () => pageUp(true)))
+    keys.pgDown.forEach(key => mousetrap.bind(key, () => pageDown(false)))
+    keys.pgDownSelect.forEach(key => mousetrap.bind(key, () => pageDown(true)))
 
-    nav.pgDown.forEach(key => mousetrap.bind(key, () => pageDown(false)))
-    nav.pgDownSelect.forEach(key => mousetrap.bind(key, () => pageDown(true)))
+    keys.home.forEach(key => mousetrap.bind(key, () => home(false)))
+    keys.homeSelect.forEach(key => mousetrap.bind(key, () => home(true)))
 
-    nav.home.forEach(key => mousetrap.bind(key, () => home(false)))
-    nav.homeSelect.forEach(key => mousetrap.bind(key, () => home(true)))
+    keys.end.forEach(key => mousetrap.bind(key, () => end(false)))
+    keys.endSelect.forEach(key => mousetrap.bind(key, () => end(true)))
 
-    nav.end.forEach(key => mousetrap.bind(key, () => end(false)))
-    nav.endSelect.forEach(key => mousetrap.bind(key, () => end(true)))
+    keys.enter.forEach(key => mousetrap.bind(key, enter))
 
-    nav.enter.forEach(key => mousetrap.bind(key, enter))
+    keys.back.forEach(key => mousetrap.bind(key, back))
 
-    nav.back.forEach(key => mousetrap.bind(key, back))
+    keys.homeDir.forEach(key => mousetrap.bind(key, homeDir))
 
-    nav.homeDir.forEach(key => mousetrap.bind(key, homeDir))
+    keys.openToRight.forEach(key => mousetrap.bind(key, () => openDir(0)))
+    keys.openToLeft.forEach(key => mousetrap.bind(key, () => openDir(1)))
 
-    nav.openToRight.forEach(key => mousetrap.bind(key, () => openDir(0)))
-    nav.openToLeft.forEach(key => mousetrap.bind(key, () => openDir(1)))
+    keys.historyBack.forEach(key => mousetrap.bind(key, () => historyBack))
+    keys.historyForward.forEach(key => mousetrap.bind(key, () => historyForward))
 
-    nav.historyBack.forEach(key => mousetrap.bind(key, () => historyBack))
-    nav.historyForward.forEach(key => mousetrap.bind(key, () => historyForward))
-
-    nav.jump.forEach(key => mousetrap.bind(key, jump))
+    keys.jump.forEach(key => mousetrap.bind(key, jump))
 }
