@@ -82,9 +82,9 @@ export const keys = load(keysFullPath, {
     historyForward: ['alt+right'],
 
     // SELECTION
-    toggle: ['space'],
-    all: ['ctrl+a'],
-    clear: ['esc'],
+    toggleSelection: ['space'],
+    selectAll: ['ctrl+a'],
+    clearSelection: ['esc'],
 
     // FILE
     del: ['del'],
@@ -105,7 +105,7 @@ export const keys = load(keysFullPath, {
     // FILTER
     show: ['f'],
     likeThis: ['l'],
-    toggleHidden: ['h'],
+    toggleHiddenFiles: ['h'],
     toggleFlatMode: ['r'],
 
     // GIST
@@ -135,9 +135,9 @@ export const keys = load(keysFullPath, {
         historyForward: ['alt+right'],
 
         // SELECTION
-        toggle: [],
-        all: [],
-        clear: [],
+        toggleSelection: [],
+        selectAll: [],
+        clearSelection: [],
 
         // FILE
         del: [],
@@ -157,7 +157,7 @@ export const keys = load(keysFullPath, {
 
         // FILTER
         likeThis: ['ctrl+l'],
-        toggleHidden: ['ctrl+h'],
+        toggleHiddenFiles: ['ctrl+h'],
         toggleFlatMode: ['ctrl+r'],
 
         // GIST

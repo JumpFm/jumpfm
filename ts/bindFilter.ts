@@ -42,7 +42,7 @@ export function bindFilter(jumpFm: JumpFm) {
     keys.show.forEach(key => mousetrap.bind(key, show))
     keys.likeThis.forEach(key => mousetrap.bind(key, likeThis))
     keys.toggleFlatMode.forEach(key => mousetrap.bind(key, toggleFlatMode))
-    keys.toggleHidden.forEach(key => mousetrap.bind(key, toggleHidden))
+    keys.toggleHiddenFiles.forEach(key => mousetrap.bind(key, toggleHidden))
 
     const blur = (e: KeyboardEvent) => {
         (e.target as HTMLInputElement).blur()
