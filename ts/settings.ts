@@ -99,5 +99,11 @@ export const keys = load(keysFullPath, {
         newFile: ['shift+f4'],
         newDir: ['f7'],
         rename: ['f2']
+    },
+    panels: {
+        switch: ['tab'],
+        copy: ['f5'],
+        move: ['f6'],
+        swap: ['s'],
     }
 })
