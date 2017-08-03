@@ -8,8 +8,8 @@ export class Panels {
 
     constructor(jumpFm: JumpFm) {
         this.panels = [
-            new Panel(jumpFm, "p0tbody"),
-            new Panel(jumpFm, "p1tbody")
+            new Panel(jumpFm),
+            new Panel(jumpFm)
         ]
 
         this.model = {
@@ -33,11 +33,11 @@ export class Panels {
         return this.panels[this.model.active]
     }
 
-    passive = (): Panel => {
+    getPassivePanel = (): Panel => {
         return this.panels[(this.model.active + 1) % 2]
     }
 
-    get = (i): Panel => {
+    getPanel = (i): Panel => {
         return this.panels[i]
     }
 }

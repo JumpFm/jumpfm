@@ -42,23 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
 
-    // FILTERS
-    function filterKeyDown(e: KeyboardEvent) {
-        const kc = keycode(e.keyCode)
-        const filter = e.target as HTMLInputElement
-        if (['esc', 'tab'].indexOf(kc) > -1) filter.blur()
-        if (['up', 'down', 'enter', 'tab'].indexOf(kc) > -1) {
-            e.preventDefault()
-            mousetrap.trigger(kc)
-        }
-    }
-
-    document.getElementById('filter0').addEventListener('keydown', filterKeyDown, true)
-    document.getElementById('filter1').addEventListener('keydown', filterKeyDown, true)
-
-    // KEY BINDING
-    bind(jumpFm)
-
     // SETTINGS
     function edit(id: string, fullPath: string) {
         document.getElementById(id).addEventListener("click", () => {
@@ -69,10 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
     edit('editMisc', miscFullPath)
     edit('editPlugins', pluginsFullPath)
     edit('editKeys', keysFullPath)
+
+    // KEY BINDING
+    bind(jumpFm)
+
     // INIT
     jumpFm.init()
     const panels = jumpFm.panels
-    panels.get(0).cd(homedir())
-    panels.get(1).cd(homedir())
+    panels.getPanel(0).cd(homedir())
+    panels.getPanel(1).cd(homedir())
 
 }, false)

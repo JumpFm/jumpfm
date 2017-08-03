@@ -60,14 +60,15 @@ export const plugins = load(pluginsFullPath, {
 
 export const keys = load(keysFullPath, {
     nav: {
-        down: ['down'],
-        downSelect: ['shift+down'],
-        pgDown: ['pagedown'],
-        pgDownSelect: ['shift+pagedown'],
-        up: ['up'],
-        upSelect: ['shift+up'],
-        pgUp: ['pageup'],
-        pgUpSelect: ['shift+pageup'],
+        jump: ['alt+j'],
+        down: ['down', 'j'],
+        downSelect: ['shift+down', 'shift+j'],
+        pgDown: ['pagedown', 'ctrl+j'],
+        pgDownSelect: ['shift+pagedown', 'shift+ctrl+j'],
+        up: ['up', 'k'],
+        upSelect: ['shift+up', 'shift+k'],
+        pgUp: ['pageup', 'ctrl+k'],
+        pgUpSelect: ['shift+pageup', 'shift+ctrl+k'],
         home: ['home'],
         homeSelect: ['shift+home'],
         end: ['end'],
@@ -79,7 +80,6 @@ export const keys = load(keysFullPath, {
         openToLeft: ['ctrl+left'],
         historyBack: ['alt+left'],
         historyForward: ['alt+right'],
-        jump: ['j']
     },
     selection: {
         toggle: ['space'],

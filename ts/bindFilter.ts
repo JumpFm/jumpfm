@@ -35,10 +35,22 @@ export function bindFilter(jumpFm: JumpFm) {
         return false
     }
 
+
     const filter = keys.filter
 
     filter.show.forEach(key => mousetrap.bind(key, show))
     filter.likeThis.forEach(key => mousetrap.bind(key, likeThis))
     filter.toggleFlatMode.forEach(key => mousetrap.bind(key, toggleFlatMode))
     filter.toggleHidden.forEach(key => mousetrap.bind(key, toggleHidden))
+
+    const blur = (e: KeyboardEvent) => {
+        (e.target as HTMLInputElement).blur()
+        return false
+    }
+
+    ['filter0', 'filter1'].forEach(filterId => {
+        ['esc', 'tab'].forEach(key => {
+            mousetrap(document.getElementById(filterId)).bind(key, blur)
+        })
+    })
 }

@@ -26,7 +26,7 @@
                             <th>Date Modified</th>
                         </tr>
                     </thead>
-                    <tbody id="p0tbody">
+                    <tbody id="tbody0">
                         <tr v-for="(file, i) in panels.a.get.files()" :class="[file.sel ? 'sel' : '']" :cur="i == panels.a.get.cur()">
                             <td>
                                 <!-- <i :class="file.icon"></i> -->
@@ -54,7 +54,7 @@
                             <th>Date Modified</th>
                         </tr>
                     </thead>
-                    <tbody id="p1tbody">
+                    <tbody id="tbody1">
                         <tr v-for="(file, i) in panels.b.get.files()" :class="[file.sel ? 'sel' : '']" :cur="i == panels.b.get.cur()">
                             <td>
                                 <!-- <i :class="file.icon"></i> -->

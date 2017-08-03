@@ -9,28 +9,15 @@ import * as path from 'path'
 import * as watch from 'node-watch';
 
 export class Panel {
-    tbodyId: string
     private watcher = { close: () => { } }
     private history = new History()
     private jumpDb
     private statusBar
 
-    constructor(jumpFm: JumpFm, tbodyId: string) {
+    constructor(jumpFm: JumpFm) {
         this.jumpDb = jumpFm.jumpDb
-        this.tbodyId = tbodyId
         this.statusBar = jumpFm.statusBar
     }
-
-    private tbody = () => document.getElementById(this.tbodyId)
-    private rowHeight = () => this.tbody().scrollHeight / this.tbody().childNodes.length
-
-    private scroll = () => {
-        setImmediate(() =>
-            this.tbody().scrollTop = Math.max(0, this.getCur() - 10) * this.rowHeight()
-            , 100);
-    }
-
-    getRowCountInPage = () => this.tbody().clientHeight / this.rowHeight()
 
     clear = () => {
         this.model.files = []
@@ -109,7 +96,6 @@ export class Panel {
     step = (d: number, select = false) => {
         const i1 = this.getCur()
         this.model.cur = this.getCur() + Math.floor(d)
-        this.scroll()
 
         if (select) this.selectRange(i1, this.getCur())
     }

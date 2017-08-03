@@ -3,6 +3,7 @@ import { Panels } from './Panels'
 import { Panel } from './Panel'
 import { opn } from './opn'
 import { keys } from './settings'
+import { Table } from './Table'
 
 import * as mousetrap from 'mousetrap'
 import * as path from 'path'
@@ -11,21 +12,26 @@ import * as homedir from 'homedir'
 export function bindNav(jumpFm: JumpFm) {
     const pan = () => jumpFm.panels.getActivePanel()
 
-    const up = (select) => { pan().step(-1, select); return false }
-    const down = (select) => { pan().step(1, select); return false }
-
-    const pageUp = (select) => {
-        pan().step(-pan().getRowCountInPage() + 1, select);
+    const tables = [
+        new Table('tbody0'),
+        new Table('tbody1')
+    ]
+    const table = () => tables[jumpFm.panels.model.active]
+    const step = (d: number, select: boolean) => {
+        const p = pan()
+        p.step(d, select)
+        table().scroll(p.getCur())
         return false
     }
 
-    const pageDown = (select) => {
-        pan().step(pan().getRowCountInPage() - 1, select);
-        return false
-    }
+    const up = (select) => step(-1, select)
+    const down = (select) => step(1, select)
 
-    const home = (select) => { pan().step(-9999, select); return false }
-    const end = (select) => { pan().step(9999, select); return false }
+    const pageUp = (select) => step(-table().getRowCountInPage() + 1, select);
+    const pageDown = (select) => step(table().getRowCountInPage() - 1, select);
+
+    const home = (select) => step(-9999, select)
+    const end = (select) => step(9999, select)
 
     const enter = () => {
         const fullPath = pan().getCurFile().fullPath
@@ -53,8 +59,8 @@ export function bindNav(jumpFm: JumpFm) {
 
     const openDir = (here: number) => {
         const there = (here + 1) % 2
-        const h = jumpFm.panels.get(here)
-        const t = jumpFm.panels.get(there)
+        const h = jumpFm.panels.getPanel(here)
+        const t = jumpFm.panels.getPanel(there)
         const f = h.getCurFile();
         if (!f || !f.stat.isDirectory()) t.cd(h.getCurDir())
         else t.cd(f.fullPath)

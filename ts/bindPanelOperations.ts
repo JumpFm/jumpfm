@@ -9,7 +9,7 @@ import * as shell from 'shelljs'
 
 export function bindPanelOperations(jumpFm: JumpFm) {
     const act = () => jumpFm.panels.getActivePanel()
-    const pas = () => jumpFm.panels.passive()
+    const pas = () => jumpFm.panels.getPassivePanel()
 
     const switchPanel = () => {
         jumpFm.panels.switch()
