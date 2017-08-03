@@ -98,12 +98,14 @@ export const keys = load(keysFullPath, {
         edit: ['f4'],
         newFile: ['shift+f4'],
         newDir: ['f7'],
-        rename: ['f2']
+        rename: ['f2'],
+        zip: ['z'],
+        unzip: ['u'],
     },
     panels: {
         switch: ['tab'],
         copy: ['f5'],
         move: ['f6'],
         swap: ['s'],
-    }
+    },
 })

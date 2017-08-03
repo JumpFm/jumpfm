@@ -14,6 +14,10 @@ import * as mousetrap from 'mousetrap'
 import * as path from 'path'
 import * as fs from 'fs'
 
+import * as extractor from 'unzip'
+import * as archiver from 'archiver'
+import * as replaceExt from 'replace-ext'
+
 export function bindFileOperations(jumpFm: JumpFm) {
     const pan = () => jumpFm.panels.getActivePanel()
 
@@ -84,6 +88,47 @@ export function bindFileOperations(jumpFm: JumpFm) {
         return false;
     }
 
+    const unzip = () => {
+        const zipFile = pan().getCurFile()
+
+        try {
+            const fullPath = zipFile.fullPath
+            fs.createReadStream(fullPath)
+                .pipe(extractor.Extract({
+                    path: replaceExt(fullPath, '')
+                }));
+            return false
+        } catch (e) {
+            jumpFm.statusBar.err('Error: ' + zipFile.name + ' is not a zip file')
+            return false
+        }
+    }
+
+    const zip = () => {
+        const zip = archiver('zip', { zlib: { level: 1 } })
+        const pan = jumpFm.panels.getActivePanel()
+        pan.getSelectedFiles().forEach(file => {
+            if (file.stat.isDirectory()) zip.directory(file.fullPath, file.name)
+            else zip.append(file.fullPath, { name: file.name })
+        })
+        jumpFm.dialog.open({
+            title: 'Zip To',
+            init: input => {
+                input.value = 'untitled.zip'
+                input.select()
+                input.selectionStart = 0
+                input.selectionEnd = 'untitled'.length
+            },
+            ok: to => {
+                const out = fs.createWriteStream(path.join(pan.getCurDir(), to))
+                zip.pipe(out)
+                zip.finalize()
+            }
+        })
+        return false
+    }
+
+
     const file = keys.file
 
     file.del.forEach(key => mousetrap.bind(key, del))
@@ -91,4 +136,6 @@ export function bindFileOperations(jumpFm: JumpFm) {
     file.newFile.forEach(key => mousetrap.bind(key, newFile))
     file.newDir.forEach(key => mousetrap.bind(key, newDir))
     file.rename.forEach(key => mousetrap.bind(key, rename))
+    file.zip.forEach(key => mousetrap.bind(key, zip))
+    file.unzip.forEach(key => mousetrap.bind(key, unzip))
 }

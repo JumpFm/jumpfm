@@ -13,5 +13,4 @@ export function bind(jumpFm: JumpFm) {
     bindFileOperations(jumpFm)
     bindPanelOperations(jumpFm)
     bindMisc(jumpFm)
-    bindZip(jumpFm)
 }
