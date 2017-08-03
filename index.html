@@ -27,7 +27,8 @@
             <a name="about"></a><i class="fa fa-info-circle"></i> About
         </h3>
         <p>
-            JumpFm is a minimalistic dual panel file manager (currently released only for Linux) that lets you navigate your file system very efficiently.
+            JumpFm is a minimalistic dual panel file manager (currently released only for Linux) that lets you navigate your file system
+            very efficiently.
         </p>
 
         <section>
@@ -40,7 +41,8 @@
                         <i class="fa fa-bolt"></i> Jumping
                     </h3>
                     <p>
-                        Press <code>j</code> to jump directly to your favorites folders. No manual bookmarking is needed, JumpFm will learn where you want to go.
+                        Press <code>j</code> to jump directly to your favorites folders. No manual bookmarking is needed,
+                        JumpFm will learn where you want to go.
                     </p>
                 </div>
 
@@ -86,14 +88,15 @@
         <!-- ALERTS  -->
         <h3>
             <a name="alert"></a>
-            <i class="fa fa-exclamation-triangle"></i> Alerts
+            <i class="fa fa-exclamation-triangle"></i> Before You Jump
         </h3>
         <div class="cols">
             <div class="col panic">
-                <i class="fa fa-globe"></i> Instant gists are public !!! don't gist your private ssh key or any other private information.
+                <i class="fa fa-globe"></i> Instant gists are public !!! don't gist your private ssh key or any other private
+                information.
             </div>
             <div class="col alert">
-                <i class="fa fa-trash"></i> There are no confirmation dialogs in JumpFm, whenever you hit the <code>DEL</code> key a file is gone.
+                <i class="fa fa-trash"></i> There are no confirmation dialogs in JumpFm, whenever you hit the <code>DEL</code>                key a file is gone.
             </div>
         </div>
 
@@ -101,88 +104,85 @@
         <!-- SHORTCUTS  -->
         <h3>
             <a name="keyboard-shortcuts"></a>
-            <i class="fa fa-keyboard-o"></i> Keyboard Shortcuts</h3>
-
+            <i class="fa fa-keyboard-o"></i> Default Key Bindings</h3>
+        <p>You can change the default keybindings by editing the keybinding file. Not all keybindings are available (from obvious
+            reasons) when the filter box is active.</p>
         <table>
             <tbody>
-                <!-- POWER TOOLS  -->
-                <tr>
-                    <a name="power-tools"></a>
-                    <th class="sep" colspan="2">power tools</th>
-                </tr>
-                <tr>
-                    <td>j</td>
-                    <td>open the jump dialog</td>
-                </tr>
-                <tr>
-                    <td>f</td>
-                    <td>open the filter box</td>
-                </tr>
-                <tr>
-                    <td>r</td>
-                    <td>toggle flat mode</td>
-                </tr>
-                <tr>
-                    <td>h</td>
-                    <td>show/hide hidden files</td>
-                </tr>
-                <tr>
-                    <td>l</td>
-                    <td>show files with same extension</td>
-                </tr>
-
                 <!-- NAVIGATION  -->
                 <tr>
                     <th class="sep" colspan="2">navigation</th>
                 </tr>
                 <tr>
-                    <td>ctrl+home</td>
-                    <td>go to home directory</td>
+                    <td>alt + j</td>
+                    <td>open the jump dialog</td>
                 </tr>
+
                 <tr>
-                    <td>tab</td>
-                    <td>switch panel</td>
-                </tr>
-                <tr>
-                    <td>up</td>
-                    <td>move cursor up one line</td>
-                </tr>
-                <tr>
-                    <td>page up</td>
-                    <td>move cursor up 10 lines</td>
-                </tr>
-                <tr>
+                    <td>down / j</td>
                     <td>down</td>
-                    <td>move cursor down one line</td>
                 </tr>
                 <tr>
-                    <td>page down</td>
-                    <td>move cursor down 10 lines</td>
+                    <td>shift + down / shift + j</td>
+                    <td>down and select</td>
                 </tr>
+                <tr>
+                    <td>page down / ctrl + j</td>
+                    <td>page down</td>
+                </tr>
+                <tr>
+                    <td>shift + page down / shift + ctrl + j</td>
+                    <td>page down and select</td>
+                </tr>
+
+                <tr>
+                    <td>up / k</td>
+                    <td>up</td>
+                </tr>
+                <tr>
+                    <td>shift + up / shift + k</td>
+                    <td>up and select</td>
+                </tr>
+                <tr>
+                    <td>page up / ctrl + k</td>
+                    <td>page up</td>
+                </tr>
+                <tr>
+                    <td>shift + page up / shift + ctrl + k</td>
+                    <td>page up and select</td>
+                </tr>
+
                 <tr>
                     <td>home</td>
-                    <td>move cursor to start</td>
+                    <td>go to start</td>
+                </tr>
+                <tr>
+                    <td>shift + home</td>
+                    <td>go to start and select</td>
                 </tr>
                 <tr>
                     <td>end</td>
-                    <td>move cursor to end</td>
+                    <td>go to end</td>
                 </tr>
                 <tr>
+                    <td>shift + end</td>
+                    <td>go to end and select</td>
+                </tr>
+
+                <tr>
                     <td>enter</td>
-                    <td>enter a directory</td>
+                    <td>enter folder / open file</td>
                 </tr>
                 <tr>
                     <td>backspace</td>
-                    <td>move one directory up</td>
+                    <td>up the directory tree</td>
                 </tr>
+
                 <tr>
-                    <td>alt + right</td>
-                    <td>forward history</td>
+                    <td>ctrl + home</td>
+                    <td>go to home directory</td>
                 </tr>
-                <tr>
-                    <td>alt + left</td>
-                    <td>backward history</td>
-                </tr>
+
                 <tr>
                     <td>ctrl + right</td>
                     <td>open directory in right panel</td>
@@ -191,18 +191,19 @@
                     <td>ctrl + left</td>
                     <td>open directory in left panel</td>
                 </tr>
+
                 <tr>
-                    <td>ctrl + s</td>
-                    <td>swipe panels</td>
+                    <td>alt + left</td>
+                    <td>go to previous directory</td>
+                </tr>
+                <tr>
+                    <td>alt + right</td>
+                    <td>go to next directory</td>
                 </tr>
 
                 <!-- SELECTION  -->
                 <tr>
                     <th class="sep" colspan="2">selection</th>
-                </tr>
-                <tr>
-                    <td>shift + up/down</td>
-                    <td>selects current file and move</td>
                 </tr>
                 <tr>
                     <td>space</td>
@@ -214,7 +215,7 @@
                 </tr>
                 <tr>
                     <td>esc</td>
-                    <td>deselect all</td>
+                    <td>clear selection</td>
                 </tr>
 
                 <!-- FILE OPERATIONS  -->
@@ -223,12 +224,36 @@
                     <th class="sep" colspan="2">file operations</th>
                 </tr>
                 <tr>
-                    <td>F2</td>
-                    <td>rename file</td>
+                    <td>del</td>
+                    <td>delete selected files</td>
                 </tr>
                 <tr>
                     <td>F4</td>
                     <td>edit file</td>
+                </tr>
+                <tr>
+                    <td>Shift + F4</td>
+                    <td>new file</td>
+                </tr>
+                <tr>
+                    <td>F7</td>
+                    <td>new folder</td>
+                </tr>
+                <tr>
+                    <td>F2</td>
+                    <td>rename file</td>
+                </tr>
+                <tr>
+                    <td>z</td>
+                    <td>zip selected files</td>
+                </tr>
+                <tr>
+                    <td>u</td>
+                    <td>unzip current file</td>
+                </tr>
+                <tr>
+                    <td>p</td>
+                    <td>copy full path of current file to clipboard</td>
                 </tr>
                 <tr>
                     <td>F5</td>
@@ -238,36 +263,48 @@
                     <td>F6</td>
                     <td>move selected files</td>
                 </tr>
+
+                <!-- PANELS  -->
                 <tr>
-                    <td>F7</td>
-                    <td>new folder</td>
+                    <a name="panels"></a>
+                    <th class="sep" colspan="2">panels</th>
                 </tr>
                 <tr>
-                    <td>Shift + F4</td>
-                    <td>new file</td>
+                    <td>tab</td>
+                    <td>switch panel</td>
                 </tr>
                 <tr>
-                    <td>del</td>
-                    <td>delete selected files</td>
+                    <td>s</td>
+                    <td>swap panels</td>
+                </tr>
+
+                <!-- FILTERS  -->
+                <tr>
+                    <a name="filters"></a>
+                    <th class="sep" colspan="2">filters</th>
                 </tr>
                 <tr>
-                    <td>u</td>
-                    <td>unzip current file</td>
+                    <td>f</td>
+                    <td>open the filter box</td>
                 </tr>
                 <tr>
-                    <td>z</td>
-                    <td>zip selected files</td>
+                    <td>l</td>
+                    <td>show files with same extension</td>
                 </tr>
                 <tr>
-                    <td>p</td>
-                    <td>copy full path of current file to clipboard</td>
+                    <td>h</td>
+                    <td>show/hide hidden files</td>
                 </tr>
+                <tr>
+                    <td>r</td>
+                    <td>toggle flat mode</td>
+                </tr>
+
+                <!-- MISC  -->
                 <tr>
                     <td>g</td>
                     <td>create a public gist from selected files</td>
                 </tr>
-
-                <!-- MISC  -->
                 <tr>
                     <a name="misc"></a>
                     <th class="sep" colspan="2">miscellaneous</th>
