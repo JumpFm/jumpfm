@@ -61,6 +61,7 @@ export const plugins = load(pluginsFullPath, {
 export const keys = load(keysFullPath, {
     // NAV
     jump: ['alt+j'],
+
     down: ['down', 'j'],
     downSelect: ['shift+down', 'shift+j'],
     pgDown: ['pagedown', 'ctrl+j'],
@@ -69,15 +70,20 @@ export const keys = load(keysFullPath, {
     upSelect: ['shift+up', 'shift+k'],
     pgUp: ['pageup', 'ctrl+k'],
     pgUpSelect: ['shift+pageup', 'shift+ctrl+k'],
+
     home: ['home'],
     homeSelect: ['shift+home'],
     end: ['end'],
     endSelect: ['shift+end'],
+
     enter: ['enter'],
     back: ['backspace'],
-    homeDir: ['ctrl+home', 'ctrl+h'],
+
+    homeDir: ['ctrl+home'],
+
     openToRight: ['ctrl+right'],
     openToLeft: ['ctrl+left'],
+
     historyBack: ['alt+left'],
     historyForward: ['alt+right'],
 
