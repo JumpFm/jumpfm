@@ -2,7 +2,7 @@ import { JumpFm } from './JumpFm'
 import { Panels } from './Panels'
 import { Panel } from './Panel'
 import { Dialog } from './Dialog'
-import { settings } from './settings'
+import { misc } from './settings'
 import { opn } from './opn'
 
 import * as cmd from 'node-cmd';
@@ -26,7 +26,7 @@ export function bindFileOperations(jumpFm: JumpFm) {
 
     // EDIT
     mousetrap.bind('f4', () => {
-        const cm = settings.editor + " " + pan().getCurFile().fullPath
+        const cm = misc.editor + " " + pan().getCurFile().fullPath
         cmd.run(cm);
         return false;
     });

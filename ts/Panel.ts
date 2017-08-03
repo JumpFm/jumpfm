@@ -2,7 +2,7 @@ import { JumpFm } from './JumpFm'
 import { History } from './History'
 import { FileInfo } from './FileInfo'
 import { JumpDb } from './JumpDb'
-import { settings } from './settings'
+import { misc } from './settings'
 
 import * as fs from 'fs'
 import * as path from 'path'
@@ -82,7 +82,7 @@ export class Panel {
                 return
             }
             this.setFiles(
-                files.filter(
+                files.slice(0, misc.maxFilesInPanel).filter(
                     file => fs.existsSync(fp(file))
                 ).map(file =>
                     new FileInfo(fp(file))
@@ -216,7 +216,7 @@ export class Panel {
         const pwd = this.model.pwd
 
         function flatDir(rootDir: string, res: FileInfo[]) {
-            if (res.length > settings.maxFlatModeSize) return
+            if (res.length > misc.maxFilesInPanel) return
             fs.readdirSync(rootDir).forEach((file) => {
                 try {
                     const fullPath = path.join(rootDir, file)
@@ -234,7 +234,7 @@ export class Panel {
         const res = []
         flatDir(pwd, res)
 
-        if (res.length > settings.maxFlatModeSize) {
+        if (res.length > misc.maxFilesInPanel) {
             return false
         }
 

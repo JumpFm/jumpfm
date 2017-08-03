@@ -1,9 +1,9 @@
-import { files } from './files'
+import { root } from './settings'
 
 import * as fs from 'fs'
 import * as path from 'path'
 
-const dbFullPath = path.join(files.root, "jumps.json");
+const dbFullPath = path.join(root, "jumps.json");
 
 export class JumpDb {
     private db = this.loadDb();
