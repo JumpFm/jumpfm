@@ -7,29 +7,27 @@ import * as mousetrap from 'mousetrap'
 
 
 export function bindSelection(jumpFm: JumpFm) {
-    const selection = keys.selection
-
-    function pan(): Panel {
-        return jumpFm.panels.getActivePanel()
-    }
+    const pan = () => jumpFm.panels.getActivePanel()
 
     const toggle = () => {
         pan().toggleSel()
         return false
     }
 
-    selection.toggle.forEach(key => mousetrap.bind(key, toggle))
-
     const clear = () => {
         pan().clearFilter()
         pan().deselectAll()
         return false
     }
-    selection.clear.forEach(key => mousetrap.bind(key, clear))
 
     const all = () => {
         pan().selectAll();
         return false;
     }
+
+    const selection = keys.selection
+
+    selection.toggle.forEach(key => mousetrap.bind(key, toggle))
+    selection.clear.forEach(key => mousetrap.bind(key, clear))
     selection.all.forEach(key => mousetrap.bind(key, all))
 }

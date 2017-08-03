@@ -4,6 +4,7 @@ import { Panel } from './Panel'
 import { Dialog } from './Dialog'
 import { misc } from './settings'
 import { opn } from './opn'
+import { keys } from './settings'
 
 import * as cmd from 'node-cmd';
 import * as shell from 'shelljs'
@@ -14,25 +15,20 @@ import * as path from 'path'
 import * as fs from 'fs'
 
 export function bindFileOperations(jumpFm: JumpFm) {
-    function pan(): Panel {
-        return jumpFm.panels.getActivePanel()
-    }
+    const pan = () => jumpFm.panels.getActivePanel()
 
-    // DEL
-    mousetrap.bind('del', () => {
+    const del = () => {
         shell.rm('-rf', pan().getSelectedFilesFullPath())
         return false;
-    });
+    }
 
-    // EDIT
-    mousetrap.bind('f4', () => {
+    const edit = () => {
         const cm = misc.editor + " " + pan().getCurFile().fullPath
         cmd.run(cm);
         return false;
-    });
+    }
 
-    // NEW FILE
-    mousetrap.bind('shift+f4', () => {
+    const newFile = () => {
         const pwd = pan().getCurDir();
         jumpFm.dialog.open({
             title: "New File",
@@ -47,10 +43,9 @@ export function bindFileOperations(jumpFm: JumpFm) {
             }
         });
         return false;
-    });
+    }
 
-    // NEW DIR
-    mousetrap.bind('f7', () => {
+    const newDir = () => {
         const pwd = pan().getCurDir();
         jumpFm.dialog.open({
             title: "New Folder",
@@ -64,10 +59,9 @@ export function bindFileOperations(jumpFm: JumpFm) {
             }
         });
         return false;
-    });
+    }
 
-    // RENAME
-    mousetrap.bind('f2', () => {
+    const rename = () => {
         const pwd = pan().getCurDir();
         const curFile = pan().getCurFile();
         const name = curFile.name;
@@ -88,5 +82,13 @@ export function bindFileOperations(jumpFm: JumpFm) {
         });
 
         return false;
-    });
+    }
+
+    const file = keys.file
+
+    file.del.forEach(key => mousetrap.bind(key, del))
+    file.edit.forEach(key => mousetrap.bind(key, edit))
+    file.newFile.forEach(key => mousetrap.bind(key, newFile))
+    file.newDir.forEach(key => mousetrap.bind(key, newDir))
+    file.rename.forEach(key => mousetrap.bind(key, rename))
 }

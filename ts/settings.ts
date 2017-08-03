@@ -92,5 +92,12 @@ export const keys = load(keysFullPath, {
         toggle: ['space'],
         all: ['ctrl+a'],
         clear: ['esc'],
+    },
+    file: {
+        del: ['del'],
+        edit: ['f4'],
+        newFile: ['shift+f4'],
+        newDir: ['f7'],
+        rename: ['f2']
     }
 })
