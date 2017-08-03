@@ -7,16 +7,10 @@ export const root = path.join(homedir(), ".jumpfm");
 if (!fs.existsSync(root)) fs.mkdirSync(root);
 
 function sync<T>(obj: any, defaults: T): T {
-    console.log('sync',
-        JSON.stringify(obj),
-        JSON.stringify(defaults),
-        typeof obj,
-        typeof defaults
-    )
-
-    if (typeof obj !== 'object') return (typeof obj) === (typeof defaults) ? obj : defaults
-
-    console.log('objects')
+    if (typeof obj !== 'object')
+        return (typeof obj) === (typeof defaults) ?
+            obj :
+            defaults
 
     Object.keys(defaults).forEach(key => {
         obj[key] = obj.hasOwnProperty(key) ?
@@ -48,8 +42,13 @@ function load<T>(fullPath: string, defaults: T): T {
 }
 
 export const miscFullPath = path.join(root, 'misc.json')
+export const pluginsFullPath = path.join(root, 'plugins.json')
 
 export const misc = load(miscFullPath, {
     editor: 'gedit',
     maxFilesInPanel: 1000
+})
+
+export const plugins = load(pluginsFullPath, {
+    plugins: []
 })

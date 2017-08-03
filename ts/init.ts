@@ -6,7 +6,7 @@ import { Jump } from './Jump'
 import { StatusBar } from './StatusBar'
 import { Q } from './Q'
 import { opn } from './opn'
-import { miscFullPath } from './settings'
+import { miscFullPath, pluginsFullPath } from './settings'
 
 import { bind } from './bind'
 
@@ -55,8 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
     bind(jumpFm)
 
     // SETTINGS
-    document.getElementById("editSettings").addEventListener("click", () => {
+    document.getElementById("editMisc").addEventListener("click", () => {
         opn(miscFullPath);
+    }, false);
+
+    document.getElementById("editPlugins").addEventListener("click", () => {
+        opn(pluginsFullPath);
     }, false);
 
     // INIT

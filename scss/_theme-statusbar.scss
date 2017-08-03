@@ -2,13 +2,14 @@
 #statusbar {
     display: flex;
     flex-shrink: 0;
-    margin-top: .2em;
 }
 
 #statusbar-msg {
-    padding: .1em .3em;
+    padding-left: .5em;
     flex-grow: 1;
     font-size: 90%;
+    display: flex;
+    align-items: center;
     &.info {
         color: $color-info;
     }
@@ -21,11 +22,11 @@
 }
 
 #buttons {
+    font-size: 120%;
     display: flex;
-    flex-direction: row-reverse;
-    flex-basis: 4em;
+    flex-direction: row;
     flex-shrink: 0;
     .btn {
-        padding-right: .3em;
+        padding-right: .5em;
     }
 }
