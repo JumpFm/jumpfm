@@ -6,11 +6,11 @@ import { Panel } from './Panel'
 import { Dialog } from './Dialog'
 import { Jump } from './Jump'
 import { Gist, newPublicGist } from './gist'
+import { opn } from './opn'
 
 import * as path from 'path';
 import * as mousetrap from 'mousetrap';
 import * as keycode from 'keycode';
-import * as open from 'open';
 
 export function bindMisc(jumpFm: JumpFm) {
     function pan(): Panel {
@@ -76,7 +76,7 @@ export function bindMisc(jumpFm: JumpFm) {
                     filesFullPath: jumpFm.panels.getActivePanel().getSelectedFilesFullPath()
                 }, (err, url) => {
                     jumpFm.statusBar.info('Gist created at ' + url)
-                    open(url)
+                    opn(url)
                 })
             }
         })

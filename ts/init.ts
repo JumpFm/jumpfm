@@ -6,9 +6,14 @@ import { Jump } from './Jump'
 import { StatusBar } from './StatusBar'
 import { Q } from './Q'
 import { opn } from './opn'
-import { miscFullPath, pluginsFullPath } from './settings'
-
 import { bind } from './bind'
+
+import {
+    miscFullPath,
+    pluginsFullPath,
+    keysFullPath
+} from './settings'
+
 
 import * as fileSize from 'filesize'
 import * as moment from 'moment'
@@ -55,14 +60,15 @@ document.addEventListener('DOMContentLoaded', () => {
     bind(jumpFm)
 
     // SETTINGS
-    document.getElementById("editMisc").addEventListener("click", () => {
-        opn(miscFullPath);
-    }, false);
+    function edit(id: string, fullPath: string) {
+        document.getElementById(id).addEventListener("click", () => {
+            opn(fullPath);
+        }, false);
+    }
 
-    document.getElementById("editPlugins").addEventListener("click", () => {
-        opn(pluginsFullPath);
-    }, false);
-
+    edit('editMisc', miscFullPath)
+    edit('editPlugins', pluginsFullPath)
+    edit('editKeys', keysFullPath)
     // INIT
     jumpFm.init()
     const panels = jumpFm.panels

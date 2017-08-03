@@ -6,9 +6,19 @@ export const root = path.join(homedir(), ".jumpfm");
 
 if (!fs.existsSync(root)) fs.mkdirSync(root);
 
+const typeOf = obj => Array.isArray(obj) ? 'array' : typeof obj
+
 function sync<T>(obj: any, defaults: T): T {
-    if (typeof obj !== 'object')
-        return (typeof obj) === (typeof defaults) ?
+    // console.log(
+    //     'sync',
+    //     JSON.stringify(obj),
+    //     JSON.stringify(defaults),
+    //     typeof obj,
+    //     typeof defaults
+    // )
+
+    if (typeOf(obj) !== 'object')
+        return typeOf(obj) === typeOf(defaults) ?
             obj :
             defaults
 
@@ -26,23 +36,26 @@ function sync<T>(obj: any, defaults: T): T {
 }
 
 function load<T>(fullPath: string, defaults: T): T {
-    try {
-        const settings = fs.existsSync(fullPath) ?
-            sync(require(fullPath), defaults) :
-            defaults
-
+    const save = (settings) => {
         fs.writeFileSync(fullPath, JSON.stringify(settings, null, 2));
-
         return settings
+    }
+
+    try {
+        return save(
+            fs.existsSync(fullPath) ?
+                sync(require(fullPath), defaults) :
+                defaults
+        )
     } catch (e) {
         console.log(e)
-        fs.writeFileSync(fullPath, JSON.stringify(defaults, null, 2));
-        return defaults
+        return save(defaults)
     }
 }
 
 export const miscFullPath = path.join(root, 'misc.json')
 export const pluginsFullPath = path.join(root, 'plugins.json')
+export const keysFullPath = path.join(root, 'keys.json')
 
 export const misc = load(miscFullPath, {
     editor: 'gedit',
@@ -51,4 +64,26 @@ export const misc = load(miscFullPath, {
 
 export const plugins = load(pluginsFullPath, {
     plugins: []
+})
+
+export const keys = load(keysFullPath, {
+    down: ['down'],
+    downSelect: ['shift+down'],
+    pgDown: ['pagedown'],
+    pgDownSelect: ['shift+pagedown'],
+    up: ['up'],
+    upSelect: ['shift+up'],
+    pgUp: ['pageup'],
+    pgUpSelect: ['shift+pageup'],
+    home: ['home'],
+    homeSelect: ['shift+home'],
+    end: ['end'],
+    endSelect: ['shift+end'],
+    enter: ['enter'],
+    back: ['backspace'],
+    homeDir: ['ctrl+home'],
+    openToRight: ['ctrl+right'],
+    openToLeft: ['ctrl+left'],
+    historyBack: ['alt+left'],
+    historyForward: ['alt+right'],
 })

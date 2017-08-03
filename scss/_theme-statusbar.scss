@@ -2,10 +2,10 @@
 #statusbar {
     display: flex;
     flex-shrink: 0;
+    padding: .1em .5em
 }
 
 #statusbar-msg {
-    padding-left: .5em;
     flex-grow: 1;
     font-size: 90%;
     display: flex;
@@ -27,6 +27,6 @@
     flex-direction: row;
     flex-shrink: 0;
     .btn {
-        padding-right: .5em;
+        padding-left: .5em;
     }
 }

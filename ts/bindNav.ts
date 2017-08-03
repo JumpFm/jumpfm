@@ -2,6 +2,7 @@ import { JumpFm } from './JumpFm'
 import { Panels } from './Panels'
 import { Panel } from './Panel'
 import { opn } from './opn'
+import { keys } from './settings'
 
 import * as mousetrap from 'mousetrap'
 import * as path from 'path'
@@ -14,36 +15,38 @@ export function bindNav(jumpFm: JumpFm) {
 
     // UP DOWN
     const up = (select) => { pan().step(-1, select); return false }
+    keys.up.forEach(key => mousetrap.bind(key, () => up(false)))
+    keys.upSelect.forEach(key => mousetrap.bind(key, () => up(true)))
+
     const down = (select) => { pan().step(1, select); return false }
-    mousetrap.bind('up', () => up(false))
-    mousetrap.bind('shift+up', () => up(true))
-    mousetrap.bind('down', () => down(false))
-    mousetrap.bind('shift+down', () => down(true))
+    keys.down.forEach(key => mousetrap.bind(key, () => down(false)))
+    keys.downSelect.forEach(key => mousetrap.bind(key, () => down(true)))
 
     const pageUp = (select) => {
         pan().step(-pan().getRowCountInPage() + 1, select);
         return false
     }
+    keys.pgUp.forEach(key => mousetrap.bind(key, () => pageUp(false)))
+    keys.pgUpSelect.forEach(key => mousetrap.bind(key, () => pageUp(true)))
+
     const pageDown = (select) => {
         pan().step(pan().getRowCountInPage() - 1, select);
         return false
     }
-    mousetrap.bind('pageup', () => pageUp(false))
-    mousetrap.bind('shift+pageup', () => pageUp(true))
-    mousetrap.bind('pagedown', () => pageDown(false))
-    mousetrap.bind('shift+pagedown', () => pageDown(true))
+    keys.pgDown.forEach(key => mousetrap.bind(key, () => pageDown(false)))
+    keys.pgDownSelect.forEach(key => mousetrap.bind(key, () => pageDown(true)))
 
     const home = (select) => { pan().step(-9999, select); return false }
-    const end = (select) => { pan().step(9999, select); return false }
+    keys.home.forEach(key => mousetrap.bind(key, () => home(false)))
+    keys.homeSelect.forEach(key => mousetrap.bind(key, () => home(true)))
 
-    mousetrap.bind('home', () => home(false))
-    mousetrap.bind('shift+home', () => home(true))
-    mousetrap.bind('end', () => end(false))
-    mousetrap.bind('shift+end', () => end(true))
+    const end = (select) => { pan().step(9999, select); return false }
+    keys.end.forEach(key => mousetrap.bind(key, () => end(false)))
+    keys.endSelect.forEach(key => mousetrap.bind(key, () => end(true)))
 
 
     // NAVIGATION
-    mousetrap.bind('enter', () => {
+    const enter = () => {
         const fullPath = pan().getCurFile().fullPath
         if (pan().getCurFile().stat.isDirectory()) {
             pan().cd(fullPath)
@@ -51,21 +54,21 @@ export function bindNav(jumpFm: JumpFm) {
             opn(fullPath)
         }
         return false
-    })
+    }
+    keys.enter.forEach(key => mousetrap.bind(key, enter))
 
-    mousetrap.bind('backspace', () => {
+    const back = () => {
         const p = pan()
         p.cd(path.dirname(p.getCurDir()))
         return false
-    },
-        'keyup'
-    )
-    mousetrap.bind('ctrl+home', () => {
+    }
+    keys.back.forEach(key => mousetrap.bind(key, back))
+
+    const homeDir = () => {
         pan().cd(homedir())
         return false
-    },
-        'keyup'
-    )
+    }
+    keys.homeDir.forEach(key => mousetrap.bind(key, homeDir))
 
     function openDir(here: number) {
         const there = (here + 1) % 2
@@ -77,8 +80,12 @@ export function bindNav(jumpFm: JumpFm) {
         return false
     }
 
-    mousetrap.bind('ctrl+right', () => { return openDir(0) })
-    mousetrap.bind('ctrl+left', () => { return openDir(1) })
-    mousetrap.bind('alt+left', () => { pan().back(); return false })
-    mousetrap.bind('alt+right', () => { pan().forward(); return false })
+    keys.openToRight.forEach(key => mousetrap.bind(key, () => openDir(0)))
+    keys.openToLeft.forEach(key => mousetrap.bind(key, () => openDir(1)))
+
+    const historyBack = () => { pan().back; return false }
+    keys.historyBack.forEach(key => mousetrap.bind(key, () => historyBack))
+
+    const historyForward = () => { pan().forward; return false }
+    keys.historyForward.forEach(key => mousetrap.bind(key, () => historyForward))
 }
