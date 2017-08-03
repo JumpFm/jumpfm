@@ -9,14 +9,6 @@ if (!fs.existsSync(root)) fs.mkdirSync(root);
 const typeOf = obj => Array.isArray(obj) ? 'array' : typeof obj
 
 function sync<T>(obj: any, defaults: T): T {
-    // console.log(
-    //     'sync',
-    //     JSON.stringify(obj),
-    //     JSON.stringify(defaults),
-    //     typeof obj,
-    //     typeof defaults
-    // )
-
     if (typeOf(obj) !== 'object')
         return typeOf(obj) === typeOf(defaults) ?
             obj :
@@ -87,6 +79,7 @@ export const keys = load(keysFullPath, {
         openToLeft: ['ctrl+left'],
         historyBack: ['alt+left'],
         historyForward: ['alt+right'],
+        jump: ['j']
     },
     selection: {
         toggle: ['space'],
@@ -101,6 +94,7 @@ export const keys = load(keysFullPath, {
         rename: ['f2'],
         zip: ['z'],
         unzip: ['u'],
+        copyFullPath: ['p'],
     },
     panels: {
         switch: ['tab'],
@@ -108,4 +102,13 @@ export const keys = load(keysFullPath, {
         move: ['f6'],
         swap: ['s'],
     },
+    filter: {
+        show: ['f'],
+        likeThis: ['l'],
+        toggleHidden: ['h'],
+        toggleFlatMode: ['r']
+    },
+    misc: {
+        gist: ['ctrl+g']
+    }
 })

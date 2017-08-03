@@ -1,3 +1,5 @@
+const clipboard = require('electron').clipboard;
+
 import { JumpFm } from './JumpFm'
 import { Panels } from './Panels'
 import { Panel } from './Panel'
@@ -128,6 +130,11 @@ export function bindFileOperations(jumpFm: JumpFm) {
         return false
     }
 
+    const copyFullPath = () => {
+        const fullPath = pan().getCurFile().fullPath
+        jumpFm.statusBar.info('Clipboard: ' + fullPath)
+        clipboard.writeText(fullPath);
+    }
 
     const file = keys.file
 
@@ -138,4 +145,5 @@ export function bindFileOperations(jumpFm: JumpFm) {
     file.rename.forEach(key => mousetrap.bind(key, rename))
     file.zip.forEach(key => mousetrap.bind(key, zip))
     file.unzip.forEach(key => mousetrap.bind(key, unzip))
+    file.copyFullPath.forEach(key => mousetrap.bind(key, ))
 }

@@ -61,6 +61,13 @@ export function bindNav(jumpFm: JumpFm) {
         return false
     }
 
+    const jump = () => {
+        jumpFm.jump.open((pwd) => {
+            pan().cd(pwd);
+        });
+        return false;
+    }
+
     const nav = keys.nav
 
     nav.up.forEach(key => mousetrap.bind(key, () => up(false)))
@@ -92,4 +99,6 @@ export function bindNav(jumpFm: JumpFm) {
 
     nav.historyBack.forEach(key => mousetrap.bind(key, () => historyBack))
     nav.historyForward.forEach(key => mousetrap.bind(key, () => historyForward))
+
+    nav.jump.forEach(key => mousetrap.bind(key, jump))
 }
