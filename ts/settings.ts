@@ -37,7 +37,7 @@ function sync<T>(obj: any, defaults: T): T {
 
 function load<T>(fullPath: string, defaults: T): T {
     const save = (settings) => {
-        fs.writeFileSync(fullPath, JSON.stringify(settings, null, 2));
+        fs.writeFileSync(fullPath, JSON.stringify(settings, null, 4));
         return settings
     }
 
@@ -67,23 +67,30 @@ export const plugins = load(pluginsFullPath, {
 })
 
 export const keys = load(keysFullPath, {
-    down: ['down'],
-    downSelect: ['shift+down'],
-    pgDown: ['pagedown'],
-    pgDownSelect: ['shift+pagedown'],
-    up: ['up'],
-    upSelect: ['shift+up'],
-    pgUp: ['pageup'],
-    pgUpSelect: ['shift+pageup'],
-    home: ['home'],
-    homeSelect: ['shift+home'],
-    end: ['end'],
-    endSelect: ['shift+end'],
-    enter: ['enter'],
-    back: ['backspace'],
-    homeDir: ['ctrl+home'],
-    openToRight: ['ctrl+right'],
-    openToLeft: ['ctrl+left'],
-    historyBack: ['alt+left'],
-    historyForward: ['alt+right'],
+    nav: {
+        down: ['down'],
+        downSelect: ['shift+down'],
+        pgDown: ['pagedown'],
+        pgDownSelect: ['shift+pagedown'],
+        up: ['up'],
+        upSelect: ['shift+up'],
+        pgUp: ['pageup'],
+        pgUpSelect: ['shift+pageup'],
+        home: ['home'],
+        homeSelect: ['shift+home'],
+        end: ['end'],
+        endSelect: ['shift+end'],
+        enter: ['enter'],
+        back: ['backspace'],
+        homeDir: ['ctrl+home'],
+        openToRight: ['ctrl+right'],
+        openToLeft: ['ctrl+left'],
+        historyBack: ['alt+left'],
+        historyForward: ['alt+right'],
+    },
+    selection: {
+        toggle: ['space'],
+        all: ['ctrl+a'],
+        clear: ['esc'],
+    }
 })

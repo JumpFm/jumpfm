@@ -9,40 +9,42 @@ import * as path from 'path'
 import * as homedir from 'homedir'
 
 export function bindNav(jumpFm: JumpFm) {
+    const nav = keys.nav
+
     function pan(): Panel {
         return jumpFm.panels.getActivePanel()
     }
 
     // UP DOWN
     const up = (select) => { pan().step(-1, select); return false }
-    keys.up.forEach(key => mousetrap.bind(key, () => up(false)))
-    keys.upSelect.forEach(key => mousetrap.bind(key, () => up(true)))
+    nav.up.forEach(key => mousetrap.bind(key, () => up(false)))
+    nav.upSelect.forEach(key => mousetrap.bind(key, () => up(true)))
 
     const down = (select) => { pan().step(1, select); return false }
-    keys.down.forEach(key => mousetrap.bind(key, () => down(false)))
-    keys.downSelect.forEach(key => mousetrap.bind(key, () => down(true)))
+    nav.down.forEach(key => mousetrap.bind(key, () => down(false)))
+    nav.downSelect.forEach(key => mousetrap.bind(key, () => down(true)))
 
     const pageUp = (select) => {
         pan().step(-pan().getRowCountInPage() + 1, select);
         return false
     }
-    keys.pgUp.forEach(key => mousetrap.bind(key, () => pageUp(false)))
-    keys.pgUpSelect.forEach(key => mousetrap.bind(key, () => pageUp(true)))
+    nav.pgUp.forEach(key => mousetrap.bind(key, () => pageUp(false)))
+    nav.pgUpSelect.forEach(key => mousetrap.bind(key, () => pageUp(true)))
 
     const pageDown = (select) => {
         pan().step(pan().getRowCountInPage() - 1, select);
         return false
     }
-    keys.pgDown.forEach(key => mousetrap.bind(key, () => pageDown(false)))
-    keys.pgDownSelect.forEach(key => mousetrap.bind(key, () => pageDown(true)))
+    nav.pgDown.forEach(key => mousetrap.bind(key, () => pageDown(false)))
+    nav.pgDownSelect.forEach(key => mousetrap.bind(key, () => pageDown(true)))
 
     const home = (select) => { pan().step(-9999, select); return false }
-    keys.home.forEach(key => mousetrap.bind(key, () => home(false)))
-    keys.homeSelect.forEach(key => mousetrap.bind(key, () => home(true)))
+    nav.home.forEach(key => mousetrap.bind(key, () => home(false)))
+    nav.homeSelect.forEach(key => mousetrap.bind(key, () => home(true)))
 
     const end = (select) => { pan().step(9999, select); return false }
-    keys.end.forEach(key => mousetrap.bind(key, () => end(false)))
-    keys.endSelect.forEach(key => mousetrap.bind(key, () => end(true)))
+    nav.end.forEach(key => mousetrap.bind(key, () => end(false)))
+    nav.endSelect.forEach(key => mousetrap.bind(key, () => end(true)))
 
 
     // NAVIGATION
@@ -55,20 +57,20 @@ export function bindNav(jumpFm: JumpFm) {
         }
         return false
     }
-    keys.enter.forEach(key => mousetrap.bind(key, enter))
+    nav.enter.forEach(key => mousetrap.bind(key, enter))
 
     const back = () => {
         const p = pan()
         p.cd(path.dirname(p.getCurDir()))
         return false
     }
-    keys.back.forEach(key => mousetrap.bind(key, back))
+    nav.back.forEach(key => mousetrap.bind(key, back))
 
     const homeDir = () => {
         pan().cd(homedir())
         return false
     }
-    keys.homeDir.forEach(key => mousetrap.bind(key, homeDir))
+    nav.homeDir.forEach(key => mousetrap.bind(key, homeDir))
 
     function openDir(here: number) {
         const there = (here + 1) % 2
@@ -80,12 +82,12 @@ export function bindNav(jumpFm: JumpFm) {
         return false
     }
 
-    keys.openToRight.forEach(key => mousetrap.bind(key, () => openDir(0)))
-    keys.openToLeft.forEach(key => mousetrap.bind(key, () => openDir(1)))
+    nav.openToRight.forEach(key => mousetrap.bind(key, () => openDir(0)))
+    nav.openToLeft.forEach(key => mousetrap.bind(key, () => openDir(1)))
 
     const historyBack = () => { pan().back; return false }
-    keys.historyBack.forEach(key => mousetrap.bind(key, () => historyBack))
+    nav.historyBack.forEach(key => mousetrap.bind(key, () => historyBack))
 
     const historyForward = () => { pan().forward; return false }
-    keys.historyForward.forEach(key => mousetrap.bind(key, () => historyForward))
+    nav.historyForward.forEach(key => mousetrap.bind(key, () => historyForward))
 }
