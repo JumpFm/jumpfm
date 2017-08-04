@@ -1,15 +1,10 @@
 @import 'colors';
 #statusbar {
-    display: flex;
-    flex-shrink: 0;
     padding: .1em .5em
 }
 
 #statusbar-msg {
-    flex-grow: 1;
     font-size: 90%;
-    display: flex;
-    align-items: center;
     &.info {
         color: $color-info;
     }
@@ -23,9 +18,6 @@
 
 #buttons {
     font-size: 120%;
-    display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
     .btn {
         padding-left: .5em;
     }

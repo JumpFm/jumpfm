@@ -2,6 +2,7 @@
 @import 'theme-table';
 @import 'theme-button';
 @import 'theme-dialog';
+@import 'theme-jump';
 @import 'theme-input';
 @import 'theme-panel';
 @import 'theme-filter';
@@ -10,16 +11,6 @@
 @font-face {
     font-family: DroidSansMono;
     src: url('../fonts/DroidSansMono.ttf');
-}
-
-@font-face {
-    font-family: SpaceMono-Regular;
-    src: url('../fonts/SpaceMono-Regular.ttf');
-}
-
-@font-face {
-    font-family: RobotoMono-Regular;
-    src: url('../fonts/RobotoMono-Regular.ttf');
 }
 
 body,
@@ -48,5 +39,4 @@ input {
 .file-icon {
     width: 1em;
     height: 1em;
-    color: red;
 }

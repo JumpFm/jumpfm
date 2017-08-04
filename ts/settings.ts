@@ -51,7 +51,11 @@ export const keysFullPath = path.join(root, 'keys.json')
 
 export const misc = load(miscFullPath, {
     editor: 'gedit',
-    maxFilesInPanel: 1000
+    maxFilesInPanel: 1000,
+    jump: {
+        dbMaxSize: 300,
+        saveInterval: 5
+    }
 })
 
 export const plugins = load(pluginsFullPath, {

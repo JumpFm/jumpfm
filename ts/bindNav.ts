@@ -54,8 +54,8 @@ export function bindNav(jumpFm: JumpFm) {
         return false
     }
 
-    const historyBack = () => { pan().back; return false }
-    const historyForward = () => { pan().forward; return false }
+    const historyBack = () => { pan().back(); return false }
+    const historyForward = () => { pan().forward(); return false }
 
     const openDir = (here: number) => {
         const there = (here + 1) % 2
@@ -68,9 +68,7 @@ export function bindNav(jumpFm: JumpFm) {
     }
 
     const jump = () => {
-        jumpFm.jump.open((pwd) => {
-            pan().cd(pwd);
-        });
+        jumpFm.jump.open();
         return false;
     }
 
@@ -92,17 +90,17 @@ export function bindNav(jumpFm: JumpFm) {
     keys.end.forEach(key => mousetrap.bind(key, () => end(false)))
     keys.endSelect.forEach(key => mousetrap.bind(key, () => end(true)))
 
-    keys.enter.forEach(key => mousetrap.bind(key, enter))
+    keys.enter.forEach(key => mousetrap.bind(key, () => enter()))
 
-    keys.back.forEach(key => mousetrap.bind(key, back))
+    keys.back.forEach(key => mousetrap.bind(key, () => back()))
 
-    keys.homeDir.forEach(key => mousetrap.bind(key, homeDir))
+    keys.homeDir.forEach(key => mousetrap.bind(key, () => homeDir()))
 
     keys.openToRight.forEach(key => mousetrap.bind(key, () => openDir(0)))
     keys.openToLeft.forEach(key => mousetrap.bind(key, () => openDir(1)))
 
-    keys.historyBack.forEach(key => mousetrap.bind(key, () => historyBack))
-    keys.historyForward.forEach(key => mousetrap.bind(key, () => historyForward))
+    keys.historyBack.forEach(key => mousetrap.bind(key, () => historyBack()))
+    keys.historyForward.forEach(key => mousetrap.bind(key, () => historyForward()))
 
-    keys.jump.forEach(key => mousetrap.bind(key, jump))
+    keys.jump.forEach(key => mousetrap.bind(key, () => jump()))
 }

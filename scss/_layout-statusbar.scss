@@ -1,0 +1,16 @@
+#statusbar {
+    display: flex;
+    flex-shrink: 0;
+}
+
+#statusbar-msg {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+}

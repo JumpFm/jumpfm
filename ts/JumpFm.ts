@@ -19,7 +19,8 @@ export class JumpFm {
     model = {
         'panels': this.panels.model,
         'status': this.statusBar.model,
-        'progress': this.progressBar.model
+        'progress': this.progressBar.model,
+        'jumps': this.jump.model
     }
 
     init = () => {

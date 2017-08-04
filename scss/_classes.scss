@@ -1,0 +1,17 @@
+@import 'colors';
+.border {
+    border: 1px solid $color-natural;
+}
+
+.labeled-input {
+    display: flex;
+    .label {
+        color: $color-info;
+        font-weight: bold;
+        padding: .4em;
+    }
+    input {
+        display: block;
+        flex-grow: 1;
+    }
+}

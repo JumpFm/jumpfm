@@ -2,8 +2,5 @@
 input {
     padding: .2em;
     outline: none;
-    border: 1px solid transparent;
-    &:focus {
-        border-color: $color-natural;
-    }
+    border: none;
 }

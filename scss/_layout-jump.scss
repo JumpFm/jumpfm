@@ -1,0 +1,9 @@
+#jump {
+    @extend .dialog;
+    flex-direction: column;
+}
+
+#jump-sug-list {
+    margin: 0;
+    margin-left: 4em;
+}

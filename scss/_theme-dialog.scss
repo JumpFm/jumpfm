@@ -1,13 +1,4 @@
 @import 'colors';
 .dialog {
-    border: 1px solid $color-natural;
     background-color: $color-bg;
-    .title {
-        color: $color-info;
-        font-weight: bold;
-        padding: .4em;
-    }
-    input {
-        border: none;
-    }
 }

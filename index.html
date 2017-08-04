@@ -4,7 +4,6 @@
 <head>
     <title>JumpFm</title>
     <link rel="stylesheet" href="static/font-awesome.css">
-    <link rel="stylesheet" href="css/auto-complete.css">
     <link rel="stylesheet" href="css/index.css">
 
     <script src="js/main.js"></script>
@@ -72,15 +71,22 @@
         </div>
 
         <!-- DIALOG JUMP -->
-        <div id="jump" class="dialog">
-            <div class="title">Jump:</div>
-            <input id="jumpInput" type="text" />
+        <div id='jump'>
+            <div class='labeled-input border'>
+                <div class='label'>Jump:</div>
+                <input id="jumpInput" type="text" />
+            </div>
+            <div>
+                <ol id='jump-sug-list' class='border'>
+                    <li v-for="(res, i) in jumps.res" :cur="i == jumps.cur" v-html="res.string" />
+                </ol>
+            </div>
         </div>
         <!-- /DIALOG JUMP -->
 
         <!-- DIALOG -->
-        <div id="dialog" class="dialog">
-            <div id="dialogTitle" class="title"></div>
+        <div id="dialog" class="dialog border">
+            <div id="dialogTitle" class="label"></div>
             <input id="dialogInput" type="text" />
         </div>
         <!-- /DIALOG -->

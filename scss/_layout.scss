@@ -1,41 +1,41 @@
 @import '_layout-table';
 @import '_layout-dialog';
+@import '_layout-jump';
+@import '_layout-statusbar';
 * {
     box-sizing: border-box;
-    html,
-    body {
-        height: 100%;
-        width: 100%;
-        padding: 0;
-        margin: 0;
-    }
-    #app {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        flex-direction: column;
-    }
-    #panels {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: row;
-    }
-    .panel {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        width: 50%;
-    }
-    .panel {
-        .title {
-            flex-shrink: 0;
-        }
-    }
-    #q {
-        display: flex;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#app {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#panels {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 50%;
+    .title {
         flex-shrink: 0;
     }
 }
