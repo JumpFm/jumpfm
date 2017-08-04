@@ -2,7 +2,6 @@ import { JumpFm } from './JumpFm'
 import { JumpDb } from './JumpDb'
 
 import * as fuzzy from 'fuzzy'
-import * as autoComplete from 'js-autocomplete'
 import * as Mousetrap from 'mousetrap'
 import * as fs from 'fs'
 

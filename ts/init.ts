@@ -19,7 +19,6 @@ import * as fileSize from 'filesize'
 import * as moment from 'moment'
 
 import * as mousetrap from 'mousetrap'
-import * as keycode from 'keycode'
 
 import * as homedir from 'homedir'
 import * as Vue from 'vue/dist/vue.min.js'

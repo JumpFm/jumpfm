@@ -7,7 +7,6 @@ import { keys } from './settings'
 
 import * as path from 'path';
 import * as mousetrap from 'mousetrap';
-import * as keycode from 'keycode';
 
 export function bindFilter(jumpFm: JumpFm) {
     const pan = () => jumpFm.panels.getActivePanel()
