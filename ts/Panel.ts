@@ -89,7 +89,7 @@ export class Panel {
             const files = this.getFiles()
             for (var i = a; i <= b; i++) files[i].sel = true
         } catch (e) {
-            console.log(a, b)
+            console.log(e, a, b)
         }
     }
 

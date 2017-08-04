@@ -56,7 +56,6 @@ export class JumpDb {
     }
 
     private saveDb = () => {
-        console.log('save')
         fs.truncateSync(dbFullPath);
         fs.writeFileSync(dbFullPath, JSON.stringify(this.db));
     }
