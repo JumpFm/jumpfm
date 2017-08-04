@@ -1,6 +1,7 @@
 import { JumpFm } from './JumpFm'
 import { JumpDb } from './JumpDb'
 
+import * as fuzzy from 'fuzzy'
 import * as autoComplete from 'js-autocomplete'
 import * as Mousetrap from 'mousetrap'
 import * as fs from 'fs'
@@ -43,16 +44,10 @@ export class Jump {
         new autoComplete({
             minChars: 1,
             selector: '#jumpInput',
-            source: function (input, suggest) {
-                const inputLc = input.toLowerCase();
-                const sug = Object.keys(jumpDb.get()).filter((file) => {
-                    return fs.existsSync(file);
-                }).filter((file) => {
-                    return file.toLowerCase().indexOf(inputLc) > -1;
-                }).sort((f1, f2) => {
-                    return jumpDb[f2] - jumpDb[f1];
-                });
-                suggest(sug);
+            source: function (pattern, suggest) {
+                const files = jumpDb.db.filter(file => fs.existsSync(file))
+                console.log(pattern, files)
+                suggest(fuzzy.filter(pattern, files).map(res => res.string))
             }
         });
     }
