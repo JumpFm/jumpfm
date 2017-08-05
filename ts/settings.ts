@@ -146,7 +146,7 @@ export const keys = load(keysFullPath, {
 
         // SELECTION
         toggleSelection: [],
-        selectAll: ['ctrl-a'],
+        selectAll: ['ctrl+a'],
         clearSelection: [],
 
         // FILE
