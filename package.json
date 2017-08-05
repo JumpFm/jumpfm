@@ -5,6 +5,7 @@
     "author": "Gilad Kutiel",
     "license": "ISC",
     "dependencies": {
+        "@types/nodegit": "^0.18.1",
         "archiver": "^2.0.0",
         "electron-log": "^2.2.7",
         "electron-simple-updater": "^1.2.1",
@@ -17,6 +18,7 @@
         "node-cmd": "^3.0.0",
         "node-watch": "^0.5.5",
         "node.os": "^1.2.4",
+        "nodegit": "^0.18.3",
         "priorityqueuejs": "^1.0.0",
         "progress-stream": "^2.0.0",
         "replace-ext": "^1.0.0",

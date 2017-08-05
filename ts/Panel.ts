@@ -4,6 +4,7 @@ import { FileInfo } from './FileInfo'
 import { JumpDb } from './JumpDb'
 import { misc } from './settings'
 
+import * as Git from 'nodegit'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as watch from 'node-watch';
@@ -42,10 +43,6 @@ export class Panel {
         return this.getFiles()[this.getCur()]
     }
 
-    setFiles = (files: FileInfo[]): void => {
-        this.model.files = files
-    }
-
     getFiles = (): FileInfo[] => {
         const filterFilter = (file) => {
             return file.name.toLowerCase().indexOf(this.model.filter.toLowerCase()) > -1
@@ -60,23 +57,22 @@ export class Panel {
             .filter(filterHidden)
     }
 
-    loadFiles = (cb: () => void = undefined): void => {
+    readFileInfos = (): FileInfo[] => {
         const dirFullPath = this.model.pwd
-        const fp = file => path.join(dirFullPath, file)
-        fs.readdir(dirFullPath, (err, files) => {
-            if (err) {
-                console.log(err)
-                return
-            }
-            this.setFiles(
-                files.slice(0, misc.maxFilesInPanel).filter(
-                    file => fs.existsSync(fp(file))
-                ).map(file =>
-                    new FileInfo(fp(file))
-                    )
-            )
-            if (cb) cb()
-        })
+        const fileInfos = fs.readdirSync(dirFullPath)
+            .slice(0, misc.maxFilesInPanel)
+            .map(file => path.join(dirFullPath, file))
+            .filter(fullPath => fs.existsSync(fullPath))
+            .map(fullPath => new FileInfo(fullPath))
+
+        Git.Repository
+            .open(dirFullPath)
+            .then(repo =>
+                fileInfos.forEach(fileInfo =>
+                    console.log(fileInfo.name, Git.Status.file(repo, fileInfo.name))
+                ))
+
+        return fileInfos
     }
 
     clearFilter = () => {
@@ -169,11 +165,15 @@ export class Panel {
 
         this.watcher.close()
 
-        this.loadFiles()
+        this.model.files = this.readFileInfos()
 
         this.watcher = watch(dirFullPath, { recursive: false }, () => {
-            this.loadFiles()
+            this.model.files = this.readFileInfos()
         });
+    }
+
+    toggleShowHidden = () => {
+        this.model.showHidden = !this.model.showHidden
     }
 
     toggleFlatMode = (): void => {
@@ -188,14 +188,11 @@ export class Panel {
                 return
             }
             this.watcher = watch(this.model.pwd, { recursive: true }, () => {
-                this.loadFiles(this.flat)
+                this.model.files = this.readFileInfos()
+                this.flat()
             });
         }
         this.statusBar.warn("FlatMode: " + (this.model.flatMode ? 'On' : 'Off'))
-    }
-
-    toggleShowHidden = () => {
-        this.model.showHidden = !this.model.showHidden
     }
 
     private flat = (): boolean => {
@@ -220,11 +217,9 @@ export class Panel {
         const res = []
         flatDir(pwd, res)
 
-        if (res.length > misc.maxFilesInPanel) {
-            return false
-        }
+        if (res.length > misc.maxFilesInPanel) return false
 
-        this.setFiles(res)
+        this.model.files = res
         return true
     }
 
