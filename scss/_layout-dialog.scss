@@ -1,15 +1,10 @@
 @import 'colors';
-.dialog {
+#dialog {
     display: none;
-    flex-direction: column;
     position: absolute;
     top: 20%;
     left: 0;
     right: 0;
     width: 600px;
     margin: 0 auto;
-    input {
-        display: block;
-        width: 100%;
-    }
 }

@@ -13,7 +13,7 @@ export class Dialog {
             ok: (input: string) => void
         }) => {
         this.ok = spec.ok
-        this.dialog().style.display = 'flex';
+        this.dialog().style.display = 'block';
         this.title().innerText = spec.title + ":";
         this.input().select();
         spec.init && spec.init(this.input());
