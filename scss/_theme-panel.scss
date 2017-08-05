@@ -1,14 +1,4 @@
 .panel {
-    tr {
-        &[cur] {
-            background-color: $color-border;
-            font-weight: bold;
-            color: lighten($color-warn, 10%);
-        }
-        &.sel {
-            color: $color-warn;
-        }
-    }
     &[sel] {
         .title {
             background-color: $color-info;
@@ -16,9 +6,18 @@
         }
         tr {
             &[cur] {
-                // background-color: lighten($color-07, 5%);
                 background-color: $color-info;
             }
+        }
+    }
+    tr {
+        &[cur] {
+            background-color: $color-border;
+            font-weight: bold;
+            color: lighten($color-warn, 10%);
+        }
+        &.sel {
+            background-color: darken($color-warn, 50%);
         }
     }
     .title {
