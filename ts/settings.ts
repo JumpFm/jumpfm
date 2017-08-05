@@ -64,16 +64,16 @@ export const plugins = load(pluginsFullPath, {
 
 export const keys = load(keysFullPath, {
     // NAV
-    jump: ['alt+j'],
+    jump: ['j'],
 
-    down: ['down', 'j'],
-    downSelect: ['shift+down', 'shift+j'],
-    pgDown: ['pagedown', 'ctrl+j'],
-    pgDownSelect: ['shift+pagedown', 'shift+ctrl+j'],
-    up: ['up', 'k'],
-    upSelect: ['shift+up', 'shift+k'],
-    pgUp: ['pageup', 'ctrl+k'],
-    pgUpSelect: ['shift+pageup', 'shift+ctrl+k'],
+    down: ['down'],
+    downSelect: ['shift+down'],
+    pgDown: ['pagedown'],
+    pgDownSelect: ['shift+pagedown'],
+    up: ['up'],
+    upSelect: ['shift+up'],
+    pgUp: ['pageup'],
+    pgUpSelect: ['shift+pageup'],
 
     home: ['home'],
     homeSelect: ['shift+home'],
@@ -123,15 +123,15 @@ export const keys = load(keysFullPath, {
 
     filter: {
         // NAV
-        jump: ['alt+j'],
+        jump: [],
         down: ['down'],
         downSelect: ['shift+down'],
-        pgDown: ['pagedown', 'ctrl+j'],
-        pgDownSelect: ['shift+pagedown', 'shift+ctrl+j'],
+        pgDown: ['pagedown'],
+        pgDownSelect: ['shift+pagedown'],
         up: ['up'],
         upSelect: ['shift+up'],
-        pgUp: ['pageup', 'ctrl+k'],
-        pgUpSelect: ['shift+pageup', 'shift+ctrl+k'],
+        pgUp: ['pageup'],
+        pgUpSelect: ['shift+pageup'],
         home: [],
         homeSelect: [],
         end: [],
@@ -146,7 +146,7 @@ export const keys = load(keysFullPath, {
 
         // SELECTION
         toggleSelection: [],
-        selectAll: [],
+        selectAll: ['ctrl-a'],
         clearSelection: [],
 
         // FILE
@@ -163,12 +163,12 @@ export const keys = load(keysFullPath, {
         switch: ['tab'],
         copy: ['f5'],
         move: ['f6'],
-        swap: ['ctrl+s'],
+        swap: [],
 
         // FILTER
-        likeThis: ['ctrl+l'],
-        toggleHiddenFiles: ['ctrl+h'],
-        toggleFlatMode: ['ctrl+r'],
+        likeThis: [],
+        toggleHiddenFiles: [],
+        toggleFlatMode: [],
 
         // GIST
         gist: ['ctrl+g'],
