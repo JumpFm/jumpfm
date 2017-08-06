@@ -9,6 +9,7 @@
 @import 'theme-statusbar';
 @import 'theme-progressbar';
 @import 'theme-git';
+@import 'classes';
 @font-face {
     font-family: DroidSansMono;
     src: url('../fonts/DroidSansMono.ttf');
@@ -24,9 +25,7 @@ table {
 
 td,
 #progress-txt {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    @extend .txtNoWrap
 }
 
 i.fa {
