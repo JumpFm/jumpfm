@@ -1,3 +1,14 @@
+.header {
+    max-width: 1100px;
+    margin: auto;
+    text-align: center;
+}
+
+.content {
+    max-width: 1000px;
+    margin: auto;
+}
+
 #ss {
     margin: 20px 0;
 }
@@ -10,17 +21,36 @@
 }
 
 section {
-    margin: 2em 0;
+    margin: 6em 0;
 }
 
 div.cols {
     display: flex;
+    &.center {
+        align-items: center;
+    }
+}
+
+.cols {
+    .col:first-child {
+        margin-right: 1em;
+    }
+}
+
+section:nth-child(even) .cols {
+    flex-direction: row-reverse;
+    .col:first-child {
+        margin-left: 1em;
+    }
 }
 
 div.col {
     flex-basis: 50%;
     flex-grow: 1;
-    margin-right: 1em;
+    &.img {
+        flex-basis: 600px;
+        flex-shrink: 0;
+    }
 }
 
 div.col:last-child {
