@@ -107,11 +107,15 @@ a {
     color: #4db6ac; }
 
 .alert, .panic {
+  display: flex;
   font-size: 80%;
   border: 2px solid orange;
   padding: 1em;
   background-color: gold;
   margin: 1em 0; }
+  .alert i, .panic i {
+    font-size: 200%;
+    padding-right: .3em; }
 
 .panic {
   border-color: red;
