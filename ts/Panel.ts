@@ -195,10 +195,6 @@ export class Panel {
                 this.model.files.forEach(fileInfo => {
                     const relativePath = path.relative(gitFullPath, fileInfo.fullPath)
                     const status = gitStatus(Git.Status.file(repo, relativePath))
-                    console.log('-------------')
-                    console.log(gitFullPath, relativePath)
-                    console.log('-------------')
-                    Object.keys(status).forEach(key => console.log(key, status[key]))
                     fileInfo.gitStatus = status
                 })
             })
