@@ -1,0 +1,22 @@
+@import 'colors';
+.gitIgnored {
+    color: darken($color-fg, 25%)
+}
+
+.gitIndexNew,
+.gitIndexModified {
+    color: $color-natural;
+}
+
+.gitWtModified {
+    color: $color-warn;
+}
+
+.gitIndexDeleted {
+    color: $color-err;
+    text-decoration: line-through;
+}
+
+.gitWtNew {
+    color: $color-err;
+}

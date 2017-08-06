@@ -50,7 +50,7 @@ export class JumpDb {
         }
         const db =
             bfs(homedir(), misc.jump.dbMaxSize * 2 / 3)
-                .concat(bfs('/', misc.jump.dbMaxSize * 1 / 3))
+                .concat(bfs(path.parse(homedir()).root, misc.jump.dbMaxSize * 1 / 3))
         fs.writeFileSync(dbFullPath, JSON.stringify(db))
         return db;
     }

@@ -3,6 +3,7 @@ import { History } from './History'
 import { FileInfo } from './FileInfo'
 import { JumpDb } from './JumpDb'
 import { misc } from './settings'
+import { gitStatus, repoRootDir } from './GitStatus'
 
 import * as Git from 'nodegit'
 import * as fs from 'fs'
@@ -11,6 +12,7 @@ import * as watch from 'node-watch';
 
 export class Panel {
     private watcher = { close: () => { } }
+    private gitWatcher = { close: () => { } }
     private history = new History()
     private jumpDb
     private statusBar
@@ -18,14 +20,6 @@ export class Panel {
     constructor(jumpFm: JumpFm) {
         this.jumpDb = jumpFm.jumpDb
         this.statusBar = jumpFm.statusBar
-    }
-
-    clear = () => {
-        this.model.files = []
-    }
-
-    add = (file: FileInfo) => {
-        this.model.files.push(file)
     }
 
     filter = (filter: string = undefined): void => {
@@ -64,13 +58,6 @@ export class Panel {
             .map(file => path.join(dirFullPath, file))
             .filter(fullPath => fs.existsSync(fullPath))
             .map(fullPath => new FileInfo(fullPath))
-
-        Git.Repository
-            .open(dirFullPath)
-            .then(repo =>
-                fileInfos.forEach(fileInfo =>
-                    console.log(fileInfo.name, Git.Status.file(repo, fileInfo.name))
-                ))
 
         return fileInfos
     }
@@ -150,28 +137,6 @@ export class Panel {
         })
     }
 
-    cd = (dirFullPath: string, pushHistory: boolean = true): void => {
-        if (!fs.existsSync(dirFullPath) ||
-            !fs.statSync(dirFullPath).isDirectory()) return
-
-
-
-        if (pushHistory) this.history.push(dirFullPath)
-        this.jumpDb.visit(dirFullPath)
-
-        this.model.pwd = dirFullPath
-        this.model.flatMode = false
-        this.clearFilter()
-
-        this.watcher.close()
-
-        this.model.files = this.readFileInfos()
-
-        this.watcher = watch(dirFullPath, { recursive: false }, () => {
-            this.model.files = this.readFileInfos()
-        });
-    }
-
     toggleShowHidden = () => {
         this.model.showHidden = !this.model.showHidden
     }
@@ -188,7 +153,7 @@ export class Panel {
                 return
             }
             this.watcher = watch(this.model.pwd, { recursive: true }, () => {
-                this.model.files = this.readFileInfos()
+                this.setFiles(this.readFileInfos())
                 this.flat()
             });
         }
@@ -219,8 +184,58 @@ export class Panel {
 
         if (res.length > misc.maxFilesInPanel) return false
 
-        this.model.files = res
+        this.setFiles(res)
         return true
+    }
+
+    private updateGitStatus(gitFullPath: string) {
+        Git.Repository
+            .open(gitFullPath)
+            .then(repo => {
+                this.model.files.forEach(fileInfo => {
+                    const relativePath = path.relative(gitFullPath, fileInfo.fullPath)
+                    const status = gitStatus(Git.Status.file(repo, relativePath))
+                    console.log('-------------')
+                    console.log(gitFullPath, relativePath)
+                    console.log('-------------')
+                    Object.keys(status).forEach(key => console.log(key, status[key]))
+                    fileInfo.gitStatus = status
+                })
+            })
+    }
+
+    private setFiles(files: FileInfo[]) {
+        this.model.files = files
+
+        this.gitWatcher.close()
+        const gitPath = repoRootDir(this.getCurDir())
+        if (!fs.existsSync(gitPath)) return
+
+        this.gitWatcher = watch(gitPath, { recursive: true }, () => {
+            this.updateGitStatus(gitPath)
+        })
+
+        this.updateGitStatus(gitPath)
+    }
+
+    cd = (dirFullPath: string, pushHistory: boolean = true): void => {
+        if (!fs.existsSync(dirFullPath) ||
+            !fs.statSync(dirFullPath).isDirectory()) return
+
+        if (pushHistory) this.history.push(dirFullPath)
+        this.jumpDb.visit(dirFullPath)
+
+        this.model.pwd = dirFullPath
+        this.model.flatMode = false
+        this.clearFilter()
+
+        this.watcher.close()
+
+        this.setFiles(this.readFileInfos())
+
+        this.watcher = watch(dirFullPath, { recursive: false }, () => {
+            this.setFiles(this.readFileInfos())
+        });
     }
 
     model = {

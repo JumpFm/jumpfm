@@ -1,3 +1,5 @@
+import { GitStatus, gitStatus } from './GitStatus'
+
 import * as fs from 'fs'
 import * as path from 'path'
 import * as request from 'request'
@@ -16,6 +18,7 @@ export class FileInfo {
     name: string
     fullPath: string
     sel = false
+    gitStatus = gitStatus()
 
     constructor(fullPath: string, name: string = undefined) {
         this.stat = fs.statSync(fullPath)
