@@ -1,19 +1,19 @@
 @import 'colors';
 @import 'classes';
 #console {
-    @extend .txtNoWrap;
     position: fixed;
-    bottom: 3.5em;
+    bottom: 2.2em;
     left: 0;
     right: 0;
-    width: 60%;
-    max-width: 55em;
     margin: 0 auto;
     font-size: 90%;
     color: $color-natural;
-    background-color: transparent;
-    opacity: 0.9;
+    background-color: $color-bg;
+    opacity: 0.65;
+    // border: 1px solid red;
     .line {
+        @extend .txtNoWrap;
         padding: .1em 0;
+        padding-right: .2em
     }
 }
