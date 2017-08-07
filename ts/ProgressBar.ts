@@ -1,11 +1,15 @@
 export class ProgressBar {
-    model = {
-        per: 0
+    complete: HTMLDivElement
+
+    init = () => {
+        this.complete =
+            document.getElementById('progress-bar-complete') as HTMLDivElement
     }
 
     set = (prog: number) => {
-        this.model.per = prog
+        console.log('set', prog)
+        this.complete.style.width = prog + '%'
     }
 
-    clear = () => this.model.per = 0
+    clear = () => this.set(0)
 }

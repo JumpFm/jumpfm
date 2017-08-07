@@ -18,13 +18,14 @@ export class JumpFm {
 
     model = {
         'panels': this.panels.model,
+        'cp': this.q.model,
         'status': this.statusBar.model,
-        'progress': this.progressBar.model,
         'jumps': this.jump.model
     }
 
     init = () => {
         this.jump.init()
         this.dialog.init()
+        this.progressBar.init()
     }
 }

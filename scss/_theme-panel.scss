@@ -6,6 +6,9 @@
             font-weight: bold;
         }
         tr {
+            &.sel {
+                background-color: darken($color-warn, 55%);
+            }
             &[cur] {
                 background-color: darken($color-warn, 45%);
             }
@@ -15,9 +18,6 @@
         &[cur] {
             background-color: $color-border;
             font-weight: bold;
-        }
-        &.sel {
-            background-color: darken($color-warn, 55%);
         }
     }
     .title {

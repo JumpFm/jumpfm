@@ -1,5 +1,4 @@
 import { JumpFm } from './JumpFm'
-import { StatusBar } from './StatusBar'
 import { ProgressBar } from './ProgressBar'
 
 import * as fileSize from 'filesize'
@@ -7,84 +6,93 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as progress from 'progress-stream'
 
-class Task {
-  file: string
-  dir: string
+class Cp {
+  fileFullPath: string
+  dirFullPath: string
 }
 
 export class Q {
-  working = false
-  q: Task[] = [];
-  status: StatusBar
   progress: ProgressBar
+  copying: boolean = false
+
+  model: { q: Cp[] } = {
+    q: []
+  }
 
   constructor(jumpFm: JumpFm) {
-    this.status = jumpFm.statusBar
     this.progress = jumpFm.progressBar
   }
 
   private done = () => {
-    this.status.clear()
     this.progress.clear()
   }
 
-  private pop = () => {
-    if (this.q.length == 0) return this.done()
-    if (this.working) return;
-    this.status.info('Copy ' + this.q.length + ' file(s)')
-    const job = this.q.pop();
-    this.cpFile(job.file, job.dir);
-  }
+  private cpFileAndPop = () => {
+    if (this.model.q.length == 0) return this.done()
+    if (this.copying) return
 
-  private cpFile = (file: string, dir: string) => {
-    this.working = true;
-    if (!fs.statSync(dir).isDirectory()) return;
+    this.copying = true
+
+    const cp = this.model.q[this.model.q.length - 1]
 
     const prog = progress({
-      length: fs.statSync(file).size,
-      time: 1000
-    }, (progress) => {
-      this.progress.set(progress.percentage);
+      length: fs.statSync(cp.fileFullPath).size,
+      time: 300
+    }, (prog) => {
+      this.progress.set(prog.percentage);
     });
 
 
-    const out = fs.createWriteStream(path.join(dir, path.basename(file)));
+    const out = fs.createWriteStream(
+      path.join(
+        cp.dirFullPath,
+        path.basename(cp.fileFullPath)
+      )
+    );
 
     out.on('close', () => {
-      this.working = false
-      this.pop();
+      this.progress.clear()
+      this.copying = false
+      this.model.q.pop()
+      this.cpFileAndPop()
     });
 
-    fs.createReadStream(file).pipe(prog).pipe(out);
+    fs.createReadStream(cp.fileFullPath)
+      .pipe(prog)
+      .pipe(out)
+
   }
 
-  private cpDir = (sourceDir: string, toDir: string) => {
-    const destDir = path.join(toDir, path.basename(sourceDir));
+  private mkdirp = (dirFullPath) =>
+    fs.existsSync(dirFullPath) ||
+    fs.mkdirSync(dirFullPath)
 
-    let _this = this
+  private cpDir = (sourceDirFullPath: string, targetDirFullPath: string) => {
+    const destDir = path.join(
+      targetDirFullPath,
+      path.basename(sourceDirFullPath)
+    );
 
-    function cpFiles() {
-      fs.readdir(sourceDir, (err, files) => {
-        _this.cp(
-          files.map((file) => {
-            return path.join(sourceDir, file);
-          }),
-          destDir);
+    this.mkdirp(destDir)
+
+    this.cp(
+      fs.readdirSync(sourceDirFullPath)
+        .map(file => path.join(sourceDirFullPath, file)),
+      destDir
+    )
+  }
+
+  cp = (fullPaths: string[], distDirFullPath: string) => {
+    fullPaths.forEach((fullPath) => {
+      if (fs.statSync(fullPath).isDirectory())
+        return this.cpDir(fullPath, distDirFullPath)
+
+      this.model.q.push({
+        fileFullPath: fullPath,
+        dirFullPath: distDirFullPath
       })
-    }
-
-    fs.exists(destDir, (b) => {
-      if (b) return cpFiles()
-      fs.mkdirSync(destDir)
-      cpFiles();
     })
-  }
 
-  cp = (files: string[], dir: string) => {
-    files.forEach((file) => {
-      if (fs.statSync(file).isDirectory()) return this.cpDir(file, dir);
-      this.q.push({ file: file, dir: dir });
-    });
-    this.pop();
+    this.cpFileAndPop();
   }
 }

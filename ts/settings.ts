@@ -113,7 +113,7 @@ export const keys = load(keysFullPath, {
     swap: ['s'],
 
     // FILTER
-    show: ['f'],
+    filter: ['f'],
     likeThis: ['l'],
     toggleHiddenFiles: ['h'],
     toggleFlatMode: ['r'],
@@ -121,7 +121,7 @@ export const keys = load(keysFullPath, {
     // GIST
     gist: ['ctrl+g'],
 
-    filter: {
+    filterMod: {
         // NAV
         jump: [],
         down: ['down'],

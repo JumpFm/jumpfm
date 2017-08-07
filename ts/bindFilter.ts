@@ -38,7 +38,7 @@ export function bindFilter(jumpFm: JumpFm) {
     }
 
 
-    keys.show.forEach(key => mousetrap.bind(key, show))
+    keys.filter.forEach(key => mousetrap.bind(key, show))
     keys.likeThis.forEach(key => mousetrap.bind(key, likeThis))
     keys.toggleFlatMode.forEach(key => mousetrap.bind(key, toggleFlatMode))
     keys.toggleHiddenFiles.forEach(key => mousetrap.bind(key, toggleHidden))
@@ -53,8 +53,8 @@ export function bindFilter(jumpFm: JumpFm) {
         ['esc', 'tab'].forEach(key => {
             trap.bind(key, blur)
         })
-        Object.keys(keys.filter).forEach(cmd => {
-            keys.filter[cmd].forEach(key => {
+        Object.keys(keys.filterMod).forEach(cmd => {
+            keys.filterMod[cmd].forEach(key => {
                 trap.bind(key, () => {
                     mousetrap.trigger(keys[cmd][0])
                     return false

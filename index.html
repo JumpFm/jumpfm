@@ -141,20 +141,28 @@
         </div>
         <!-- /DIALOG -->
 
+        <!-- CONSOLE  -->
+        <div id='console'>
+            <div class="line"
+                v-for='cp in cp.q'>{{cp.fileFullPath}} => {{cp.dirFullPath}}</div>
+        </div>
+        <!-- /CONSOLE  -->
+
         <!-- PROGRESS BAR -->
         <div id="progress-bar">
-            <div id="progress-bar-complete"
-                :style="{width: progress.per + '%'}"></div>
+            <div id="progress-bar-complete"></div>
         </div>
         <!-- /PROGRESS BAR -->
 
         <!-- STATUS BAR  -->
         <footer id="statusbar">
+            <!-- MSG  -->
             <div id="statusbar-msg"
                 :class="status.type">
                 <div>{{status.txt}}
                 </div>
             </div>
+            <!-- BUTTONS  -->
             <div id="buttons">
                 <a class="btn"
                     id="editKeys"

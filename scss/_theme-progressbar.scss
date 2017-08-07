@@ -9,6 +9,7 @@
 }
 
 #progress-bar-complete {
+    width: 0;
     background-color: $color-natural;
-    transition: width 2s;
+    transition: width .1s;
 }
