@@ -27,13 +27,13 @@ export class Q {
     this.progress.clear()
   }
 
-  private cpFileAndShift = () => {
+  private cpFileAndPop = () => {
     if (this.model.q.length == 0) return this.done()
     if (this.copying) return
 
     this.copying = true
 
-    const cp = this.model.q[0]
+    const cp = this.model.q[this.model.q.length - 1]
 
     const prog = progress({
       length: fs.statSync(cp.fileFullPath).size,
@@ -53,8 +53,8 @@ export class Q {
     out.on('close', () => {
       this.progress.clear()
       this.copying = false
-      this.model.q.shift()
-      this.cpFileAndShift()
+      this.model.q.pop()
+      this.cpFileAndPop()
     });
 
     fs.createReadStream(cp.fileFullPath)
@@ -87,12 +87,12 @@ export class Q {
       if (fs.statSync(fullPath).isDirectory())
         return this.cpDir(fullPath, distDirFullPath)
 
-      this.model.q.push({
+      this.model.q.unshift({
         fileFullPath: fullPath,
         dirFullPath: distDirFullPath
       })
     })
 
-    this.cpFileAndShift();
+    this.cpFileAndPop();
   }
 }
