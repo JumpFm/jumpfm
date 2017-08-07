@@ -1,8 +1,8 @@
 {
     "linux-x64-prod": {
         "readme": "First Release",
-        "update": "https://github.com/Gilad-Kutiel-App/jumpfm/releases/download/v0.9.3/JumpFm-0.9.3-x86_64.AppImage",
-        "install": "https://github.com/Gilad-Kutiel-App/jumpfm/releases/download/v0.9.3/JumpFm-0.9.3-x86_64.AppImage",
-        "version": "0.9.3"
+        "update": "https://github.com/Gilad-Kutiel-App/jumpfm/releases/download/v0.9.4/JumpFm-0.9.4-x86_64.AppImage",
+        "install": "https://github.com/Gilad-Kutiel-App/jumpfm/releases/download/v0.9.4/JumpFm-0.9.4-x86_64.AppImage",
+        "version": "0.9.4"
     }
 }
