@@ -1,6 +1,6 @@
-import { JumpDb } from './JumpDb'
-import { JumpFm } from './JumpFm'
 import { Plugin } from './Plugin'
+import { JumpFm } from './JumpFm'
+import { JumpDb } from './JumpDb'
 
 import * as fs from 'fs'
 import * as fuzzy from 'fuzzy'
@@ -10,7 +10,7 @@ class Jump extends Plugin {
         super(jumpFm)
     }
 
-    onLoad(): void {
+    onLoad() {
         const jumpFm = this.jumpFm
         const jumpDb = new JumpDb()
 

@@ -6,10 +6,10 @@ export interface PluginDesc {
 }
 
 export const plugins = (): PluginDesc[] => {
-    const defaultPlugins: PluginDesc[] = [{
-        enabled: true,
-        js: './Jump'
-    }]
+    const defaultPlugins: PluginDesc[] = [
+        { enabled: true, js: './Jump' },
+        { enabled: true, js: './FileManager' },
+    ]
 
     return load('plugins', defaultPlugins).filter(plugin => plugin.enabled)
 }

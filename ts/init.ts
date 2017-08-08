@@ -7,8 +7,12 @@ import * as moment from 'moment'
 import * as Vue from 'vue/dist/vue.min.js'
 
 document.addEventListener('DOMContentLoaded', () => {
-    Vue.filter('formatDate', function (date) { return moment(date).format('MM/DD/YYYY hh:mm'); });
-    Vue.filter('fileSize', function (size) { return fileSize(size); });
+    Vue.filter('formatDate', date =>
+        date && moment(date).format('MM/DD/YYYY hh:mm') || '--'
+    )
+    Vue.filter('fileSize', size =>
+        size && fileSize(size) || '--'
+    )
 
     const jumpFm = new JumpFm()
 
@@ -17,5 +21,5 @@ document.addEventListener('DOMContentLoaded', () => {
         data: jumpFm.model
     })
 
-    console.log(Date.now() - time, 'millisecons')
+    console.log(Date.now() - time, 'milliseconds')
 }, false)

@@ -11,6 +11,39 @@
 
 <body>
     <div id="app" v-bind:style="{ fontSize: fontSize + 'px' }">
+
+        <div id='panels'>
+            <!-- LEFT PANEL -->
+            <div class="panel" :sel="panels.active == 0">
+                <div class="title">{{panels.a.title}}</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Date Modified</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody0">
+                        <tr v-for="(file, i) in panels.a.getItems()" v-bind:class="{
+                                sel : file.sel, 
+                                cur : i == panels.a.getCur()
+                            }">
+                            <td>
+                                <img class='file-icon' :src='file.icon' />
+                            </td>
+                            <td>{{file.name}}</td>
+                            <td>{{file.size | fileSize}}</td>
+                            <td>{{file.mtime | formatDate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <input v-model="panels.a.filter" id="filter0" class="filter" placeholder="Filter Files" /> -->
+            </div>
+            <!-- /LEFT PANEL -->
+        </div>
+
         <!-- DIALOG -->
         <div id='dialog'>
             <div class='labeled-input border'>
