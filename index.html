@@ -19,7 +19,7 @@
             </div>
             <div>
                 <ol id='dialog-sug' class='border'>
-                    <li v-for="(sug, i) in dialog.sug" :cur="i == dialog.cur" v-html="sug" class="txt-no-wrap" />
+                    <li v-for="(sug, i) in dialog.sug" :cur="i == dialog.cur" v-html="sug.html" class="txt-no-wrap" />
                 </ol>
             </div>
         </div>

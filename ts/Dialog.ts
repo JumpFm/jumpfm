@@ -1,17 +1,22 @@
 import * as Mousetrap from 'mousetrap'
 
+interface Suggestion {
+    value: string
+    html: string
+}
+
 interface Spec {
     label: string
     onOpen?: (input: HTMLInputElement) => void
-    onChange?: (val: string) => string[]
-    onAccept: (val: string) => void
+    onChange?: (val: string) => Suggestion[]
+    onAccept: (val: string, sug: string) => void
 }
 
 export class Dialog {
     dialog
     input
 
-    onAccept = val => { }
+    onAccept = (val, sug) => { }
     onChange = val => ['ba<b>b</b>a', 'nana']
 
     private close = () => {
@@ -45,7 +50,10 @@ export class Dialog {
         mousetrap.bind('esc', this.close)
         mousetrap.bind('enter', () => {
             this.close()
-            this.onAccept(this.input.value)
+            this.onAccept(
+                this.input.value,
+                this.model.sug[this.model.cur].value
+            )
             return false
         })
 

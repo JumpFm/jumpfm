@@ -2,7 +2,7 @@ import * as homedir from 'homedir'
 import * as fs from 'fs'
 import * as path from 'path'
 
-const root = path.join(homedir(), ".jumpfm");
+export const root = path.join(homedir(), ".jumpfm");
 
 if (!fs.existsSync(root)) fs.mkdirSync(root);
 
