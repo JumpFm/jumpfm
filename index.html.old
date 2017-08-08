@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JumpFm</title>
+    <link rel="stylesheet"
+        href="static/font-awesome.css">
+    <link rel="stylesheet"
+        href="css/index.css">
+
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+    <div id="app"
+        v-bind:style="{ fontSize: fontSize + 'px' }">
+        <div id="panels">
+
+            <!-- LEFT PANEL -->
+            <div class="panel"
+                :sel="panels.active == 0">
+                <div class="title">{{panels.a.get.title()}}</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Date Modified</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody0">
+                        <tr v-for="(file, i) in panels.a.get.files()"
+                            v-bind:class="{
+                                sel : file.sel, 
+                                gitCurrent: file.gitStatus.CURRENT,
+                                gitIgnored: file.gitStatus.IGNORED,
+                                gitConflict: file.gitStatus.CONFLICT,
+                                gitIndexNew: file.gitStatus.INDEX_NEW,
+                                gitIndexModified: file.gitStatus.INDEX_MODIFIED,
+                                gitIndexDeleted: file.gitStatus.INDEX_DELETED,
+                                gitIndexRenamed: file.gitStatus.INDEX_RENAMED,
+                                gitWtModified: file.gitStatus.WT_MODIFIED, 
+                                gitWtNew: file.gitStatus.WT_NEW,
+                                gitWtDeleted: file.gitStatus.WT_DELETED,
+                                gitWtRenamed: file.gitStatus.WT_RENAMED,
+                            }"
+                            :cur="i == panels.a.get.cur()">
+                            <td>
+                                <img class='file-icon'
+                                    :src='file.icon' />
+                            </td>
+                            <td>{{file.name}}</td>
+                            <td>{{file.stat.size | fileSize}}</td>
+                            <td>{{file.stat.mtime | formatDate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input v-model="panels.a.filter"
+                    id="filter0"
+                    class="filter"
+                    placeholder="Filter Files" />
+            </div>
+            <!-- /LEFT PANEL -->
+
+            <!-- RIGHT PANEL -->
+            <div class="panel"
+                :sel="panels.active == 1">
+                <div class="title">{{panels.b.get.title()}}</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Date Modified</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody1">
+                        <tr v-for="(file, i) in panels.b.get.files()"
+                            v-bind:class="{
+                                sel : file.sel, 
+                                gitCurrent: file.gitStatus.CURRENT,
+                                gitIgnored: file.gitStatus.IGNORED,
+                                gitConflict: file.gitStatus.CONFLICT,
+                                gitIndexNew: file.gitStatus.INDEX_NEW,
+                                gitIndexModified: file.gitStatus.INDEX_MODIFIED,
+                                gitIndexDeleted: file.gitStatus.INDEX_DELETED,
+                                gitIndexRenamed: file.gitStatus.INDEX_RENAMED,
+                                gitWtModified: file.gitStatus.WT_MODIFIED, 
+                                gitWtNew: file.gitStatus.WT_NEW,
+                                gitWtDeleted: file.gitStatus.WT_DELETED,
+                                gitWtRenamed: file.gitStatus.WT_RENAMED,
+                            }"
+                            :cur="i == panels.b.get.cur()">
+                            <td>
+                                <img class='file-icon'
+                                    :src='file.icon' />
+                            </td>
+                            <td>{{file.name}}</td>
+                            <td>{{file.stat.size | fileSize}}</td>
+                            <td>{{file.stat.mtime | formatDate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input v-model="panels.b.filter"
+                    id="filter1"
+                    class="filter"
+                    placeholder="Filter Files" />
+            </div>
+            <!-- /RIGHT PANEL -->
+        </div>
+
+        <!-- DIALOG JUMP -->
+        <div id='jump'>
+            <div class='labeled-input border'>
+                <div class='label'>Jump:</div>
+                <input id="jumpInput"
+                    type="text" />
+            </div>
+            <div>
+                <ol id='jump-sug-list'
+                    class='border'>
+                    <li v-for="(res, i) in jumps.res"
+                        :cur="i == jumps.cur"
+                        v-html="res.string"
+                        class="txtNoWrap" />
+                </ol>
+            </div>
+        </div>
+        <!-- /DIALOG JUMP -->
+
+        <!-- DIALOG -->
+        <div id='dialog'>
+            <div class="labeled-input border">
+                <div id="dialogTitle"
+                    class="label"></div>
+                <input id="dialogInput"
+                    type="text" />
+            </div>
+        </div>
+        <!-- /DIALOG -->
+
+        <!-- CONSOLE  -->
+        <div id='console'>
+            <div class="line"
+                v-for='cp in cp.q'>{{cp.fileFullPath}} => {{cp.dirFullPath}}</div>
+        </div>
+        <!-- /CONSOLE  -->
+
+        <!-- PROGRESS BAR -->
+        <div id="progress-bar">
+            <div id="progress-bar-complete"></div>
+        </div>
+        <!-- /PROGRESS BAR -->
+
+        <!-- STATUS BAR  -->
+        <footer id="statusbar">
+            <!-- MSG  -->
+            <div id="statusbar-msg"
+                :class="status.type">
+                <div>{{status.txt}}
+                </div>
+            </div>
+            <!-- BUTTONS  -->
+            <div id="buttons">
+                <a class="btn"
+                    id="editKeys"
+                    title="Edit Keys"><i class="fa fa-keyboard-o"></i></a>
+                <a class="btn"
+                    id="editPlugins"
+                    title="Plugins"><i class="fa fa-plug"></i></a>
+                <a class="btn"
+                    id="editMisc"
+                    title="Edit Settings"><i class="fa fa-cog"></i></a>
+                <a class="btn"
+                    title="Help"
+                    href="https://gilad-kutiel-app.github.io/jumpfm/"
+                    target="about:blank"><i class="fa fa-question-circle"></i></a>
+            </div>
+        </footer>
+        <!-- /STATUS BAR  -->
+
+    </div>
+</body>
+
+</html>

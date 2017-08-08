@@ -1,8 +1,21 @@
-#jump-sug-list {
+@import 'colors';
+#dialog {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    right: 0;
+    width: 600px;
+    margin: 0 auto;
+    background-color: $color-bg;
+    border: 1px solid red;
+}
+
+#dialog-sug {
     line-height: 1.5;
     padding: 0;
     list-style-type: none;
     border-top: none;
+    margin: 0;
     [cur] {
         background-color: $color-border;
     }

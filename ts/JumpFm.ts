@@ -1,31 +1,30 @@
-import { JumpDb } from './JumpDb'
-import { StatusBar } from './StatusBar'
-import { Panels } from './Panels'
-import { Jump } from './Jump'
+import { Plugin } from './Plugin'
 import { Dialog } from './Dialog'
-import { ProgressBar } from './ProgressBar'
-import { Q } from './Q'
+import { plugins } from './plugins'
+
+import * as mousetrap from 'mousetrap'
 
 export class JumpFm {
     dialog = new Dialog()
-    jumpDb = new JumpDb()
-    statusBar = new StatusBar()
-    progressBar = new ProgressBar()
 
-    panels = new Panels(this)
-    jump = new Jump(this)
-    q = new Q(this)
+    constructor() {
+        mousetrap.bind('ctrl+=', () => this.model.fontSize++)
+        mousetrap.bind('ctrl+-', () => this.model.fontSize--)
+        mousetrap.bind('ctrl+0', () => this.model.fontSize = 14)
 
-    model = {
-        'panels': this.panels.model,
-        'cp': this.q.model,
-        'status': this.statusBar.model,
-        'jumps': this.jump.model
+        setImmediate(() => {
+            this.dialog.onLoad()
+
+            plugins().forEach(pluginDesc => {
+                const Plug = require(pluginDesc.js)
+                const plugin: Plugin = new Plug(this)
+                plugin.onLoad()
+            })
+        })
     }
 
-    init = () => {
-        this.jump.init()
-        this.dialog.init()
-        this.progressBar.init()
+    model = {
+        fontSize: 14,
+        dialog: this.dialog.model
     }
 }

@@ -4,7 +4,7 @@
 }
 
 .labeled-input {
-    display: flex;
+    // display: flex;
     .label {
         color: $color-info;
         font-weight: bold;
@@ -12,11 +12,11 @@
     }
     input {
         display: block;
-        flex-grow: 1;
+        width: 100%;
     }
 }
 
-.txtNoWrap {
+.txt-no-wrap {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
