@@ -25,8 +25,9 @@ export class Dialog {
 
     open = (spec: Spec) => {
         this.dialog.style.display = 'block'
-        this.input.select()
         this.model.label = spec.label
+        this.input.select()
+        this.model.cur = 0
 
         spec.onOpen && spec.onOpen(this.input)
         this.onChange = spec.onChange || (val => [])
