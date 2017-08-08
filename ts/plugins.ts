@@ -8,7 +8,7 @@ export interface PluginDesc {
 export const plugins = (): PluginDesc[] => {
     const defaultPlugins: PluginDesc[] = [
         { enabled: true, js: './Jump' },
-        { enabled: true, js: './FileManager' },
+        { enabled: true, js: './DirHandler' },
     ]
 
     return load('plugins', defaultPlugins).filter(plugin => plugin.enabled)
