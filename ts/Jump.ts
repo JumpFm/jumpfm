@@ -8,6 +8,15 @@ class Jump extends Plugin {
 
     onLoad(): void {
         console.log('onLoad')
+        const jumpFm = this.jumpFm
+        jumpFm.keys.bind('jump', 'j', () => {
+            jumpFm.dialog.open({
+                label: 'Jump',
+                onAccept: val => {
+                    console.log(val)
+                },
+            })
+        })
     }
 }
 

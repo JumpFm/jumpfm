@@ -1,11 +1,14 @@
-import { Plugin } from './Plugin'
 import { Dialog } from './Dialog'
+import { Keys } from './Keys'
+
 import { plugins } from './plugins'
+import { Plugin } from './Plugin'
 
 import * as mousetrap from 'mousetrap'
 
 export class JumpFm {
-    dialog = new Dialog()
+    readonly dialog = new Dialog()
+    keys = new Keys()
 
     constructor() {
         mousetrap.bind('ctrl+=', () => this.model.fontSize++)
@@ -14,6 +17,7 @@ export class JumpFm {
 
         setImmediate(() => {
             this.dialog.onLoad()
+            this.keys.onLoad()
 
             plugins().forEach(pluginDesc => {
                 const Plug = require(pluginDesc.js)

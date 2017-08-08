@@ -1,10 +1,10 @@
 import * as Mousetrap from 'mousetrap'
 
 interface Spec {
-    label: string,
-    onOpen: (input: HTMLInputElement) => void,
-    onAccept: (val: string) => void,
-    onChange: (val: string) => string[]
+    label: string
+    onOpen?: (input: HTMLInputElement) => void
+    onChange?: (val: string) => string[]
+    onAccept: (val: string) => void
 }
 
 export class Dialog {
@@ -19,14 +19,13 @@ export class Dialog {
     }
 
     open = (spec: Spec) => {
-        this.onAccept = spec.onAccept
-        this.onChange = spec.onChange
-
         this.dialog.style.display = 'block'
         this.input.select()
         this.model.label = spec.label
 
         spec.onOpen && spec.onOpen(this.input)
+        this.onChange = spec.onChange || (val => [])
+        this.onAccept = spec.onAccept
     }
 
     model = {

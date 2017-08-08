@@ -1,5 +1,6 @@
 @import 'colors';
 #dialog {
+    display: none;
     position: absolute;
     top: 20%;
     left: 0;
@@ -7,7 +8,6 @@
     width: 600px;
     margin: 0 auto;
     background-color: $color-bg;
-    border: 1px solid red;
 }
 
 #dialog-sug {
