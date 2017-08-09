@@ -3,6 +3,9 @@ import { Plugin } from './Plugin'
 
 import * as fs from 'fs'
 import * as path from 'path'
+import * as shell from 'shelljs'
+import * as cmd from 'node-cmd'
+import { misc } from './settings'
 
 class PluginFileOperations extends Plugin {
     onLoad(): void {
@@ -11,12 +14,20 @@ class PluginFileOperations extends Plugin {
         const bind = this.jumpFm.bindKeys
         const activePanel = () => jumpFm.panels.getActivePanel()
 
-        bind('rename', ['f2'], () => {
+        const del = () =>
+            shell.rm('-rf', activePanel().getSelectedItemsUrls())
+
+        const edit = () =>
+            cmd.run(misc.editor + " " + activePanel().getCurItem().url);
+
+        const rename = () => {
             dialog.open({
                 label: 'Rename',
                 onOpen: input => {
-                    input.value = activePanel().getCurItem().name
+                    const name = activePanel().getCurItem().name
+                    input.value = name
                     input.select()
+                    input.setSelectionRange(0, name.length - path.extname(name).length);
                 },
                 onAccept: name => {
                     const pan = activePanel()
@@ -26,9 +37,9 @@ class PluginFileOperations extends Plugin {
                     )
                 },
             })
-        })
+        }
 
-        bind('newFolder', ['f7'], () => {
+        const newFolder = () => {
             dialog.open({
                 label: 'New Folder',
                 onOpen: input => {
@@ -42,7 +53,11 @@ class PluginFileOperations extends Plugin {
                     )
                 },
             })
-        })
+        }
+
+        bind('del', ['del'], del)
+        bind('rename', ['f2'], rename)
+        bind('newFolder', ['f7'], newFolder)
     }
 }
 

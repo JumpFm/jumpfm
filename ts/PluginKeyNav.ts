@@ -47,7 +47,13 @@ class PluginKeyNav extends Plugin {
         bind('selectAll', ['ctrl+a'], () => activePan().selectAll())
         bind('deselectAll', ['esc'], () => activePan().deselectAll())
 
-        bind('enter', ['enter'], () => activePan().cd(activePan().getCurItem().url))
+        const enter = () => activePan().cd(activePan().getCurItem().url)
+        bind('enter', ['enter'], enter)
+        bindFilter('enter', ['enter'], () => {
+            enter()
+            activePan().view.filter.select()
+        })
+
         bind('back', ['backspace'], () => {
             const pan = activePan()
             pan.cd(path.dirname(pan.getUrl()))
@@ -58,6 +64,10 @@ class PluginKeyNav extends Plugin {
         })
 
         bind('openFilter', ['f'], () => activePan().view.showFilter())
+        bind('clearFilter', ['esc'], () => activePan().model.filter = '')
+        bindFilter('hideFilter', ['esc'], () => activePan().view.hideFilter())
+
+
         // TODO bind open to right / open to left
     }
 }

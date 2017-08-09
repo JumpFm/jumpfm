@@ -53,7 +53,6 @@ export class Panel {
     }
 
     selectAll = (): void => {
-        // this.model.items.forEach(item => item.sel = true)
         this.getItems().forEach(item => item.sel = true)
     }
 
@@ -69,6 +68,10 @@ export class Panel {
         return this.getItems().filter((item, i) => {
             return item.sel || this.getCur() == i
         })
+    }
+
+    getSelectedItemsUrls = () => {
+        return this.getSelectedItems().map(item => item.url)
     }
 
     setItems(files: Item[]) {

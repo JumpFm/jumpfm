@@ -1,4 +1,4 @@
-import { load } from './settings'
+import { loadAndSave } from './settings'
 
 export interface PluginDesc {
     enabled: boolean
@@ -12,6 +12,6 @@ export const plugins = (): PluginDesc[] => {
         { enabled: true, js: './PluginKeyNav' },
         { enabled: true, js: './PluginFileOperations' },
     ]
-
-    return load('plugins', defaultPlugins).filter(plugin => plugin.enabled)
+    return loadAndSave('plugins.json', defaultPlugins)
+        .filter(plugin => plugin.enabled)
 }

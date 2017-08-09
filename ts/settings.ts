@@ -4,11 +4,17 @@ import * as path from 'path'
 
 export const root = path.join(homedir(), ".jumpfm");
 
-if (!fs.existsSync(root)) fs.mkdirSync(root);
+export var misc
+setImmediate(() => {
+    if (!fs.existsSync(root)) fs.mkdirSync(root);
+    misc = this.load('misc.json', {
+        editor: 'gedit'
+    })
+})
 
 const typeOf = obj => Array.isArray(obj) ? 'array' : typeof obj
 
-export const merge = <T>(obj: any, defaults: T): T => {
+const merge = <T>(obj: any, defaults: T): T => {
     if (typeOf(obj) !== 'object')
         return typeOf(obj) === typeOf(defaults) ? obj : defaults
 
@@ -30,9 +36,21 @@ export const save = (name: string, settings) => {
 }
 
 export const load = <T>(name: string, defaults: T): T => {
-    const fullPath = path.join(root, name)
+    try {
+        const fullPath = path.join(root, name)
 
-    return fs.existsSync(fullPath) ?
-        merge(require(name), defaults) :
-        defaults
+        return fs.existsSync(fullPath) ?
+            merge(require(fullPath), defaults) :
+            defaults
+
+    } catch (e) {
+        console.log(e.message);
+        return defaults
+    }
+}
+
+export const loadAndSave = <T>(name: string, defaults: T): T => {
+    const settings = load(name, defaults)
+    save(name, settings)
+    return settings
 }

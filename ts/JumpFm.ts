@@ -1,5 +1,4 @@
 import { Dialog } from './Dialog'
-import { Keys } from './Keys'
 import { Panels } from './Panels'
 import { PanelView } from './PanelView'
 
@@ -16,16 +15,6 @@ export class JumpFm {
         setImmediate(() => {
             [0, 1].forEach(i => {
                 const view = this.panels.panels[i].view = new PanelView(i)
-            })
-
-            this.bindKeysFilterMode('hideFilter', ['enter'], () =>
-                this.panels.getActivePanel().view.hideFilter()
-            )
-
-            this.bindKeysFilterMode('hideAndClearFilter', ['esc'], () => {
-                const pan = this.panels.getActivePanel()
-                pan.model.filter = ''
-                pan.view.hideFilter()
             })
 
             this.bindKeys('increaseFontSize', ['ctrl+='], () => this.model.fontSize++)

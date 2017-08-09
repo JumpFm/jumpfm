@@ -27,8 +27,4 @@ export class Panels {
         a: this.panels[0].model,
         b: this.panels[1].model
     }
-
-    onLoad = () => {
-        this.panels.forEach(panel => panel.view.onLoad())
-    }
 }
