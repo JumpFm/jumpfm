@@ -3,6 +3,7 @@ import { JumpFm } from './JumpFm'
 import { Panel } from './Panel'
 import { Item } from './Item'
 import { opn } from './opn'
+import { getExtIcon } from './icons'
 
 import * as homedir from 'homedir'
 import * as fs from 'fs'
@@ -26,8 +27,15 @@ class PluginFileSystem extends Plugin {
         panel.setItems(fs.readdirSync(url).map((name): Item => {
             const fullPath = path.join(url, name)
             const stat = fs.statSync(fullPath)
+            const ext = path.extname(fullPath).substr(1).toLowerCase()
+            const icon = getExtIcon(ext) || (
+                stat.isDirectory() ?
+                    'file-icons/default_folder.svg' :
+                    'file-icons/default_file.svg'
+            )
+
             return {
-                icon: 'file-icons/default_file.svg',
+                icon: icon,
                 url: fullPath,
                 name: name,
                 size: stat.size,
