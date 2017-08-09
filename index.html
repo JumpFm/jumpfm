@@ -15,7 +15,7 @@
         <div id='panels'>
             <!-- LEFT PANEL -->
             <div class="panel" :sel="panels.active == 0">
-                <div class="title">{{panels.a.title}}</div>
+                <div class="title">{{panels.a.getTitle()}}</div>
                 <table>
                     <thead>
                         <tr>
@@ -45,7 +45,7 @@
 
             <!-- RIGHT PANEL -->
             <div class="panel" :sel="panels.active == 1">
-                <div class="title">{{panels.b.title}}</div>
+                <div class="title">{{panels.b.getTitle()}}</div>
                 <table>
                     <thead>
                         <tr>

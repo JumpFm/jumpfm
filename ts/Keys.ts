@@ -5,30 +5,18 @@ import * as mousetrap from 'mousetrap'
 
 export class Keys {
     private readonly userKeys = {}
-    private readonly filters: HTMLInputElement[] = []
 
-    jumpFm: JumpFm
+    private jumpFm: JumpFm
+    private filters: mousetrap[] = []
 
     constructor(jumpFm: JumpFm) {
         this.jumpFm = jumpFm
     }
 
     onLoad = () => {
-        [0, 1].forEach(i => {
-            const filter = document.getElementById('filter' + i) as HTMLInputElement
-            this.filters[i] = filter
-            filter.addEventListener('blur', () => filter.style.display = 'none', false)
-        })
-
-        this.bindKeysFilterMode('closeFilter', ['esc'], () =>
-            this.filters.forEach(filter => filter.blur())
+        [0, 1].forEach(i =>
+            this.filters[i] = new mousetrap(this.jumpFm.panels.getPanel(i).view.filter)
         )
-
-        this.bindKeys('openFilter', ['f'], () => {
-            const filter = this.filters[this.jumpFm.panels.model.active]
-            filter.style.display = 'block'
-            filter.select()
-        })
     }
 
     private getKeys = (actionName: string, defaultKeys: string[]): string[] => {
@@ -52,7 +40,7 @@ export class Keys {
 
     bindKeysFilterMode = (actionName: string, defaultKeys: string[], action: () => void) =>
         this.filters.forEach(filter =>
-            this.bind(actionName, defaultKeys, action, new mousetrap(filter))
+            this.bind(actionName, defaultKeys, action, filter)
         )
 
     bindKeys = (actionName: string, defaultKeys: string[], action: () => void) =>

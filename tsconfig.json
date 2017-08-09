@@ -1,15 +1,13 @@
 {
     "compilerOptions": {
         "outDir": "js",
-        "target": "es6",
+        "target": "es2017",
         "module": "commonjs",
         "sourceMap": true,
         "watch": true,
-        "allowSyntheticDefaultImports": true,
-        "jsx": "react",
         "lib": [
             "dom",
-            "es6",
+            "es2017",
             "es2015.promise"
         ]
     },

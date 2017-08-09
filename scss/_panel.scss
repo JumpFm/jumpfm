@@ -26,7 +26,7 @@
     // 
     &[sel] {
         .title {
-            background-color: $color-info;
+            background-color: darken($color-info, 20%);
             font-weight: bold;
         }
         tr {

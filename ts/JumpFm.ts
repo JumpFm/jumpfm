@@ -8,9 +8,9 @@ import { Plugin } from './Plugin'
 import * as mousetrap from 'mousetrap'
 
 export class JumpFm {
-    readonly dialog = new Dialog()
     readonly keys = new Keys(this)
     readonly panels = new Panels()
+    readonly dialog = new Dialog()
 
     constructor() {
         mousetrap.bind('ctrl+=', () => this.model.fontSize++)
@@ -27,6 +27,7 @@ export class JumpFm {
     }
 
     onLoad = () => {
+        this.panels.onLoad()
         this.dialog.onLoad()
         this.keys.onLoad()
 

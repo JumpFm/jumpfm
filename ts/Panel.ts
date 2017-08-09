@@ -1,12 +1,12 @@
 import { Item } from './Item'
-import { Table } from './Table'
+import { PanelView } from './PanelView'
 
 type CdHandler = (panel: Panel, url: string, info: any) => void
 
 export class Panel {
-    readonly view: Table
+    readonly view: PanelView
 
-    constructor(view: Table) {
+    constructor(view: PanelView) {
         this.view = view
     }
 
@@ -93,13 +93,27 @@ export class Panel {
         this.model.url = url
     }
 
+    getTitle = () => {
+        const filter = this.model.filter
+        const extra = this.model.extra
+        return this.model.url
+            + ' '
+            + (filter ? '[' + filter + ']' : '')
+            + Object
+                .keys(extra)
+                .map(key => extra[key])
+                .filter(key => key)
+                .join(' : ')
+    }
+
     model = {
         url: '',
         filter: '',
-        title: '',
-
         cur: 0,
         items: [],
+        extra: {},
+
+        getTitle: this.getTitle,
         getCur: this.getCur,
         getItems: this.getItems,
     }

@@ -43,8 +43,6 @@ class PluginFileSystem extends Plugin {
                 sel: false
             }
         }))
-
-        panel.model.title = url
     }
 }
 

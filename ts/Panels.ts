@@ -1,19 +1,13 @@
 import { JumpFm } from './JumpFm'
 import { JumpDb } from './JumpDb'
-import { Table } from './Table'
+import { PanelView } from './PanelView'
 import { Panel } from './Panel'
 
 export class Panels {
     private panels = [
-        new Panel(new Table('tbody0')),
-        new Panel(new Table('tbody1'))
+        new Panel(new PanelView(0)),
+        new Panel(new PanelView(1))
     ]
-
-    model = {
-        active: 0,
-        a: this.panels[0].model,
-        b: this.panels[1].model
-    }
 
     switch = () => {
         this.model.active = (this.model.active + 1) % 2
@@ -29,5 +23,15 @@ export class Panels {
 
     getPanel = (i): Panel => {
         return this.panels[i]
+    }
+
+    model = {
+        active: 0,
+        a: this.panels[0].model,
+        b: this.panels[1].model
+    }
+
+    onLoad = () => {
+        this.panels.forEach(panel => panel.view.onLoad())
     }
 }
