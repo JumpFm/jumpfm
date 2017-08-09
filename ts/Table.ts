@@ -10,7 +10,7 @@ export class Table {
     private rowTop = (i) => i * this.rowHeight()
     private rowBottom = (i) => (i + 1) * this.rowHeight()
     private bodyTop = () => this.tbody().scrollTop
-    private bodyBottom = () => this.tbody().scrollTop + this.tbody().clientHeight
+    private bodyBottom = () => this.tbody().scrollTop + this.clientHeight()
 
     getRowCountInPage = (): number => {
         return Math.floor(this.clientHeight() / this.rowHeight())
@@ -21,9 +21,11 @@ export class Table {
         const rowBottom = this.rowBottom(rowNum)
 
         if (rowTop < this.bodyTop())
-            this.tbody().scrollTop = rowTop
+            this.tbody().scrollTop = Math.ceil(rowTop)
         if (rowBottom > this.bodyBottom())
             this.tbody().scrollTop = rowBottom - this.clientHeight()
+
+        console.log(rowTop, this.rowHeight(), this.clientHeight(), this.bodyTop())
     }
 }
 

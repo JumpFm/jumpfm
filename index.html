@@ -42,6 +42,36 @@
                 <input v-model="panels.a.filter" id="filter0" class="filter" placeholder="Filter Files" />
             </div>
             <!-- /LEFT PANEL -->
+
+            <!-- RIGHT PANEL -->
+            <div class="panel" :sel="panels.active == 1">
+                <div class="title">{{panels.b.title}}</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Date Modified</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody1">
+                        <tr v-for="(item, i) in panels.b.getItems()" v-bind:class="{
+                                sel : item.sel, 
+                                cur : i == panels.b.getCur(),
+                            }">
+                            <td>
+                                <img class='file-icon' :src='item.icon' />
+                            </td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.size | fileSize}}</td>
+                            <td>{{item.mtime | formatDate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input v-model="panels.b.filter" id="filter0" class="filter" placeholder="Filter Files" />
+            </div>
+            <!-- /RIGHT PANEL -->
         </div>
 
         <!-- DIALOG -->

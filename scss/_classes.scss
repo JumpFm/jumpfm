@@ -21,3 +21,12 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+ ::-webkit-scrollbar {
+    display: none;
+}
+
+.file-icon {
+    width: 1em;
+    height: 1em;
+}

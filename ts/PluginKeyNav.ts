@@ -15,10 +15,13 @@ class PluginKeyNav extends Plugin {
         const activePan = () => jumpFm.panels.getActivePanel()
         const step = (d, select = false) => {
             const pan = activePan()
-            pan.step(d, select).view.scroll(pan.getCur())
+            pan.step(d, select)
+            setImmediate(() => pan.view.scroll(pan.getCur()))
         }
 
         const rowCountInPage = () => activePan().view.getRowCountInPage()
+
+        bind('switchPanel', ['tab'], jumpFm.panels.switch)
 
         bind('up', ['up'], () => step(-1))
         bind('upSelect', ['shift+up'], () => step(-1, true))
@@ -47,6 +50,8 @@ class PluginKeyNav extends Plugin {
         bind('homeDir', ['ctrl+home'], () => {
             activePan().cd(homedir())
         })
+
+        // TODO bind open to right / open to left
     }
 }
 
