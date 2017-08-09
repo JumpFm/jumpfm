@@ -30,6 +30,11 @@ class PluginKeyNav extends Plugin {
         bind('pageDown', ['pagedown'], () => step(rowCountInPage()))
         bind('pageDownSelect', ['shift+pagedown'], () => step(rowCountInPage(), true))
 
+        bind('goStart', ['home'], () => step(-9999))
+        bind('goStartSelect', ['shift+home'], () => step(-9999, true))
+        bind('goEnd', ['end'], () => step(9999))
+        bind('goEndSelect', ['shift+end'], () => step(9999, true))
+
         bind('selectAll', ['ctrl+a'], () => activePan().selectAll())
         bind('deselectAll', ['esc'], () => activePan().deselectAll())
 
