@@ -7,7 +7,7 @@ import * as homedir from 'homedir'
 import * as fs from 'fs'
 import * as path from 'path'
 
-class DirHandler extends Plugin {
+class PluginFileSystem extends Plugin {
     onLoad() {
         [0, 1].forEach(i => {
             this.jumpFm.panels.getPanel(i).onCd(this.cd).cd(homedir())
@@ -34,4 +34,4 @@ class DirHandler extends Plugin {
     }
 }
 
-module.exports = DirHandler
+module.exports = PluginFileSystem

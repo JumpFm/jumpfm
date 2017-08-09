@@ -7,8 +7,8 @@ export interface PluginDesc {
 
 export const plugins = (): PluginDesc[] => {
     const defaultPlugins: PluginDesc[] = [
-        { enabled: true, js: './Jump' },
-        { enabled: true, js: './DirHandler' },
+        { enabled: true, js: './PluginJump' },
+        { enabled: true, js: './PluginFileSystem' },
         { enabled: true, js: './KeyNav' },
     ]
 

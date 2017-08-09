@@ -5,8 +5,8 @@ import { JumpDb } from './JumpDb'
 import * as fs from 'fs'
 import * as fuzzy from 'fuzzy'
 
-class Jump extends Plugin {
-    label = 'Jump'
+class PluginJump extends Plugin {
+    label = 'PluginJump'
     jumpDb = new JumpDb()
 
     onLoad() {
@@ -39,4 +39,4 @@ class Jump extends Plugin {
     }
 }
 
-module.exports = Jump
+module.exports = PluginJump
