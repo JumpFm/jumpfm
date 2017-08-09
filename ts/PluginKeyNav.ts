@@ -32,6 +32,8 @@ class PluginKeyNav extends Plugin {
 
         bind('selectAll', ['ctrl+a'], () => activePan().selectAll())
         bind('deselectAll', ['esc'], () => activePan().deselectAll())
+
+        bind('enter', ['enter'], () => activePan().cd(activePan().getCurItem().url))
     }
 }
 
