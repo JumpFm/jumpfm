@@ -26,11 +26,16 @@ class PluginFileSystem extends Plugin {
         // TODO add watcher
         panel.setItems(
             fs.readdirSync(fullPath)
-                .map(name => path.join(fullPath, name))
-                .filter(fullPath => fs.existsSync(fullPath))
-                .map(fullPath => {
-                    const stat = fs.statSync(fullPath)
-                    const ext = path.extname(fullPath).substr(1).toLowerCase()
+                .map(name => {
+                    return {
+                        name: name,
+                        url: path.join(fullPath, name),
+                    }
+                })
+                .filter(item => fs.existsSync(item.url))
+                .map(item => {
+                    const stat = fs.statSync(item.url)
+                    const ext = path.extname(item.url).substr(1).toLowerCase()
                     const icon = getExtIcon(ext) || (
                         stat.isDirectory() ?
                             'file-icons/default_folder.svg' :
@@ -39,8 +44,8 @@ class PluginFileSystem extends Plugin {
 
                     return {
                         icon: icon,
-                        url: fullPath,
-                        name: name,
+                        url: item.url,
+                        name: item.name,
                         size: stat.size,
                         mtime: stat.mtime.getTime(),
                         sel: false
