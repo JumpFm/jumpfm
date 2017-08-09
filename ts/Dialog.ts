@@ -59,10 +59,12 @@ export class Dialog {
     onChange = val => []
 
     open = (spec: Spec) => {
-        this.view.style.display = 'block'
+        this.model.sug = []
         this.model.label = spec.label
-        this.input.select()
         this.model.cur = 0
+
+        this.view.style.display = 'block'
+        this.input.select()
 
         spec.onOpen && spec.onOpen(this.input)
         this.onChange = spec.onChange || (val => [])

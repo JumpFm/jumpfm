@@ -11,6 +11,8 @@ import * as path from 'path'
 import * as watch from 'node-watch'
 
 class PluginFileSystem extends Plugin {
+    watcher = { close: () => { } }
+
     onLoad() {
         [0, 1].forEach(i => {
             this.jumpFm.panels.getPanel(i).onCd(this.cd).cd(homedir())
@@ -21,6 +23,10 @@ class PluginFileSystem extends Plugin {
         if (!fs.existsSync(url)) return
         if (fs.statSync(url).isDirectory()) {
             this.ll(panel, url)
+            this.watcher.close()
+            this.watcher = watch(url, { recursive: false }, () =>
+                this.ll(panel, url)
+            )
         }
         else opn(url)
     }
