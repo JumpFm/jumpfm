@@ -5,8 +5,8 @@ import { Panel } from './Panel'
 
 export class Panels {
     private panels = [
-        new Panel(new Table('table0')),
-        new Panel(new Table('table1'))
+        new Panel(new Table('tbody0')),
+        new Panel(new Table('tbody1'))
     ]
 
     model = {

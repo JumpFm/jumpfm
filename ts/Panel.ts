@@ -4,7 +4,7 @@ import { Table } from './Table'
 type CdHandler = (panel: Panel, url: string, info: any) => void
 
 export class Panel {
-    readonly view
+    readonly view: Table
 
     constructor(view: Table) {
         this.view = view
@@ -48,6 +48,7 @@ export class Panel {
         this.model.cur = this.getCur() + Math.floor(d)
 
         if (select) this.selectRange(i1, this.getCur())
+        return this
     }
 
     toggleSel = (): void => {

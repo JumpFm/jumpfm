@@ -13,12 +13,22 @@ class PluginKeyNav extends Plugin {
         const bind = jumpFm.keys.bind
 
         const activePan = () => jumpFm.panels.getActivePanel()
-        const step = (d, select = false) => activePan().step(d, select)
+        const step = (d, select = false) => {
+            const pan = activePan()
+            pan.step(d, select).view.scroll(pan.getCur())
+        }
+
+        const rowCountInPage = () => activePan().view.getRowCountInPage()
 
         bind('up', ['up'], () => step(-1))
         bind('upSelect', ['shift+up'], () => step(-1, true))
+        bind('pageUp', ['pageup'], () => step(-rowCountInPage()))
+        bind('pageUpSelect', ['shift+pageup'], () => step(-rowCountInPage(), true))
+
         bind('down', ['down'], () => step(1))
         bind('downSelect', ['shift+down'], () => step(1, true))
+        bind('pageDown', ['pagedown'], () => step(rowCountInPage()))
+        bind('pageDownSelect', ['shift+pagedown'], () => step(rowCountInPage(), true))
 
         bind('selectAll', ['ctrl+a'], () => activePan().selectAll())
         bind('deselectAll', ['esc'], () => activePan().deselectAll())
