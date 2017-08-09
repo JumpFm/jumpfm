@@ -17,7 +17,7 @@ export class JumpFm {
         mousetrap.bind('ctrl+-', () => this.model.fontSize--)
         mousetrap.bind('ctrl+0', () => this.model.fontSize = 14)
 
-        setImmediate(() => this.onLoad())
+        setImmediate(this.onLoad)
     }
 
     model = {
@@ -26,7 +26,7 @@ export class JumpFm {
         panels: this.panels.model
     }
 
-    onLoad() {
+    onLoad = () => {
         this.dialog.onLoad()
         // this.keys.onLoad()
 

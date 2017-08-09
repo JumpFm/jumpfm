@@ -90,6 +90,7 @@ export class Panel {
 
     cd(url: string, info: any = {}): void {
         this.handlers.forEach(handler => handler(this, url, info))
+        this.model.url = url
     }
 
     model = {

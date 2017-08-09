@@ -39,6 +39,10 @@ class PluginKeyNav extends Plugin {
         bind('deselectAll', ['esc'], () => activePan().deselectAll())
 
         bind('enter', ['enter'], () => activePan().cd(activePan().getCurItem().url))
+        bind('back', ['backspace'], () => {
+            const pan = activePan()
+            pan.cd(path.dirname(pan.getUrl()))
+        })
     }
 }
 
