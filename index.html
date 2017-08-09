@@ -26,16 +26,16 @@
                         </tr>
                     </thead>
                     <tbody id="tbody0">
-                        <tr v-for="(file, i) in panels.a.getItems()" v-bind:class="{
-                                sel : file.sel, 
-                                cur : i == panels.a.getCur()
+                        <tr v-for="(item, i) in panels.a.getItems()" v-bind:class="{
+                                cur : i == panels.a.getCur(),
+                                sel : item.sel, 
                             }">
                             <td>
-                                <img class='file-icon' :src='file.icon' />
+                                <img class='file-icon' :src='item.icon' />
                             </td>
-                            <td>{{file.name}}</td>
-                            <td>{{file.size | fileSize}}</td>
-                            <td>{{file.mtime | formatDate}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.size | fileSize}}</td>
+                            <td>{{item.mtime | formatDate}}</td>
                         </tr>
                     </tbody>
                 </table>

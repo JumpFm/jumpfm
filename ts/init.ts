@@ -10,15 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
     Vue.filter('formatDate', date =>
         date && moment(date).format('MM/DD/YYYY hh:mm') || '--'
     )
+
     Vue.filter('fileSize', size =>
         size && fileSize(size) || '--'
     )
 
-    const jumpFm = new JumpFm()
-
     new Vue({
         el: '#app',
-        data: jumpFm.model
+        data: new JumpFm().model
     })
 
     console.log(Date.now() - time, 'milliseconds')

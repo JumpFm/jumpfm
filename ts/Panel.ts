@@ -1,8 +1,15 @@
 import { Item } from './Item'
+import { Table } from './Table'
 
 type CdHandler = (panel: Panel, url: string, info: any) => void
 
 export class Panel {
+    readonly view
+
+    constructor(view: Table) {
+        this.view = view
+    }
+
     getCur = (): number => {
         return Math.min(
             this.getItems().length - 1,
@@ -26,7 +33,7 @@ export class Panel {
         this.model.filter = ''
     }
 
-    selectRange = (a, b) => {
+    private selectRange = (a, b) => {
         try {
             if (a > b) return this.selectRange(b, a)
             const files = this.getItems()
@@ -43,29 +50,21 @@ export class Panel {
         if (select) this.selectRange(i1, this.getCur())
     }
 
-    select = (): void => {
-        this.getCurItem().sel = true
-    }
-
     toggleSel = (): void => {
         const f = this.getCurItem()
         f.sel = !f.sel
     }
 
     selectAll = (): void => {
-        this.getItems().forEach(file => {
-            file.sel = true
-        })
+        this.getItems().forEach(item => item.sel = true)
     }
 
     deselectAll = (): void => {
-        this.getItems().forEach(file => {
-            file.sel = false
-        })
+        this.getItems().forEach(item => item.sel = false)
     }
 
-    getPath = (): string => {
-        return this.model.path
+    getUrl = (): string => {
+        return this.model.url
     }
 
     getSelectedItems = (): Item[] => {
@@ -92,7 +91,7 @@ export class Panel {
     }
 
     model = {
-        path: '',
+        url: '',
         filter: '',
         title: '',
 

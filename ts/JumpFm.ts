@@ -28,7 +28,7 @@ export class JumpFm {
 
     onLoad() {
         this.dialog.onLoad()
-        this.keys.onLoad()
+        // this.keys.onLoad()
 
         plugins().forEach(pluginDesc => {
             const Plug = require(pluginDesc.js)
