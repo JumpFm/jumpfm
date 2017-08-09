@@ -8,6 +8,7 @@ import { getExtIcon } from './icons'
 import * as homedir from 'homedir'
 import * as fs from 'fs'
 import * as path from 'path'
+import * as watch from 'node-watch'
 
 class PluginFileSystem extends Plugin {
     onLoad() {
@@ -18,7 +19,9 @@ class PluginFileSystem extends Plugin {
 
     cd = (panel: Panel, url: string, info: any) => {
         if (!fs.existsSync(url)) return
-        if (fs.statSync(url).isDirectory()) this.ll(panel, url)
+        if (fs.statSync(url).isDirectory()) {
+            this.ll(panel, url)
+        }
         else opn(url)
     }
 
