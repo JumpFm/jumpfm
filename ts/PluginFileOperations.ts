@@ -27,6 +27,22 @@ class PluginFileOperations extends Plugin {
                 },
             })
         })
+
+        bind('newFolder', ['f7'], () => {
+            dialog.open({
+                label: 'New Folder',
+                onOpen: input => {
+                    input.value = 'New Folder'
+                    input.select()
+                },
+                onAccept: name => {
+                    const pan = activePanel()
+                    fs.mkdirSync(
+                        path.join(pan.getUrl(), name)
+                    )
+                },
+            })
+        })
     }
 }
 
