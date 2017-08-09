@@ -12,11 +12,9 @@ setImmediate(() => {
     })
 })
 
-const typeOf = obj => Array.isArray(obj) ? 'array' : typeof obj
-
 const merge = <T>(obj: any, defaults: T): T => {
-    if (typeOf(obj) !== 'object')
-        return typeOf(obj) === typeOf(defaults) ? obj : defaults
+    if (typeof (obj) !== 'object')
+        return typeof (obj) === typeof (defaults) ? obj : defaults
 
     Object.keys(defaults).forEach(key => {
         obj[key] = obj.hasOwnProperty(key) ?
