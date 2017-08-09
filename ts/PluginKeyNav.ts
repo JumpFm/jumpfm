@@ -24,7 +24,6 @@ class PluginKeyNav extends Plugin {
 
         bind('switchPanel', ['tab'], jumpFm.panels.switch)
         bindFilter('switchPanel', ['tab'], () => {
-            console.log('filter mode')
             const panels = jumpFm.panels
             panels.getActivePanel().view.hideFilter()
             panels.switch()
