@@ -43,6 +43,10 @@ class PluginKeyNav extends Plugin {
             const pan = activePan()
             pan.cd(path.dirname(pan.getUrl()))
         })
+
+        bind('homeDir', ['ctrl+home'], () => {
+            activePan().cd(homedir())
+        })
     }
 }
 
