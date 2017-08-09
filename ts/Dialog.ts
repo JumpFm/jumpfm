@@ -9,7 +9,7 @@ interface Spec {
     label: string
     onOpen?: (input: HTMLInputElement) => void
     onChange?: (val: string) => Suggestion[]
-    onAccept: (val: string, sug: string) => void
+    onAccept: (val: string, sug: Suggestion) => void
 }
 
 export class Dialog {
@@ -30,7 +30,7 @@ export class Dialog {
                 this.close()
                 this.onAccept(
                     this.input.value,
-                    this.model.sug[this.model.cur].value
+                    this.model.sug[this.model.cur]
                 )
                 return false
             })
@@ -55,7 +55,7 @@ export class Dialog {
         this.view.style.display = 'none'
     }
 
-    onAccept = (val, sug) => { }
+    onAccept = (val: string, sug: Suggestion) => { }
     onChange = val => []
 
     open = (spec: Spec) => {

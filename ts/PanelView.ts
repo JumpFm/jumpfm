@@ -1,15 +1,15 @@
 import * as Mousetrap from 'mousetrap'
 
 export class PanelView {
-    tbody: HTMLElement
-    filter: HTMLInputElement
-    filterTrap: Mousetrap
+    readonly tbody: HTMLElement
+    readonly filter: HTMLInputElement
+    readonly filterTrap: Mousetrap
 
     constructor(i) {
         this.tbody = document.getElementById('tbody' + i)
         this.filter = document.getElementById('filter' + i) as HTMLInputElement
-        this.filter.addEventListener('blur', this.hideFilter, false)
         this.filterTrap = new Mousetrap(this.filter)
+        this.filter.addEventListener('blur', this.hideFilter, false)
     }
 
     private clientHeight = () => this.tbody.clientHeight

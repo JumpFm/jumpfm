@@ -18,9 +18,19 @@ export class JumpFm {
                 const view = this.panels.panels[i].view = new PanelView(i)
             })
 
-            Mousetrap.bind('ctrl+=', () => this.model.fontSize++)
-            Mousetrap.bind('ctrl+-', () => this.model.fontSize--)
-            Mousetrap.bind('ctrl+0', () => this.model.fontSize = 14)
+            this.bindKeysFilterMode('hideFilter', ['enter'], () =>
+                this.panels.getActivePanel().view.hideFilter()
+            )
+
+            this.bindKeysFilterMode('hideAndClearFilter', ['esc'], () => {
+                const pan = this.panels.getActivePanel()
+                pan.model.filter = ''
+                pan.view.hideFilter()
+            })
+
+            this.bindKeys('increaseFontSize', ['ctrl+='], () => this.model.fontSize++)
+            this.bindKeys('decreaseFontSize', ['ctrl+-'], () => this.model.fontSize--)
+            this.bindKeys('resetFontSize', ['ctrl+0'], () => this.model.fontSize = 14)
 
             plugins().forEach(pluginDesc => {
                 const Plug = require(pluginDesc.js)

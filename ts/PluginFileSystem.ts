@@ -18,7 +18,7 @@ class PluginFileSystem extends Plugin {
 
     cd = (panel: Panel, url: string, info: any) => {
         if (!fs.existsSync(url)) return
-        if (fs.statSync(url).isDirectory) this.ll(panel, url)
+        if (fs.statSync(url).isDirectory()) this.ll(panel, url)
         else opn(url)
     }
 

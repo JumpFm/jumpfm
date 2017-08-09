@@ -10,6 +10,7 @@ export const plugins = (): PluginDesc[] => {
         { enabled: true, js: './PluginJump' },
         { enabled: true, js: './PluginFileSystem' },
         { enabled: true, js: './PluginKeyNav' },
+        { enabled: true, js: './PluginFileOperations' },
     ]
 
     return load('plugins', defaultPlugins).filter(plugin => plugin.enabled)
