@@ -1,10 +1,15 @@
+import * as Mousetrap from 'mousetrap'
+
 export class PanelView {
-    readonly i
     tbody: HTMLElement
     filter: HTMLInputElement
+    filterTrap: Mousetrap
 
     constructor(i) {
-        this.i = i
+        this.tbody = document.getElementById('tbody' + i)
+        this.filter = document.getElementById('filter' + i) as HTMLInputElement
+        this.filter.addEventListener('blur', this.hideFilter, false)
+        this.filterTrap = new Mousetrap(this.filter)
     }
 
     private clientHeight = () => this.tbody.clientHeight
@@ -14,25 +19,15 @@ export class PanelView {
     private bodyTop = () => this.tbody.scrollTop
     private bodyBottom = () => this.tbody.scrollTop + this.clientHeight()
 
-    getRowCountInPage = (): number => {
-        return Math.floor(this.clientHeight() / this.rowHeight())
-    }
-
-    onLoad = () => {
-        const i = this.i
-        this.tbody = document.getElementById('tbody' + i)
-        this.filter = document.getElementById('filter' + i) as HTMLInputElement
-        this.filter.addEventListener('blur', this.hideFilter, false)
-    }
+    getRowCountInPage = (): number =>
+        Math.floor(this.clientHeight() / this.rowHeight())
 
     showFilter = () => {
         this.filter.style.display = 'block'
         this.filter.select()
     }
 
-    hideFilter = () => {
-        this.filter.style.display = 'none'
-    }
+    hideFilter = () => this.filter.style.display = 'none'
 
     scroll = (rowNum: number) => {
         const rowTop = this.rowTop(rowNum)

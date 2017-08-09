@@ -4,11 +4,7 @@ import { PanelView } from './PanelView'
 type CdHandler = (panel: Panel, url: string, info: any) => void
 
 export class Panel {
-    readonly view: PanelView
-
-    constructor(view: PanelView) {
-        this.view = view
-    }
+    view: PanelView
 
     getCur = (): number => {
         return Math.min(

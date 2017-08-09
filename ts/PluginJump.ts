@@ -14,7 +14,7 @@ class PluginJump extends Plugin {
             this.jumpDb.visit(url)
         ))
 
-        this.jumpFm.keys.bindKeys('jump', ['j'], () => this.jumpFm.dialog.open(this))
+        this.jumpFm.bindKeys('jump', ['j'], () => this.jumpFm.dialog.open(this))
     }
 
     onChange = (val: string) => {

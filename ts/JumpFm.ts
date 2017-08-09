@@ -1,40 +1,66 @@
 import { Dialog } from './Dialog'
 import { Keys } from './Keys'
 import { Panels } from './Panels'
+import { PanelView } from './PanelView'
 
 import { plugins } from './plugins'
 import { Plugin } from './Plugin'
 
-import * as mousetrap from 'mousetrap'
+import * as Mousetrap from 'mousetrap'
 
 export class JumpFm {
-    readonly keys = new Keys(this)
+    readonly dialog = new Dialog('dialog', 'dialog-input')
     readonly panels = new Panels()
-    readonly dialog = new Dialog()
 
     constructor() {
-        mousetrap.bind('ctrl+=', () => this.model.fontSize++)
-        mousetrap.bind('ctrl+-', () => this.model.fontSize--)
-        mousetrap.bind('ctrl+0', () => this.model.fontSize = 14)
+        setImmediate(() => {
+            [0, 1].forEach(i => {
+                const view = this.panels.panels[i].view = new PanelView(i)
+            })
 
-        setImmediate(this.onLoad)
+            Mousetrap.bind('ctrl+=', () => this.model.fontSize++)
+            Mousetrap.bind('ctrl+-', () => this.model.fontSize--)
+            Mousetrap.bind('ctrl+0', () => this.model.fontSize = 14)
+
+            plugins().forEach(pluginDesc => {
+                const Plug = require(pluginDesc.js)
+                const plugin: Plugin = new Plug(this)
+                plugin.onLoad()
+            })
+        })
     }
+
+    private readonly userKeys = {}
+
+    private getKeys = (actionName: string, defaultKeys: string[]): string[] => {
+        const keys = this.userKeys[actionName]
+        if (keys && Array.isArray(keys)) return keys
+        return defaultKeys
+    }
+
+    private bind = (actionName: string,
+        defaultKeys: string[],
+        action: () => void,
+        trap: Mousetrap = Mousetrap) => {
+        this.getKeys(actionName, defaultKeys).forEach(key =>
+            trap.bind(key, () => {
+                action()
+                return false
+            })
+        )
+    }
+
+    bindKeysFilterMode = (actionName: string, defaultKeys: string[], action: () => void) =>
+        this.panels.panels.forEach(panel =>
+            this.bind(actionName, defaultKeys, action, panel.view.filterTrap)
+        )
+
+    bindKeys = (actionName: string, defaultKeys: string[], action: () => void) =>
+        this.bind(actionName, defaultKeys, action)
 
     model = {
         fontSize: 14,
         dialog: this.dialog.model,
         panels: this.panels.model
-    }
-
-    onLoad = () => {
-        this.panels.onLoad()
-        this.dialog.onLoad()
-        this.keys.onLoad()
-
-        plugins().forEach(pluginDesc => {
-            const Plug = require(pluginDesc.js)
-            const plugin: Plugin = new Plug(this)
-            plugin.onLoad()
-        })
     }
 }

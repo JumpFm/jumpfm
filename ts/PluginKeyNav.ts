@@ -10,8 +10,8 @@ import * as path from 'path'
 class PluginKeyNav extends Plugin {
     onLoad() {
         const jumpFm = this.jumpFm
-        const bind = jumpFm.keys.bindKeys
-        const bindFilter = jumpFm.keys.bindKeysFilterMode
+        const bind = jumpFm.bindKeys
+        const bindFilter = jumpFm.bindKeysFilterMode
 
         const activePan = () => jumpFm.panels.getActivePanel()
         const step = (d, select = false) => {

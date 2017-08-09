@@ -4,10 +4,7 @@ import { PanelView } from './PanelView'
 import { Panel } from './Panel'
 
 export class Panels {
-    private panels = [
-        new Panel(new PanelView(0)),
-        new Panel(new PanelView(1))
-    ]
+    readonly panels = [new Panel(), new Panel()]
 
     switch = () => {
         this.model.active = (this.model.active + 1) % 2

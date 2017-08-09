@@ -22,27 +22,32 @@ class PluginFileSystem extends Plugin {
         else opn(url)
     }
 
-    ll = (panel, url) => {
+    ll = (panel, fullPath) => {
         // TODO add watcher
-        panel.setItems(fs.readdirSync(url).map((name): Item => {
-            const fullPath = path.join(url, name)
-            const stat = fs.statSync(fullPath)
-            const ext = path.extname(fullPath).substr(1).toLowerCase()
-            const icon = getExtIcon(ext) || (
-                stat.isDirectory() ?
-                    'file-icons/default_folder.svg' :
-                    'file-icons/default_file.svg'
-            )
+        panel.setItems(
+            fs.readdirSync(fullPath)
+                .map(name => path.join(fullPath, name))
+                .filter(fullPath => fs.existsSync(fullPath))
+                .map(fullPath => {
+                    const stat = fs.statSync(fullPath)
+                    const ext = path.extname(fullPath).substr(1).toLowerCase()
+                    const icon = getExtIcon(ext) || (
+                        stat.isDirectory() ?
+                            'file-icons/default_folder.svg' :
+                            'file-icons/default_file.svg'
+                    )
 
-            return {
-                icon: icon,
-                url: fullPath,
-                name: name,
-                size: stat.size,
-                mtime: stat.mtime.getTime(),
-                sel: false
-            }
-        }))
+                    return {
+                        icon: icon,
+                        url: fullPath,
+                        name: name,
+                        size: stat.size,
+                        mtime: stat.mtime.getTime(),
+                        sel: false
+                    }
+
+                })
+        )
     }
 }
 
