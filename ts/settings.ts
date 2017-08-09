@@ -32,7 +32,8 @@ const merge = <T>(obj: any, defaults: T): T => {
 }
 
 export const save = (name: string, settings) => {
-    fs.writeFileSync(name, JSON.stringify(settings, null, 4));
+    const fullPath = path.join(root, name)
+    fs.writeFileSync(fullPath, JSON.stringify(settings, null, 4))
 }
 
 export const load = <T>(name: string, defaults: T): T => {
