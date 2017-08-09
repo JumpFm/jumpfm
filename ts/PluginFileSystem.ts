@@ -31,7 +31,8 @@ class PluginFileSystem extends Plugin {
                 url: fullPath,
                 name: name,
                 size: stat.size,
-                mtime: stat.mtime.getTime()
+                mtime: stat.mtime.getTime(),
+                sel: false
             }
         }))
 

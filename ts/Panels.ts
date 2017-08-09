@@ -1,9 +1,13 @@
 import { JumpFm } from './JumpFm'
 import { JumpDb } from './JumpDb'
+import { Table } from './Table'
 import { Panel } from './Panel'
 
 export class Panels {
-    private panels = [new Panel(), new Panel()]
+    private panels = [
+        new Panel(new Table('table0')),
+        new Panel(new Table('table1'))
+    ]
 
     model = {
         active: 0,

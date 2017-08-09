@@ -27,8 +27,8 @@
                     </thead>
                     <tbody id="tbody0">
                         <tr v-for="(item, i) in panels.a.getItems()" v-bind:class="{
-                                cur : i == panels.a.getCur(),
                                 sel : item.sel, 
+                                cur : i == panels.a.getCur(),
                             }">
                             <td>
                                 <img class='file-icon' :src='item.icon' />

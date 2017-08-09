@@ -56,6 +56,7 @@ export class Panel {
     }
 
     selectAll = (): void => {
+        // this.model.items.forEach(item => item.sel = true)
         this.getItems().forEach(item => item.sel = true)
     }
 
