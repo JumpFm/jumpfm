@@ -6,6 +6,7 @@ import * as path from 'path'
 import * as shell from 'shelljs'
 import * as cmd from 'node-cmd'
 import { misc } from './settings'
+import { opn } from './opn'
 
 class PluginFileOperations extends Plugin {
     onLoad(): void {
@@ -18,7 +19,23 @@ class PluginFileOperations extends Plugin {
             shell.rm('-rf', activePanel().getSelectedItemsUrls())
 
         const edit = () =>
-            cmd.run(misc.editor + " " + activePanel().getCurItem().url);
+            cmd.run(misc.editor + " " + activePanel().getCurItem().url)
+
+        const newFile = () => {
+            const pwd = activePanel().getUrl()
+            jumpFm.dialog.open({
+                label: "New File",
+                onOpen: input => {
+                    input.value = "untitled.txt"
+                    input.select();
+                },
+                onAccept: name => {
+                    const f = path.join(pwd, name)
+                    fs.closeSync(fs.openSync(f, 'a'))
+                    opn(f);
+                }
+            })
+        }
 
         const rename = () => {
             dialog.open({
@@ -56,6 +73,8 @@ class PluginFileOperations extends Plugin {
         }
 
         bind('del', ['del'], del)
+        bind('edit', ['f4'], edit)
+        bind('newFile', ['shift+f4'], newFile)
         bind('rename', ['f2'], rename)
         bind('newFolder', ['f7'], newFolder)
     }
