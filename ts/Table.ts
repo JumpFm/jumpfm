@@ -24,8 +24,6 @@ export class Table {
             this.tbody().scrollTop = Math.ceil(rowTop)
         if (rowBottom > this.bodyBottom())
             this.tbody().scrollTop = rowBottom - this.clientHeight()
-
-        console.log(rowTop, this.rowHeight(), this.clientHeight(), this.bodyTop())
     }
 }
 

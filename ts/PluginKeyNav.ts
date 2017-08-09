@@ -10,7 +10,7 @@ import * as path from 'path'
 class PluginKeyNav extends Plugin {
     onLoad() {
         const jumpFm = this.jumpFm
-        const bind = jumpFm.keys.bind
+        const bind = jumpFm.keys.bindKeys
 
         const activePan = () => jumpFm.panels.getActivePanel()
         const step = (d, select = false) => {

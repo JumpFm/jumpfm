@@ -1,3 +1,4 @@
+@import 'colors';
 @import 'classes';
 .panel {
     display: flex;
@@ -87,5 +88,9 @@
         &:last-child {
             padding-right: .5em;
         }
+    }
+    .filter {
+        border-top: 2px solid $color-border;
+        display: none;
     }
 }

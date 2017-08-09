@@ -9,7 +9,7 @@ import * as mousetrap from 'mousetrap'
 
 export class JumpFm {
     readonly dialog = new Dialog()
-    readonly keys = new Keys()
+    readonly keys = new Keys(this)
     readonly panels = new Panels()
 
     constructor() {
@@ -28,7 +28,7 @@ export class JumpFm {
 
     onLoad = () => {
         this.dialog.onLoad()
-        // this.keys.onLoad()
+        this.keys.onLoad()
 
         plugins().forEach(pluginDesc => {
             const Plug = require(pluginDesc.js)
