@@ -24,10 +24,10 @@ class PluginKeyNav extends Plugin {
         const rowCountInPage = () => activePan().view.getRowCountInPage()
 
         bind('switchPanel', ['tab'],
-            jumpFm.switch,
+            jumpFm.switchPanel,
             () => {
                 jumpFm.getActivePanel().view.hideFilter()
-                jumpFm.switch()
+                jumpFm.switchPanel()
             }
         )
 
@@ -75,7 +75,7 @@ class PluginKeyNav extends Plugin {
         })
 
         bind('openFilter', ['f'], () => activePan().view.showFilter())
-
+        bind('swapPanels', ['s'], jumpFm.swapPanels)
 
         // TODO bind open to right / open to left
     }

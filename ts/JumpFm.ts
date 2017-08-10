@@ -13,9 +13,10 @@ export class JumpFm {
     readonly statusBar = new StatusBar()
     readonly panels = [new Panel(), new Panel()]
 
-    switch = () => {
+    switchPanel = () => {
         this.model.activePanel = (this.model.activePanel + 1) % 2
     }
+
 
     getActivePanel = (): Panel => {
         return this.panels[this.model.activePanel]
@@ -25,6 +26,14 @@ export class JumpFm {
         return this.panels[(this.model.activePanel + 1) % 2]
     }
 
+    swapPanels = () => {
+        const active = this.getActivePanel()
+        const passive = this.getPassivePanel()
+        const activePath = active.getPath()
+        active.cd(passive.getPath())
+        passive.cd(activePath)
+        this.switchPanel()
+    }
 
     constructor() {
         setImmediate(() => {
