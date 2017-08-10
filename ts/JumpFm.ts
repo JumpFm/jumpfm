@@ -1,6 +1,7 @@
 import { Dialog } from './Dialog'
 import { Panels } from './Panels'
 import { PanelView } from './PanelView'
+import { StatusBar } from './StatusBar'
 
 import { plugins } from './plugins'
 import { Plugin } from './Plugin'
@@ -10,6 +11,7 @@ import * as Mousetrap from 'mousetrap'
 export class JumpFm {
     readonly dialog = new Dialog('dialog', 'dialog-input')
     readonly panels = new Panels()
+    readonly statusBar = new StatusBar()
 
     constructor() {
         setImmediate(() => {
@@ -72,6 +74,7 @@ export class JumpFm {
     model = {
         fontSize: 14,
         dialog: this.dialog.model,
-        panels: this.panels.model
+        panels: this.panels.model,
+        status: this.statusBar.model
     }
 }
