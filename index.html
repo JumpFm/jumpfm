@@ -2,107 +2,106 @@
 <html>
 
 <head>
-  <title>JumpFm</title>
-  <link rel="stylesheet"
-    href="static/font-awesome.css">
-  <link rel="stylesheet"
-    href="css/index.css">
+    <title>JumpFm</title>
+    <link rel="stylesheet"
+        href="static/font-awesome.css">
+    <link rel="stylesheet"
+        href="css/index.css">
 
-  <script src="js/main.js"></script>
+    <script src="js/main.js"></script>
 </head>
 
 <body>
-  <div id="app"
-    v-bind:style="{ fontSize: fontSize + 'px' }">
+    <div id="app"
+        v-bind:style="{ fontSize: fontSize + 'px' }">
 
-    <!-- PANELS  -->
-    <div id='panels'>
-      <div v-for="(panel, i) in panels"
-        class="panel"
-        :sel="activePanel == i">
-        <div class="title">{{panel.getTitle()}}</div>
-        <!--TABLE  -->
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Size</th>
-              <th>Date Modified</th>
-            </tr>
-          </thead>
-          <!--TBODY  -->
-          <tbody :id="'tbody' + i">
-            <tr v-for="(item, j) in panel.getItems()"
-              v-bind:class="{
-                                sel : item.sel, 
-                                cur : j == panel.getCur(),
-                            }">
-              <td>
-                <img class='file-icon'
-                  :src='item.icon' />
-              </td>
-              <td>{{item.name}}</td>
-              <td>{{item.size | fileSize}}</td>
-              <td>{{item.mtime | formatDate}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <!-- FILTER  -->
-        <input :id="'filter' + i"
-          v-model="panel.filter"
-          class="filter"
-          placeholder="Filter Files" />
-      </div>
-    </div>
-    <!-- /PANELS -->
-
-    <!-- STATUS BAR  -->
-    <footer id="statusbar">
-      <!-- MSG  -->
-      <div id="statusbar-msgs">
-        <div v-for="msg in status.msgs"
-          class='msg'
-          :class="msg.classes">
-          <div>{{msg.txt}}</div>
+        <!-- PANELS  -->
+        <div id='panels'>
+            <div v-for="(panel, i) in panels"
+                class="panel"
+                :sel="activePanel == i">
+                <div class="title">{{panel.getTitle()}}</div>
+                <!--TABLE  -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Date Modified</th>
+                        </tr>
+                    </thead>
+                    <!--TBODY  -->
+                    <tbody :id="'tbody' + i">
+                        <tr v-for="(item, j) in panel.getItems()"
+                            :sel='item.sel'
+                            :cur='j == panel.getCur()'
+                            v-bind:class='item.classes'>
+                            <td>
+                                <img class='file-icon'
+                                    :src='item.icon' />
+                            </td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.size | fileSize}}</td>
+                            <td>{{item.mtime | formatDate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- FILTER  -->
+                <input :id="'filter' + i"
+                    v-model="panel.filter"
+                    class="filter"
+                    placeholder="Filter Files" />
+            </div>
         </div>
-      </div>
-      <!-- BUTTONS  -->
-      <div id="buttons">
-        <a class="btn"
-          id="editKeys"
-          title="Edit Keys"><i class="fa fa-keyboard-o"></i></a>
-        <a class="btn"
-          id="editPlugins"
-          title="Plugins"><i class="fa fa-plug"></i></a>
-        <a class="btn"
-          id="editMisc"
-          title="Edit Settings"><i class="fa fa-cog"></i></a>
-        <a class="btn"
-          title="Help"
-          href="https://gilad-kutiel-app.github.io/jumpfm/"
-          target="about:blank"><i class="fa fa-question-circle"></i></a>
-      </div>
-    </footer>
-    <!-- /STATUS BAR  -->
+        <!-- /PANELS -->
 
-    <!-- DIALOG -->
-    <div id='dialog'>
-      <div class='labeled-input border'>
-        <div class='label'>{{dialog.label}}:</div>
-        <input id="dialog-input"
-          type="text" />
-      </div>
-      <div>
-        <ol id='dialog-sug'
-          class='border'>
-          <li v-for="(sug, i) in dialog.sug"
-            :cur="i == dialog.cur"
-            v-html="sug.html"
-            class="txt-no-wrap" />
-        </ol>
-      </div>
+        <!-- STATUS BAR  -->
+        <footer id="statusbar">
+            <!-- MSG  -->
+            <div id="statusbar-msgs">
+                <div v-for="msg in status.msgs"
+                    class='msg'
+                    :class="msg.classes">
+                    <div>{{msg.txt}}</div>
+                </div>
+            </div>
+            <!-- BUTTONS  -->
+            <div id="buttons">
+                <a class="btn"
+                    id="editKeys"
+                    title="Edit Keys"><i class="fa fa-keyboard-o"></i></a>
+                <a class="btn"
+                    id="editPlugins"
+                    title="Plugins"><i class="fa fa-plug"></i></a>
+                <a class="btn"
+                    id="editMisc"
+                    title="Edit Settings"><i class="fa fa-cog"></i></a>
+                <a class="btn"
+                    title="Help"
+                    href="https://gilad-kutiel-app.github.io/jumpfm/"
+                    target="about:blank"><i class="fa fa-question-circle"></i></a>
+            </div>
+        </footer>
+        <!-- /STATUS BAR  -->
+
+        <!-- DIALOG -->
+        <div id='dialog'>
+            <div class='labeled-input border'>
+                <div class='label'>{{dialog.label}}:</div>
+                <input id="dialog-input"
+                    type="text" />
+            </div>
+            <div>
+                <ol id='dialog-sug'
+                    class='border'>
+                    <li v-for="(sug, i) in dialog.sug"
+                        :cur="i == dialog.cur"
+                        v-html="sug.html"
+                        class="txt-no-wrap" />
+                </ol>
+            </div>
+        </div>
+        <!-- /DIALOG -->
     </div>
-    <!-- /DIALOG -->
-  </div>
 </body>

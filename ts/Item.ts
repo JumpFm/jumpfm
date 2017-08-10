@@ -10,9 +10,10 @@ export interface Item {
     size: number
     mtime: number
     sel: boolean
+    classes: string[]
 }
 
-export const itemFromPath = (fullPath) => {
+export const itemFromPath = (fullPath): Item => {
     const stat = fs.statSync(fullPath)
     const ext = path.extname(fullPath).substr(1).toLowerCase()
     const icon = getExtIcon(ext) || (
@@ -27,7 +28,8 @@ export const itemFromPath = (fullPath) => {
         name: path.basename(fullPath),
         size: stat.size,
         mtime: stat.mtime.getTime(),
-        sel: false
+        sel: false,
+        classes: []
     }
 
 }
