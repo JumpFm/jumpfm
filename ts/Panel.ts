@@ -107,7 +107,10 @@ export class Panel {
         return this.model.path + (filter ? ' [' + filter + ']' : '')
     }
 
+    isActive = () => this.model.active
+
     model = {
+        active: false,
         path: '',
         filter: '',
         cur: 0,

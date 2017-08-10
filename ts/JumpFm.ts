@@ -14,16 +14,15 @@ export class JumpFm {
     readonly panels = [new Panel(), new Panel()]
 
     switchPanel = () => {
-        this.model.activePanel = (this.model.activePanel + 1) % 2
+        this.panels.forEach(panel => panel.model.active = !panel.model.active)
     }
 
-
     getActivePanel = (): Panel => {
-        return this.panels[this.model.activePanel]
+        return this.panels.filter(panel => panel.model.active)[0]
     }
 
     getPassivePanel = (): Panel => {
-        return this.panels[(this.model.activePanel + 1) % 2]
+        return this.panels.filter(panel => !panel.model.active)[0]
     }
 
     swapPanels = () => {
@@ -40,6 +39,8 @@ export class JumpFm {
             [0, 1].forEach(i => {
                 const view = this.panels[i].view = new PanelView(i)
             })
+
+            this.panels[0].model.active = true
 
             this.bindKeys('increaseFontSize', ['ctrl+='], () => this.model.fontSize++)
             this.bindKeys('decreaseFontSize', ['ctrl+-'], () => this.model.fontSize--)
@@ -95,7 +96,6 @@ export class JumpFm {
 
     model = {
         fontSize: 14,
-        activePanel: 0,
         panels: this.panels.map(panel => panel.model),
         dialog: this.dialog.model,
         status: this.statusBar.model
