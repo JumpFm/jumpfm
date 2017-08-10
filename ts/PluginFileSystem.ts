@@ -4,7 +4,6 @@ import { Panel, Url } from './Panel'
 import { Item } from './Item'
 import { getExtIcon } from './icons'
 
-import * as homedir from 'homedir'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as watch from 'node-watch'
@@ -71,7 +70,6 @@ class PluginFileSystem extends Plugin {
             this.msg()
         })
         this.msg()
-        panels.forEach(panel => panel.cd(homedir()))
     }
 
     msg = () => {

@@ -2,9 +2,9 @@ import { Item } from './Item'
 import { PanelView } from './PanelView'
 
 export interface Url {
-    protocol?: string
+    protocol: string
     path: string
-    query?: { [key: string]: any }
+    query: { [key: string]: any }
 }
 
 type UrlHandler = (url: Url) => void
@@ -67,7 +67,7 @@ export class Panel {
     }
 
     getPath = (): string => {
-        return this.model.path
+        return this.model.url.path
     }
 
     getSelectedItems = (): Item[] => {
@@ -95,23 +95,28 @@ export class Panel {
 
     cd(path: string)
     cd(url: Url)
-    cd(x): void {
-        if (typeof x == 'string') return this.cd({ path: x })
-        const url = x as Url
-        this.model.path = url.path
+    cd(pathOrUrl): void {
+        if (typeof pathOrUrl == 'string') return this.cd({
+            protocol: '',
+            path: pathOrUrl,
+            query: {}
+        })
+        const url = pathOrUrl as Url
+        this.model.url = url
         this.handlers.forEach(handler => handler(url))
     }
 
     getTitle = () => {
         const filter = this.model.filter
-        return this.model.path + (filter ? ' [' + filter + ']' : '')
+        return this.model.url.path + (filter ? ' [' + filter + ']' : '')
     }
 
-    isActive = () => this.model.active
-
     model = {
-        active: false,
-        path: '',
+        url: {
+            protocol: '',
+            path: '',
+            query: {}
+        },
         filter: '',
         cur: 0,
         items: [],

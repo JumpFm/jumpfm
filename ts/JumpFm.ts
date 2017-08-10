@@ -6,6 +6,7 @@ import { StatusBar } from './StatusBar'
 import { plugins } from './plugins'
 import { Plugin } from './Plugin'
 
+import * as homedir from 'homedir'
 import * as Mousetrap from 'mousetrap'
 
 export class JumpFm {
@@ -14,15 +15,16 @@ export class JumpFm {
     readonly panels = [new Panel(), new Panel()]
 
     switchPanel = () => {
-        this.panels.forEach(panel => panel.model.active = !panel.model.active)
+        this.model.activePanel = (this.model.activePanel + 1) % 2
     }
 
+
     getActivePanel = (): Panel => {
-        return this.panels.filter(panel => panel.model.active)[0]
+        return this.panels[this.model.activePanel]
     }
 
     getPassivePanel = (): Panel => {
-        return this.panels.filter(panel => !panel.model.active)[0]
+        return this.panels[(this.model.activePanel + 1) % 2]
     }
 
     swapPanels = () => {
@@ -40,8 +42,6 @@ export class JumpFm {
                 const view = this.panels[i].view = new PanelView(i)
             })
 
-            this.panels[0].model.active = true
-
             this.bindKeys('increaseFontSize', ['ctrl+='], () => this.model.fontSize++)
             this.bindKeys('decreaseFontSize', ['ctrl+-'], () => this.model.fontSize--)
             this.bindKeys('resetFontSize', ['ctrl+0'], () => this.model.fontSize = 14)
@@ -51,6 +51,8 @@ export class JumpFm {
                 const plugin: Plugin = new Plug(this)
                 plugin.onLoad()
             })
+
+            this.panels.forEach(panel => panel.cd(homedir()))
         })
     }
 
@@ -96,6 +98,7 @@ export class JumpFm {
 
     model = {
         fontSize: 14,
+        activePanel: 0,
         panels: this.panels.map(panel => panel.model),
         dialog: this.dialog.model,
         status: this.statusBar.model

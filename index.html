@@ -19,7 +19,7 @@
     <div id='panels'>
       <div v-for="(panel, i) in panels"
         class="panel"
-        :sel="panel.active">
+        :sel="activePanel == i">
         <div class="title">{{panel.getTitle()}}</div>
         <!--TABLE  -->
         <table>
