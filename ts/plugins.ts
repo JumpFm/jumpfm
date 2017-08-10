@@ -15,6 +15,7 @@ export const plugins = (): PluginDesc[] => {
         { enabled: true, js: './PluginCopy' },
         { enabled: true, js: './PluginZip' },
         { enabled: true, js: './PluginJump' },
+        { enabled: true, js: './PluginHistory' },
     ]
     return loadAndSave('plugins.json', defaultPlugins)
         .filter(plugin => plugin.enabled)
