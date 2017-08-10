@@ -21,6 +21,7 @@
         class="panel"
         :sel="activePanel == i">
         <div class="title">{{panel.getTitle()}}</div>
+        <!--TABLE  -->
         <table>
           <thead>
             <tr>
@@ -30,6 +31,7 @@
               <th>Date Modified</th>
             </tr>
           </thead>
+          <!--TBODY  -->
           <tbody :id="'tbody' + i">
             <tr v-for="(item, j) in panel.getItems()"
               v-bind:class="{
@@ -46,6 +48,7 @@
             </tr>
           </tbody>
         </table>
+        <!-- FILTER  -->
         <input :id="'filter' + i"
           v-model="panel.filter"
           class="filter"

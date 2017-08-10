@@ -87,7 +87,7 @@ export class JumpFm {
     model = {
         fontSize: 14,
         activePanel: 0,
-        panels: this.panels,
+        panels: this.panels.map(panel => panel.model),
         dialog: this.dialog.model,
         status: this.statusBar.model
     }

@@ -104,7 +104,7 @@ export class Panel {
 
     getTitle = () => {
         const filter = this.model.filter
-        return this.model.path + (filter ? '[' + filter + ']' : '')
+        return this.model.path + (filter ? ' [' + filter + ']' : '')
     }
 
     model = {
