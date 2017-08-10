@@ -6,6 +6,7 @@ import { Item } from './Item'
 import * as homedir from 'homedir'
 import * as fs from 'fs'
 import * as path from 'path'
+import { opn } from './opn'
 
 class PluginKeyNav extends Plugin {
     onLoad() {
@@ -52,7 +53,12 @@ class PluginKeyNav extends Plugin {
         })
         bindFilter('hideFilter', ['esc'], () => activePan().view.hideFilter())
 
-        const enter = () => activePan().cd(activePan().getCurItem().path)
+        const enter = () => {
+            const pan = activePan()
+            const path = pan.getCurItem().path
+            if (fs.statSync(path).isDirectory()) pan.cd(path)
+            else opn(path)
+        }
 
         bind('enter', ['enter'], enter, () => {
             enter()

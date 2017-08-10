@@ -2,7 +2,6 @@ import { Plugin } from './Plugin'
 import { JumpFm } from './JumpFm'
 import { Panel, Url } from './Panel'
 import { Item } from './Item'
-import { opn } from './opn'
 import { getExtIcon } from './icons'
 
 import * as homedir from 'homedir'
@@ -22,20 +21,10 @@ class FileSystem {
     }
 
     cd = (url: Url) => {
-        if (url.protocol) {
-            this.watcher.close()
-            return
-        }
-        const path = url.path
-        if (!fs.existsSync(path)) return
-        if (fs.statSync(path).isDirectory()) {
-            this.watcher.close()
-            this.ll()
-            this.watcher = watch(path, { recursive: false }, () =>
-                this.ll()
-            )
-        }
-        else opn(path)
+        this.watcher.close()
+        if (url.protocol) return
+        this.ll()
+        this.watcher = watch(url.path, { recursive: false }, this.ll)
     }
 
     ll = () => {
