@@ -1,0 +1,40 @@
+@import 'colors';
+#statusbar {
+    display: flex;
+    flex-shrink: 0;
+    padding: .1em 0;
+    border-top: 3px solid $color-border;
+}
+
+#statusbar-msgs {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    font-size: 90%;
+    .msg {
+        border-right: 1px solid $color-border;
+        padding: 0 .5em;
+        &:last-child {
+            border-right: none;
+        }
+    }
+    .info {
+        color: $color-info;
+    }
+    .warn {
+        color: $color-warn;
+    }
+    .err {
+        color: $color-err;
+    }
+}
+
+#buttons {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    font-size: 120%;
+    .btn {
+        padding-right: .5em;
+    }
+}
