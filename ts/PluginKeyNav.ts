@@ -75,6 +75,10 @@ class PluginKeyNav extends Plugin {
         })
 
         bind('openFilter', ['f'], () => activePan().view.showFilter())
+        bind('likeThis', ['l'], () => {
+            const pan = activePan()
+            pan.model.filter = path.extname(pan.getCurItem().path)
+        })
         bind('swapPanels', ['s'], jumpFm.swapPanels)
 
         const openTo = (source: Panel, dist: Panel) => {
