@@ -3,6 +3,7 @@ import { loadAndSave } from './settings'
 export interface PluginDesc {
     enabled: boolean
     js: string
+    css?: string
 }
 
 export const plugins = (): PluginDesc[] => {
@@ -17,7 +18,7 @@ export const plugins = (): PluginDesc[] => {
         { enabled: true, js: './PluginJump' },
         { enabled: true, js: './PluginHistory' },
         // { enabled: true, js: './PluginFlatMode' },
-        { enabled: true, js: './PluginGitStatus' },
+        { enabled: true, js: './PluginGitStatus', css: '../css/gitstatus.css' },
     ]
     return loadAndSave('plugins.json', defaultPlugins)
         .filter(plugin => plugin.enabled)
