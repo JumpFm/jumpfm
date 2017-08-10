@@ -26,8 +26,20 @@ export class StatusBar {
         this.update()
     }
 
-    msg = (key: string, txt: string, classes: string[] = ['info']) =>
-        this.setAndUpdate(key, { txt: txt, classes: classes })
+    msg = (key: string,
+        txt: string,
+        classes: string[] = ['info'],
+        clearTimeout: number = 0
+    ) => {
+        this.setAndUpdate(key, {
+            txt: txt,
+            classes: classes
+        })
+
+        if (clearTimeout) setTimeout(() =>
+            this.clear(key)
+            , clearTimeout);
+    }
 
     clear = (key: string) => {
         delete this.msgs[key]

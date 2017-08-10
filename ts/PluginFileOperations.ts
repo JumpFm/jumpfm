@@ -8,6 +8,8 @@ import * as path from 'path'
 import * as shell from 'shelljs'
 import * as cmd from 'node-cmd'
 
+const { clipboard } = require('electron')
+
 class PluginFileOperations extends Plugin {
     onLoad(): void {
         const jumpFm = this.jumpFm
@@ -88,6 +90,11 @@ class PluginFileOperations extends Plugin {
         bind('rename', ['f2'], rename)
         bind('newFolder', ['f7'], newFolder)
         bind('mv', ['f6'], mv)
+        bind('copyFullPath', ['p'], () => {
+            const path = activePanel().getCurItem().path
+            clipboard.writeText(path)
+            jumpFm.statusBar.msg('clipboard', 'copied: ' + path, ['info'], 2000)
+        })
     }
 }
 
