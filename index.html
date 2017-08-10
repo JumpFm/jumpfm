@@ -93,9 +93,12 @@
     <!-- STATUS BAR  -->
     <footer id="statusbar">
       <!-- MSG  -->
-      <div id="statusbar-msg"
-        :class="status.type">
-        <div>{{status.txt}}
+      <div id="statusbar-msgs">
+        <div v-for="msg in status.msgs"
+          class='msg'
+          :class="msg.type">
+          <div>{{msg.txt}}
+          </div>
         </div>
       </div>
       <!-- BUTTONS  -->
