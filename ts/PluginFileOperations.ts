@@ -1,19 +1,20 @@
 import { JumpFm } from './JumpFm'
 import { Plugin } from './Plugin'
+import { misc } from './settings'
+import { opn } from './opn'
 
 import * as fs from 'fs'
 import * as path from 'path'
 import * as shell from 'shelljs'
 import * as cmd from 'node-cmd'
-import { misc } from './settings'
-import { opn } from './opn'
 
 class PluginFileOperations extends Plugin {
     onLoad(): void {
         const jumpFm = this.jumpFm
         const dialog = jumpFm.dialog
         const bind = this.jumpFm.bindKeys
-        const activePanel = () => jumpFm.getActivePanel()
+        const activePanel = jumpFm.getActivePanel
+        const passivePanel = jumpFm.getPassivePanel
 
         const del = () =>
             shell.rm('-rf', activePanel().getSelectedItemsUrls())
@@ -72,11 +73,21 @@ class PluginFileOperations extends Plugin {
             })
         }
 
+        const mv = () => {
+            activePanel().getSelectedItems().forEach(file =>
+                shell.mv(
+                    file.path,
+                    path.join(passivePanel().getPath(), file.name)
+                )
+            )
+        }
+
         bind('del', ['del'], del)
         bind('edit', ['f4'], edit)
         bind('newFile', ['shift+f4'], newFile)
         bind('rename', ['f2'], rename)
         bind('newFolder', ['f7'], newFolder)
+        bind('mv', ['f6'], mv)
     }
 }
 
