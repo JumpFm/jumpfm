@@ -14,14 +14,14 @@ class PluginKeyNav extends Plugin {
         const bind = jumpFm.bindKeys
         const bindFilter = jumpFm.bindKeysFilterMode
 
-        const activePan = () => jumpFm.getActivePanel()
+        const activePan = jumpFm.getActivePanel
         const step = (d, select = false) => {
             const pan = activePan()
             pan.step(d, select)
             setImmediate(() => pan.view.scroll(pan.getCur()))
         }
 
-        const rowCountInPage = () => activePan().view.getRowCountInPage()
+        const rowCountInPage = activePan().view.getRowCountInPage
 
         bind('switchPanel', ['tab'],
             jumpFm.switchPanel,
@@ -77,7 +77,28 @@ class PluginKeyNav extends Plugin {
         bind('openFilter', ['f'], () => activePan().view.showFilter())
         bind('swapPanels', ['s'], jumpFm.swapPanels)
 
-        // TODO bind open to right / open to left
+        const openTo = (source: Panel, dist: Panel) => {
+            const item = source.getCurItem()
+            dist.cd(
+                fs.statSync(item.path).isDirectory() ?
+                    item.path :
+                    source.getPath()
+            )
+        }
+
+        bind('openToRight', ['ctrl+right'], () =>
+            openTo(
+                jumpFm.panels[0],
+                jumpFm.panels[1],
+            )
+        )
+
+        bind('openToLeft', ['ctrl+left'], () =>
+            openTo(
+                jumpFm.panels[1],
+                jumpFm.panels[0],
+            )
+        )
     }
 }
 
