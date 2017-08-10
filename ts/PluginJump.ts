@@ -10,7 +10,7 @@ class PluginJump extends Plugin {
     jumpDb = new JumpDb()
 
     onLoad() {
-        this.jumpFm.panels.forEach(panel => panel.onCd(url =>
+        this.jumpFm.panels.forEach(panel => panel.listen(url =>
             this.jumpDb.visit(url.path)
         ))
 

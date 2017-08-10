@@ -15,10 +15,11 @@ class FileSystem {
 
     constructor(panel: Panel) {
         this.panel = panel
-        panel.onCd(this.cd)
+        panel.listen(this)
     }
 
-    cd = (url: Url) => {
+    onPanelCd = () => {
+        const url = this.panel.getUrl()
         this.watcher.close()
         if (url.protocol) return
         this.ll()

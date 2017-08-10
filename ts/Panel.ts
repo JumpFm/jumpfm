@@ -7,7 +7,10 @@ export interface Url {
     query: { [key: string]: any }
 }
 
-type UrlHandler = (url: Url) => void
+interface PanelHandler {
+    onPanelCd?: () => void
+    onPanelItemsSet?: () => void
+}
 
 export class Panel {
     view: PanelView
@@ -84,15 +87,18 @@ export class Panel {
         return this.getSelectedItems().map(item => item.path)
     }
 
-    setItems(files: Item[]) {
-        this.model.items = files
+    setItems(items: Item[]) {
+        this.model.items = items
+        this.handlers
+            .filter(handler => handler.onPanelItemsSet)
+            .forEach(handler => handler.onPanelItemsSet())
         return this
     }
 
 
-    readonly handlers: UrlHandler[] = []
+    readonly handlers: PanelHandler[] = []
 
-    onCd(handler: UrlHandler) {
+    listen(handler: PanelHandler) {
         this.handlers.push(handler)
         return this
     }
@@ -107,7 +113,9 @@ export class Panel {
         })
         const url = pathOrUrl as Url
         this.model.url = url
-        this.handlers.forEach(handler => handler(url))
+        this.handlers
+            .filter(handler => handler.onPanelCd)
+            .forEach(handler => handler.onPanelCd())
     }
 
     getTitle = () => {

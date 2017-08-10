@@ -8,7 +8,7 @@ class History {
     i = 0
 
     constructor(panel: Panel) {
-        panel.onCd(url => {
+        panel.listen(url => {
             if (!url.query.history) this.push(url)
         })
     }
