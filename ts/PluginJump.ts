@@ -35,9 +35,7 @@ class PluginJump extends Plugin {
     }
 
     onAccept = (val: string, sug) => {
-        this.jumpFm.panels.getActivePanel().cd({
-            path: sug.value
-        })
+        this.jumpFm.panels.getActivePanel().cd(sug.value)
     }
 }
 

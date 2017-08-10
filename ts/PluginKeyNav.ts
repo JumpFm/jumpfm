@@ -47,11 +47,13 @@ class PluginKeyNav extends Plugin {
         bind('goEndSelect', ['shift+end'], () => step(9999, true))
 
         bind('selectAll', ['ctrl+a'], () => activePan().selectAll())
-        bind('deselectAll', ['esc'], () => activePan().deselectAll())
-
-        const enter = () => activePan().cd({
-            path: activePan().getCurItem().path,
+        bind('deselectAll', ['esc'], () => {
+            activePan().model.filter = ''
+            activePan().deselectAll()
         })
+        bindFilter('hideFilter', ['esc'], () => activePan().view.hideFilter())
+
+        const enter = () => activePan().cd(activePan().getCurItem().path)
 
         bind('enter', ['enter'], enter, () => {
             enter()
@@ -60,9 +62,7 @@ class PluginKeyNav extends Plugin {
 
         bind('back', ['backspace'], () => {
             const pan = activePan()
-            pan.cd({
-                path: path.dirname(pan.getPath())
-            })
+            pan.cd(path.dirname(pan.getPath()))
         })
 
         bind('homeDir', ['ctrl+home'], () => {
@@ -70,8 +70,6 @@ class PluginKeyNav extends Plugin {
         })
 
         bind('openFilter', ['f'], () => activePan().view.showFilter())
-        bind('clearFilter', ['esc'], () => activePan().model.filter = '')
-        bindFilter('hideFilter', ['esc'], () => activePan().view.hideFilter())
 
 
         // TODO bind open to right / open to left

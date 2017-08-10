@@ -15,9 +15,7 @@ class PluginFileSystem extends Plugin {
 
     onLoad() {
         [0, 1].forEach(i => {
-            this.jumpFm.panels.getPanel(i).onCd(this.cd).cd({
-                path: homedir()
-            })
+            this.jumpFm.panels.getPanel(i).onCd(this.cd).cd(homedir())
         })
     }
 
