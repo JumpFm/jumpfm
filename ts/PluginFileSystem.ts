@@ -22,11 +22,15 @@ class PluginFileSystem extends Plugin {
     }
 
     cd = (panel: Panel, url: Url) => {
+        if (url.protocol) {
+            this.watcher.close()
+            return
+        }
         const path = url.path
         if (!fs.existsSync(path)) return
         if (fs.statSync(path).isDirectory()) {
-            this.ll(panel, path)
             this.watcher.close()
+            this.ll(panel, path)
             this.watcher = watch(path, { recursive: false }, () =>
                 this.ll(panel, path)
             )
