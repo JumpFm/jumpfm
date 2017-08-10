@@ -4,7 +4,7 @@ import * as request from 'request'
 
 export interface Item {
     icon: string
-    url: string
+    path: string
     name: string
     size: number
     mtime: number

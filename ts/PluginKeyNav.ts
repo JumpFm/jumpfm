@@ -49,7 +49,10 @@ class PluginKeyNav extends Plugin {
         bind('selectAll', ['ctrl+a'], () => activePan().selectAll())
         bind('deselectAll', ['esc'], () => activePan().deselectAll())
 
-        const enter = () => activePan().cd(activePan().getCurItem().url)
+        const enter = () => activePan().cd({
+            path: activePan().getCurItem().path,
+        })
+
         bind('enter', ['enter'], enter, () => {
             enter()
             activePan().view.filter.select()
@@ -57,7 +60,9 @@ class PluginKeyNav extends Plugin {
 
         bind('back', ['backspace'], () => {
             const pan = activePan()
-            pan.cd(path.dirname(pan.getUrl()))
+            pan.cd({
+                path: path.dirname(pan.getPath())
+            })
         })
 
         bind('homeDir', ['ctrl+home'], () => {

@@ -11,7 +11,7 @@ class PluginJump extends Plugin {
 
     onLoad() {
         [0, 1].forEach(i => this.jumpFm.panels.getPanel(i).onCd((panel, url) =>
-            this.jumpDb.visit(url)
+            this.jumpDb.visit(url.path)
         ))
 
         this.jumpFm.bindKeys('jump', ['j'], () => this.jumpFm.dialog.open(this))
@@ -35,7 +35,9 @@ class PluginJump extends Plugin {
     }
 
     onAccept = (val: string, sug) => {
-        this.jumpFm.panels.getActivePanel().cd(sug.value)
+        this.jumpFm.panels.getActivePanel().cd({
+            path: sug.value
+        })
     }
 }
 

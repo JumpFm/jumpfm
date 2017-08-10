@@ -15,7 +15,7 @@ class PluginZip extends Plugin {
         const unzip = () => {
             try {
                 const zipFile = activePanel().getCurItem()
-                const fullPath = zipFile.url
+                const fullPath = zipFile.path
                 fs.createReadStream(fullPath)
                     .pipe(extractor.Extract({
                         path: replaceExt(fullPath, '')
@@ -29,11 +29,11 @@ class PluginZip extends Plugin {
             const zip = archiver('zip', { zlib: { level: 1 } })
             const pan = activePanel()
             pan.getSelectedItems().forEach(item => {
-                const stat = fs.statSync(item.url)
+                const stat = fs.statSync(item.path)
                 if (stat.isDirectory())
-                    zip.directory(item.url, item.name)
+                    zip.directory(item.path, item.name)
                 else
-                    zip.append(item.url, { name: item.name })
+                    zip.append(item.path, { name: item.name })
             })
 
             jumpFm.dialog.open({
@@ -44,7 +44,7 @@ class PluginZip extends Plugin {
                     input.setSelectionRange(0, 'untitled'.length)
                 },
                 onAccept: to => {
-                    const out = fs.createWriteStream(path.join(pan.getUrl(), to))
+                    const out = fs.createWriteStream(path.join(pan.getPath(), to))
                     zip.pipe(out)
                     zip.finalize()
                 }

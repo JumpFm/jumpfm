@@ -19,10 +19,10 @@ class PluginFileOperations extends Plugin {
             shell.rm('-rf', activePanel().getSelectedItemsUrls())
 
         const edit = () =>
-            cmd.run(misc.editor + " " + activePanel().getCurItem().url)
+            cmd.run(misc.editor + " " + activePanel().getCurItem().path)
 
         const newFile = () => {
-            const pwd = activePanel().getUrl()
+            const pwd = activePanel().getPath()
             jumpFm.dialog.open({
                 label: "New File",
                 onOpen: input => {
@@ -49,8 +49,8 @@ class PluginFileOperations extends Plugin {
                 onAccept: name => {
                     const pan = activePanel()
                     fs.renameSync(
-                        pan.getCurItem().url,
-                        path.join(pan.getUrl(), name)
+                        pan.getCurItem().path,
+                        path.join(pan.getPath(), name)
                     )
                 },
             })
@@ -66,7 +66,7 @@ class PluginFileOperations extends Plugin {
                 onAccept: name => {
                     const pan = activePanel()
                     fs.mkdirSync(
-                        path.join(pan.getUrl(), name)
+                        path.join(pan.getPath(), name)
                     )
                 },
             })

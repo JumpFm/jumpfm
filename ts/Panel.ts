@@ -1,7 +1,13 @@
 import { Item } from './Item'
 import { PanelView } from './PanelView'
 
-type CdHandler = (panel: Panel, url: string, info: any) => void
+export interface Url {
+    protocol?: string
+    path: string
+    query?: { [key: string]: any }
+}
+
+type UrlHandler = (panel: Panel, url: Url) => void
 
 export class Panel {
     view: PanelView
@@ -60,8 +66,8 @@ export class Panel {
         this.getItems().forEach(item => item.sel = false)
     }
 
-    getUrl = (): string => {
-        return this.model.url
+    getPath = (): string => {
+        return this.model.path
     }
 
     getSelectedItems = (): Item[] => {
@@ -71,7 +77,7 @@ export class Panel {
     }
 
     getSelectedItemsUrls = () => {
-        return this.getSelectedItems().map(item => item.url)
+        return this.getSelectedItems().map(item => item.path)
     }
 
     setItems(files: Item[]) {
@@ -80,37 +86,28 @@ export class Panel {
     }
 
 
-    readonly handlers: CdHandler[] = []
+    readonly handlers: UrlHandler[] = []
 
-    onCd(handler: CdHandler) {
+    onCd(handler: UrlHandler) {
         this.handlers.push(handler)
         return this
     }
 
-    cd(url: string, info: any = {}): void {
-        this.handlers.forEach(handler => handler(this, url, info))
-        this.model.url = url
+    cd(url: Url): void {
+        this.handlers.forEach(handler => handler(this, url))
+        this.model.path = url.path
     }
 
     getTitle = () => {
         const filter = this.model.filter
-        const extra = this.model.extra
-        return this.model.url
-            + ' '
-            + (filter ? '[' + filter + ']' : '')
-            + Object
-                .keys(extra)
-                .map(key => extra[key])
-                .filter(key => key)
-                .join(' : ')
+        return this.model.path + (filter ? '[' + filter + ']' : '')
     }
 
     model = {
-        url: '',
+        path: '',
         filter: '',
         cur: 0,
         items: [],
-        extra: {},
 
         getTitle: this.getTitle,
         getCur: this.getCur,

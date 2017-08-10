@@ -1,6 +1,6 @@
 import { Plugin } from './Plugin'
 import { JumpFm } from './JumpFm'
-import { Panel } from './Panel'
+import { Panel, Url } from './Panel'
 import { Item } from './Item'
 import { opn } from './opn'
 import { getExtIcon } from './icons'
@@ -15,36 +15,39 @@ class PluginFileSystem extends Plugin {
 
     onLoad() {
         [0, 1].forEach(i => {
-            this.jumpFm.panels.getPanel(i).onCd(this.cd).cd(homedir())
+            this.jumpFm.panels.getPanel(i).onCd(this.cd).cd({
+                path: homedir()
+            })
         })
     }
 
-    cd = (panel: Panel, url: string, info: any) => {
-        if (!fs.existsSync(url)) return
-        if (fs.statSync(url).isDirectory()) {
-            this.ll(panel, url)
+    cd = (panel: Panel, url: Url) => {
+        const path = url.path
+        if (!fs.existsSync(path)) return
+        if (fs.statSync(path).isDirectory()) {
+            this.ll(panel, path)
             this.watcher.close()
-            this.watcher = watch(url, { recursive: false }, () =>
-                this.ll(panel, url)
+            this.watcher = watch(path, { recursive: false }, () =>
+                this.ll(panel, path)
             )
         }
-        else opn(url)
+        else opn(path)
     }
 
-    ll = (panel, fullPath) => {
+    ll = (panel: Panel, fullPath: string) => {
         // TODO add watcher
         panel.setItems(
             fs.readdirSync(fullPath)
                 .map(name => {
                     return {
                         name: name,
-                        url: path.join(fullPath, name),
+                        path: path.join(fullPath, name),
                     }
                 })
-                .filter(item => fs.existsSync(item.url))
-                .map(item => {
-                    const stat = fs.statSync(item.url)
-                    const ext = path.extname(item.url).substr(1).toLowerCase()
+                .filter(file => fs.existsSync(file.path))
+                .map(file => {
+                    const stat = fs.statSync(file.path)
+                    const ext = path.extname(file.path).substr(1).toLowerCase()
                     const icon = getExtIcon(ext) || (
                         stat.isDirectory() ?
                             'file-icons/default_folder.svg' :
@@ -53,8 +56,8 @@ class PluginFileSystem extends Plugin {
 
                     return {
                         icon: icon,
-                        url: item.url,
-                        name: item.name,
+                        path: file.path,
+                        name: file.name,
                         size: stat.size,
                         mtime: stat.mtime.getTime(),
                         sel: false
