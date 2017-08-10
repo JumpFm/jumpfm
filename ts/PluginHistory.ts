@@ -5,12 +5,17 @@ import { Panel, Url } from './Panel'
 class History {
     HISTORY_MAX_SIZE = 20
     history: Url[] = []
+    panel: Panel
     i = 0
 
     constructor(panel: Panel) {
-        panel.listen(url => {
-            if (!url.query.history) this.push(url)
-        })
+        this.panel = panel
+        panel.listen(this)
+    }
+
+    onPanelCd = () => {
+        const url = this.panel.getUrl()
+        if (!url.query.history) this.push(url)
     }
 
     push = (url: Url) => {

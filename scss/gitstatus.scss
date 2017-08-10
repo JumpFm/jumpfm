@@ -1,0 +1,37 @@
+@import 'colors';
+.git-current {}
+
+.git-index-new,
+.git-index-modified {
+    color: $color-natural;
+}
+
+.git-index-deleted {
+    text-decoration: line-through;
+}
+
+.git-index-renamed {}
+
+.git-index-typechange {}
+
+.git-wt-new {
+    color: $color-err;
+}
+
+.git-wt-modified {
+    color: $color-warn;
+}
+
+.git-wt-deleted {}
+
+.git-wt-typechange {}
+
+.git-wt-renamed {}
+
+.git-wt-unreadable {}
+
+.git-ignored {
+    color: darken($color-fg, 25%)
+}
+
+.git-conflicted {}

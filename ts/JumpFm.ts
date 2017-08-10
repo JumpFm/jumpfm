@@ -47,6 +47,7 @@ export class JumpFm {
             this.bindKeys('resetFontSize', ['ctrl+0'], () => this.model.fontSize = 14)
 
             plugins().forEach(pluginDesc => {
+                this.addCss(pluginDesc.css)
                 const Plug = require(pluginDesc.js)
                 const plugin: Plugin = new Plug(this)
                 plugin.onLoad()
@@ -54,6 +55,14 @@ export class JumpFm {
 
             this.panels.forEach(panel => panel.cd(homedir()))
         })
+    }
+
+    addCss = (href) => {
+        if (!href) return
+        const link = document.createElement('link')
+        link.setAttribute('rel', 'stylesheet')
+        link.setAttribute('href', href)
+        document.head.appendChild(link)
     }
 
     private readonly userKeys = {}

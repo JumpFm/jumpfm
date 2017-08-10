@@ -6,7 +6,7 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 
-const log = require('electron-log');
+// const log = require('electron-log');
 
 app.on('window-all-closed', function() {
     if (process.platform != 'darwin') {
@@ -23,8 +23,8 @@ app.on('ready', function() {
     const w = parseInt(width * .8);
     const h = parseInt(height * .8);
 
-    log.transports.file.level = 'debug';
-    log.transports.console.level = 'debug';
+    // log.transports.file.level = 'debug';
+    // log.transports.console.level = 'debug';
 
     // Create the browser window.
     let mainWindow = new BrowserWindow({
