@@ -10,7 +10,7 @@ class PluginZip extends Plugin {
     onLoad(): void {
         const jumpFm = this.jumpFm
         const bind = jumpFm.bindKeys
-        const activePanel = jumpFm.panels.getActivePanel
+        const activePanel = jumpFm.getActivePanel
 
         const unzip = () => {
             try {

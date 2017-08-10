@@ -13,7 +13,7 @@ class PluginFileOperations extends Plugin {
         const jumpFm = this.jumpFm
         const dialog = jumpFm.dialog
         const bind = this.jumpFm.bindKeys
-        const activePanel = () => jumpFm.panels.getActivePanel()
+        const activePanel = () => jumpFm.getActivePanel()
 
         const del = () =>
             shell.rm('-rf', activePanel().getSelectedItemsUrls())
