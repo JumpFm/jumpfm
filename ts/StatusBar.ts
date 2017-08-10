@@ -1,41 +1,34 @@
-type Type = "info" | "warn" | "err"
-
 interface Msg {
     txt: string
-    type: Type
+    classes: string[]
 }
 
 export class StatusBar {
-
     model = {
         msgs: [{
             txt: '',
-            type: 'info'
+            classes: ['info']
         }]
     }
 
     private msgs: { [key: string]: Msg } = {}
 
-    private set = (key: string, msg: Msg, clearTimeout: number = 0) => {
+    private set = (key: string, msg: Msg) => {
         this.msgs[key] = msg
-        if (clearTimeout) setTimeout(() => this.clear(key), clearTimeout)
     }
 
     private update = () => {
         this.model.msgs = Object.keys(this.msgs).map(key => this.msgs[key])
     }
 
-    private setAndUpdate = (key: string, msg: Msg, clearTimeout: number = 0) => {
-        this.set(key, msg, clearTimeout)
+    private setAndUpdate = (key: string, msg: Msg) => {
+        this.set(key, msg)
         this.update()
     }
 
-    info = (key: string, txt: string, clearTimeout: number = 0) =>
-        this.setAndUpdate(key, { txt: txt, type: 'info' }, clearTimeout)
-    warn = (key: string, txt: string, clearTimeout: number = 0) =>
-        this.setAndUpdate(key, { txt: txt, type: 'warn' }, clearTimeout)
-    err = (key: string, txt: string, clearTimeout: number = 0) =>
-        this.setAndUpdate(key, { txt: txt, type: 'err' }, clearTimeout)
+    msg = (key: string, txt: string, classes: string[] = ['info']) =>
+        this.setAndUpdate(key, { txt: txt, classes: classes })
+
     clear = (key: string) => {
         delete this.msgs[key]
         this.update()

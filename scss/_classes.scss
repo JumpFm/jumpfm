@@ -46,3 +46,19 @@
         opacity: 1;
     }
 }
+
+.info {
+    color: $color-info;
+}
+
+.warn {
+    color: $color-warn;
+}
+
+.err {
+    color: $color-err;
+}
+
+.del {
+    text-decoration: line-through;
+}

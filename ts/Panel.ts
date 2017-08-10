@@ -98,8 +98,8 @@ export class Panel {
     cd(x): void {
         if (typeof x == 'string') return this.cd({ path: x })
         const url = x as Url
-        this.handlers.forEach(handler => handler(url))
         this.model.path = url.path
+        this.handlers.forEach(handler => handler(url))
     }
 
     getTitle = () => {

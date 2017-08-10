@@ -10,9 +10,11 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as watch from 'node-watch'
 
+var showHiddenFiles = false
+
 class FileSystem {
     watcher = { close: () => { } }
-    readonly panel
+    readonly panel: Panel
 
     constructor(panel: Panel) {
         this.panel = panel
@@ -28,23 +30,23 @@ class FileSystem {
         if (!fs.existsSync(path)) return
         if (fs.statSync(path).isDirectory()) {
             this.watcher.close()
-            this.ll(path)
+            this.ll()
             this.watcher = watch(path, { recursive: false }, () =>
-                this.ll(path)
+                this.ll()
             )
         }
         else opn(path)
     }
 
-    ll = (fullPath: string) => {
+    ll = () => {
+        const fullPath = this.panel.getPath()
         this.panel.setItems(
             fs.readdirSync(fullPath)
-                .map(name => {
-                    return {
-                        name: name,
-                        path: path.join(fullPath, name),
-                    }
-                })
+                .filter(name => showHiddenFiles || name.indexOf('.') != 0)
+                .map(name => ({
+                    name: name,
+                    path: path.join(fullPath, name),
+                }))
                 .filter(file => fs.existsSync(file.path))
                 .map(file => {
                     const stat = fs.statSync(file.path)
@@ -70,11 +72,25 @@ class FileSystem {
 }
 
 class PluginFileSystem extends Plugin {
+    fss: FileSystem[] = []
     onLoad() {
-        this.jumpFm.panels.forEach(panel => {
-            new FileSystem(panel)
-            panel.cd(homedir())
+        const panels = this.jumpFm.panels
+        this.fss = panels.map(panel => new FileSystem(panel))
+        this.jumpFm.bindKeys('toggleHiddenFiles', ['h'], () => {
+            showHiddenFiles = !showHiddenFiles
+            this.fss.forEach(fs => fs.ll())
+            this.msg()
         })
+        this.msg()
+        panels.forEach(panel => panel.cd(homedir()))
+    }
+
+    msg = () => {
+        this.jumpFm.statusBar.msg(
+            'hidden',
+            'hidden',
+            showHiddenFiles ? ['info'] : ['info', 'del']
+        )
     }
 }
 

@@ -14,6 +14,7 @@
 <body>
   <div id="app"
     v-bind:style="{ fontSize: fontSize + 'px' }">
+
     <!-- PANELS  -->
     <div id='panels'>
       <div v-for="(panel, i) in panels"
@@ -59,9 +60,8 @@
       <div id="statusbar-msgs">
         <div v-for="msg in status.msgs"
           class='msg'
-          :class="msg.type">
-          <div>{{msg.txt}}
-          </div>
+          :class="msg.classes">
+          <div>{{msg.txt}}</div>
         </div>
       </div>
       <!-- BUTTONS  -->
