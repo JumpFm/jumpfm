@@ -75,6 +75,6 @@ export class JumpFm {
         fontSize: 14,
         dialog: this.dialog.model,
         panels: this.panels.model,
-        // status: this.statusBar.model
+        status: this.statusBar.model
     }
 }
