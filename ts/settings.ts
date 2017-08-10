@@ -12,21 +12,22 @@ setImmediate(() => {
     })
 })
 
-const merge = <T>(obj: any, defaults: T): T => {
-    if (typeof (obj) !== 'object')
-        return typeof (obj) === typeof (defaults) ? obj : defaults
+const typeOf = (obj: any) => Array.isArray(obj) ? 'array' : typeof obj
 
-    Object.keys(defaults).forEach(key => {
-        obj[key] = obj.hasOwnProperty(key) ?
-            merge(obj[key], defaults[key]) :
-            defaults[key]
-    })
+const merge = <T>(defaults: T, obj: any): T => {
+    if (typeOf(defaults) != typeOf(obj)) return defaults
+    if (typeOf(defaults) === 'object') {
+        Object.keys(defaults).forEach(key => {
+            defaults[key] = obj.hasOwnProperty(key) ?
+                merge(defaults[key], obj[key]) :
+                defaults[key]
+        })
+    }
+    if (typeOf(defaults) === 'array') {
+        // TODO merge arrays
+    }
 
-    Object.keys(obj).forEach(key =>
-        defaults.hasOwnProperty(key) || delete obj[key]
-    )
-
-    return obj
+    return defaults
 }
 
 export const save = (name: string, settings) => {
@@ -39,7 +40,7 @@ export const load = <T>(name: string, defaults: T): T => {
         const fullPath = path.join(root, name)
 
         return fs.existsSync(fullPath) ?
-            merge(require(fullPath), defaults) :
+            merge(defaults, require(fullPath)) :
             defaults
 
     } catch (e) {

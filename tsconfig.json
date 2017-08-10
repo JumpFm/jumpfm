@@ -10,8 +10,5 @@
             "es2017",
             "es2015.promise"
         ]
-    },
-    "include": [
-        "ts"
-    ]
+    }
 }

@@ -22,12 +22,14 @@ class PluginKeyNav extends Plugin {
 
         const rowCountInPage = () => activePan().view.getRowCountInPage()
 
-        bind('switchPanel', ['tab'], jumpFm.panels.switch)
-        bindFilter('switchPanel', ['tab'], () => {
-            const panels = jumpFm.panels
-            panels.getActivePanel().view.hideFilter()
-            panels.switch()
-        })
+        bind('switchPanel', ['tab'],
+            jumpFm.panels.switch,
+            () => {
+                const panels = jumpFm.panels
+                panels.getActivePanel().view.hideFilter()
+                panels.switch()
+            }
+        )
 
         bind('up', ['up'], () => step(-1))
         bind('upSelect', ['shift+up'], () => step(-1, true))
@@ -48,8 +50,7 @@ class PluginKeyNav extends Plugin {
         bind('deselectAll', ['esc'], () => activePan().deselectAll())
 
         const enter = () => activePan().cd(activePan().getCurItem().url)
-        bind('enter', ['enter'], enter)
-        bindFilter('enter', ['enter'], () => {
+        bind('enter', ['enter'], enter, () => {
             enter()
             activePan().view.filter.select()
         })

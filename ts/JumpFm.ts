@@ -54,8 +54,20 @@ export class JumpFm {
             this.bind(actionName, defaultKeys, action, panel.view.filterTrap)
         )
 
-    bindKeys = (actionName: string, defaultKeys: string[], action: () => void) =>
+    bindKeys = (actionName: string,
+        defaultKeys: string[],
+        action: () => void,
+        actionFilterMode: () => void = undefined
+    ) => {
         this.bind(actionName, defaultKeys, action)
+
+        if (!actionFilterMode) return
+        this.bindKeysFilterMode(
+            actionName,
+            defaultKeys,
+            actionFilterMode
+        )
+    }
 
     model = {
         fontSize: 14,
