@@ -10,7 +10,7 @@ class PluginJump extends Plugin {
     jumpDb = new JumpDb()
 
     onLoad() {
-        [0, 1].forEach(i => this.jumpFm.panels.getPanel(i).onCd((panel, url) =>
+        this.jumpFm.panels.forEach(panel => panel.onCd(url =>
             this.jumpDb.visit(url.path)
         ))
 
@@ -35,7 +35,7 @@ class PluginJump extends Plugin {
     }
 
     onAccept = (val: string, sug) => {
-        this.jumpFm.panels.getActivePanel().cd(sug.value)
+        this.jumpFm.getActivePanel().cd(sug.value)
     }
 }
 

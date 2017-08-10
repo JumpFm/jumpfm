@@ -7,7 +7,7 @@ export interface Url {
     query?: { [key: string]: any }
 }
 
-type UrlHandler = (panel: Panel, url: Url) => void
+type UrlHandler = (url: Url) => void
 
 export class Panel {
     view: PanelView
@@ -98,7 +98,7 @@ export class Panel {
     cd(x): void {
         if (typeof x == 'string') return this.cd({ path: x })
         const url = x as Url
-        this.handlers.forEach(handler => handler(this, url))
+        this.handlers.forEach(handler => handler(url))
         this.model.path = url.path
     }
 

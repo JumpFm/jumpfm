@@ -16,10 +16,10 @@
     v-bind:style="{ fontSize: fontSize + 'px' }">
     <!-- PANELS  -->
     <div id='panels'>
-      <!-- LEFT PANEL -->
-      <div class="panel"
-        :sel="panels.active == 0">
-        <div class="title">{{panels.a.getTitle()}}</div>
+      <div v-for="(panel, i) in panels"
+        class="panel"
+        :sel="activePanel == i">
+        <div class="title">{{panel.getTitle()}}</div>
         <table>
           <thead>
             <tr>
@@ -29,11 +29,11 @@
               <th>Date Modified</th>
             </tr>
           </thead>
-          <tbody id="tbody0">
-            <tr v-for="(item, i) in panels.a.getItems()"
+          <tbody :id="'tbody' + i">
+            <tr v-for="(item, j) in panel.getItems()"
               v-bind:class="{
                                 sel : item.sel, 
-                                cur : i == panels.a.getCur(),
+                                cur : j == panel.getCur(),
                             }">
               <td>
                 <img class='file-icon'
@@ -45,48 +45,11 @@
             </tr>
           </tbody>
         </table>
-        <input id="filter0"
-          v-model="panels.a.filter"
+        <input :id="'filter' + i"
+          v-model="panel.filter"
           class="filter"
           placeholder="Filter Files" />
       </div>
-      <!-- /LEFT PANEL -->
-
-      <!-- RIGHT PANEL -->
-      <div class="panel"
-        :sel="panels.active == 1">
-        <div class="title">{{panels.b.getTitle()}}</div>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Size</th>
-              <th>Date Modified</th>
-            </tr>
-          </thead>
-          <tbody id="tbody1">
-            <tr v-for="(item, i) in panels.b.getItems()"
-              v-bind:class="{
-                                sel : item.sel, 
-                                cur : i == panels.b.getCur(),
-                            }">
-              <td>
-                <img class='file-icon'
-                  :src='item.icon' />
-              </td>
-              <td>{{item.name}}</td>
-              <td>{{item.size | fileSize}}</td>
-              <td>{{item.mtime | formatDate}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <input id="filter1"
-          v-model="panels.b.filter"
-          class="filter"
-          placeholder="Filter Files" />
-      </div>
-      <!-- /RIGHT PANEL -->
     </div>
     <!-- /PANELS -->
 

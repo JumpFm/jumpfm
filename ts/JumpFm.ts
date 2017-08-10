@@ -1,5 +1,5 @@
 import { Dialog } from './Dialog'
-import { Panels } from './Panels'
+import { Panel } from './Panel'
 import { PanelView } from './PanelView'
 import { StatusBar } from './StatusBar'
 
@@ -10,13 +10,26 @@ import * as Mousetrap from 'mousetrap'
 
 export class JumpFm {
     readonly dialog = new Dialog('dialog', 'dialog-input')
-    readonly panels = new Panels()
     readonly statusBar = new StatusBar()
+    readonly panels = [new Panel(), new Panel()]
+
+    switch = () => {
+        this.model.activePanel = (this.model.activePanel + 1) % 2
+    }
+
+    getActivePanel = (): Panel => {
+        return this.panels[this.model.activePanel]
+    }
+
+    getPassivePanel = (): Panel => {
+        return this.panels[(this.model.activePanel + 1) % 2]
+    }
+
 
     constructor() {
         setImmediate(() => {
             [0, 1].forEach(i => {
-                const view = this.panels.panels[i].view = new PanelView(i)
+                const view = this.panels[i].view = new PanelView(i)
             })
 
             this.bindKeys('increaseFontSize', ['ctrl+='], () => this.model.fontSize++)
@@ -52,7 +65,7 @@ export class JumpFm {
     }
 
     bindKeysFilterMode = (actionName: string, defaultKeys: string[], action: () => void) =>
-        this.panels.panels.forEach(panel =>
+        this.panels.forEach(panel =>
             this.bind(actionName, defaultKeys, action, panel.view.filterTrap)
         )
 
@@ -73,8 +86,9 @@ export class JumpFm {
 
     model = {
         fontSize: 14,
+        activePanel: 0,
+        panels: this.panels,
         dialog: this.dialog.model,
-        panels: this.panels.model,
         status: this.statusBar.model
     }
 }

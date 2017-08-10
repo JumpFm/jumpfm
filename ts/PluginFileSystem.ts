@@ -10,16 +10,16 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as watch from 'node-watch'
 
-class PluginFileSystem extends Plugin {
+class FileSystem {
     watcher = { close: () => { } }
+    readonly panel
 
-    onLoad() {
-        [0, 1].forEach(i => {
-            this.jumpFm.panels.getPanel(i).onCd(this.cd).cd(homedir())
-        })
+    constructor(panel: Panel) {
+        this.panel = panel
+        panel.onCd(this.cd)
     }
 
-    cd = (panel: Panel, url: Url) => {
+    cd = (url: Url) => {
         if (url.protocol) {
             this.watcher.close()
             return
@@ -28,17 +28,16 @@ class PluginFileSystem extends Plugin {
         if (!fs.existsSync(path)) return
         if (fs.statSync(path).isDirectory()) {
             this.watcher.close()
-            this.ll(panel, path)
+            this.ll(path)
             this.watcher = watch(path, { recursive: false }, () =>
-                this.ll(panel, path)
+                this.ll(path)
             )
         }
         else opn(path)
     }
 
-    ll = (panel: Panel, fullPath: string) => {
-        // TODO add watcher
-        panel.setItems(
+    ll = (fullPath: string) => {
+        this.panel.setItems(
             fs.readdirSync(fullPath)
                 .map(name => {
                     return {
@@ -67,6 +66,15 @@ class PluginFileSystem extends Plugin {
 
                 })
         )
+    }
+}
+
+class PluginFileSystem extends Plugin {
+    onLoad() {
+        this.jumpFm.panels.forEach(panel => {
+            new FileSystem(panel)
+            panel.cd(homedir())
+        })
     }
 }
 

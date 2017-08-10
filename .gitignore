@@ -7,3 +7,4 @@ _config.yml
 js
 *.swp
 old
+*.log
