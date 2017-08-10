@@ -15,7 +15,9 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', function() {
-    updater.init('https://raw.githubusercontent.com/Gilad-Kutiel-App/jumpfm/master/updates.json');
+    updater.init(
+        'https://raw.githubusercontent.com/Gilad-Kutiel-App/jumpfm/master/updates.json'
+    );
 
     const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
     const w = parseInt(width * .8);

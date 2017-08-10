@@ -12,8 +12,8 @@ export const plugins = (): PluginDesc[] => {
         { enabled: true, js: './PluginKeyNav' },
         { enabled: true, js: './PluginFileOperations' },
         { enabled: true, js: './PluginZip' },
-        { enabled: true, js: './PluginClock' },
-        { enabled: true, js: './PluginVersion' },
+        { enabled: false, js: './PluginClock' },
+        { enabled: false, js: './PluginVersion' },
     ]
     return loadAndSave('plugins.json', defaultPlugins)
         .filter(plugin => plugin.enabled)

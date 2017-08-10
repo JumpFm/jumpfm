@@ -7,14 +7,11 @@ import { plugins } from './plugins'
 import { Plugin } from './Plugin'
 
 import * as Mousetrap from 'mousetrap'
-import * as notifier from 'node-notifier'
-
 
 export class JumpFm {
     readonly dialog = new Dialog('dialog', 'dialog-input')
     readonly panels = new Panels()
     readonly statusBar = new StatusBar()
-    readonly notifier = notifier
 
     constructor() {
         setImmediate(() => {
@@ -78,6 +75,6 @@ export class JumpFm {
         fontSize: 14,
         dialog: this.dialog.model,
         panels: this.panels.model,
-        status: this.statusBar.model
+        // status: this.statusBar.model
     }
 }
