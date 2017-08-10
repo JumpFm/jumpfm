@@ -66,6 +66,10 @@ export class Panel {
         this.getItems().forEach(item => item.sel = false)
     }
 
+    getUrl = (): Url => {
+        return this.model.url
+    }
+
     getPath = (): string => {
         return this.model.url.path
     }
@@ -108,7 +112,14 @@ export class Panel {
 
     getTitle = () => {
         const filter = this.model.filter
-        return this.model.url.path + (filter ? ' [' + filter + ']' : '')
+        const protocol = this.model.url.protocol
+        return (
+            protocol ?
+                protocol + ':' :
+                ''
+        )
+            + this.model.url.path
+            + (filter ? ' [' + filter + ']' : '')
     }
 
     model = {

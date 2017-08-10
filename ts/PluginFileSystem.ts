@@ -1,8 +1,7 @@
 import { Plugin } from './Plugin'
 import { JumpFm } from './JumpFm'
 import { Panel, Url } from './Panel'
-import { Item } from './Item'
-import { getExtIcon } from './icons'
+import { Item, itemFromPath } from './Item'
 
 import * as fs from 'fs'
 import * as path from 'path'
@@ -31,30 +30,9 @@ class FileSystem {
         this.panel.setItems(
             fs.readdirSync(fullPath)
                 .filter(name => showHiddenFiles || name.indexOf('.') != 0)
-                .map(name => ({
-                    name: name,
-                    path: path.join(fullPath, name),
-                }))
-                .filter(file => fs.existsSync(file.path))
-                .map(file => {
-                    const stat = fs.statSync(file.path)
-                    const ext = path.extname(file.path).substr(1).toLowerCase()
-                    const icon = getExtIcon(ext) || (
-                        stat.isDirectory() ?
-                            'file-icons/default_folder.svg' :
-                            'file-icons/default_file.svg'
-                    )
-
-                    return {
-                        icon: icon,
-                        path: file.path,
-                        name: file.name,
-                        size: stat.size,
-                        mtime: stat.mtime.getTime(),
-                        sel: false
-                    }
-
-                })
+                .map(name => path.join(fullPath, name))
+                .filter(fullPath => fs.existsSync(fullPath))
+                .map(fullPath => itemFromPath(fullPath))
         )
     }
 }
