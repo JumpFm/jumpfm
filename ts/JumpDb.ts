@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
 import * as homedir from 'homedir';
 import * as path from 'path';
 

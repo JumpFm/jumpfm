@@ -54,7 +54,7 @@ export class JumpFm {
                 const Plug = require(pluginDesc.js)
                 const plugin: Plugin = new Plug(this)
                 plugin.onLoad()
-                console.log(pluginDesc.js, 'loaded', Date.now() - s + ' milliseconds')
+                console.log(pluginDesc.js, `[${Date.now() - s} milliseconds]`)
             })
 
             this.panels.forEach(panel => panel.cd(homedir()))

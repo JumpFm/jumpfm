@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
 import * as homedir from 'homedir';
 import * as path from 'path';
 
@@ -61,7 +61,7 @@ class PluginKeyNav extends Plugin {
 
         bind('enter', ['enter'], enter).filterMode(['enter'], () => {
             enter()
-            activePan().view.filter.select()
+            activePan().clearFilter()
         })
 
         bind('back', ['backspace'], () => {

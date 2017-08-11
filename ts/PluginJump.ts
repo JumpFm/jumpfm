@@ -1,11 +1,11 @@
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
 import * as fuzzy from 'fuzzy';
 
 import { JumpDb } from './JumpDb';
 import { Plugin } from './Plugin';
 
 class PluginJump extends Plugin {
-    label = 'PluginJump'
+    label = 'Jump'
     jumpDb
 
     onLoad() {

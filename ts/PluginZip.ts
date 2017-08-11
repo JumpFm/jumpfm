@@ -1,5 +1,5 @@
 import * as archiver from 'archiver';
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as replaceExt from 'replace-ext';
 import * as extractor from 'unzip';

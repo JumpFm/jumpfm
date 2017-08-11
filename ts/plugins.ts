@@ -18,8 +18,8 @@ export const loadPlugins = (): PluginDesc[] => {
         'jump': { enabled: true, js: './PluginJump' },
         'history': { enabled: true, js: './PluginHistory' },
         'flatMode': { enabled: true, js: './PluginFlatMode' },
-        'gitStatus': { enabled: true, js: './PluginGitStatus', css: './css/gitstatus.css' },
-        'publicGist': { enabled: true, js: './PluginPublicGist' },
+        'gitStatus': { enabled: false, js: './PluginGitStatus', css: './css/gitstatus.css' },
+        'publicGist': { enabled: false, js: './PluginPublicGist' },
     }
 
     Object.keys(defaultPlugins).forEach(key => {
@@ -28,5 +28,5 @@ export const loadPlugins = (): PluginDesc[] => {
     })
 
     savePlugins(plugins)
-    return Object.values(plugins)
+    return Object.values(plugins).filter(plugin => plugin.enabled)
 }
