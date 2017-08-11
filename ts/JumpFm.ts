@@ -6,7 +6,9 @@ import { StatusBar } from './StatusBar'
 import { plugins } from './plugins'
 import { Plugin } from './Plugin'
 
-import { editableFiles, keyboard, save } from './files'
+import { Settings } from './Settings'
+
+import { editableFiles, keyboard, saveKeyboard } from './files'
 
 import * as homedir from 'homedir'
 import * as Mousetrap from 'mousetrap'
@@ -15,6 +17,7 @@ export class JumpFm {
     readonly dialog = new Dialog('dialog', 'dialog-input')
     readonly statusBar = new StatusBar()
     readonly panels = [new Panel(), new Panel()]
+    readonly settings = new Settings()
 
     switchPanel = () => {
         this.model.activePanel = (this.model.activePanel + 1) % 2
@@ -57,7 +60,7 @@ export class JumpFm {
 
             this.panels.forEach(panel => panel.cd(homedir()))
 
-            save('keyboard.json', keyboard)
+            saveKeyboard(keyboard)
         })
     }
 
@@ -88,18 +91,26 @@ export class JumpFm {
         )
     }
 
-    bindKeysFilterMode = (actionName: string, defaultKeys: string[], action: () => void) =>
-        this.panels.forEach(panel =>
-            this.bind(actionName, defaultKeys, action, panel.view.filterTrap)
-        )
-
-    bindKeys = (actionName: string, defaultKeys: string[], action: () => void) => {
-        this.bind(actionName, defaultKeys, action)
-    }
-
-    bindKeysBoth = (actionName: string, defaultKeys: string[], action: () => void) => {
-        this.bindKeys.apply(this, arguments)
-        this.bindKeysFilterMode.apply(this, arguments)
+    bindKeys = (actionName: string,
+        defaultKeys: string[] = [],
+        action: () => void = undefined
+    ) => {
+        if (defaultKeys.length && action)
+            this.bind(actionName, defaultKeys, action)
+        return {
+            filterMode: (filterDefaultKeys: string[] = defaultKeys,
+                filterAction: () => void = action,
+            ) => {
+                this.panels.forEach(panel =>
+                    this.bind(
+                        'filter:' + actionName,
+                        filterDefaultKeys,
+                        filterAction,
+                        panel.view.filterTrap
+                    )
+                )
+            }
+        }
     }
 
     model = {

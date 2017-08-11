@@ -52,11 +52,8 @@ class PluginFileSystem extends Plugin {
     }
 
     msg = () => {
-        this.jumpFm.statusBar.msg(
-            'hidden',
-            'hidden',
-            showHiddenFiles ? ['info'] : ['info', 'del']
-        )
+        this.jumpFm.statusBar.msg(showHiddenFiles ? ['info'] : ['info', 'del'])
+            ('hidden', '.hidden')
     }
 }
 

@@ -3,13 +3,14 @@ import { Plugin } from './Plugin'
 import { Panel, Url } from './Panel'
 
 class History {
-    HISTORY_MAX_SIZE = 20
+    maxSize
     history: Url[] = []
     panel: Panel
     i = 0
 
-    constructor(panel: Panel) {
+    constructor(panel: Panel, maxSize: number) {
         this.panel = panel
+        this.maxSize = maxSize
         panel.listen(this)
     }
 
@@ -22,7 +23,7 @@ class History {
         this.history.splice(0, this.i);
         this.i = 0;
         this.history.unshift(url);
-        this.history.splice(this.HISTORY_MAX_SIZE);
+        this.history.splice(this.maxSize);
         return url;
     }
 
@@ -44,7 +45,9 @@ class PluginHistory extends Plugin {
     onLoad(): void {
         const jumpFm: JumpFm = this.jumpFm
         const panels = jumpFm.panels
-        this.histories = panels.map(panel => new History(panel))
+        this.histories = panels.map(panel =>
+            new History(panel, jumpFm.settings.getNum('historyMaxSize', 20))
+        )
 
         jumpFm.bindKeys('historyBack', ['alt+left'], () => {
             const i = jumpFm.model.activePanel

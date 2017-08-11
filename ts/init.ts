@@ -11,7 +11,7 @@ import * as Vue from 'vue/dist/vue.min.js'
 
 document.addEventListener('DOMContentLoaded', () => {
     Vue.filter('formatDate', date =>
-        date && moment(date).format('MM/DD/YYYY hh:mm') || '--'
+        date && moment(date).format('DD/MM/YYYY hh:mm') || '--'
     )
 
     Vue.filter('fileSize', size =>

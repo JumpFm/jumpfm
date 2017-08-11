@@ -5,8 +5,10 @@ import * as moment from 'moment'
 class PluginClock extends Plugin {
     onLoad(): void {
         setInterval(() =>
-            this.jumpFm.statusBar.msg('clock',
-                moment(Date.now()).format('hh:mm:ss')
+            this.jumpFm.statusBar.info('clock',
+                moment(Date.now()).format(
+                    this.jumpFm.settings.getStr('dateFormat', 'MM/DD/YYYY hh:mm:ss')
+                )
             )
             , 1000
         )

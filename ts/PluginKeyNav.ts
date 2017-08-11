@@ -12,8 +12,6 @@ class PluginKeyNav extends Plugin {
     onLoad() {
         const jumpFm = this.jumpFm
         const bind = jumpFm.bindKeys
-        const bindFilter = jumpFm.bindKeysFilterMode
-        const bindBoth = jumpFm.bindKeysBoth
 
         const activePan = jumpFm.getActivePanel
         const step = (d, select = false) => {
@@ -24,22 +22,25 @@ class PluginKeyNav extends Plugin {
 
         const rowCountInPage = activePan().view.getRowCountInPage
 
-        bind('switchPanel', ['tab'], jumpFm.switchPanel)
-        bindFilter('switchPanel', ['tab'], () => {
+        bind('switchPanel', ['tab'], jumpFm.switchPanel).filterMode(['tab'], () => {
             jumpFm.getActivePanel().view.hideFilter()
             jumpFm.switchPanel()
-        }
-        )
+        })
 
-        bind('up', ['up'], () => step(-1))
-        bind('upSelect', ['shift+up'], () => step(-1, true))
-        bind('pageUp', ['pageup'], () => step(-rowCountInPage()))
-        bind('pageUpSelect', ['shift+pageup'], () => step(-rowCountInPage(), true))
+        bind('up', ['up', ']'], () => step(-1)).filterMode()
+        bind('upSelect', ['shift+up', 'shift+]'], () => step(-1, true)).filterMode()
+        bind('pageUp', ['pageup', 'ctrl+]'], () => step(-rowCountInPage()))
+            .filterMode()
+        bind('pageUpSelect', ['shift+pageup', 'shift+ctrl+]'],
+            () => step(-rowCountInPage(), true))
 
-        bind('down', ['down'], () => step(1))
-        bind('downSelect', ['shift+down'], () => step(1, true))
-        bind('pageDown', ['pagedown'], () => step(rowCountInPage()))
-        bind('pageDownSelect', ['shift+pagedown'], () => step(rowCountInPage(), true))
+        bind('down', ['down', '['], () => step(1))
+            .filterMode()
+        bind('downSelect', ['shift+down', 'shift+['], () => step(1, true))
+        bind('pageDown', ['pagedown', 'ctrl+['], () => step(rowCountInPage()))
+            .filterMode()
+        bind('pageDownSelect', ['shift+pagedown', 'shift+ctrl+['],
+            () => step(rowCountInPage(), true))
 
         bind('goStart', ['home'], () => step(-9999))
         bind('goStartSelect', ['shift+home'], () => step(-9999, true))
@@ -51,7 +52,7 @@ class PluginKeyNav extends Plugin {
             activePan().model.filter = ''
             activePan().deselectAll()
         })
-        bindFilter('hideFilter', ['esc'], () => activePan().view.hideFilter())
+        bind('hide').filterMode(['esc'], () => activePan().view.hideFilter())
 
         const enter = () => {
             const pan = activePan()
@@ -60,7 +61,7 @@ class PluginKeyNav extends Plugin {
             else opn(path)
         }
 
-        bind('enter', ['enter'], enter, () => {
+        bind('enter', ['enter'], enter).filterMode(['enter'], () => {
             enter()
             activePan().view.filter.select()
         })

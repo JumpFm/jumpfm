@@ -29,20 +29,23 @@ export const editableFiles: EditableFile[] = [
 ]
 
 export const root = path.join(homedir(), ".jumpfm")
-
+const fullPath = (name: name) => path.join(root, name)
 const load = (name: name) => {
     try {
-        return require(path.join(root, name))
+        return require(fullPath(name))
     } catch (e) {
         console.log(e)
         return {}
     }
 }
 
-export const save = (name: name, obj) => {
-    const fullPath = path.join(root, name)
-    fs.writeFileSync(fullPath, JSON.stringify(obj, null, 4))
+const save = (name: name) => (obj) => {
+    fs.writeFileSync(fullPath(name), JSON.stringify(obj, null, 4))
 }
+
+export const saveSettings = save('settings.json')
+export const saveKeyboard = save('keyboard.json')
+export const savePlugins = save('plugins.json')
 
 export var settings
 export var keyboard

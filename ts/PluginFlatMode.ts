@@ -7,16 +7,17 @@ import * as watch from 'node-watch'
 import * as fs from 'fs'
 import * as path from 'path'
 
-const MAX_SIZE = 200
 
 class Flat {
     readonly panel: Panel
     readonly jumpFm: JumpFm
+    readonly maxSize
     watcher: { close: () => {} }
 
     constructor(jumpFm: JumpFm, panel: Panel) {
         this.jumpFm = jumpFm
         this.panel = panel
+        this.maxSize = jumpFm.settings.getNum('flatModeMaxSize', 200)
         panel.listen(this)
     }
 
@@ -25,18 +26,17 @@ class Flat {
         if (url.protocol != 'flat') return
         const items = this.flat(url.path)
         this.panel.setItems(items)
-        if (items.length > MAX_SIZE)
-            this.jumpFm.statusBar.msg(
+        if (items.length > this.maxSize)
+            this.jumpFm.statusBar.err(
                 'flat',
                 'Flat Mode: too many files to show',
-                ['err'],
-                2000
+                3000
             )
     }
 
     private flat = (dir): Item[] => {
-        function flatDir(rootDir: string, res: Item[]) {
-            if (res.length > MAX_SIZE) return
+        const flatDir = (rootDir: string, res: Item[]) => {
+            if (res.length > this.maxSize) return
 
             fs.readdirSync(rootDir)
                 .map(name => path.join(rootDir, name))
@@ -44,7 +44,7 @@ class Flat {
                 .forEach(fullPath => {
                     const stat = fs.statSync(fullPath)
                     if (stat.isDirectory()) flatDir(fullPath, res)
-                    else res.length <= MAX_SIZE && res.push(itemFromPath(fullPath))
+                    else res.length <= this.maxSize && res.push(itemFromPath(fullPath))
                 })
         }
 

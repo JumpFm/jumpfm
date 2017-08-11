@@ -7,9 +7,14 @@ import * as fuzzy from 'fuzzy'
 
 class PluginJump extends Plugin {
     label = 'PluginJump'
-    jumpDb = new JumpDb()
+    jumpDb
 
     onLoad() {
+        const getNum = this.jumpFm.settings.getNum
+        this.jumpDb = new JumpDb(
+            getNum('jumpMaxDbSize', 300),
+            getNum('jumpDbSaveInterval', 1)
+        )
         this.jumpFm.panels.forEach(panel => panel.listen(url =>
             this.jumpDb.visit(url.path)
         ))
@@ -28,7 +33,7 @@ class PluginJump extends Plugin {
             .splice(0, 12)
             .map(res => {
                 return {
-                    value: res.original,
+                    value: res.original as string,
                     html: res.string
                 }
             })

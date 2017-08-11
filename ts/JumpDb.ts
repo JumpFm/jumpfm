@@ -37,13 +37,18 @@ function bfs(dirFullPath: string, sizeLimit: number): string[] {
     return res
 }
 
-const DB_MAX_SIZE = 300
-const SAVE_INTERVAL = 3
 
 export class JumpDb {
+    readonly dbMaxSize
+    readonly saveInterval
     readonly dbFullPath = path.join(root, 'jumps.json')
     readonly db: string[] = this.loadDb();
-    saveInterval = 0
+    visitCount = 0
+
+    constructor(dbMaxSize: number, saveInterval: number) {
+        this.dbMaxSize = dbMaxSize
+        this.saveInterval = saveInterval
+    }
 
     private loadDb() {
         if (fs.existsSync(this.dbFullPath)) {
@@ -51,8 +56,8 @@ export class JumpDb {
             if (Array.isArray(db)) return db
         }
         const db =
-            bfs(homedir(), DB_MAX_SIZE * 2 / 3)
-                .concat(bfs(path.parse(homedir()).root, DB_MAX_SIZE * 1 / 3))
+            bfs(homedir(), this.dbMaxSize * 2 / 3)
+                .concat(bfs(path.parse(homedir()).root, this.dbMaxSize * 1 / 3))
         fs.writeFileSync(this.dbFullPath, JSON.stringify(db))
         return db;
     }
@@ -64,10 +69,10 @@ export class JumpDb {
 
     visit = (dirFullPath: string): void => {
         this.db.splice(this.db.indexOf(dirFullPath), 1)
-        this.db.splice(300)
+        this.db.splice(this.dbMaxSize)
         this.db.unshift(dirFullPath)
 
-        if (this.saveInterval++ % SAVE_INTERVAL) return
+        if (this.visitCount++ % this.saveInterval) return
         this.saveDb();
     };
 }

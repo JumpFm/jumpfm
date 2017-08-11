@@ -26,20 +26,21 @@ export class StatusBar {
         this.update()
     }
 
-    msg = (key: string,
-        txt: string,
-        classes: string[] = ['info'],
-        clearTimeout: number = 0
-    ) => {
-        this.setAndUpdate(key, {
-            txt: txt,
-            classes: classes
-        })
+    msg = (classes: string[]) =>
+        (key: string, txt: string, clearTimeout: number = 0) => {
+            this.setAndUpdate(key, {
+                txt: txt,
+                classes: classes
+            })
 
-        if (clearTimeout) setTimeout(() =>
-            this.clear(key)
-            , clearTimeout);
-    }
+            if (clearTimeout) setTimeout(() =>
+                this.clear(key)
+                , clearTimeout);
+        }
+
+    info = this.msg(['info'])
+    warn = this.msg(['warn'])
+    err = this.msg(['err'])
 
     clear = (key: string) => {
         delete this.msgs[key]
