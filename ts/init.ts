@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         methods: {
             edit: name => {
                 const file = path.join(root, name)
-                console.log(file)
                 opn(file)
             }
         }

@@ -42,19 +42,18 @@ export class JumpDb {
     readonly dbMaxSize
     readonly saveInterval
     readonly dbFullPath = path.join(root, 'jumps.json')
-    readonly db: string[] = this.loadDb();
+    readonly db: string[]
     visitCount = 0
 
     constructor(dbMaxSize: number, saveInterval: number) {
         this.dbMaxSize = dbMaxSize
         this.saveInterval = saveInterval
+        this.db = this.loadDb()
     }
 
-    private loadDb() {
-        if (fs.existsSync(this.dbFullPath)) {
-            const db = require(this.dbFullPath)
-            if (Array.isArray(db)) return db
-        }
+    private loadDb = () => {
+        if (fs.existsSync(this.dbFullPath))
+            return require(this.dbFullPath)
         const db =
             bfs(homedir(), this.dbMaxSize * 2 / 3)
                 .concat(bfs(path.parse(homedir()).root, this.dbMaxSize * 1 / 3))

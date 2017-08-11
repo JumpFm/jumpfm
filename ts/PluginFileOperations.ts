@@ -16,7 +16,7 @@ class PluginFileOperations extends Plugin {
         const passivePanel = jumpFm.getPassivePanel
 
         const del = () =>
-            activePanel().getSelectedItemsPaths().forEach(fs.remove)
+            activePanel().getSelectedItemsPaths().forEach(path => fs.remove(path))
 
         const edit = () =>
             cmd.run(

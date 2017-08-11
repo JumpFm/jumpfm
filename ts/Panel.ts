@@ -8,7 +8,7 @@ export interface Url {
 }
 
 interface PanelHandler {
-    onPanelCd?: () => void
+    onPanelCd?: (url?: Url) => void
     onPanelItemsSet?: () => void
 }
 
@@ -111,11 +111,12 @@ export class Panel {
             path: pathOrUrl,
             query: {}
         })
+
         const url = pathOrUrl as Url
         this.model.url = url
         this.handlers
             .filter(handler => handler.onPanelCd)
-            .forEach(handler => handler.onPanelCd())
+            .forEach(handler => handler.onPanelCd(url))
     }
 
     getTitle = () => {

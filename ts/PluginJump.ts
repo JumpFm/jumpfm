@@ -1,5 +1,6 @@
-import * as fs from 'fs-extra';
-import * as fuzzy from 'fuzzy';
+import * as console from 'console'
+import * as fs from 'fs-extra'
+import * as fuzzy from 'fuzzy'
 
 import { JumpDb } from './JumpDb';
 import { Plugin } from './Plugin';
@@ -14,11 +15,12 @@ class PluginJump extends Plugin {
             getNum('jumpMaxDbSize', 300),
             getNum('jumpDbSaveInterval', 1)
         )
-        this.jumpFm.panels.forEach(panel => panel.listen(url =>
-            this.jumpDb.visit(url.path)
-        ))
-
+        this.jumpFm.panels.forEach(panel => panel.listen(this))
         this.jumpFm.bindKeys('jump', ['j'], () => this.jumpFm.dialog.open(this))
+    }
+
+    onPanelCd = (url) => {
+        this.jumpDb.visit(url.path)
     }
 
     onChange = (val: string) => {

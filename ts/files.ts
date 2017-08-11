@@ -10,7 +10,6 @@ interface EditableFile {
     icon: string
 }
 
-export const packageJson = require('../package.json')
 
 export const editableFiles: EditableFile[] = [
     {
@@ -30,8 +29,8 @@ export const editableFiles: EditableFile[] = [
     },
 ]
 
-export const root = path.join(homedir(), ".jumpfm", packageJson.version)
 const fullPath = (name: name) => path.join(root, name)
+
 const load = (name: name) => {
     try {
         return require(fullPath(name))
@@ -49,13 +48,11 @@ export const saveSettings = save('settings.json')
 export const saveKeyboard = save('keyboard.json')
 export const savePlugins = save('plugins.json')
 
-export var settings
-export var keyboard
-export var plugins
 
-setImmediate(() => {
-    if (!fs.existsSync(root)) fs.mkdirpSync(root)
-    settings = load('settings.json')
-    keyboard = load('keyboard.json')
-    plugins = load('plugins.json')
-})
+export const packageJson = require('../package.json')
+export const root = path.join(homedir(), ".jumpfm", packageJson.version)
+if (!fs.existsSync(root)) fs.mkdirpSync(root)
+export const settings = load('settings.json')
+export const keyboard = load('keyboard.json')
+export const plugins = load('plugins.json')
+
