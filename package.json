@@ -32,7 +32,6 @@
         "@types/watch": "^1.0.0",
         "electron": "^1.6.11",
         "electron-builder": "^19.20.1",
-        "electron-rebuild": "^1.6.0",
         "request-debug": "^0.2.0"
     },
     "homepage": "https://jumpfm.org",
