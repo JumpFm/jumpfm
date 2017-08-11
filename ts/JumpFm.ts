@@ -6,7 +6,7 @@ import { StatusBar } from './StatusBar'
 import { plugins } from './plugins'
 import { Plugin } from './Plugin'
 
-import { editableFiles } from './files'
+import { editableFiles, keyboard, save } from './files'
 
 import * as homedir from 'homedir'
 import * as Mousetrap from 'mousetrap'
@@ -56,6 +56,8 @@ export class JumpFm {
             })
 
             this.panels.forEach(panel => panel.cd(homedir()))
+
+            save('keyboard.json', keyboard)
         })
     }
 
@@ -67,11 +69,10 @@ export class JumpFm {
         document.head.appendChild(link)
     }
 
-    private readonly userKeys = {}
-
     private getKeys = (actionName: string, defaultKeys: string[]): string[] => {
-        const keys = this.userKeys[actionName]
+        const keys = keyboard[actionName]
         if (keys && Array.isArray(keys)) return keys
+        keyboard[actionName] = defaultKeys
         return defaultKeys
     }
 
@@ -92,19 +93,13 @@ export class JumpFm {
             this.bind(actionName, defaultKeys, action, panel.view.filterTrap)
         )
 
-    bindKeys = (actionName: string,
-        defaultKeys: string[],
-        action: () => void,
-        actionFilterMode: () => void = undefined
-    ) => {
+    bindKeys = (actionName: string, defaultKeys: string[], action: () => void) => {
         this.bind(actionName, defaultKeys, action)
+    }
 
-        if (!actionFilterMode) return
-        this.bindKeysFilterMode(
-            actionName,
-            defaultKeys,
-            actionFilterMode
-        )
+    bindKeysBoth = (actionName: string, defaultKeys: string[], action: () => void) => {
+        this.bindKeys.apply(this, arguments)
+        this.bindKeysFilterMode.apply(this, arguments)
     }
 
     model = {

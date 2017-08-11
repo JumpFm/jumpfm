@@ -2,80 +2,55 @@ import * as homedir from 'homedir'
 import * as fs from 'fs'
 import * as path from 'path'
 
+type name = 'settings.json' | 'keyboard.json' | 'plugins.json'
+
 interface EditableFile {
+    name: name
     title: string
-    name: string
     icon: string
 }
 
-export const root = path.join(homedir(), ".jumpfm");
 export const editableFiles: EditableFile[] = [
     {
-        title: 'Keyboard',
         name: 'keyboard.json',
+        title: 'Keyboard',
         icon: 'fa fa-keyboard-o'
     },
     {
-        title: 'Plugins',
         name: 'plugins.json',
+        title: 'Plugins',
         icon: 'fa fa-plug'
     },
     {
-        title: 'Settings',
         name: 'settings.json',
+        title: 'Settings',
         icon: 'fa fa-cog',
     },
 ]
 
+export const root = path.join(homedir(), ".jumpfm")
+
+const load = (name: name) => {
+    try {
+        return require(path.join(root, name))
+    } catch (e) {
+        console.log(e)
+        return {}
+    }
+}
+
+export const save = (name: name, obj) => {
+    const fullPath = path.join(root, name)
+    fs.writeFileSync(fullPath, JSON.stringify(obj, null, 4))
+}
 
 export var settings
+export var keyboard
+export var plugins
 
 setImmediate(() => {
-    if (!fs.existsSync(root)) fs.mkdirSync(root);
-    settings = this.load('settings.json', {
-        editor: 'gedit'
-    })
+    if (!fs.existsSync(root)) fs.mkdirSync(root)
+    settings = load('settings.json')
+    keyboard = load('keyboard.json')
+    plugins = load('plugins.json')
 })
-
-export const save = (name: string, settings) => {
-    const fullPath = path.join(root, name)
-    fs.writeFileSync(fullPath, JSON.stringify(settings, null, 4))
-}
-
-export const load = <T>(name: string, defaults: T): T => {
-    try {
-        const fullPath = path.join(root, name)
-
-        return fs.existsSync(fullPath) ?
-            merge(defaults, require(fullPath)) :
-            defaults
-
-    } catch (e) {
-        console.log(e.message);
-        return defaults
-    }
-}
-
-export const loadAndSave = <T>(name: string, defaults: T): T => {
-    const settings = load(name, defaults)
-    save(name, settings)
-    return settings
-}
-
-const typeOf = (obj: any) => Array.isArray(obj) ? 'array' : typeof obj
-
-const merge = <T>(defaults: T, obj: any): T => {
-    if (typeOf(defaults) != typeOf(obj)) return defaults
-    if (typeOf(defaults) === 'object') {
-        Object.keys(defaults).forEach(key => {
-            defaults[key] = obj.hasOwnProperty(key) ?
-                merge(defaults[key], obj[key]) :
-                defaults[key]
-        })
-    }
-    if (typeOf(defaults) === 'array') {
-        // TODO merge arrays
-    }
-
-    return defaults
-}

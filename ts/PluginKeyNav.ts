@@ -13,6 +13,7 @@ class PluginKeyNav extends Plugin {
         const jumpFm = this.jumpFm
         const bind = jumpFm.bindKeys
         const bindFilter = jumpFm.bindKeysFilterMode
+        const bindBoth = jumpFm.bindKeysBoth
 
         const activePan = jumpFm.getActivePanel
         const step = (d, select = false) => {
@@ -23,12 +24,11 @@ class PluginKeyNav extends Plugin {
 
         const rowCountInPage = activePan().view.getRowCountInPage
 
-        bind('switchPanel', ['tab'],
-            jumpFm.switchPanel,
-            () => {
-                jumpFm.getActivePanel().view.hideFilter()
-                jumpFm.switchPanel()
-            }
+        bind('switchPanel', ['tab'], jumpFm.switchPanel)
+        bindFilter('switchPanel', ['tab'], () => {
+            jumpFm.getActivePanel().view.hideFilter()
+            jumpFm.switchPanel()
+        }
         )
 
         bind('up', ['up'], () => step(-1))
