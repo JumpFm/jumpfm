@@ -1,12 +1,9 @@
-import { JumpFm } from './JumpFm'
-import { Plugin } from './Plugin'
-import { misc } from './settings'
-import { opn } from './opn'
+import * as fs from 'fs-extra';
+import * as cmd from 'node-cmd';
+import * as path from 'path';
 
-import * as fs from 'fs'
-import * as path from 'path'
-import * as shell from 'shelljs'
-import * as cmd from 'node-cmd'
+import { opn } from './opn';
+import { Plugin } from './Plugin';
 
 const { clipboard } = require('electron')
 
@@ -19,10 +16,14 @@ class PluginFileOperations extends Plugin {
         const passivePanel = jumpFm.getPassivePanel
 
         const del = () =>
-            shell.rm('-rf', activePanel().getSelectedItemsUrls())
+            activePanel().getSelectedItemsPaths().forEach(fs.remove)
 
         const edit = () =>
-            cmd.run(misc.editor + " " + activePanel().getCurItem().path)
+            cmd.run(
+                jumpFm.settings.getStr('editor', 'gedit')
+                + " "
+                + activePanel().getCurItem().path
+            )
 
         const newFile = () => {
             const pwd = activePanel().getPath()
@@ -77,7 +78,7 @@ class PluginFileOperations extends Plugin {
 
         const mv = () => {
             activePanel().getSelectedItems().forEach(file =>
-                shell.mv(
+                fs.move(
                     file.path,
                     path.join(passivePanel().getPath(), file.name)
                 )

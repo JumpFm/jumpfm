@@ -1,17 +1,14 @@
-import { Dialog } from './Dialog'
-import { Panel } from './Panel'
-import { PanelView } from './PanelView'
-import { StatusBar } from './StatusBar'
+import * as homedir from 'homedir';
+import * as Mousetrap from 'mousetrap';
 
-import { plugins } from './plugins'
-import { Plugin } from './Plugin'
-
-import { Settings } from './Settings'
-
-import { editableFiles, keyboard, saveKeyboard } from './files'
-
-import * as homedir from 'homedir'
-import * as Mousetrap from 'mousetrap'
+import { Dialog } from './Dialog';
+import { editableFiles, keyboard, saveKeyboard } from './files';
+import { Panel } from './Panel';
+import { PanelView } from './PanelView';
+import { Plugin } from './Plugin';
+import { loadPlugins } from './plugins';
+import { Settings } from './Settings';
+import { StatusBar } from './StatusBar';
 
 export class JumpFm {
     readonly dialog = new Dialog('dialog', 'dialog-input')
@@ -51,11 +48,13 @@ export class JumpFm {
             this.bindKeys('decreaseFontSize', ['ctrl+-'], () => this.model.fontSize--)
             this.bindKeys('resetFontSize', ['ctrl+0'], () => this.model.fontSize = 14)
 
-            plugins().forEach(pluginDesc => {
+            loadPlugins().forEach(pluginDesc => {
+                const s = Date.now()
                 this.addCss(pluginDesc.css)
                 const Plug = require(pluginDesc.js)
                 const plugin: Plugin = new Plug(this)
                 plugin.onLoad()
+                console.log(pluginDesc.js, 'loaded', Date.now() - s + ' milliseconds')
             })
 
             this.panels.forEach(panel => panel.cd(homedir()))

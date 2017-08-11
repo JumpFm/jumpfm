@@ -1,9 +1,8 @@
-import { Plugin } from './Plugin'
-import { JumpFm } from './JumpFm'
-import { JumpDb } from './JumpDb'
+import * as fs from 'fs';
+import * as fuzzy from 'fuzzy';
 
-import * as fs from 'fs'
-import * as fuzzy from 'fuzzy'
+import { JumpDb } from './JumpDb';
+import { Plugin } from './Plugin';
 
 class PluginJump extends Plugin {
     label = 'PluginJump'

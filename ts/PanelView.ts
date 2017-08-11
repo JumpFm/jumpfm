@@ -1,4 +1,4 @@
-import * as Mousetrap from 'mousetrap'
+import * as Mousetrap from 'mousetrap';
 
 export class PanelView {
     readonly tbody: HTMLElement

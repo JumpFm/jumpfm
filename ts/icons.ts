@@ -1,3 +1,4 @@
+
 const icons = require('../icons.json')
 const extensions = {}
 for (var icon in icons) {

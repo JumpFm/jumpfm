@@ -1,5 +1,5 @@
-import { Item } from './Item'
-import { PanelView } from './PanelView'
+import { Item } from './Item';
+import { PanelView } from './PanelView';
 
 export interface Url {
     protocol: string
@@ -83,7 +83,7 @@ export class Panel {
         })
     }
 
-    getSelectedItemsUrls = () => {
+    getSelectedItemsPaths = () => {
         return this.getSelectedItems().map(item => item.path)
     }
 

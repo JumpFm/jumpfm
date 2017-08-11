@@ -1,10 +1,10 @@
-import { Plugin } from './Plugin'
+import * as archiver from 'archiver';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as replaceExt from 'replace-ext';
+import * as extractor from 'unzip';
 
-import * as fs from 'fs'
-import * as path from 'path'
-import * as extractor from 'unzip'
-import * as archiver from 'archiver'
-import * as replaceExt from 'replace-ext'
+import { Plugin } from './Plugin';
 
 class PluginZip extends Plugin {
     onLoad(): void {

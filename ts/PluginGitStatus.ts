@@ -1,10 +1,10 @@
-import { Plugin } from './Plugin'
-import { Panel } from './Panel'
+import * as findParentDir from 'find-parent-dir';
+import * as nodegit from 'nodegit';
+import * as path from 'path';
+import * as watch from 'watch';
 
-import * as findParentDir from 'find-parent-dir'
-import * as watch from 'watch'
-import * as nodegit from 'nodegit'
-import * as path from 'path'
+import { Panel } from './Panel';
+import { Plugin } from './Plugin';
 
 class GitStatus {
     readonly panel: Panel

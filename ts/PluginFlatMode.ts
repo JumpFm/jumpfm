@@ -1,11 +1,10 @@
-import { JumpFm } from './JumpFm'
-import { Plugin } from './Plugin'
-import { Panel } from './Panel'
-import { Item, itemFromPath } from './Item'
+import * as fs from 'fs';
+import * as path from 'path';
 
-import * as watch from 'node-watch'
-import * as fs from 'fs'
-import * as path from 'path'
+import { Item, itemFromPath } from './Item';
+import { JumpFm } from './JumpFm';
+import { Panel } from './Panel';
+import { Plugin } from './Plugin';
 
 
 class Flat {

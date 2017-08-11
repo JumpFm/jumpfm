@@ -1,12 +1,10 @@
-import { Plugin } from './Plugin'
-import { JumpFm } from './JumpFm'
-import { Panel } from './Panel'
-import { Item } from './Item'
+import * as fs from 'fs';
+import * as homedir from 'homedir';
+import * as path from 'path';
 
-import * as homedir from 'homedir'
-import * as fs from 'fs'
-import * as path from 'path'
-import { opn } from './opn'
+import { opn } from './opn';
+import { Panel } from './Panel';
+import { Plugin } from './Plugin';
 
 class PluginKeyNav extends Plugin {
     onLoad() {

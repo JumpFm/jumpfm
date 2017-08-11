@@ -18,7 +18,7 @@ export class StatusBar {
     }
 
     private update = () => {
-        this.model.msgs = Object.keys(this.msgs).map(key => this.msgs[key])
+        this.model.msgs = Object.values(this.msgs)
     }
 
     private setAndUpdate = (key: string, msg: Msg) => {

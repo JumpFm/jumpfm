@@ -1,6 +1,6 @@
-import { Plugin } from './Plugin'
+import * as moment from 'moment';
 
-import * as moment from 'moment'
+import { Plugin } from './Plugin';
 
 class PluginClock extends Plugin {
     onLoad(): void {

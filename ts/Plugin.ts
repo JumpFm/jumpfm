@@ -1,4 +1,4 @@
-import { JumpFm } from './JumpFm'
+import { JumpFm } from './JumpFm';
 
 export abstract class Plugin {
     readonly jumpFm: JumpFm

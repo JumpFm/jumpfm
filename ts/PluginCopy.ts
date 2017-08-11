@@ -1,10 +1,8 @@
-import { Plugin } from './Plugin'
-import { JumpFm } from './JumpFm'
+import * as fs from 'fs';
+import * as path from 'path';
+import * as progress from 'progress-stream';
 
-import * as fileSize from 'filesize'
-import * as fs from 'fs'
-import * as path from 'path'
-import * as progress from 'progress-stream'
+import { Plugin } from './Plugin';
 
 interface cp {
     fileFullPath: string
@@ -99,7 +97,7 @@ class PluginCopy extends Plugin {
     }
 
     onLoad(): void {
-        const selectedFiles = this.jumpFm.getActivePanel().getSelectedItemsUrls
+        const selectedFiles = this.jumpFm.getActivePanel().getSelectedItemsPaths
         const distDir = this.jumpFm.getPassivePanel().getPath
         this.jumpFm.bindKeys('copy', ['f5'], () => {
             this.cp(selectedFiles(), distDir())

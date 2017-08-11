@@ -1,11 +1,10 @@
-import { Plugin } from './Plugin'
-import { JumpFm } from './JumpFm'
-import { Panel, Url } from './Panel'
-import { Item, itemFromPath } from './Item'
+import * as fs from 'fs';
+import * as watch from 'node-watch';
+import * as path from 'path';
 
-import * as fs from 'fs'
-import * as path from 'path'
-import * as watch from 'node-watch'
+import { itemFromPath } from './Item';
+import { Panel } from './Panel';
+import { Plugin } from './Plugin';
 
 var showHiddenFiles = false
 

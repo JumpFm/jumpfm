@@ -1,6 +1,6 @@
-import * as homedir from 'homedir'
-import * as fs from 'fs'
-import * as path from 'path'
+import * as fs from 'fs';
+import * as homedir from 'homedir';
+import * as path from 'path';
 
 type name = 'settings.json' | 'keyboard.json' | 'plugins.json'
 

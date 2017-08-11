@@ -1,13 +1,13 @@
+import * as fileSize from 'filesize';
+import * as moment from 'moment';
+import * as path from 'path';
+import * as Vue from 'vue/dist/vue.min.js';
+
+import { root } from './files';
+import { JumpFm } from './JumpFm';
+import { opn } from './opn';
+
 const time = Date.now()
-
-import { JumpFm } from './JumpFm'
-import { opn } from './opn'
-import { root } from './files'
-
-import * as fileSize from 'filesize'
-import * as moment from 'moment'
-import * as path from 'path'
-import * as Vue from 'vue/dist/vue.min.js'
 
 document.addEventListener('DOMContentLoaded', () => {
     Vue.filter('formatDate', date =>

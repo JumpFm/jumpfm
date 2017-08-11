@@ -1,8 +1,8 @@
-import { root } from './settings'
+import * as fs from 'fs';
+import * as homedir from 'homedir';
+import * as path from 'path';
 
-import * as homedir from 'homedir'
-import * as fs from 'fs'
-import * as path from 'path'
+import { root } from './files';
 
 const isHidden = (fullPath: string) => path.basename(fullPath).indexOf('.') == 0
 

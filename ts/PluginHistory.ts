@@ -1,6 +1,6 @@
-import { JumpFm } from './JumpFm'
-import { Plugin } from './Plugin'
-import { Panel, Url } from './Panel'
+import { JumpFm } from './JumpFm';
+import { Panel, Url } from './Panel';
+import { Plugin } from './Plugin';
 
 class History {
     maxSize

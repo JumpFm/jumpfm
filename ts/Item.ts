@@ -1,7 +1,7 @@
-import * as fs from 'fs'
-import * as path from 'path'
-import * as request from 'request'
-import { getExtIcon } from './icons'
+import * as fs from 'fs';
+import * as path from 'path';
+
+import { getExtIcon } from './icons';
 
 export interface Item {
     icon: string
