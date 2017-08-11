@@ -33,7 +33,7 @@ class PluginCopy extends Plugin {
             length: fs.statSync(cp.fileFullPath).size,
             time: 200
         }, (prog) => {
-            this.jumpFm.statusBar.msg('cp',
+            this.jumpFm.statusBar.info('cp',
                 'cp: '
                 + path.basename(cp.fileFullPath)
                 + ' '
@@ -89,10 +89,9 @@ class PluginCopy extends Plugin {
                 dirFullPath: distDirFullPath
             })
 
-            this.jumpFm.statusBar.msg(
+            this.jumpFm.statusBar.warn(
                 'q',
                 'waiting: ' + path.basename(fullPath),
-                ['warn']
             )
         })
 

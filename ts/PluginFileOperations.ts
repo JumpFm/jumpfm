@@ -93,7 +93,7 @@ class PluginFileOperations extends Plugin {
         bind('copyFullPath', ['p'], () => {
             const path = activePanel().getCurItem().path
             clipboard.writeText(path)
-            jumpFm.statusBar.msg('clipboard', 'copied: ' + path, ['info'], 2000)
+            jumpFm.statusBar.info('clipboard', 'copied: ' + path, 3000)
         })
     }
 }
