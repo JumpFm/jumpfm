@@ -1,4 +1,5 @@
 @import 'colors';
+@import 'classes';
 #statusbar {
     display: flex;
     flex-shrink: 0;
@@ -12,6 +13,7 @@
     align-items: center;
     font-size: 90%;
     .msg {
+        @extend .txt-no-wrap;
         border-right: 1px solid $color-border;
         padding: 0 .5em;
         &:last-child {

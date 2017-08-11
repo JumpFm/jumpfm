@@ -11,6 +11,8 @@ interface Gist {
 }
 
 class PluginPublicGist extends Plugin {
+    label = 'New Gist Description'
+
     readonly req = genReq.defaults({
         headers: { 'User-Agent': 'JumpFm' }
     })
@@ -37,7 +39,6 @@ class PluginPublicGist extends Plugin {
         })
     }
 
-    label = 'New Gist'
 
     onDialogOpen = (input) => {
         input.value = 'Gist Description'
@@ -50,7 +51,7 @@ class PluginPublicGist extends Plugin {
             description: description,
             filesFullPath: this.jumpFm.getActivePanel().getSelectedItemsPaths()
         }, (err, url) => {
-            this.jumpFm.statusBar.info('gist', 'Gist created at ' + url)
+            this.jumpFm.statusBar.info('gist', 'Gist created at ' + url, 5000)
             opn(url)
         })
     }

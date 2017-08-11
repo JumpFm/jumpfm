@@ -64,6 +64,7 @@ export class Dialog {
         this.model.cur = 0
 
         this.view.style.display = 'block'
+        this.input.value = ''
         this.input.select()
 
         spec.onOpen && spec.onOpen(this.input)

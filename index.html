@@ -17,19 +17,21 @@
 
         <!-- DIALOG -->
         <div id='dialog'>
-            <div class='labeled-input border'>
-                <div class='label'>{{dialog.label}}:</div>
-                <input id="dialog-input"
-                    type="text" />
-            </div>
-            <div>
-                <ol id='dialog-sug'
-                    class='border'>
-                    <li v-for="(sug, i) in dialog.sug"
-                        :cur="i == dialog.cur"
-                        v-html="sug.html"
-                        class="txt-no-wrap" />
-                </ol>
+            <div id='dialog-content'>
+                <div>
+                    <div id='dialog-label'>{{dialog.label}}:</div>
+                </div>
+                <div id='dialog-right'>
+                    <input id="dialog-input"
+                        type="text" />
+                    <ol id='dialog-sug'
+                        class='border'>
+                        <li v-for="(sug, i) in dialog.sug"
+                            :cur="i == dialog.cur"
+                            v-html="sug.html"
+                            class="txt-no-wrap" />
+                    </ol>
+                </div>
             </div>
         </div>
         <!-- /DIALOG -->

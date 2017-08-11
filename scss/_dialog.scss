@@ -1,6 +1,7 @@
 @import 'colors';
+@import 'classes';
 #dialog {
-    display: none;
+    // display: none;
     position: absolute;
     top: 20%;
     left: 0;
@@ -10,19 +11,51 @@
     background-color: $color-bg;
 }
 
+#dialog-label,
+#dialog-input {
+    padding: .8em;
+}
+
+#dialog-label,
+#dialog-input,
 #dialog-sug {
-    line-height: 1.5;
-    padding: 0;
-    list-style-type: none;
-    border-top: none;
-    margin: 0;
-    [cur] {
-        background-color: $color-border;
-    }
-    b {
+    @extend .border;
+}
+
+#dialog-input,
+#dialog-sug {
+    width: 100%;
+}
+
+#dialog-content {
+    display: flex;
+    #dialog-label {
         color: $color-info;
+        font-weight: bold;
+        border-right: none;
     }
-    li {
-        padding: 0 .2em;
+}
+
+#dialog-right {
+    flex-grow: 1;
+    #dialog-input {
+        border-left: none;
+        padding-left: 0;
+    }
+    #dialog-sug {
+        border-top: none;
+        line-height: 1.5;
+        padding: 0;
+        list-style-type: none;
+        margin: 0;
+        [cur] {
+            background-color: $color-border;
+        }
+        b {
+            color: $color-info;
+        }
+        li {
+            padding: 0 .2em;
+        }
     }
 }
