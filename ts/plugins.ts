@@ -17,7 +17,7 @@ export const plugins = (): PluginDesc[] => {
         { enabled: true, js: './PluginZip' },
         { enabled: true, js: './PluginJump' },
         { enabled: true, js: './PluginHistory' },
-        // { enabled: true, js: './PluginFlatMode' },
+        { enabled: true, js: './PluginFlatMode' },
         { enabled: true, js: './PluginGitStatus', css: './css/gitstatus.css' },
     ]
     return loadAndSave('plugins.json', defaultPlugins)

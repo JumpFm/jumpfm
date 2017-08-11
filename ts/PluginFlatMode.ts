@@ -10,21 +10,28 @@ import * as path from 'path'
 const MAX_SIZE = 200
 
 class Flat {
+    readonly panel: Panel
+    readonly jumpFm: JumpFm
     watcher: { close: () => {} }
 
     constructor(jumpFm: JumpFm, panel: Panel) {
-        panel.onCd(url => {
-            if (url.protocol != 'flat') return
-            const items = this.flat(url.path)
-            panel.setItems(items)
-            if (items.length > MAX_SIZE)
-                jumpFm.statusBar.msg(
-                    'flat',
-                    'Flat Mode: too many files to show',
-                    ['err'],
-                    2000
-                )
-        })
+        this.jumpFm = jumpFm
+        this.panel = panel
+        panel.listen(this)
+    }
+
+    onPanelCd = () => {
+        const url = this.panel.getUrl()
+        if (url.protocol != 'flat') return
+        const items = this.flat(url.path)
+        this.panel.setItems(items)
+        if (items.length > MAX_SIZE)
+            this.jumpFm.statusBar.msg(
+                'flat',
+                'Flat Mode: too many files to show',
+                ['err'],
+                2000
+            )
     }
 
     private flat = (dir): Item[] => {

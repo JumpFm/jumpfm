@@ -6,6 +6,8 @@ import { StatusBar } from './StatusBar'
 import { plugins } from './plugins'
 import { Plugin } from './Plugin'
 
+import { editableFiles } from './files'
+
 import * as homedir from 'homedir'
 import * as Mousetrap from 'mousetrap'
 
@@ -110,6 +112,7 @@ export class JumpFm {
         activePanel: 0,
         panels: this.panels.map(panel => panel.model),
         dialog: this.dialog.model,
-        status: this.statusBar.model
+        status: this.statusBar.model,
+        editableFiles: editableFiles
     }
 }

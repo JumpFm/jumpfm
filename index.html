@@ -15,6 +15,25 @@
     <div id="app"
         v-bind:style="{ fontSize: fontSize + 'px' }">
 
+        <!-- DIALOG -->
+        <div id='dialog'>
+            <div class='labeled-input border'>
+                <div class='label'>{{dialog.label}}:</div>
+                <input id="dialog-input"
+                    type="text" />
+            </div>
+            <div>
+                <ol id='dialog-sug'
+                    class='border'>
+                    <li v-for="(sug, i) in dialog.sug"
+                        :cur="i == dialog.cur"
+                        v-html="sug.html"
+                        class="txt-no-wrap" />
+                </ol>
+            </div>
+        </div>
+        <!-- /DIALOG -->
+
         <!-- PANELS  -->
         <div id='panels'>
             <div v-for="(panel, i) in panels"
@@ -68,15 +87,10 @@
             </div>
             <!-- BUTTONS  -->
             <div id="buttons">
-                <a class="btn"
-                    id="editKeys"
-                    title="Edit Keys"><i class="fa fa-keyboard-o"></i></a>
-                <a class="btn"
-                    id="editPlugins"
-                    title="Plugins"><i class="fa fa-plug"></i></a>
-                <a class="btn"
-                    id="editMisc"
-                    title="Edit Settings"><i class="fa fa-cog"></i></a>
+                <a v-for='file in editableFiles'
+                    v-on:click='edit(file.name)'
+                    class="btn"
+                    :title="file.title"><i :class="file.icon"></i></a>
                 <a class="btn"
                     title="Help"
                     href="https://gilad-kutiel-app.github.io/jumpfm/"
@@ -84,24 +98,5 @@
             </div>
         </footer>
         <!-- /STATUS BAR  -->
-
-        <!-- DIALOG -->
-        <div id='dialog'>
-            <div class='labeled-input border'>
-                <div class='label'>{{dialog.label}}:</div>
-                <input id="dialog-input"
-                    type="text" />
-            </div>
-            <div>
-                <ol id='dialog-sug'
-                    class='border'>
-                    <li v-for="(sug, i) in dialog.sug"
-                        :cur="i == dialog.cur"
-                        v-html="sug.html"
-                        class="txt-no-wrap" />
-                </ol>
-            </div>
-        </div>
-        <!-- /DIALOG -->
     </div>
 </body>
