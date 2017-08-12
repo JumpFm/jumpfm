@@ -50,7 +50,7 @@ export const savePlugins = save('plugins.json')
 
 
 export const packageJson = require('../package.json')
-export const root = path.join(homedir(), ".jumpfm", packageJson.version)
+export const root = path.join(homedir(), ".jumpfm")
 if (!fs.existsSync(root)) fs.mkdirpSync(root)
 export const settings = load('settings.json')
 export const keyboard = load('keyboard.json')
