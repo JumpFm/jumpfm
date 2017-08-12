@@ -17,6 +17,11 @@
     href='index.css' />
 <link rel='shortcut icon'
     href='favicon.ico'>
+
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism-okaidia.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+
 <script src='https://use.fontawesome.com/219041236c.js'></script>
 </head>
 
@@ -505,8 +510,8 @@
             </tr>
             <tr>
                 <td>git status</td>
-                <td>false</td>
-                <td>Enable git status indicators. Enabling this plugin might cause some
+                <td>true</td>
+                <td>Enable git status indicators. Might cause some
                     <b>performance degradation</b> when browsing large git repositories.
                 </td>
                 <td>yes</td>
@@ -530,6 +535,26 @@
         <a href='https://github.com/Gilad-Kutiel-App/jumpfm/issues/new'
             target='_blank'>open an issue</a>.
     </p>
+</section>
+<section>
+    <a name='dev.jumpfm'></a>
+    <h3 class='mono'>&lt;plugins/&gt;</h3>
+    <p>Want to write your own plugin? great, its super easy.</p>
+    <pre>
+<code class='language-js'>
+class MyPlugin {
+    constructor(jumpFm) {
+        this.jumpFm = jumpFm
+    }
+
+    onLoad() {
+        this.jumpFm.statusBar.info('me', 'me plugin :)')
+    }
+}
+
+module.exports = MyPlugin
+</code>
+    </pre>
 </section>
 </div>
 <footer>
