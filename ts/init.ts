@@ -7,8 +7,6 @@ import { root } from './files';
 import { JumpFm } from './JumpFm';
 import { opn } from './opn';
 
-const time = Date.now()
-
 document.addEventListener('DOMContentLoaded', () => {
     Vue.filter('formatDate', date =>
         date && moment(date).format('DD/MM/YYYY hh:mm') || '--'
@@ -28,6 +26,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     })
-
-    console.log(Date.now() - time, 'milliseconds')
 }, false)

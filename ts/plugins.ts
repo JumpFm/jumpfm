@@ -14,10 +14,11 @@ export const loadPlugins = (): PluginDesc[] => {
         'keyNav': { enabled: true, js: './PluginKeyNav' },
         'fileOperations': { enabled: true, js: './PluginFileOperations' },
         'copy': { enabled: true, js: './PluginCopy' },
-        'zip': { enabled: true, js: './PluginZip' },
         'jump': { enabled: true, js: './PluginJump' },
         'history': { enabled: true, js: './PluginHistory' },
         'flatMode': { enabled: true, js: './PluginFlatMode' },
+        // TODO long load time
+        'zip': { enabled: true, js: './PluginZip' },
         'gitStatus': { enabled: false, js: './PluginGitStatus', css: './css/gitstatus.css' },
         'publicGist': { enabled: false, js: './PluginPublicGist' },
     }
