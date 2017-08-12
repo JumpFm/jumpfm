@@ -1,6 +1,8 @@
 @import 'colors';
 table {
     border-collapse: collapse;
+    width: 100%;
+    text-align: left;
     thead {
         background-color: $color-tr-even;
         font-weight: bold;
@@ -8,30 +10,32 @@ table {
             padding: .3em;
         }
     }
-    width: 100%;
-    text-align: left;
     tr {
         &:nth-child(even) {
             background-color: $color-tr-even;
+        }
+        &.sep {
+            text-transform: capitalize;
+            background-color: $color-bg;
+            font-weight: bold;
+            th {
+                padding: 1em 0;
+            }
         }
     }
     td {
         font-size: 85%;
         padding: 5px;
-        &.sep {
-            text-transform: capitalize;
-            padding: 10px 0;
-            background-color: $color-bg;
-            font-weight: bold;
-        }
     }
     &#shortcuts {
-        &:first-child {
-            font-family: monospace;
-            text-transform: uppercase;
-        }
-        &:nth-child(2) {
-            text-transform: capitalize;
+        td {
+            &:first-child {
+                font-family: monospace;
+                text-transform: uppercase;
+            }
+            &:nth-child(2) {
+                text-transform: capitalize;
+            }
         }
     }
 }

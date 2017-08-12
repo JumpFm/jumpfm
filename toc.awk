@@ -4,7 +4,7 @@ BEGIN{
     print "<ul id='toc'>"
 }
 
-match($0, /name='([^']+)'/, m){
+match($0, /a name='([^']+)'/, m){
     print "<li><a href='#'"m[1]"</li>"
 }
 

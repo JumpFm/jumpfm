@@ -62,18 +62,19 @@ table {
       padding: .3em; }
   table tr:nth-child(even) {
     background-color: #eee; }
+  table tr.sep {
+    text-transform: capitalize;
+    background-color: #fff;
+    font-weight: bold; }
+    table tr.sep th {
+      padding: 1em 0; }
   table td {
     font-size: 85%;
     padding: 5px; }
-    table td.sep {
-      text-transform: capitalize;
-      padding: 10px 0;
-      background-color: #fff;
-      font-weight: bold; }
-  table#shortcuts:first-child {
+  table#shortcuts td:first-child {
     font-family: monospace;
     text-transform: uppercase; }
-  table#shortcuts:nth-child(2) {
+  table#shortcuts td:nth-child(2) {
     text-transform: capitalize; }
 
 * {
