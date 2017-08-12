@@ -1,7 +1,8 @@
 import * as findParentDir from 'find-parent-dir'
 import * as nodegit from 'nodegit'
 import * as path from 'path'
-import * as watch from 'watch'
+// import * as watch from 'watch'
+import * as  watch from 'node-watch'
 
 import { Panel } from './Panel';
 import { Plugin } from './Plugin';
@@ -9,6 +10,7 @@ import { Plugin } from './Plugin';
 class GitStatus {
     readonly panel: Panel
     root: string
+    watcher = { close: () => undefined }
 
     constructor(panel: Panel) {
         this.panel = panel
@@ -17,11 +19,11 @@ class GitStatus {
 
     onPanelItemsSet = () => {
         const url = this.panel.getUrl()
-        watch.unwatchTree(this.root)
+        this.watcher.close()
         if (url.protocol) return
         this.root = findParentDir.sync(url.path, '.git')
         if (!this.root) return
-        watch.watchTree(this.root, () => this.updateStatus)
+        this.watcher = watch(this.root, { recursive: true }, this.updateStatus)
         this.updateStatus()
     }
 
