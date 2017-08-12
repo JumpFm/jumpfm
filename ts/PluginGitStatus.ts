@@ -29,16 +29,10 @@ class GitStatus {
         if (!this.root) return
         console.log('watching', this.root)
 
-        this.rootWatcher = watch(this.root, () => {
-            console.log('root')
-            this.updateStatus()
-        })
+        this.rootWatcher = watch(this.root, this.updateStatus)
         this.indexWatcher = watch(
             path.join(this.root, '.git', 'index'),
-            () => {
-                console.log('index')
-                this.updateStatus()
-            }
+            this.updateStatus
         )
 
         this.updateStatus()
