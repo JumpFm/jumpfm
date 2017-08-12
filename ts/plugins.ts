@@ -19,7 +19,7 @@ export const loadPlugins = (): PluginDesc[] => {
         'flatMode': { enabled: true, js: './PluginFlatMode' },
         // TODO long load time
         'zip': { enabled: true, js: './PluginZip' },
-        'gitStatus': { enabled: false, js: './PluginGitStatus', css: './css/gitstatus.css' },
+        'gitStatus': { enabled: true, js: './PluginGitStatus', css: './css/gitstatus.css' },
         'publicGist': { enabled: false, js: './PluginPublicGist' },
     }
 
