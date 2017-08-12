@@ -76,6 +76,17 @@ table {
     text-transform: uppercase; }
   table#shortcuts td:nth-child(2) {
     text-transform: capitalize; }
+  table#plugins {
+    table-layout: fixed; }
+    table#plugins th:first-child {
+      width: 5.5em; }
+    table#plugins th:nth-child(2) {
+      width: 5.5em; }
+    table#plugins th:nth-child(4) {
+      width: 10em; }
+
+#toc {
+  list-style: upper-roman; }
 
 * {
   box-sizing: border-box;

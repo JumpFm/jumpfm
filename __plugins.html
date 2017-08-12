@@ -4,21 +4,49 @@
         <i class='fa fa-plug'></i> Plugins
     </h3>
     <p>
-        Plugins control every aspect of JumpFm. It is easy to enable/disable them and you
-        can also install new once.
+        Plugins control every aspect of JumpFm. You can enable/disable them, install new
+        once and also write your own.
     </p>
-    <p>JumpFm shipped with the following plugins:</p>
-    <table>
+    <h4>Builtin plugins:</h4>
+    <table id='plugins'>
         <thead>
             <tr>
                 <th>Plugin</th>
-                <th>Enabled by default</th>
-                <th>Comments</th>
+                <th>Enabled</th>
+                <th>Description</th>
+                <th>Safely Disable</th>
             </tr>
         </thead>
         <tbody>
+            <!-- 
+            'clock': { enabled: true, js: './PluginClock' },
+                'version': { enabled: true, js: './PluginVersion' },
+                'fileSystem': { enabled: true, js: './PluginFileSystem' },
+                'keyNav': { enabled: true, js: './PluginKeyNav' },
+                'fileOperations': { enabled: true, js: './PluginFileOperations' },
+                'copy': { enabled: true, js: './PluginCopy' },
+                'jump': { enabled: true, js: './PluginJump' },
+                'history': { enabled: true, js: './PluginHistory' },
+                'flatMode': { enabled: true, js: './PluginFlatMode' },
+                // TODO long load time
+                'zip': { enabled: true, js: './PluginZip' },
+                'gitStatus': { enabled: false, js: './PluginGitStatus', css: './css/gitstatus.css' },
+                'publicGist': { enabled: false, js: './PluginPublicGist' },
+                     -->
             <tr>
-                <td></td>
+                <td>clock</td>
+                <td>true</td>
+                <td>displays the date and time. time format can be configured via the
+                    settings
+                </td>
+                <td>yes</td>
+            </tr>
+            <tr>
+                <td>version</td>
+                <td>true</td>
+                <td>displays the current version of JumpFm
+                </td>
+                <td>yes</td>
             </tr>
         </tbody>
     </table>
