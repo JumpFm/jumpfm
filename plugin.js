@@ -4,7 +4,7 @@ class MyPlugin {
     }
 
     onLoad() {
-        this.jumpFm.statusBar.info('me', 'me plugin :)')
+        this.jumpFm.statusBar.warn('me', 'ʘ‿ʘ')
     }
 }
 
