@@ -1,201 +1,53 @@
 <html>
 
 <head>
-    <title>JumpFm</title>
-    <meta name="description"
-        content="JumpFm - a file manager with super powers" />
-    <meta property="og:description"
-        content="JumpFm - a file manager with super powers" />
-    <meta property="og:title"
-        content="JumpFm" />
-    <meta property="og:url"
-        content="https://jumpfm.org/" />
-    <meta property="og:image"
-        content="https://jumpfm.org/superhero.png" />
-
-    <link rel="stylesheet"
-        href="index.css" />
-    <link rel="shortcut icon"
-        href="favicon.ico">
-    <script src="https://use.fontawesome.com/219041236c.js"></script>
+    <import '_head.html'/>
 </head>
 
 <body>
-    <div class="header">
-        <h1>JumpFm</h1>
-        <h2>A file manager that lets you jump</h2>
-        <div id="ss">
-            <img class="ss"
-                src="jumpfm.png"
-                alt="JumpFm" />
-        </div>
-        <div id="download">
-            <a class="btn"
-                href="https://github.com/Gilad-Kutiel-App/jumpfm/releases"
-                target="_blank">
-                <i class="fa fa-download"></i>Download
-            </a>
-        </div>
-    </div>
-    <div class="content">
-        <!-- ABOUT  -->
-        <h3>
-            <a name="about"></a><i class="fa fa-info-circle"></i> About
-        </h3>
-        <p>
-            JumpFm is a minimalistic dual panel file manager for Linux that lets you navigate
-            your file system very efficiently.
-        </p>
+    <!-- <import '_forkme.html'/> -->
+    <!-- <import '_header.html'/> -->
+    <import '_content.html'/>
+    <!-- <import '_footer.html'/> -->
+</body>
 
-        <!-- JUMPING  -->
-        <section>
-            <div class="cols center">
-                <div class="col img">
-                    <img src="jumpfm-jump.gif"
-                        class="ss"
-                        alt="Jumping">
-                </div>
-                <div class="col">
-                    <h3>
-                        <i class="fa fa-bolt"></i> Jumping
-                    </h3>
-                    <p>
-                        Press <code>j</code> to jump directly to your favorites folders.
-                        No manual bookmarking is needed, JumpFm will learn where
-                        you want to go.
-                    </p>
-                </div>
-            </div>
-        </section>
+</html>tent='https://jumpfm.org/superhero.png' />
 
-        <!-- GIT  -->
-        <section>
-            <div class='cols center'>
-                <div class='col img'>
-                    <img src="jumpfm-git.gif"
-                        class="ss"
-                        alt="Git Awareness">
-                </div>
-                <div class='col'>
-                    <h3>
-                        <i class="fa fa-code-fork"></i> Git Awareness
-                    </h3>
-                    <p>
-                        Files are displayed according to thier git status.
-                    </p>
-                </div>
-            </div>
-        </section>
+<link rel='stylesheet'
+    href='index.css' />
+<link rel='shortcut icon'
+    href='favicon.ico'>
+<script src='https://use.fontawesome.com/219041236c.js'></script>
+</head>
 
-        <!-- FILTERING  -->
-        <section>
-            <a name='cur'></a>
-            <div class="cols center">
-                <div class="col img">
-                    <img src="jumpfm-filter.gif"
-                        class="ss"
-                        alt="Jumping">
-                </div>
-                <div class="col">
-                    <h3>
-                        <i class="fa fa-filter"></i> Filtering
-                    </h3>
-                    <p>
-                        <p>
-                            Press <code>f</code> to quickly find the files you are
-                            looking for.
-                        </p>
-
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- FLAT MODE  -->
-        <section>
-            <div class="cols center">
-                <div class="col img">
-                    <img src="jumpfm-flat.gif"
-                        class="ss"
-                        alt="Flat Mode">
-                </div>
-                <div class="col">
-                    <h3>
-                        <i class="fa fa-list"></i> Flat Mode
-                    </h3>
-                    <p>
-                        <p>
-                            Press <code>r</code> and all directories are gone. Press
-                            it again to bring them back.
-                        </p>
-
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- GIST  -->
-        <section>
-            <div class="cols center">
-                <div class="col img">
-                    <img src="jumpfm-gist.gif"
-                        class="ss"
-                        alt="Gist">
-                </div>
-                <div class="col">
-                    <h3>
-                        <i class="fa fa-github"></i> Instant Gist
-                    </h3>
-                    <p>
-                        <p>
-                            Press <code>ctrl + g</code> to create instant gist from
-                            selected files.
-                        </p>
-
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ALERTS  -->
-        <section>
-            <h3>
-                <a name="alert"></a>
-                <i class="fa fa-exclamation-triangle"></i> Before You Jump
-            </h3>
-            <div class="cols">
-                <div class="col panic">
-                    <i class="fa fa-globe"></i>
-                    <p>Instant gists are public !!! don't gist your private ssh key
-                        or any other private information.</p>
-                </div>
-                <div class="col alert">
-                    <i class="fa fa-trash"></i>
-                    <p>There are no confirmation dialogs in JumpFm, whenever you hit
-                        the
-                        <code>DEL</code> key a file is gone.</p>
-                </div>
-            </div>
-        </section>
-
-
+<body>
+    <!-- <import '_forkme.html'/> -->
+    <!-- <import '_header.html'/> -->
+    <div class='content'>
+        <!-- <import '__about.html'/> -->
+        <!-- <import '__jumping.html'/> -->
+        <!-- <import '__git.html'/> -->
+        <!-- <import '__filtering.html'/> -->
+        <!-- <import '__flatmode.html'/> -->
+        <!-- <import '__gist.html'/> -->
+        <!-- <import '__alerts.html'/> -->
         <!-- SHORTCUTS  -->
         <h3>
-            <a name="keyboard-shortcuts"></a>
-            <i class="fa fa-keyboard-o"></i> Default Key Bindings</h3>
-        <p>You can change the default keybindings by editing the keybinding file. Not
-            all keybindings are available (from obvious reasons) when the filter
+            <a name='keyboard-shortcuts'></a>
+            <i class='fa fa-keyboard-o'></i> Default Key Bindings</h3>
+        <p>You can change tde default keybindings by editing tde keybinding file. Not
+            all keybindings are available (from obvious reasons) when tde filter
             box is active.</p>
-        <table>
+        <table id='shortcuts'>
             <tbody>
                 <!-- NAVIGATION  -->
                 <tr>
-                    <th class="sep"
-                        colspan="2">navigation</th>
+                    <td class='sep'
+                        colspan='2'>navigation</td>
                 </tr>
                 <tr>
                     <td>j</td>
-                    <td>open the jump dialog</td>
+                    <td>open tde jump dialog</td>
                 </tr>
 
                 <tr>
@@ -255,7 +107,7 @@
                 </tr>
                 <tr>
                     <td>backspace</td>
-                    <td>up the directory tree</td>
+                    <td>up tde directory tree</td>
                 </tr>
 
                 <tr>
@@ -283,8 +135,8 @@
 
                 <!-- SELECTION  -->
                 <tr>
-                    <th class="sep"
-                        colspan="2">selection</th>
+                    <td class='sep'
+                        colspan='2'>selection</td>
                 </tr>
                 <tr>
                     <td>space</td>
@@ -301,9 +153,9 @@
 
                 <!-- FILE OPERATIONS  -->
                 <tr>
-                    <a name="file-operations"></a>
-                    <th class="sep"
-                        colspan="2">file operations</th>
+                    <a name='file-operations'></a>
+                    <td class='sep'
+                        colspan='2'>file operations</td>
                 </tr>
                 <tr>
                     <td>del</td>
@@ -335,7 +187,7 @@
                 </tr>
                 <tr>
                     <td>p</td>
-                    <td>copy full path of current file to clipboard</td>
+                    <td>copy full patd of current file to clipboard</td>
                 </tr>
                 <tr>
                     <td>F5</td>
@@ -348,9 +200,9 @@
 
                 <!-- PANELS  -->
                 <tr>
-                    <a name="panels"></a>
-                    <th class="sep"
-                        colspan="2">panels</th>
+                    <a name='panels'></a>
+                    <td class='sep'
+                        colspan='2'>panels</td>
                 </tr>
                 <tr>
                     <td>tab</td>
@@ -363,17 +215,17 @@
 
                 <!-- FILTERS  -->
                 <tr>
-                    <a name="filters"></a>
-                    <th class="sep"
-                        colspan="2">filters</th>
+                    <a name='filters'></a>
+                    <td class='sep'
+                        colspan='2'>filters</td>
                 </tr>
                 <tr>
                     <td>f</td>
-                    <td>open the filter box</td>
+                    <td>open tde filter box</td>
                 </tr>
                 <tr>
                     <td>l</td>
-                    <td>show files with same extension</td>
+                    <td>show files witd same extension</td>
                 </tr>
                 <tr>
                     <td>h</td>
@@ -386,9 +238,9 @@
 
                 <!-- MISC  -->
                 <tr>
-                    <a name="misc"></a>
-                    <th class="sep"
-                        colspan="2">miscellaneous</th>
+                    <a name='misc'></a>
+                    <td class='sep'
+                        colspan='2'>miscellaneous</td>
                 </tr>
                 <tr>
                     <td>ctrl + g</td>
@@ -409,24 +261,33 @@
             </tbody>
         </table>
         <section>
+            <a name='plugins'></a>
             <h3>
-                <a name="feature-request"></a>
-                <i class="fa fa-github-alt"></i> Feature Request</h3>
-            <p>Please feel free to
-                <a href="https://github.com/Gilad-Kutiel-App/jumpfm/issues/new"
-                    target="_blank">open an issue</a>.
+                <i class='fa fa-plug'></i> Plugins
+            </h3>
+            <p>
+                Plugins control every aspect of JumpFm. It is easy to enable/disable them and you
+                can also install new once.
             </p>
+            <p>JumpFm shipped with the following plugins:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Plugin</th>
+                        <th>Enabled by default</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
-
+        <!-- <import '__feature-request.html'/> -->
     </div>
-    <a href="https://github.com/Gilad-Kutiel-App/jumpfm"><img style="position: absolute; top: 0; left: 0; border: 0;"
-            src="https://camo.githubusercontent.com/8b6b8ccc6da3aa5722903da7b58eb5ab1081adee/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6f72616e67655f6666373630302e706e67"
-    
-            alt="Fork me on GitHub"
-            data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png"></a>
-    <footer>
-        JumpFm by Gilad Kutiel
-    </footer>
+    <!-- <import '_footer.html'/> -->
 </body>
 
 </html>

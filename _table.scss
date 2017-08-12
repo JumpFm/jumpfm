@@ -1,5 +1,13 @@
 @import 'colors';
 table {
+    border-collapse: collapse;
+    thead {
+        background-color: $color-tr-even;
+        font-weight: bold;
+        th {
+            padding: .3em;
+        }
+    }
     width: 100%;
     text-align: left;
     tr {
@@ -7,16 +15,17 @@ table {
             background-color: $color-tr-even;
         }
     }
-    th {
+    td {
+        font-size: 85%;
+        padding: 5px;
         &.sep {
             text-transform: capitalize;
             padding: 10px 0;
             background-color: $color-bg;
+            font-weight: bold;
         }
     }
-    td {
-        font-size: 85%;
-        padding: 5px;
+    &#shortcuts {
         &:first-child {
             font-family: monospace;
             text-transform: uppercase;
