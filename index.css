@@ -106,6 +106,9 @@ body {
   padding: 0;
   color: #555; }
 
+html {
+  scroll-behavior: smooth; }
+
 body {
   font-size: 120%;
   padding: 1em;
@@ -120,8 +123,10 @@ h4 {
   margin: .7em 0; }
 
 p {
-  text-align: justify;
-  font-size: 75%; }
+  font-size: 14px;
+  text-align: justify; }
+  p#about {
+    font-size: 100%; }
 
 a {
   color: #e81c4f;
@@ -162,7 +167,6 @@ footer {
   font-family: monospace; }
 
 code {
-  font-size: 120%;
   font-weight: bold; }
 
 /*# sourceMappingURL=index.css.map */

@@ -18,6 +18,10 @@ body {
     color: $color-txt;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-size: 120%;
     padding: 1em;
@@ -34,8 +38,11 @@ h4 {
 }
 
 p {
+    font-size: 14px;
     text-align: justify;
-    font-size: 75%;
+    &#about {
+        font-size: 100%;
+    }
 }
 
 a {
@@ -86,6 +93,5 @@ footer {
 }
 
 code {
-    font-size: 120%;
     font-weight: bold;
 }
