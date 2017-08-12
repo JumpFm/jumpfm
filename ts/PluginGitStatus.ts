@@ -69,6 +69,7 @@ class GitStatus {
     updateStatus = () => {
         nodegit.Repository.open(this.root).then(repo => {
             this.panel.getItems().forEach(item => {
+                item.classes = []
                 const status = nodegit.Status.file(
                     repo,
                     path.relative(this.root, item.path)
