@@ -1,7 +1,7 @@
-import * as findParentDir from 'find-parent-dir';
-import * as nodegit from 'nodegit';
-import * as path from 'path';
-import * as watch from 'watch';
+import * as findParentDir from 'find-parent-dir'
+import * as nodegit from 'nodegit'
+import * as path from 'path'
+import * as watch from 'watch'
 
 import { Panel } from './Panel';
 import { Plugin } from './Plugin';
@@ -26,7 +26,6 @@ class GitStatus {
     }
 
     readonly classes = [
-        'git-current',
         'git-index-new',
         'git-index-modified',
         'git-index-deleted',
@@ -40,6 +39,7 @@ class GitStatus {
         'git-wt-typechange',
         'git-wt-renamed',
         'git-wt-unreadable',
+        'git-no-status',
         'git-ignored',
         'git-conflicted',
     ]

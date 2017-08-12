@@ -1,4 +1,4 @@
-import * as console from 'console'
+
 import * as fs from 'fs-extra'
 import * as fuzzy from 'fuzzy'
 
