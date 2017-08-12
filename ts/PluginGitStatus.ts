@@ -10,7 +10,8 @@ import { Plugin } from './Plugin';
 class GitStatus {
     readonly panel: Panel
     root: string
-    watcher = { close: () => undefined }
+    rootWatcher = { close: () => undefined }
+    indexWatcher = { close: () => undefined }
 
     constructor(panel: Panel) {
         this.panel = panel
@@ -19,11 +20,27 @@ class GitStatus {
 
     onPanelItemsSet = () => {
         const url = this.panel.getUrl()
-        this.watcher.close()
+
+        this.rootWatcher.close()
+        this.indexWatcher.close()
+
         if (url.protocol) return
         this.root = findParentDir.sync(url.path, '.git')
         if (!this.root) return
-        this.watcher = watch(this.root, { recursive: true }, this.updateStatus)
+        console.log('watching', this.root)
+
+        this.rootWatcher = watch(this.root, () => {
+            console.log('root')
+            this.updateStatus()
+        })
+        this.indexWatcher = watch(
+            path.join(this.root, '.git', 'index'),
+            () => {
+                console.log('index')
+                this.updateStatus()
+            }
+        )
+
         this.updateStatus()
     }
 
