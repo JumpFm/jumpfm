@@ -101,7 +101,7 @@ class PluginCopy extends Plugin {
         const distDir = this.jumpFm.getPassivePanel().getPath
         this.jumpFm.bindKeys('copy', ['f5'], () => {
             this.cp(selectedFiles(), distDir())
-        })
+        }).filterMode()
     }
 }
 

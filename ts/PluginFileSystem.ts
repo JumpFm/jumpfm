@@ -46,7 +46,7 @@ class PluginFileSystem extends Plugin {
             showHiddenFiles = !showHiddenFiles
             this.fss.forEach(fs => fs.ll())
             this.msg()
-        })
+        }).filterMode([])
         this.msg()
     }
 

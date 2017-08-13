@@ -51,8 +51,8 @@ class PluginZip extends Plugin {
             })
         }
 
-        bind('zip', ['z'], zip)
-        bind('unzip', ['u'], unzip)
+        bind('zip', ['z'], zip).filterMode([])
+        bind('unzip', ['u'], unzip).filterMode([])
     }
 }
 

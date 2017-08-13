@@ -9,8 +9,8 @@ export interface PluginDesc {
 export const loadPlugins = (): PluginDesc[] => {
     const defaultPlugins: { [name: string]: PluginDesc } = {
         'version': { enabled: true, js: './PluginVersion' },
-        'clock': { enabled: false, js: './PluginClock' },
-        'weather': { enabled: false, js: './PluginWeather' },
+        'clock': { enabled: true, js: './PluginClock' },
+        'weather': { enabled: true, js: './PluginWeather' },
         'fileSystem': { enabled: true, js: './PluginFileSystem' },
         'keyNav': { enabled: true, js: './PluginKeyNav' },
         'fileOperations': { enabled: true, js: './PluginFileOperations' },
@@ -21,7 +21,7 @@ export const loadPlugins = (): PluginDesc[] => {
         // TODO long load time
         'zip': { enabled: true, js: './PluginZip' },
         'gitStatus': { enabled: true, js: './PluginGitStatus', css: './css/gitstatus.css' },
-        'publicGist': { enabled: false, js: './PluginPublicGist' },
+        'publicGist': { enabled: true, js: './PluginPublicGist' },
     }
 
     Object.keys(defaultPlugins).forEach(key => {

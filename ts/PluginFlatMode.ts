@@ -16,7 +16,7 @@ class Flat {
     constructor(jumpFm: JumpFm, panel: Panel) {
         this.jumpFm = jumpFm
         this.panel = panel
-        this.maxSize = jumpFm.settings.getNum('flatModeMaxSize', 200)
+        this.maxSize = jumpFm.settings.getNum('flatModeMaxSize', 500)
         panel.listen(this)
     }
 
@@ -63,7 +63,7 @@ class PluginFlatMode extends Plugin {
             if (url.protocol == 'flat') url.protocol = ''
             else url.protocol = 'flat'
             pan.cd(url)
-        })
+        }).filterMode([])
     }
 }
 

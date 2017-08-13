@@ -61,7 +61,7 @@ class PluginPublicGist extends Plugin {
 
         jumpFm.bindKeys('publicGist', ['ctrl+g'], () => {
             jumpFm.dialog.open(this)
-        })
+        }).filterMode()
     }
 }
 

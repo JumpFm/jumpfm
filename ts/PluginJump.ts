@@ -13,10 +13,11 @@ class PluginJump extends Plugin {
         const getNum = this.jumpFm.settings.getNum
         this.jumpDb = new JumpDb(
             getNum('jumpMaxDbSize', 300),
-            getNum('jumpDbSaveInterval', 1)
+            getNum('jumpDbSaveInterval', 5)
         )
         this.jumpFm.panels.forEach(panel => panel.listen(this))
-        this.jumpFm.bindKeys('jump', ['j'], () => this.jumpFm.dialog.open(this))
+        this.jumpFm.bindKeys('jump', ['j'], () =>
+            this.jumpFm.dialog.open(this)).filterMode([])
     }
 
     onPanelCd = (url) => {

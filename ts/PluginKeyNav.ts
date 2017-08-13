@@ -30,26 +30,26 @@ class PluginKeyNav extends Plugin {
         bind('pageUp', ['pageup', 'ctrl+]'], () => step(-rowCountInPage()))
             .filterMode()
         bind('pageUpSelect', ['shift+pageup', 'shift+ctrl+]'],
-            () => step(-rowCountInPage(), true))
+            () => step(-rowCountInPage(), true)).filterMode()
 
         bind('down', ['down', '['], () => step(1))
             .filterMode()
-        bind('downSelect', ['shift+down', 'shift+['], () => step(1, true))
+        bind('downSelect', ['shift+down', 'shift+['], () => step(1, true)).filterMode()
         bind('pageDown', ['pagedown', 'ctrl+['], () => step(rowCountInPage()))
             .filterMode()
         bind('pageDownSelect', ['shift+pagedown', 'shift+ctrl+['],
-            () => step(rowCountInPage(), true))
+            () => step(rowCountInPage(), true)).filterMode()
 
-        bind('goStart', ['home'], () => step(-9999))
-        bind('goStartSelect', ['shift+home'], () => step(-9999, true))
-        bind('goEnd', ['end'], () => step(9999))
-        bind('goEndSelect', ['shift+end'], () => step(9999, true))
+        bind('goStart', ['home'], () => step(-9999)).filterMode([])
+        bind('goStartSelect', ['shift+home'], () => step(-9999, true)).filterMode([])
+        bind('goEnd', ['end'], () => step(9999)).filterMode([])
+        bind('goEndSelect', ['shift+end'], () => step(9999, true)).filterMode([])
 
-        bind('selectAll', ['ctrl+a'], () => activePan().selectAll())
+        bind('selectAll', ['ctrl+a'], () => activePan().selectAll()).filterMode()
         bind('deselectAll', ['esc'], () => {
             activePan().model.filter = ''
             activePan().deselectAll()
-        })
+        }).filterMode([])
         bind('hide').filterMode(['esc'], () => activePan().view.hideFilter())
 
         const enter = () => {
@@ -67,18 +67,18 @@ class PluginKeyNav extends Plugin {
         bind('back', ['backspace'], () => {
             const pan = activePan()
             pan.cd(path.dirname(pan.getPath()))
-        })
+        }).filterMode([])
 
         bind('homeDir', ['ctrl+home'], () => {
             activePan().cd(homedir())
-        })
+        }).filterMode([])
 
         bind('openFilter', ['f'], () => activePan().view.showFilter())
         bind('likeThis', ['l'], () => {
             const pan = activePan()
             pan.model.filter = path.extname(pan.getCurItem().path)
-        })
-        bind('swapPanels', ['s'], jumpFm.swapPanels)
+        }).filterMode([])
+        bind('swapPanels', ['s'], jumpFm.swapPanels).filterMode([])
 
         const openTo = (source: Panel, dist: Panel) => {
             const item = source.getCurItem()
@@ -94,14 +94,14 @@ class PluginKeyNav extends Plugin {
                 jumpFm.panels[0],
                 jumpFm.panels[1],
             )
-        )
+        ).filterMode()
 
         bind('openToLeft', ['ctrl+left'], () =>
             openTo(
                 jumpFm.panels[1],
                 jumpFm.panels[0],
             )
-        )
+        ).filterMode()
     }
 }
 

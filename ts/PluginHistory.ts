@@ -54,14 +54,14 @@ class PluginHistory extends Plugin {
             const url = this.histories[i].back()
             url.query.history = true
             panels[i].cd(url)
-        })
+        }).filterMode()
 
         jumpFm.bindKeys('historyForward', ['alt+right'], () => {
             const i = jumpFm.model.activePanel
             const url = this.histories[i].forward()
             url.query.history = true
             panels[i].cd(url)
-        })
+        }).filterMode()
     }
 }
 

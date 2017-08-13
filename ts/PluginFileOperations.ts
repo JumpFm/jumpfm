@@ -85,17 +85,17 @@ class PluginFileOperations extends Plugin {
             )
         }
 
-        bind('del', ['del'], del)
-        bind('edit', ['f4'], edit)
-        bind('newFile', ['shift+f4'], newFile)
-        bind('rename', ['f2'], rename)
-        bind('newFolder', ['f7'], newFolder)
-        bind('mv', ['f6'], mv)
+        bind('del', ['del'], del).filterMode([])
+        bind('edit', ['f4'], edit).filterMode()
+        bind('newFile', ['shift+f4'], newFile).filterMode()
+        bind('rename', ['f2'], rename).filterMode()
+        bind('newFolder', ['f7'], newFolder).filterMode()
+        bind('mv', ['f6'], mv).filterMode()
         bind('copyFullPath', ['p'], () => {
             const path = activePanel().getCurItem().path
             clipboard.writeText(path)
             jumpFm.statusBar.info('clipboard', 'copied: ' + path, 3000)
-        })
+        }).filterMode([])
     }
 }
 
