@@ -170,6 +170,8 @@ code {
 .mono {
   font-family: monospace; }
 
+#shortcuts h5 {
+  margin-top: 1.2em; }
 #shortcuts table {
   margin: 1.2em 0; }
 

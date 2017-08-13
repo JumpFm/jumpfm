@@ -48,28 +48,35 @@
     </div>
 </div>
 <div class='content'>
-<!-- ABOUT  -->
-<section>
-    <h2>
-        <i class='fa fa-info-circle'></i> About
-    </h2>
-    <p id='about'>
-        JumpFm is a minimalistic dual panel file manager for Linux that lets you navigate
-        your file system very efficiently. It is highly customizable and extendible
-        and it comes with some builtin super-powers.
-
-    </p>
-</section>
 
     <section class='special'>
-        <h3><i class='fa fa-list-ul'></i> Table of Content</h3>
+        <div class='cols'>
+            <div class='col'>
+                <h2><i class='fa fa-list-ul'></i> Table of Content</h2>
 <ul id='toc'>
+<li><a href='#About'>About</a></li>
 <li><a href='#Builtin Super-Powers'>Builtin Super-Powers</a></li>
 <li><a href='#Before You Jump'>Before You Jump</a></li>
 <li><a href='#Key Bindings'>Key Bindings</a></li>
 <li><a href='#Plugins'>Plugins</a></li>
 <li><a href='#Feature Request'>Feature Request</a></li>
+<li><a href='#dev.jumpfm'>dev.jumpfm</a></li>
 </ul>
+            </div>
+            <div class='col'>
+<!-- ABOUT  -->
+<a name='About'></a>
+<h2>
+    <i class='fa fa-info-circle'></i> About
+</h2>
+<p id='about'>
+    JumpFm is a minimalistic dual panel file manager for Linux that lets you navigate
+    your file system very efficiently. It is highly configurable and extendible and
+    it comes with some builtin super-powers.
+
+</p>
+            </div>
+        </div>
     </section>
 
     <a name='Builtin Super-Powers'></a>
@@ -198,12 +205,13 @@
     </div>
 </section>
 <!-- SHORTCUTS  -->
-<section id='shortcuts'>
+<section id='shortcuts'
+    class='special'>
     <a name='Key Bindings'></a>
     <h3>
         <i class='fa fa-keyboard-o'></i> Key Bindings</h3>
-    <p>You can change tde default keybindings by editing tde keybinding file. Not all
-        keybindings are available (from obvious reasons) when the filter box is active.</p>
+    <p>The default keybindings can be configured by editing tde keybinding file. Not
+        all keybindings are available in filter mode.</p>
     <h4>Default Bindings</h4>
 
     <!-- NAVIGATION  -->
@@ -212,7 +220,7 @@
     <tbody>
         <tr>
             <td>j</td>
-            <td>Opens the jump dialog</td>
+            <td>Open the jump dialog</td>
         </tr>
 
         <tr>
@@ -279,11 +287,123 @@
     </tbody>
 </table>
 <p>* Holding the shift key while navigating also triggers file selection.</p>
-    <!-- <import '___selection.html'/> -->
-    <!-- <import '___fileoperations.html'/> -->
-    <!-- <import '___panels.html'/> -->
-    <!-- <import '___filters.html'/> -->
-    <!-- <import '___misc.html'/> -->
+<h5>Selection</h5>
+<table class='shortcuts bs'>
+    <tbody>
+        <tr>
+            <td>space</td>
+            <td>Toggle selection</td>
+        </tr>
+        <tr>
+            <td>ctrl + a</td>
+            <td>Select all</td>
+        </tr>
+        <tr>
+            <td>esc</td>
+            <td>Clear selection</td>
+        </tr>
+    </tbody>
+</table>
+<h5>File Operations</h5>
+<table class='shortcuts bs'>
+    <tbody>
+        <tr>
+            <td>del</td>
+            <td>Delete selected files</td>
+        </tr>
+        <tr>
+            <td>F4</td>
+            <td>Edit file</td>
+        </tr>
+        <tr>
+            <td>Shift + F4</td>
+            <td>New File</td>
+        </tr>
+        <tr>
+            <td>F7</td>
+            <td>New Folder</td>
+        </tr>
+        <tr>
+            <td>F2</td>
+            <td>Rename File</td>
+        </tr>
+        <tr>
+            <td>z</td>
+            <td>Zip selected files</td>
+        </tr>
+        <tr>
+            <td>u</td>
+            <td>Unzip current file</td>
+        </tr>
+        <tr>
+            <td>p</td>
+            <td>Copy full path of current file to clipboard</td>
+        </tr>
+        <tr>
+            <td>F5</td>
+            <td>Copy selected files</td>
+        </tr>
+        <tr>
+            <td>F6</td>
+            <td>Move selected files</td>
+        </tr>
+    </tbody>
+</table>
+<h5>Panels</h5>
+<table class='shortcuts bs'>
+    <tbody>
+        <tr>
+            <td>tab</td>
+            <td>Switch panel</td>
+        </tr>
+        <tr>
+            <td>s</td>
+            <td>Swap panels</td>
+        </tr>
+    </tbody>
+</table>
+<h5>Filters</h5>
+<table class='shortcuts bs'>
+    <tbody>
+        <tr>
+            <td>f</td>
+            <td>Enter filter mode</td>
+        </tr>
+        <tr>
+            <td>l</td>
+            <td>Use selected files extension as a filter</td>
+        </tr>
+        <tr>
+            <td>h</td>
+            <td>Toggle hidden mode</td>
+        </tr>
+        <tr>
+            <td>r</td>
+            <td>Toggle flat mode</td>
+        </tr>
+    </tbody>
+</table>
+<h5>Miscellaneous</h5>
+<table class='shortcuts bs'>
+    <tbody>
+        <tr>
+            <td>ctrl + g</td>
+            <td>Create a public gist from selected files</td>
+        </tr>
+        <tr>
+            <td>ctrl + =</td>
+            <td>Increase font size</td>
+        </tr>
+        <tr>
+            <td>ctrl + -</td>
+            <td>Decrease font size</td>
+        </tr>
+        <tr>
+            <td>ctrl + 0</td>
+            <td>Reset font size</td>
+        </tr>
+    </tbody>
+</table>
 </section>
 <section>
     <a name='Plugins'></a>
