@@ -79,9 +79,9 @@ table {
     font-family: monospace;
     text-transform: capitalize; }
   table#plugins th:first-child {
-    width: 8em; }
+    width: 10em; }
   table#plugins th:nth-child(2) {
-    width: 5.5em; }
+    width: 6em; }
   table#plugins th:nth-child(4) {
     width: 10em; }
   table#plugins td:nth-child(-n+2),
