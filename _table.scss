@@ -60,4 +60,10 @@ table {
             text-transform: capitalize;
         }
     }
+    &#external {
+        th:first-child {
+            width: 11em;
+            font-family: monospace;
+        }
+    }
 }
