@@ -2,7 +2,7 @@ import * as fs from 'fs-extra';
 import * as homedir from 'homedir';
 import * as path from 'path';
 
-type name = 'settings.json' | 'keyboard.json' | 'plugins.json'
+type name = 'settings.json' | 'keyboard.json' | 'plugins.json' | 'cmds.json'
 
 interface EditableFile {
     name: name
@@ -10,12 +10,16 @@ interface EditableFile {
     icon: string
 }
 
-
 export const editableFiles: EditableFile[] = [
     {
         name: 'keyboard.json',
         title: 'Keyboard',
-        icon: 'fa fa-keyboard-o'
+        icon: 'fa fa-key'
+    },
+    {
+        name: 'cmds.json',
+        title: 'External Commands',
+        icon: 'fa fa-star',
     },
     {
         name: 'plugins.json',
@@ -47,12 +51,15 @@ const save = (name: name) => (obj) => {
 export const saveSettings = save('settings.json')
 export const saveKeyboard = save('keyboard.json')
 export const savePlugins = save('plugins.json')
+export const saveCmds = save('cmds.json')
 
 
-export const packageJson = require('../package.json')
 export const root = path.join(homedir(), ".jumpfm")
 if (!fs.existsSync(root)) fs.mkdirpSync(root)
+
+export const packageJson = require('../package.json')
 export const settings = load('settings.json')
 export const keyboard = load('keyboard.json')
 export const plugins = load('plugins.json')
+export const cmds = load('cmds.json')
 

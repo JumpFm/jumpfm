@@ -1,6 +1,6 @@
 {
-    "name": "JumpFm",
-    "version": "0.10.0",
+    "name": "jumpfm",
+    "version": "0.11.0",
     "description": "A file manager that lets you jump",
     "author": "Gilad Kutiel",
     "license": "ISC",
@@ -21,17 +21,20 @@
         "progress-stream": "^2.0.0",
         "replace-ext": "^1.0.0",
         "request": "^2.81.0",
+        "string-template": "^1.0.0",
         "unzip": "^0.1.11",
         "vue": "^2.4.2",
         "weather-js": "^2.0.0"
     },
     "devDependencies": {
         "@types/fs-extra": "^4.0.0",
+        "@types/mousetrap": "^1.5.34",
         "@types/node": "^8.0.20",
         "@types/nodegit": "^0.18.1",
+        "@types/string-template": "^1.0.2",
         "@types/watch": "^1.0.0",
         "electron": "^1.6.11",
-        "electron-builder": "^19.20.1",
+        "electron-builder": "^19.21.1",
         "request-debug": "^0.2.0"
     },
     "homepage": "https://jumpfm.org",

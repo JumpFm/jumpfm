@@ -1,0 +1,27 @@
+@import 'colors';
+[data-title] {
+    position: relative;
+    &:after {
+        position: absolute;
+        content: attr(data-title);
+        white-space: nowrap;
+        color: $color-fg;
+        background-color: $color-bg;
+        width: auto;
+        padding: .5em;
+        border: 1px solid $color-border;
+        border-radius: 3px;
+        transform: translate(-60%, -300%);
+        font-size: 80%;
+        // 
+        height: 0;
+        opacity: 0;
+        // display: none;
+    }
+    &:hover:after {
+        transition: all .2s;
+        opacity: 1;
+        height: auto;
+        transform: translate(-60%, -100%);
+    }
+}

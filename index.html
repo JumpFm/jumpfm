@@ -92,7 +92,7 @@
                 <a v-for='file in editableFiles'
                     v-on:click='edit(file.name)'
                     class="btn"
-                    :title="file.title"><i :class="file.icon"></i></a>
+                    :data-title="file.title"><i :class="file.icon"></i></a>
                 <a class="btn"
                     title="Help"
                     href="https://gilad-kutiel-app.github.io/jumpfm/"

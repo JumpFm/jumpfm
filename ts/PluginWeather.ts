@@ -30,7 +30,11 @@ class PluginWeather extends Plugin {
             degreeType: 'C'
         },
             (err, res) => {
-                if (err) console.log(err);
+                if (err) {
+                    console.log(err)
+                    return
+                }
+
                 const cur = res[0].current as CurrentWeather
                 const temp = cur.temperature
                 const cls =
@@ -43,8 +47,7 @@ class PluginWeather extends Plugin {
                     'weather',
                     `${cur.temperature}° ${cur.humidity}% ${cur.windspeed}`
                 )
-
-            });
+            })
     }
 }
 

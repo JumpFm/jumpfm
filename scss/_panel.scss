@@ -19,7 +19,7 @@
         border-left-width: 2px
     }
     // 
-    tr.cur {
+    tr[cur] {
         background-color: $color-border;
         font-weight: bold;
     }
