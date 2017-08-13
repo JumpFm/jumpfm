@@ -22,7 +22,8 @@
         "replace-ext": "^1.0.0",
         "request": "^2.81.0",
         "unzip": "^0.1.11",
-        "vue": "^2.4.2"
+        "vue": "^2.4.2",
+        "weather-js": "^2.0.0"
     },
     "devDependencies": {
         "@types/fs-extra": "^4.0.0",

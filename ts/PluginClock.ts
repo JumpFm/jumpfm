@@ -4,13 +4,15 @@ import { Plugin } from './Plugin';
 
 class PluginClock extends Plugin {
     onLoad(): void {
-        setInterval(() =>
-            this.jumpFm.statusBar.info('clock',
-                moment(Date.now()).format(
-                    this.jumpFm.settings.getStr('dateFormat', 'MM/DD/YYYY hh:mm:ss')
-                )
+        this.update()
+        setInterval(this.update, 1000)
+    }
+
+    update = () => {
+        this.jumpFm.statusBar.info('clock',
+            moment(Date.now()).format(
+                this.jumpFm.settings.getStr('dateFormat', 'MM/DD/YYYY hh:mm:ss')
             )
-            , 1000
         )
     }
 }

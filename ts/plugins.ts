@@ -8,8 +8,9 @@ export interface PluginDesc {
 
 export const loadPlugins = (): PluginDesc[] => {
     const defaultPlugins: { [name: string]: PluginDesc } = {
-        'clock': { enabled: true, js: './PluginClock' },
         'version': { enabled: true, js: './PluginVersion' },
+        'clock': { enabled: false, js: './PluginClock' },
+        'weather': { enabled: false, js: './PluginWeather' },
         'fileSystem': { enabled: true, js: './PluginFileSystem' },
         'keyNav': { enabled: true, js: './PluginKeyNav' },
         'fileOperations': { enabled: true, js: './PluginFileOperations' },
