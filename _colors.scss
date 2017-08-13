@@ -1,4 +1,11 @@
-$color-bg: #fff;
-$color-txt: #555;
-$color-txt-dark: #333;
-$color-tr-even: #eee;
+$color-border:#646464;
+$color-err:#F58E8E;
+$color-natural:#A9D3AB;
+$color-warn:#FED37E;
+$color-info:#7AABD4;
+$color-06:#D6ADD5;
+$color-07:#79D4D5;
+$color-tr-even:#D4D4D4;
+$color-txt:#2D2D2D;
+$color-txt-dark: darken($color-txt, 10%);
+$color-bg:#D4D4D4;

@@ -57,9 +57,9 @@ a {
 .alert {
     display: flex;
     font-size: 80%;
-    border: 2px solid orange;
     padding: 1em;
-    background-color: gold;
+    background-color: $color-warn;
+    border: 2px solid darken($color-warn, 15%);
     margin: 1em 0;
     i {
         font-size: 200%;
@@ -69,11 +69,11 @@ a {
 
 .panic {
     @extend .alert;
-    border-color: red;
-    background-color: lighten(red, 30%);
+    background-color: $color-err;
+    border: 2px solid darken($color-err, 15%);
 }
 
-img.ss {
+.bs {
     box-shadow: 0px 0px 30px #666;
 }
 
@@ -98,4 +98,10 @@ code {
 
 .mono {
     font-family: monospace;
+}
+
+#shortcuts {
+    h5 {
+        margin-bottom: 2em;
+    }
 }

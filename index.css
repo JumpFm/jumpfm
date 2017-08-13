@@ -56,39 +56,37 @@ div.col:last-child {
 table {
   width: 100%;
   border-collapse: collapse;
-  text-align: left; }
+  text-align: left;
+  table-layout: fixed; }
   table thead {
-    background-color: #eee;
+    background-color: #7AABD4;
     font-weight: bold; }
     table thead th {
       padding: .3em; }
   table tr:nth-child(even) {
-    background-color: #eee; }
+    background-color: #D4D4D4; }
   table tr.sep {
     text-transform: capitalize;
-    background-color: #fff;
+    background-color: #D4D4D4;
     font-weight: bold; }
     table tr.sep th {
       padding: 1em 0; }
   table td {
     font-size: 85%;
     padding: 5px; }
-  table#shortcuts td:first-child {
+  table.shortcuts td:first-child {
+    width: 18em;
     font-family: monospace;
-    text-transform: uppercase; }
-  table#shortcuts td:nth-child(2) {
     text-transform: capitalize; }
-  table#plugins {
-    table-layout: fixed; }
-    table#plugins th:first-child {
-      width: 8em; }
-    table#plugins th:nth-child(2) {
-      width: 5.5em; }
-    table#plugins th:nth-child(4) {
-      width: 10em; }
-    table#plugins td:nth-child(-n+2),
-    table#plugins td:nth-child(4) {
-      text-transform: capitalize; }
+  table#plugins th:first-child {
+    width: 8em; }
+  table#plugins th:nth-child(2) {
+    width: 5.5em; }
+  table#plugins th:nth-child(4) {
+    width: 10em; }
+  table#plugins td:nth-child(-n+2),
+  table#plugins td:nth-child(4) {
+    text-transform: capitalize; }
 
 #toc {
   list-style: upper-roman; }
@@ -104,7 +102,7 @@ body {
   line-height: 1.5;
   overflow: auto;
   padding: 0;
-  color: #555; }
+  color: #2D2D2D; }
 
 html {
   scroll-behavior: smooth; }
@@ -118,7 +116,7 @@ h1,
 h2,
 h3,
 h4 {
-  color: #333;
+  color: #141414;
   font-weight: 400;
   margin: .7em 0; }
 
@@ -138,19 +136,19 @@ a {
 .alert, .panic {
   display: flex;
   font-size: 80%;
-  border: 2px solid orange;
   padding: 1em;
-  background-color: gold;
+  background-color: #FED37E;
+  border: 2px solid #fdb932;
   margin: 1em 0; }
   .alert i, .panic i {
     font-size: 200%;
     padding-right: .3em; }
 
 .panic {
-  border-color: red;
-  background-color: #ff9999; }
+  background-color: #F58E8E;
+  border: 2px solid #ef4848; }
 
-img.ss {
+.bs {
   box-shadow: 0px 0px 30px #666; }
 
 img {
@@ -171,5 +169,8 @@ code {
 
 .mono {
   font-family: monospace; }
+
+#shortcuts h5 {
+  margin-bottom: 2em; }
 
 /*# sourceMappingURL=index.css.map */

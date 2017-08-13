@@ -3,8 +3,9 @@ table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
+    table-layout: fixed;
     thead {
-        background-color: $color-tr-even;
+        background-color: $color-info;
         font-weight: bold;
         th {
             padding: .3em;
@@ -27,19 +28,16 @@ table {
         font-size: 85%;
         padding: 5px;
     }
-    &#shortcuts {
+    &.shortcuts {
         td {
             &:first-child {
+                width: 18em;
                 font-family: monospace;
-                text-transform: uppercase;
-            }
-            &:nth-child(2) {
                 text-transform: capitalize;
             }
         }
     }
     &#plugins {
-        table-layout: fixed;
         th:first-child {
             width: 8em;
         }
