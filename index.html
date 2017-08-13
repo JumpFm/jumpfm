@@ -58,6 +58,7 @@
 <li><a href='#Builtin Super-Powers'>Builtin Super-Powers</a></li>
 <li><a href='#Before You Jump'>Before You Jump</a></li>
 <li><a href='#Key Bindings'>Key Bindings</a></li>
+<li><a href='#Settings'>Settings</a></li>
 <li><a href='#Plugins'>Plugins</a></li>
 <li><a href='#Feature Request'>Feature Request</a></li>
 <li><a href='#dev.jumpfm'>dev.jumpfm</a></li>
@@ -406,6 +407,72 @@
 </table>
 </section>
 <section class='special'>
+    <a name='Settings'></a>
+    <h3>
+        <i class='fa fa-cog'></i> Settings
+    </h3>
+    <p>All settings files are located under the <code>~/.jumpfm</code> directory. You
+        can edit the settings files to make JumpFm your own. You can also safely
+        delete the settings folder and restart JumpFm to restore the default settings.</p>
+    <h4>Default Settings:</h4>
+    <table id='settings'
+        class='bs'>
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Default Value</th>
+                <th>Description</th>
+            </tr>
+            <tbody>
+                <tr>
+                    <td>jumpMaxDbSize</td>
+                    <td>300</td>
+                    <td>Set the maximum number of folders that JumpFm index for fast
+                        jumping
+                    </td>
+                </tr>
+                <tr>
+                    <td>jumpDbSaveInterval</td>
+                    <td>5</td>
+                    <td>Controls how often JumpFm update the jumps database
+                    </td>
+                </tr>
+                <tr>
+                    <td>historyMaxSize</td>
+                    <td>20</td>
+                    <td>Set the maximum history stack size
+                    </td>
+                </tr>
+                <tr>
+                    <td>flatModeMaxSize</td>
+                    <td>500</td>
+                    <td>Set the maximum number of files the flat mode can display
+                    </td>
+                </tr>
+                <tr>
+                    <td>dateFormat</td>
+                    <td>MM/DD/YYYY hh:mm:ss</td>
+                    <td>Sets the clock format
+                    </td>
+                </tr>
+                <tr>
+                    <td>editor</td>
+                    <td>gedit</td>
+                    <td>Default editor to edit files
+                    </td>
+                </tr>
+                <tr>
+                    <td>weatherLocation</td>
+                    <td>Haifa, IL</td>
+                    <td>Default weather location
+                    </td>
+                </tr>
+            </tbody>
+        </thead>
+    </table>
+
+</section>
+<section class='special'>
     <a name='Plugins'></a>
     <h3>
         <i class='fa fa-plug'></i> Plugins
@@ -535,8 +602,10 @@
 <section>
     <a name='dev.jumpfm'></a>
     <h3 class='mono'>&lt;plugins/&gt;</h3>
-    <p>Currently, a public API is not available. If you insists to write your own plugin
-        you can start with the following snippet:</p>
+    <p>Currently, there is no mechanism to distribute third party plugins. If you want
+        to write your own plugin for personal usage you can start with the following
+        code snippet:
+    </p>
     <pre>
 <code class='language-js'>
 class MyPlugin {
@@ -551,7 +620,8 @@ class MyPlugin {
 
 module.exports = MyPlugin
 </code>
-    </pre>
+</pre>
+    <p>* Also, don't forget to register your plugin in the <code>plugins.json</code>        file</p>
 </section>
 </div>
 <footer>

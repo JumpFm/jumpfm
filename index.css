@@ -78,6 +78,10 @@ table {
     width: 18em;
     font-family: monospace;
     text-transform: capitalize; }
+  table#settings th:first-child {
+    width: 11em; }
+  table#settings th:nth-child(2) {
+    width: 15em; }
   table#plugins th:first-child {
     width: 10em; }
   table#plugins th:nth-child(2) {

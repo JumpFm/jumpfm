@@ -37,6 +37,14 @@ table {
             }
         }
     }
+    &#settings {
+        th:first-child {
+            width: 11em;
+        }
+        th:nth-child(2) {
+            width: 15em;
+        }
+    }
     &#plugins {
         th:first-child {
             width: 10em;
