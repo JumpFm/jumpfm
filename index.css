@@ -170,7 +170,7 @@ code {
 .mono {
   font-family: monospace; }
 
-#shortcuts h5 {
-  margin-bottom: 2em; }
+#shortcuts table {
+  margin: 1.2em 0; }
 
 /*# sourceMappingURL=index.css.map */
