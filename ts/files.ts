@@ -44,22 +44,33 @@ const load = (name: name) => {
     }
 }
 
+const loadPath = (path: string) => {
+    try {
+        return require(path)
+    } catch (e) {
+        console.log(e)
+        return {}
+    }
+}
+
 const save = (name: name) => (obj) => {
     fs.writeFileSync(fullPath(name), JSON.stringify(obj, null, 4))
 }
+
+export const root = path.join(homedir(), ".jumpfm")
+export const pluginsFullPath = path.join(root, 'plugins')
+if (!fs.existsSync(pluginsFullPath))
+    fs.mkdirpSync(pluginsFullPath)
+
+export const pluginsPackage = loadPath(path.join(pluginsFullPath, 'package.json'))
+
+export const packageJson = require('../package.json')
+export const settings = load('settings.json')
+export const keyboard = load('keyboard.json')
+export const pluginsOld = load('plugins.json')
+export const cmds = load('cmds.json')
 
 export const saveSettings = save('settings.json')
 export const saveKeyboard = save('keyboard.json')
 export const savePlugins = save('plugins.json')
 export const saveCmds = save('cmds.json')
-
-
-export const root = path.join(homedir(), ".jumpfm")
-if (!fs.existsSync(root)) fs.mkdirpSync(root)
-
-export const packageJson = require('../package.json')
-export const settings = load('settings.json')
-export const keyboard = load('keyboard.json')
-export const plugins = load('plugins.json')
-export const cmds = load('cmds.json')
-

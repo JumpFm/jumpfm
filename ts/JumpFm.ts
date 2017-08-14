@@ -1,14 +1,21 @@
-import * as homedir from 'homedir';
-import * as Mousetrap from 'mousetrap';
-
 import { Dialog } from './Dialog';
-import { editableFiles, keyboard, saveKeyboard } from './files';
+import {
+    editableFiles,
+    keyboard,
+    saveKeyboard,
+    pluginsPackage,
+    pluginsFullPath
+} from './files';
 import { Panel } from './Panel';
 import { PanelView } from './PanelView';
 import { Plugin } from './Plugin';
 import { loadPlugins } from './plugins';
 import { Settings } from './Settings';
 import { StatusBar } from './StatusBar';
+
+import * as homedir from 'homedir';
+import * as Mousetrap from 'mousetrap';
+import * as path from 'path';
 
 export class JumpFm {
     readonly dialog = new Dialog('dialog', 'dialog-input')
@@ -65,6 +72,17 @@ export class JumpFm {
             this.panels.forEach(panel => panel.cd(homedir()))
 
             saveKeyboard(keyboard)
+
+            if (!pluginsPackage.dependencies) return
+            Object.keys(pluginsPackage.dependencies).forEach(name => {
+                try {
+                    require(
+                        path.join(pluginsFullPath, 'node_modules', name)
+                    ).load(this)
+                } catch (e) {
+                    console.log(e)
+                }
+            })
         })
     }
 
@@ -86,7 +104,7 @@ export class JumpFm {
     private bind = (actionName: string,
         defaultKeys: string[],
         action: () => void,
-        trap: Mousetrap = Mousetrap) => {
+        trap = Mousetrap) => {
         this.getKeys(actionName, defaultKeys).forEach(key =>
             trap.bind(key, () => {
                 action()

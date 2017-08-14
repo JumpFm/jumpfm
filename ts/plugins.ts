@@ -1,4 +1,4 @@
-import { plugins, savePlugins } from './files';
+import { pluginsOld, savePlugins } from './files';
 
 export interface PluginDesc {
     enabled: boolean
@@ -9,8 +9,6 @@ export interface PluginDesc {
 export const loadPlugins = (): PluginDesc[] => {
     const defaultPlugins: { [name: string]: PluginDesc } = {
         'version': { enabled: true, js: './PluginVersion' },
-        'clock': { enabled: true, js: './PluginClock' },
-        'weather': { enabled: true, js: './PluginWeather' },
         'fileSystem': { enabled: true, js: './PluginFileSystem' },
         'keyNav': { enabled: true, js: './PluginKeyNav' },
         'fileOperations': { enabled: true, js: './PluginFileOperations' },
@@ -26,10 +24,10 @@ export const loadPlugins = (): PluginDesc[] => {
     }
 
     Object.keys(defaultPlugins).forEach(key => {
-        if (plugins[key]) return
-        plugins[key] = defaultPlugins[key]
+        if (pluginsOld[key]) return
+        pluginsOld[key] = defaultPlugins[key]
     })
 
-    savePlugins(plugins)
-    return Object.values(plugins).filter(plugin => plugin.enabled)
+    savePlugins(pluginsOld)
+    return Object.values(pluginsOld).filter(plugin => plugin.enabled)
 }
