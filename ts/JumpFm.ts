@@ -4,7 +4,8 @@ import {
     keyboard,
     saveKeyboard,
     pluginsPackage,
-    pluginsFullPath
+    pluginsFullPath,
+    packageJson
 } from './files';
 import { Panel } from './Panel';
 import { PanelView } from './PanelView';
@@ -22,6 +23,7 @@ export class JumpFm {
     readonly statusBar = new StatusBar()
     readonly panels = [new Panel(), new Panel()]
     readonly settings = new Settings()
+    readonly package = packageJson
 
     switchPanel = () => {
         this.model.activePanel = (this.model.activePanel + 1) % 2
@@ -76,9 +78,11 @@ export class JumpFm {
             if (!pluginsPackage.dependencies) return
             Object.keys(pluginsPackage.dependencies).forEach(name => {
                 try {
+                    const s = Date.now()
                     require(
                         path.join(pluginsFullPath, 'node_modules', name)
                     ).load(this)
+                    console.log(`${name} in ${Date.now() - s} milliseconds`)
                 } catch (e) {
                     console.log(e)
                 }
