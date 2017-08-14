@@ -50,6 +50,7 @@ class PluginKeyNav extends Plugin {
             activePan().model.filter = ''
             activePan().deselectAll()
         }).filterMode([])
+        bind('toggleSelection', ['space'], () => activePan().toggleSel()).filterMode([])
         bind('hide').filterMode(['esc'], () => activePan().view.hideFilter())
 
         const enter = () => {
