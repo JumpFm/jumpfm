@@ -1,51 +1,44 @@
 <section class='special'>
-    <a name='External Programs'></a>
-    <h3>
-        <i class='fa fa-gavel'></i> External Programs
-    </h3>
-    <p>
-        You can bind hotkeys to trigger the execution of external applications. You can pass
-        those applications arguments based on the current state.
-    </p>
-    <h4>Available Variables:</h4>
-    <table id='external'
-        class='bs'>
-        <thead>
-            <tr>
-                <th>Variable</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{cur0}</td>
-                <td>The file under cursor on the left panel</td>
-            </tr>
-            <tr>
-                <td>{cur1}</td>
-                <td>The file under cursor on the right panel</td>
-            </tr>
-            <tr>
-                <td>{pwd0}</td>
-                <td>The full path of the location of the left panel</td>
-            </tr>
-            <tr>
-                <td>{pwd1}</td>
-                <td>The full path of the location of the right panel</td>
-            </tr>
-            <tr>
-                <td>{active}</td>
-                <td>The full path of the active panel</td>
-            </tr>
-            <tr>
-                <td>{selected}</td>
-                <td>The selected files</td>
-            </tr>
-        </tbody>
-    </table>
-    <h4>Examples:</h4>
-    <p><code>git difftool {selected}</code> will trigger the diff tool configured for
-        git with the selected files passed as arguments to the program.</p>
-    <p><code>git difftool {active}</code> will trigger the diff tool configured for
-        git with the full path of the active panel passed as an argument to the program.</p>
+  <a name='External Programs'></a>
+  <h3>
+    <i class='fa fa-gavel'></i> External Programs
+  </h3>
+  <p>
+    You can bind hotkeys to trigger the execution of external applications. You can pass those applications arguments based on the current state.
+  </p>
+  <h4>Available Variables:</h4>
+  <table id='external'
+    class='bs'>
+    <thead>
+      <tr>
+        <th>Variable</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{active_pwd}</td>
+        <td>The full path of the active panel</td>
+      </tr>
+      <tr>
+        <td>{active_cur}</td>
+        <td>The file under cursor on the active panel</td>
+      </tr>
+      <tr>
+        <td>{active_selected}</td>
+        <td>The list of selected files in the active panel</td>
+      </tr>
+      <tr>
+        <td>{passive_pwd}</td>
+        <td>The full path of the active panel</td>
+      </tr>
+      <tr>
+        <td>{passive_cur}</td>
+        <td>The file under cursor on the active panel</td>
+      </tr>
+    </tbody>
+  </table>
+  <h4>Examples:</h4>
+  <p><code>git difftool {selected}</code> will trigger the diff tool configured for git with the selected files passed as arguments to the program.</p>
+  <p><code>git difftool {active}</code> will trigger the diff tool configured for git with the full path of the active panel passed as an argument to the program.</p>
 </section>

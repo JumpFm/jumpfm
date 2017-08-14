@@ -92,7 +92,7 @@ table {
   table#plugins td:nth-child(4) {
     text-transform: capitalize; }
   table#external th:first-child {
-    width: 11em;
+    width: 13em;
     font-family: monospace; }
 
 #toc {
