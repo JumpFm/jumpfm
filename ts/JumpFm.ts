@@ -18,8 +18,6 @@ import { StatusBar } from './StatusBar'
 import * as homedir from 'homedir'
 import * as Mousetrap from 'mousetrap'
 import * as path from 'path'
-import * as nodegit from 'nodegit'
-
 
 export class JumpFm {
     readonly dialog = new Dialog('dialog', 'dialog-input')
@@ -27,7 +25,7 @@ export class JumpFm {
     readonly panels = [new Panel(), new Panel()]
     readonly settings = new Settings()
     readonly package = packageJson
-    readonly nodegit = nodegit
+    readonly nodegit = require('nodegit')
 
     private readonly pluginManager = new PluginManager(this)
 
@@ -72,11 +70,11 @@ export class JumpFm {
                 console.log(pluginDesc.js, `[${Date.now() - s} milliseconds]`)
             })
 
-            this.panels.forEach(panel => panel.cd(homedir()))
 
             this.pluginManager.loadPlugins()
-
             saveKeyboard(keyboard)
+
+            this.panels.forEach(panel => panel.cd(homedir()))
         })
     }
 
