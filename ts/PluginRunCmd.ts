@@ -8,15 +8,15 @@ import * as child from 'child_process'
 const defaultCmds = {
     gitDiffSelected: {
         keys: ['d'],
-        template: 'git difftool {selected}'
+        template: 'git difftool {active_selected}'
     },
     gitDiffPwd: {
         keys: ['D'],
-        template: 'git difftool {active}'
+        template: 'git difftool {active_pwd}'
     },
     diffFile: {
         keys: ['ctrl+d'],
-        template: 'meld {cur0} {cur1}'
+        template: 'meld {active_cur} {passive_cur}'
     }
 }
 
@@ -35,8 +35,12 @@ class PluginRunCmd extends Plugin {
     }
 
     onLoad(): void {
-        Object.values(this.loadCmds())
-            .forEach(cmdDesc => this.bindCmd(cmdDesc))
+        try {
+            Object.values(this.loadCmds())
+                .forEach(cmdDesc => this.bindCmd(cmdDesc))
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     bindCmd = (cmdDesc: CmdDesc) => {
@@ -62,14 +66,15 @@ class PluginRunCmd extends Plugin {
         const jumpFm = this.jumpFm
         const panels = this.jumpFm.panels
         const active = jumpFm.getActivePanel()
+        const passive = jumpFm.getPassivePanel()
 
         return format(template, {
-            selected: active.getSelectedItemsPaths().join(' '),
-            cur0: panels[0].getCurItem().path,
-            cur1: panels[1].getCurItem().path,
-            pwd0: panels[0].getPath(),
-            pwd1: panels[1].getPath(),
-            active: active.getPath(),
+            active_pwd: active.getPath(),
+            active_cur: active.getCurItem().path,
+            active_selected: active.getSelectedItemsPaths().join(' '),
+
+            passive_pwd: passive.getPath(),
+            passive_cur: passive.getCur()
         })
     }
 }

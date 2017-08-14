@@ -50,10 +50,15 @@ export class JumpFm {
 
             loadPlugins().forEach(pluginDesc => {
                 const s = Date.now()
-                this.addCss(pluginDesc.css)
-                const Plug = require(pluginDesc.js)
-                const plugin: Plugin = new Plug(this)
-                plugin.onLoad()
+                try {
+
+                    this.addCss(pluginDesc.css)
+                    const Plug = require(pluginDesc.js)
+                    const plugin: Plugin = new Plug(this)
+                    plugin.onLoad()
+                } catch (e) {
+                    console.log(e)
+                }
                 console.log(pluginDesc.js, `[${Date.now() - s} milliseconds]`)
             })
 
