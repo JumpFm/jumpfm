@@ -12,7 +12,7 @@ const defaultCmds = {
     },
     gitDiffPwd: {
         keys: ['D'],
-        template: 'git difftool {pwd0}'
+        template: 'git difftool {active}'
     },
     diffFile: {
         keys: ['ctrl+d'],
@@ -69,6 +69,7 @@ class PluginRunCmd extends Plugin {
             cur1: panels[1].getCurItem().path,
             pwd0: panels[0].getPath(),
             pwd1: panels[1].getPath(),
+            active: active.getPath(),
         })
     }
 }
