@@ -27,22 +27,19 @@ export class JumpFm {
     readonly panels = [new Panel(), new Panel()]
     readonly settings = new Settings()
     readonly package = packageJson
-    readonly git = nodegit
+    readonly nodegit = nodegit
 
     private readonly pluginManager = new PluginManager(this)
 
-    switchPanel = () => {
+    switchPanel = () =>
         this.model.activePanel = (this.model.activePanel + 1) % 2
-    }
 
 
-    getActivePanel = (): Panel => {
-        return this.panels[this.model.activePanel]
-    }
+    getActivePanel = (): Panel =>
+        this.panels[this.model.activePanel]
 
-    getPassivePanel = (): Panel => {
-        return this.panels[(this.model.activePanel + 1) % 2]
-    }
+    getPassivePanel = (): Panel =>
+        this.panels[(this.model.activePanel + 1) % 2]
 
     swapPanels = () => {
         const active = this.getActivePanel()
@@ -66,8 +63,6 @@ export class JumpFm {
             loadPlugins().forEach(pluginDesc => {
                 const s = Date.now()
                 try {
-
-                    this.addCss(pluginDesc.css)
                     const Plug = require(pluginDesc.js)
                     const plugin: Plugin = new Plug(this)
                     plugin.onLoad()
@@ -83,14 +78,6 @@ export class JumpFm {
 
             saveKeyboard(keyboard)
         })
-    }
-
-    addCss = (href) => {
-        if (!href) return
-        const link = document.createElement('link')
-        link.setAttribute('rel', 'stylesheet')
-        link.setAttribute('href', href)
-        document.head.appendChild(link)
     }
 
     private getKeys = (actionName: string, defaultKeys: string[]): string[] => {

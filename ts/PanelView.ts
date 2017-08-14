@@ -3,7 +3,7 @@ import * as Mousetrap from 'mousetrap';
 export class PanelView {
     readonly tbody: HTMLElement
     readonly filter: HTMLInputElement
-    readonly filterTrap: Mousetrap
+    readonly filterTrap
 
     constructor(i) {
         this.tbody = document.getElementById('tbody' + i)

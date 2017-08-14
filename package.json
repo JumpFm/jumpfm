@@ -15,6 +15,7 @@
         "node-cmd": "^3.0.0",
         "node-watch": "^0.5.5",
         "node.os": "^1.2.4",
+        "nodegit": "^0.18.3",
         "progress-stream": "^2.0.0",
         "request": "^2.81.0",
         "vue": "^2.4.2"
@@ -24,7 +25,7 @@
         "@types/mousetrap": "^1.5.34",
         "@types/node": "^8.0.20",
         "@types/watch": "^1.0.0",
-        "electron": "^1.6.11",
+        "electron": "1.6.11",
         "electron-builder": "^19.21.1",
         "request-debug": "^0.2.0"
     },
