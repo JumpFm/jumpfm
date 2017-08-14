@@ -16,9 +16,10 @@
         // 
         height: 0;
         opacity: 0;
-        // display: none;
+        visibility: hidden;
     }
     &:hover:after {
+        visibility: visible;
         transition: all .2s;
         opacity: 1;
         height: auto;
