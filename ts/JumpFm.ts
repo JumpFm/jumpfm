@@ -1,4 +1,5 @@
-import { Dialog } from './Dialog';
+import { PluginManager } from './PluginManager'
+import { Dialog } from './Dialog'
 import {
     editableFiles,
     keyboard,
@@ -6,17 +7,19 @@ import {
     pluginsPackage,
     pluginsFullPath,
     packageJson
-} from './files';
-import { Panel } from './Panel';
-import { PanelView } from './PanelView';
-import { Plugin } from './Plugin';
-import { loadPlugins } from './plugins';
-import { Settings } from './Settings';
-import { StatusBar } from './StatusBar';
+} from './files'
+import { Panel } from './Panel'
+import { PanelView } from './PanelView'
+import { Plugin } from './Plugin'
+import { loadPlugins } from './plugins'
+import { Settings } from './Settings'
+import { StatusBar } from './StatusBar'
 
-import * as homedir from 'homedir';
-import * as Mousetrap from 'mousetrap';
-import * as path from 'path';
+import * as homedir from 'homedir'
+import * as Mousetrap from 'mousetrap'
+import * as path from 'path'
+import * as nodegit from 'nodegit'
+
 
 export class JumpFm {
     readonly dialog = new Dialog('dialog', 'dialog-input')
@@ -24,6 +27,9 @@ export class JumpFm {
     readonly panels = [new Panel(), new Panel()]
     readonly settings = new Settings()
     readonly package = packageJson
+    readonly git = nodegit
+
+    private readonly pluginManager = new PluginManager(this)
 
     switchPanel = () => {
         this.model.activePanel = (this.model.activePanel + 1) % 2
@@ -73,20 +79,9 @@ export class JumpFm {
 
             this.panels.forEach(panel => panel.cd(homedir()))
 
-            saveKeyboard(keyboard)
+            this.pluginManager.loadPlugins()
 
-            if (!pluginsPackage.dependencies) return
-            Object.keys(pluginsPackage.dependencies).forEach(name => {
-                try {
-                    const s = Date.now()
-                    require(
-                        path.join(pluginsFullPath, 'node_modules', name)
-                    ).load(this)
-                    console.log(`${name} in ${Date.now() - s} milliseconds`)
-                } catch (e) {
-                    console.log(e)
-                }
-            })
+            saveKeyboard(keyboard)
         })
     }
 
