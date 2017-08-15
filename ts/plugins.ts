@@ -12,9 +12,7 @@ export const loadPlugins = (): PluginDesc[] => {
         'keyNav': { enabled: true, js: './PluginKeyNav' },
         'fileOperations': { enabled: true, js: './PluginFileOperations' },
         'copy': { enabled: true, js: './PluginCopy' },
-        'jump': { enabled: true, js: './PluginJump' },
         'flatMode': { enabled: true, js: './PluginFlatMode' },
-        'publicGist': { enabled: true, js: './PluginPublicGist' },
     }
 
     Object.keys(defaultPlugins).forEach(key => {

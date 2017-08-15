@@ -1,3 +1,4 @@
+import { JumpFm as JumpFmApi } from 'jumpfm-api'
 import { PluginManager } from './PluginManager'
 import { Dialog } from './Dialog'
 import {
@@ -6,7 +7,8 @@ import {
     saveKeyboard,
     pluginsPackage,
     pluginsFullPath,
-    packageJson
+    packageJson,
+    root
 } from './files'
 import { Panel } from './Panel'
 import { PanelView } from './PanelView'
@@ -19,13 +21,15 @@ import * as homedir from 'homedir'
 import * as Mousetrap from 'mousetrap'
 import * as path from 'path'
 
-export class JumpFm {
+export class JumpFm implements JumpFmApi {
     readonly dialog = new Dialog('dialog', 'dialog-input')
     readonly statusBar = new StatusBar()
     readonly panels = [new Panel(), new Panel()]
     readonly settings = new Settings()
     readonly package = packageJson
+    readonly root = root
     readonly nodegit = require('nodegit')
+    readonly opn = require('./opn')
 
     private readonly pluginManager = new PluginManager(this)
 
