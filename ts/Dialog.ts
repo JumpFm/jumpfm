@@ -1,7 +1,7 @@
 import {
-    Dialog as DialogApi,
-    DialogSpec,
-    Suggestion
+    Dialog as DialogApi
+    , DialogSpec
+    , Suggestion
 } from 'jumpfm-api'
 
 import * as Mousetrap from 'mousetrap'

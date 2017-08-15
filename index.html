@@ -83,7 +83,8 @@
             <div id="statusbar-msgs">
                 <div v-for="msg in status.msgs"
                     class='msg'
-                    :class="msg.classes">
+                    :class="msg.classes"
+                    :data-title='msg.dataTitle'>
                     <div>{{msg.txt}}</div>
                 </div>
             </div>

@@ -1,6 +1,10 @@
-import { Panel as PanelApi, Url, PanelListener } from 'jumpfm-api'
+import {
+    Panel as PanelApi
+    , Url
+    , PanelListener
+    , Item
+} from 'jumpfm-api'
 
-import { Item } from './Item';
 import { PanelView } from './PanelView';
 
 export class Panel implements PanelApi {

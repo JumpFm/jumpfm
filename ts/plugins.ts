@@ -1,4 +1,4 @@
-import { pluginsOld, savePlugins } from './files';
+import { pluginsOld, savePlugins } from './files'
 
 export interface PluginDesc {
     enabled: boolean
@@ -11,7 +11,6 @@ export const loadPlugins = (): PluginDesc[] => {
         'fileSystem': { enabled: true, js: './PluginFileSystem' },
         'keyNav': { enabled: true, js: './PluginKeyNav' },
         'fileOperations': { enabled: true, js: './PluginFileOperations' },
-        'copy': { enabled: true, js: './PluginCopy' },
         'flatMode': { enabled: true, js: './PluginFlatMode' },
     }
 

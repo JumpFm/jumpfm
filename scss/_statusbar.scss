@@ -8,12 +8,15 @@
 }
 
 #statusbar-msgs {
-    flex-grow: 1;
     display: flex;
+    flex-grow: 1;
     align-items: center;
     font-size: 90%;
+    padding-right: 1em;
+    overflow: hidden;
     .msg {
-        @extend .txt-no-wrap;
+        cursor: help;
+        flex-shrink: 0;
         border-right: 1px solid $color-border;
         padding: 0 .5em;
         &:last-child {
@@ -24,7 +27,6 @@
 
 #buttons {
     display: flex;
-    flex-direction: row;
     flex-shrink: 0;
     font-size: 120%;
     .btn {

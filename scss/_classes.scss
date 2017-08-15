@@ -47,15 +47,18 @@
     }
 }
 
-.info {
+.info,
+.info[data-title]:before {
     color: $color-info;
 }
 
-.warn {
+.warn,
+.warn[data-title]:before {
     color: $color-warn;
 }
 
-.err {
+.err,
+.err[data-title]:before {
     color: $color-err;
 }
 

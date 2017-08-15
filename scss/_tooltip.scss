@@ -1,7 +1,6 @@
 @import 'colors';
 [data-title] {
-    position: relative;
-    &:after {
+    &:before {
         position: absolute;
         content: attr(data-title);
         white-space: nowrap;
@@ -11,18 +10,26 @@
         padding: .5em;
         border: 1px solid $color-border;
         border-radius: 3px;
-        transform: translate(-60%, -300%);
-        font-size: 80%;
-        // 
-        height: 0;
+        transform: translate(0, -300%);
         opacity: 0;
         visibility: hidden;
     }
-    &:hover:after {
+    &:hover:before {
         visibility: visible;
         transition: all .3s;
         opacity: 1;
         height: auto;
-        transform: translate(-60%, -100%);
+        transform: translate(10%, -150%);
+    }
+}
+
+#buttons {
+    [data-title] {
+        &:before {
+            transform: translate(-60%, -300%);
+        }
+        &:hover:before {
+            transform: translate(-60%, -120%);
+        }
     }
 }
