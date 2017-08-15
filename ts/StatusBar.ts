@@ -31,7 +31,7 @@ export class StatusBar implements StatusBarApi {
     err = this.msg(['err'])
 
     clear = (key: string) => {
-        delete this.model.msgs[key]
+        delete this.msgs[key]
         this.updateModel()
     }
 }

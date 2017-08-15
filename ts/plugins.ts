@@ -9,7 +9,6 @@ export interface PluginDesc {
 export const loadPlugins = (): PluginDesc[] => {
     const defaultPlugins: { [name: string]: PluginDesc } = {
         'keyNav': { enabled: true, js: './PluginKeyNav' },
-        'fileOperations': { enabled: true, js: './PluginFileOperations' },
         'flatMode': { enabled: true, js: './PluginFlatMode' },
     }
 

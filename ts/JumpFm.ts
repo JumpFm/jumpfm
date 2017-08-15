@@ -17,6 +17,7 @@ import { loadPlugins } from './plugins'
 import { Settings } from './Settings'
 import { StatusBar } from './StatusBar'
 
+import { clipboard } from 'electron'
 import * as homedir from 'homedir'
 import * as Mousetrap from 'mousetrap'
 import * as path from 'path'
@@ -30,6 +31,7 @@ export class JumpFm implements JumpFmApi {
     readonly root = root
     readonly nodegit = require('nodegit')
     readonly opn = require('./opn')
+    readonly clipboard: Electron.Clipboard = clipboard
 
     private readonly pluginManager = new PluginManager(this)
 
