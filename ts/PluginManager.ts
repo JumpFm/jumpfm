@@ -40,8 +40,6 @@ export class PluginManager {
 
     loadPlugin = (name: string) => {
         try {
-            const s = Date.now()
-
             const pluginDir = path.join(pluginsRoot, 'node_modules', name)
             const plugin = require(pluginDir)
 
@@ -51,8 +49,6 @@ export class PluginManager {
                 )
 
             plugin.load(this.jumpFm)
-
-            console.log(`${name} in ${Date.now() - s} milliseconds`)
         } catch (e) {
             console.log(e)
         }
@@ -60,7 +56,9 @@ export class PluginManager {
 
     loadAll = () => {
         Object.keys(require(pluginsPath).dependencies).forEach(name => {
+            const s = Date.now()
             this.loadPlugin(name)
+            console.log(`${name} in ${Date.now() - s} milliseconds`)
         })
     }
 

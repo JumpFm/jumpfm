@@ -22,7 +22,7 @@
         "@types/mousetrap": "^1.5.34",
         "@types/node": "^8.0.20",
         "@types/watch": "^1.0.0",
-        "jumpfm-api": "^1.0.0",
+        "jumpfm-api": "^1.0.2",
         "request-debug": "^0.2.0"
     },
     "homepage": "https://jumpfm.org",
@@ -50,6 +50,7 @@
         "test": "mocha js",
         "pack": "build --dir",
         "dist": "build",
-        "publish": "build --publish always"
+        "publish": "build --publish always",
+        "postinstall": "electron-builder install-app-deps"
     }
 }

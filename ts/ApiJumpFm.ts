@@ -26,8 +26,7 @@ export class JumpFm implements JumpFmApi {
     readonly package = packageJson
     readonly root = root
     readonly nodegit = require('nodegit')
-    readonly opn = require('./opn')
-    readonly clipboard = clipboard
+    readonly electron = require('electron')
 
     private readonly pluginManager = new PluginManager(this)
 

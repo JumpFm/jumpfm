@@ -8,7 +8,7 @@
     right: 0;
     width: 600px;
     margin: 0 auto;
-    background-color: $color-bg;
+    background-color: transparent;
 }
 
 #dialog-label,
@@ -20,6 +20,7 @@
 #dialog-input,
 #dialog-sug {
     @extend .border;
+    background-color: $color-bg;
 }
 
 #dialog-input,

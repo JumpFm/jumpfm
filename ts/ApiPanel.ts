@@ -128,6 +128,10 @@ export class Panel implements PanelApi {
             + (filter ? ' [' + filter + ']' : '')
     }
 
+    filter = (substr: string) => {
+        this.model.filter = substr
+    }
+
     model = {
         url: {
             protocol: '',
