@@ -37,6 +37,10 @@ export class JumpFm implements JumpFmApi {
     getActivePanel = (): Panel =>
         this.panels[this.model.activePanel]
 
+    getActivePanelIndex = (): 0 | 1 => {
+        return this.model.activePanel
+    }
+
     getPassivePanel = (): Panel =>
         this.panels[(this.model.activePanel + 1) % 2]
 
@@ -90,7 +94,14 @@ export class JumpFm implements JumpFmApi {
         }
     }
 
-    model = {
+    model: {
+        fontSize: number,
+        activePanel: 0 | 1,
+        panels: any[],
+        dialog: any,
+        status: any,
+        editableFiles: any[]
+    } = {
         fontSize: 14,
         activePanel: 0,
         panels: this.panels.map(panel => panel.model),
