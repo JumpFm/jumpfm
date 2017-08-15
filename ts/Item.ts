@@ -1,17 +1,9 @@
-import * as fs from 'fs-extra';
-import * as path from 'path';
+import { Item } from 'jumpfm-api'
 
-import { getExtIcon } from './icons';
+import * as fs from 'fs-extra'
+import * as path from 'path'
 
-export interface Item {
-    icon: string
-    path: string
-    name: string
-    size: number
-    mtime: number
-    sel: boolean
-    classes: string[]
-}
+import { getExtIcon } from './icons'
 
 export const itemFromPath = (fullPath): Item => {
     const stat = fs.statSync(fullPath)

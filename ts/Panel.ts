@@ -1,18 +1,9 @@
+import { Panel as PanelApi, Url, PanelListener } from 'jumpfm-api'
+
 import { Item } from './Item';
 import { PanelView } from './PanelView';
 
-export interface Url {
-    protocol: string
-    path: string
-    query: { [key: string]: any }
-}
-
-interface PanelHandler {
-    onPanelCd?: (url?: Url) => void
-    onPanelItemsSet?: () => void
-}
-
-export class Panel {
+export class Panel implements PanelApi {
     view: PanelView
 
     getCur = (): number => {
@@ -96,9 +87,9 @@ export class Panel {
     }
 
 
-    readonly handlers: PanelHandler[] = []
+    readonly handlers: PanelListener[] = []
 
-    listen(handler: PanelHandler) {
+    listen(handler: PanelListener) {
         this.handlers.push(handler)
         return this
     }

@@ -1,7 +1,4 @@
-interface Msg {
-    txt: string
-    classes: string[]
-}
+import { Msg } from 'jumpfm-api'
 
 export class StatusBar {
     model = {

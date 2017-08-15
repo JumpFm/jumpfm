@@ -1,18 +1,12 @@
+import {
+    Dialog as DialogApi,
+    DialogSpec,
+    Suggestion
+} from 'jumpfm-api'
+
 import * as Mousetrap from 'mousetrap'
 
-interface Suggestion {
-    value: string
-    html: string
-}
-
-interface Spec {
-    label: string
-    onOpen?: (input: HTMLInputElement) => void
-    onChange?: (val: string) => Suggestion[]
-    onAccept: (val: string, sug: Suggestion) => void
-}
-
-export class Dialog {
+export class Dialog implements DialogApi {
     view: HTMLDivElement
     input: HTMLInputElement
 
@@ -58,7 +52,7 @@ export class Dialog {
     onAccept = (val: string, sug: Suggestion) => { }
     onChange = val => []
 
-    open = (spec: Spec) => {
+    open = (spec: DialogSpec) => {
         this.model.sug = []
         this.model.label = spec.label
         this.model.cur = 0
