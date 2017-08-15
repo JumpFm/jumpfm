@@ -7,6 +7,7 @@
     width: 50%;
     // 
     .title {
+        @extend .txt-no-wrap;
         flex-shrink: 0;
         display: block;
         width: 100%;

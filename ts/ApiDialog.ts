@@ -17,7 +17,7 @@ export class Dialog implements DialogApi {
 
             const mousetrap = new Mousetrap(this.input)
 
-            this.input.addEventListener('blur', this.close, false)
+            // this.input.addEventListener('blur', this.close, false)
 
             mousetrap.bind('esc', this.close)
             mousetrap.bind('enter', () => {

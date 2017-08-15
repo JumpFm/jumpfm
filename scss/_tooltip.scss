@@ -10,16 +10,15 @@
         padding: .5em;
         border: 1px solid $color-border;
         border-radius: 3px;
-        transform: translate(10%, -300%);
+        transform: translate(1em, -3.5em);
         opacity: 0;
         visibility: hidden;
     }
     &:hover:before {
         visibility: visible;
-        transition: all .3s;
+        transition: all .2s;
         opacity: 1;
         height: auto;
-        transform: translate(10%, -150%);
     }
 }
 
@@ -27,10 +26,8 @@
     [data-title] {
         &:before {
             font-size: 80%;
-            transform: translate(-60%, -300%);
+            transform: translate(-2em, -3em);
         }
-        &:hover:before {
-            transform: translate(-60%, -130%);
-        }
+        &:hover:before {}
     }
 }
