@@ -5,7 +5,7 @@ import {
     , Item
 } from 'jumpfm-api'
 
-import { PanelView } from './PanelView'
+import { PanelView } from './ApiPanelView'
 import { itemFromPath } from './itemFromPath'
 
 export class Panel implements PanelApi {

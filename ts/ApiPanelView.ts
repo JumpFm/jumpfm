@@ -1,6 +1,8 @@
-import * as Mousetrap from 'mousetrap';
+import { PanelView as PanelViewApi } from 'jumpfm-api'
 
-export class PanelView {
+import * as Mousetrap from 'mousetrap'
+
+export class PanelView implements PanelViewApi {
     readonly tbody: HTMLElement
     readonly filter: HTMLInputElement
     readonly filterTrap

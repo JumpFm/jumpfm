@@ -91,7 +91,7 @@
             <!-- BUTTONS  -->
             <div id="buttons">
                 <a v-for='file in editableFiles'
-                    v-on:click='edit(file.name)'
+                    v-on:click='edit(file.path)'
                     class="btn"
                     :data-title="file.title"><i :class="file.icon"></i></a>
                 <a class="btn"

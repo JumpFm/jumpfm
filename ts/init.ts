@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as Vue from 'vue/dist/vue.min.js';
 
 import { root } from './files';
-import { JumpFm } from './JumpFm';
+import { JumpFm } from './ApiJumpFm';
 import { opn } from './opn';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,9 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
         el: '#app',
         data: new JumpFm().model,
         methods: {
-            edit: name => {
-                const file = path.join(root, name)
-                opn(file)
+            edit: path => {
+                opn(path)
             }
         }
     })

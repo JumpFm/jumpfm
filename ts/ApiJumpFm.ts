@@ -1,21 +1,17 @@
 import { JumpFm as JumpFmApi } from 'jumpfm-api'
 import { PluginManager } from './PluginManager'
-import { Dialog } from './Dialog'
+import { Dialog } from './ApiDialog'
 import {
     editableFiles,
     keyboard,
     saveKeyboard,
-    pluginsPackage,
-    pluginsFullPath,
     packageJson,
     root
 } from './files'
-import { Panel } from './Panel'
-import { PanelView } from './PanelView'
-import { Plugin } from './Plugin'
-import { loadPlugins } from './plugins'
-import { Settings } from './Settings'
-import { StatusBar } from './StatusBar'
+import { Panel } from './ApiPanel'
+import { PanelView } from './ApiPanelView'
+import { Settings } from './ApiSettings'
+import { StatusBar } from './ApiStatusBar'
 
 import { clipboard } from 'electron'
 import * as homedir from 'homedir'
@@ -31,7 +27,7 @@ export class JumpFm implements JumpFmApi {
     readonly root = root
     readonly nodegit = require('nodegit')
     readonly opn = require('./opn')
-    readonly clipboard: Electron.Clipboard = clipboard
+    readonly clipboard = clipboard
 
     private readonly pluginManager = new PluginManager(this)
 
@@ -52,23 +48,6 @@ export class JumpFm implements JumpFmApi {
         active.cd(passive.getPath())
         passive.cd(activePath)
         this.switchPanel()
-    }
-
-    constructor() {
-        setImmediate(() => {
-            [0, 1].forEach(i => {
-                const view = this.panels[i].view = new PanelView(i)
-            })
-
-            this.bindKeys('increaseFontSize', ['ctrl+='], () => this.model.fontSize++)
-            this.bindKeys('decreaseFontSize', ['ctrl+-'], () => this.model.fontSize--)
-            this.bindKeys('resetFontSize', ['ctrl+0'], () => this.model.fontSize = 14)
-
-            this.pluginManager.loadPlugins()
-            saveKeyboard(keyboard)
-
-            this.panels.forEach(panel => panel.cd(homedir()))
-        })
     }
 
     private getKeys = (actionName: string, defaultKeys: string[]): string[] => {
@@ -119,5 +98,38 @@ export class JumpFm implements JumpFmApi {
         dialog: this.dialog.model,
         status: this.statusBar.model,
         editableFiles: editableFiles
+    }
+
+    constructor() {
+        this.statusBar.info('plugins', {
+            txt: 'Installing plugins...',
+            dataTitle: 'This might take some time'
+        })
+
+        setTimeout(() => {
+            [0, 1].forEach(i => {
+                const view = this.panels[i].view = new PanelView(i)
+            })
+
+            this.bindKeys('increaseFontSize', ['ctrl+='], () => this.model.fontSize++)
+            this.bindKeys('decreaseFontSize', ['ctrl+-'], () => this.model.fontSize--)
+            this.bindKeys('resetFontSize', ['ctrl+0'], () => this.model.fontSize = 14)
+
+
+            this.pluginManager.loadPlugins(e => {
+                if (e) {
+                    this.statusBar.err('plugins', {
+                        txt: 'Error loading plugins'
+                        , dataTitle: e
+                    })
+                    return
+                }
+                saveKeyboard(keyboard)
+                this.panels.forEach(panel => panel.cd(homedir()))
+                this.statusBar.clear('plugins')
+
+            })
+
+        }, 1)
     }
 }

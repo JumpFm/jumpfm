@@ -26,10 +26,11 @@
 #buttons {
     [data-title] {
         &:before {
+            font-size: 80%;
             transform: translate(-60%, -300%);
         }
         &:hover:before {
-            transform: translate(-60%, -120%);
+            transform: translate(-60%, -130%);
         }
     }
 }

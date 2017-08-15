@@ -1,11 +1,14 @@
-import { JumpFm } from './JumpFm'
+import { JumpFm } from 'jumpfm-api'
+
 import {
-    pluginsPackage,
-    pluginsFullPath,
-    packageJson
+    pluginsRoot,
+    pluginsPath,
+    packageJson,
+    savePlugins
 } from './files';
 
 import * as path from 'path'
+import * as installIfNeeded from 'install-if-needed'
 
 export class PluginManager {
     readonly jumpFm: JumpFm
@@ -23,28 +26,66 @@ export class PluginManager {
         document.head.appendChild(link)
     }
 
+    createBlankPackageIfNeeded = () => {
+        try {
+            require(pluginsPath)
+        } catch (e) {
+            savePlugins({
+                name: 'plugins',
+                version: '1.0.0',
+                'dependencies': {}
+            })
+        }
+    }
 
-    loadPlugins = () => {
-        if (!pluginsPackage.dependencies) return
-        const pkgs = Object.keys(pluginsPackage.dependencies)
-        pkgs.forEach(name => {
-            try {
-                const s = Date.now()
+    loadPlugin = (name: string) => {
+        try {
+            const s = Date.now()
 
-                const pluginDir = path.join(pluginsFullPath, 'node_modules', name)
-                const plugin = require(pluginDir)
+            const pluginDir = path.join(pluginsRoot, 'node_modules', name)
+            const plugin = require(pluginDir)
 
-                if (plugin.css)
-                    plugin.css.forEach(css =>
-                        this.loadCss(path.join(pluginDir, css))
-                    )
+            if (plugin.css)
+                plugin.css.forEach(css =>
+                    this.loadCss(path.join(pluginDir, css))
+                )
 
-                plugin.load(this.jumpFm)
+            plugin.load(this.jumpFm)
 
-                console.log(`${name} in ${Date.now() - s} milliseconds`)
-            } catch (e) {
-                console.log(e)
-            }
+            console.log(`${name} in ${Date.now() - s} milliseconds`)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    loadAll = () => {
+        Object.keys(require(pluginsPath).dependencies).forEach(name => {
+            this.loadPlugin(name)
+        })
+    }
+
+    loadPlugins = (done: (e) => void) => {
+        this.createBlankPackageIfNeeded()
+        installIfNeeded({
+            cwd: pluginsRoot,
+            dependencies: [
+                'jumpfm-clock'
+                , 'jumpfm-copy'
+                , 'jumpfm-fs'
+                , 'jumpfm-gist'
+                , 'jumpfm-git-status'
+                , 'jumpfm-history'
+                , 'jumpfm-jump'
+                , 'jumpfm-version'
+                , 'jumpfm-weather'
+                , 'jumpfm-zip'
+                , 'jumpfm-file-ops'
+                , 'jumpfm-key-nav'
+                , 'jumpfm-flat-mode'
+            ]
+        }, e => {
+            this.loadAll()
+            done(e)
         })
     }
 }
