@@ -64,19 +64,6 @@ export class JumpFm implements JumpFmApi {
             this.bindKeys('decreaseFontSize', ['ctrl+-'], () => this.model.fontSize--)
             this.bindKeys('resetFontSize', ['ctrl+0'], () => this.model.fontSize = 14)
 
-            loadPlugins().forEach(pluginDesc => {
-                const s = Date.now()
-                try {
-                    const Plug = require(pluginDesc.js)
-                    const plugin: Plugin = new Plug(this)
-                    plugin.onLoad()
-                } catch (e) {
-                    console.log(e)
-                }
-                console.log(pluginDesc.js, `[${Date.now() - s} milliseconds]`)
-            })
-
-
             this.pluginManager.loadPlugins()
             saveKeyboard(keyboard)
 

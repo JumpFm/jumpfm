@@ -46,15 +46,5 @@ export class PluginManager {
                 console.log(e)
             }
         })
-        // npm.install(pkgs, {
-        //     cwd: pluginsFullPath,
-        //     save: false,
-        // })
-        //     .then(() => {
-        //         console.log('done installing')
-        //     })
-        //     .catch(() => {
-        //         console.log('err')
-        //     })
     }
 }
