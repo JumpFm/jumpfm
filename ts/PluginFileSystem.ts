@@ -52,7 +52,10 @@ class PluginFileSystem extends Plugin {
 
     msg = () => {
         this.jumpFm.statusBar.msg(showHiddenFiles ? ['info'] : ['info', 'del'])
-            ('hidden', '.hidden')
+            ('hidden', {
+                txt: '.h',
+                dataTitle: `${showHiddenFiles ? 'Showing' : 'Hiding'} dot files`
+            })
     }
 }
 

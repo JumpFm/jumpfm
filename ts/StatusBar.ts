@@ -1,25 +1,25 @@
 import { StatusBar as StatusBarApi, Msg, StyledMsg } from 'jumpfm-api'
 
 export class StatusBar implements StatusBarApi {
-    model: {
-        msgs: { [key: string]: StyledMsg },
-        getMsgs: () => StyledMsg[]
-    } = {
-        msgs: { 'dbg': { txt: 'dbg', dataTitle: 'working', classes: ['info'] } },
-        getMsgs: () =>
-            Object.values(this.model.msgs)
-
+    model: { msgs: StyledMsg[] } = {
+        msgs: [],
     }
 
-    private
+    readonly msgs: { [key: string]: StyledMsg } = {}
+
+    private updateModel = () => {
+        this.model.msgs = Object.values(this.msgs)
+    }
 
     msg = (classes: string[]) =>
         (key: string, msg: Msg, clearTimeout: number = 0) => {
-            this.model.msgs[key] = {
+            this.msgs[key] = {
                 classes: classes,
                 dataTitle: msg.dataTitle,
                 txt: msg.txt
             }
+
+            this.updateModel()
 
             if (clearTimeout) setTimeout(() =>
                 this.clear(key)
@@ -32,5 +32,6 @@ export class StatusBar implements StatusBarApi {
 
     clear = (key: string) => {
         delete this.model.msgs[key]
+        this.updateModel()
     }
 }

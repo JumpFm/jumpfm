@@ -23,5 +23,4 @@ export const itemFromPath = (fullPath): Item => {
         sel: false,
         classes: []
     }
-
 }

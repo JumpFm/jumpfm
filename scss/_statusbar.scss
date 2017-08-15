@@ -15,7 +15,7 @@
     padding-right: 1em;
     overflow: hidden;
     .msg {
-        cursor: help;
+        cursor: default;
         flex-shrink: 0;
         border-right: 1px solid $color-border;
         padding: 0 .5em;

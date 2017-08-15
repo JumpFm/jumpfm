@@ -5,10 +5,12 @@ import {
     , Item
 } from 'jumpfm-api'
 
-import { PanelView } from './PanelView';
+import { PanelView } from './PanelView'
+import { itemFromPath } from './itemFromPath'
 
 export class Panel implements PanelApi {
     view: PanelView
+    readonly itemFromPath = itemFromPath
 
     getCur = (): number => {
         return Math.min(
