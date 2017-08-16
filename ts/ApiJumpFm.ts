@@ -31,7 +31,7 @@ export class JumpFm implements JumpFmApi {
     private readonly pluginManager = new PluginManager(this)
 
     switchPanel = () =>
-        this.model.activePanel = (this.model.activePanel + 1) % 2
+        this.model.activePanel = (this.model.activePanel + 1) % 2 as 0 | 1
 
 
     getActivePanel = (): Panel =>
@@ -112,7 +112,7 @@ export class JumpFm implements JumpFmApi {
 
     constructor() {
         this.statusBar.info('plugins', {
-            txt: 'Installing plugins...',
+            txt: 'Installing plugins (can take a while)...',
             dataTitle: 'This might take some time'
         })
 
