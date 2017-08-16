@@ -1,118 +1,115 @@
 <section class='special'>
-    <a name='Plugins'></a>
-    <h3>
-        <i class='fa fa-plug'></i> Plugins
-    </h3>
-    <p>
-        Plugins control every aspect of JumpFm. You can enable/disable them, install new
-        once and also write your own.
-    </p>
-    <h4>Builtin plugins:</h4>
-    <table id='plugins'
-        class='bs'>
-        <thead>
-            <tr>
-                <th>Plugin</th>
-                <th>Enabled</th>
-                <th>Description</th>
-                <th>Safely Disable</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>version</td>
-                <td>true</td>
-                <td>Displays the current version of JumpFm.
-                </td>
-                <td>yes</td>
-            </tr>
-            <tr>
-                <td>clock</td>
-                <td>true</td>
-                <td>Displays the date and time.
-                </td>
-                <td>yes</td>
-            </tr>
-            <tr>
-                <td>weather</td>
-                <td>true</td>
-                <td>Displays local (need to set the <code>weatherLocation</code> value)
-                    weather
-                </td>
-                <td>yes</td>
-            </tr>
-            <tr>
-                <td>file system</td>
-                <td>true</td>
-                <td>List the files in the directory.
-                </td>
-                <td>no</td>
-            </tr>
-            <tr>
-                <td>key navigation</td>
-                <td>true</td>
-                <td>Enable keyboard shortcuts.
-                </td>
-                <td>no</td>
-            </tr>
-            <tr>
-                <td>file operations</td>
-                <td>true</td>
-                <td>Enable file operations such as renaming, editing, etc...
-                </td>
-                <td>no</td>
-            </tr>
-            <tr>
-                <td>copy</td>
-                <td>true</td>
-                <td>Enable file copying.
-                </td>
-                <td>no</td>
-            </tr>
-            <tr>
-                <td>jump</td>
-                <td>true</td>
-                <td>Enable directory jumping.
-                </td>
-                <td>yes (but why?)</td>
-            </tr>
-            <tr>
-                <td>history</td>
-                <td>true</td>
-                <td>Enable history navigation.
-                </td>
-                <td>yes (but why?)</td>
-            </tr>
-            <tr>
-                <td>flat mode</td>
-                <td>true</td>
-                <td>Enable flat mode.
-                </td>
-                <td>yes</td>
-            </tr>
-            <tr>
-                <td>zip</td>
-                <td>true</td>
-                <td>Enable zipping and unzipping files.
-                </td>
-                <td>yes</td>
-            </tr>
-            <tr>
-                <td>git status</td>
-                <td>true</td>
-                <td>Enable git status awareness. Might cause some
-                    <b>performance degradation</b> when browsing large git repositories.
-                </td>
-                <td>yes</td>
-            </tr>
-            <tr>
-                <td>gist</td>
-                <td>true</td>
-                <td>Allow sharing files via public gists. If you decide to enable this
-                    plugin make sure you know what <b>public</b> means.
-                </td>
-                <td>yes</td>
-            </tr>
-        </tbody>
-    </table>
+  <a name='Plugins'></a>
+  <h3>
+    <i class='fa fa-plug'></i> Plugins
+  </h3>
+  <p>
+    Plugins control every aspect of JumpFm. You can enable/disable them, install new once and also write your own. They are located under <code>~/.jumpfm/plugins</code> and are managed with npm/yarn.
+  </p>
+  <h4>Builtin plugins:</h4>
+  <table id='plugins'
+    class='bs'>
+    <thead>
+      <tr>
+        <th>Plugin</th>
+        <th>Enabled</th>
+        <th>Description</th>
+        <th>Safely Disable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>jumpfm-version</td>
+        <td>true</td>
+        <td>Displays the current version of JumpFm.
+        </td>
+        <td>yes</td>
+      </tr>
+      <tr>
+        <td>jumpfm-clock</td>
+        <td>true</td>
+        <td>Displays the date and time.
+        </td>
+        <td>yes</td>
+      </tr>
+      <tr>
+        <td>jumpfm-weather</td>
+        <td>true</td>
+        <td>Displays local (need to set the <code>weatherLocation</code> value) weather
+        </td>
+        <td>yes</td>
+      </tr>
+      <tr>
+        <td>jumpfm-fs</td>
+        <td>true</td>
+        <td>List the files in the directory.
+        </td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>jumpfm-key-nav</td>
+        <td>true</td>
+        <td>Enable keyboard shortcuts.
+        </td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>jumpfm-file-ops</td>
+        <td>true</td>
+        <td>Enable file operations such as renaming, editing, etc...
+        </td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>jumpfm-copy</td>
+        <td>true</td>
+        <td>Enable file copying.
+        </td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>jumpfm-jump</td>
+        <td>true</td>
+        <td>Enable directory jumping.
+        </td>
+        <td>yes (but why?)</td>
+      </tr>
+      <tr>
+        <td>jumpfm-history</td>
+        <td>true</td>
+        <td>Enable history navigation.
+        </td>
+        <td>yes (but why?)</td>
+      </tr>
+      <tr>
+        <td>jumpfm-flat-mode</td>
+        <td>true</td>
+        <td>Enable flat mode.
+        </td>
+        <td>yes</td>
+      </tr>
+      <tr>
+        <td>jumpfm-zip</td>
+        <td>true</td>
+        <td>Enable zipping and unzipping files.
+        </td>
+        <td>yes</td>
+      </tr>
+      <tr>
+        <td>jumpfm-git-status</td>
+        <td>true</td>
+        <td>Enable git status awareness. Might cause some
+          <b>performance degradation</b> when browsing large git repositories.
+        </td>
+        <td>yes</td>
+      </tr>
+      <tr>
+        <td>jumpfm-gist</td>
+        <td>true</td>
+        <td>Allow sharing files via public gists. If you decide to enable this plugin make sure you know what <b>public</b> means.
+        </td>
+        <td>yes</td>
+      </tr>
+    </tbody>
+  </table>
 </section>

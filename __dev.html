@@ -1,14 +1,31 @@
 <section>
-    <a name='&lt;plugins/&gt;'></a>
-    <h3 class='mono'>&lt;plugins/&gt;</h3>
-    <p>Currently, there is no mechanism to distribute third party plugins. If you want
-        to write your own plugin for personal usage you can start with the following
-        code snippet:
-    </p>
-    <pre>
+  <a name='&lt;plugins/&gt;'></a>
+  <h3 class='mono'>&lt;plugins/&gt;</h3>
+  <p>Want to write your own plugin ? great, it is easy as writing an npm package. Here is the source code of the jumpfm-clock plugin and here is the <a href="https://github.com/Gilad-Kutiel-Lib/jumpfm-api/blob/master/index.ts"
+      target="_bliank">full API</a>.
+  </p>
+  <pre>
 <code class='language-js'>
-    import 'plugin.js'
+import { JumpFm } from 'jumpfm-api'
+
+import * as moment from 'moment'
+
+export const load = (jumpFm: JumpFm) => {
+    const update = () => {
+        const m = moment(Date.now())
+        jumpFm.statusBar.info('clock', {
+            txt: m.format(
+                jumpFm.settings.getStr('timeFormat', 'HH:mm:ss')
+            ),
+            dataTitle: m.format(
+                jumpFm.settings.getStr('dateFormat', 'MM/DD/YYYY ')
+            ),
+        })
+    }
+
+    update()
+    setInterval(update, 1000)
+}
 </code>
 </pre>
-    <p>* Also, don't forget to register your plugin in the <code>plugins.json</code>        file</p>
 </section>

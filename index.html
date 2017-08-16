@@ -49,10 +49,10 @@
 </div>
 <div class='content'>
 
-    <section class='special'>
-        <div class='cols'>
-            <div class='col'>
-                <h2><i class='fa fa-list-ul'></i> Table of Content</h2>
+  <section class='special'>
+    <div class='cols'>
+      <div class='col'>
+        <h2><i class='fa fa-list-ul'></i> Table of Content</h2>
 <ul id='toc'>
 <li><a href='#About'>About</a></li>
 <li><a href='#Builtin Super-Powers'>Builtin Super-Powers</a></li>
@@ -64,8 +64,8 @@
 <li><a href='#Feature Request'>Feature Request</a></li>
 <li><a href='#&lt;plugins/&gt;'>&lt;plugins/&gt;</a></li>
 </ul>
-            </div>
-            <div class='col'>
+      </div>
+      <div class='col'>
 <!-- ABOUT  -->
 <a name='About'></a>
 <h2>
@@ -77,11 +77,11 @@
     it comes with some builtin super-powers.
 
 </p>
-            </div>
-        </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <a name='Builtin Super-Powers'></a>
+  <a name='Builtin Super-Powers'></a>
 <!-- JUMPING  -->
 <section class='special'>
     <div class='cols center'>
@@ -179,24 +179,6 @@
             <p>
                 Press <code>ctrl + g</code> to create instant gist from selected
                 files.
-            </p>
-        </div>
-    </div>
-</section>
-<!-- EXTERNAL  -->
-<section class='special'>
-    <div class='cols center'>
-        <div class='col img'>
-            <img src='jumpfm-external.gif'
-                class='bs'
-                alt='Gist'>
-        </div>
-        <div class='col'>
-            <h3>
-                <i class='fa fa-gavel'></i> External Programs
-            </h3>
-            <p>
-                Configure hot-keys to run external tools.
             </p>
         </div>
     </div>
@@ -323,48 +305,52 @@
 </table>
 <h5>File Operations</h5>
 <table class='shortcuts bs'>
-    <tbody>
-        <tr>
-            <td>del</td>
-            <td>Delete selected files</td>
-        </tr>
-        <tr>
-            <td>F4</td>
-            <td>Edit file</td>
-        </tr>
-        <tr>
-            <td>Shift + F4</td>
-            <td>New File</td>
-        </tr>
-        <tr>
-            <td>F7</td>
-            <td>New Folder</td>
-        </tr>
-        <tr>
-            <td>F2</td>
-            <td>Rename File</td>
-        </tr>
-        <tr>
-            <td>z</td>
-            <td>Zip selected files</td>
-        </tr>
-        <tr>
-            <td>u</td>
-            <td>Unzip current file</td>
-        </tr>
-        <tr>
-            <td>p</td>
-            <td>Copy full path of current file to clipboard</td>
-        </tr>
-        <tr>
-            <td>F5</td>
-            <td>Copy selected files</td>
-        </tr>
-        <tr>
-            <td>F6</td>
-            <td>Move selected files</td>
-        </tr>
-    </tbody>
+  <tbody>
+    <tr>
+      <td>del</td>
+      <td>Delete selected files</td>
+    </tr>
+    <tr>
+      <td>F4</td>
+      <td>Edit file</td>
+    </tr>
+    <tr>
+      <td>Shift + F4</td>
+      <td>New File</td>
+    </tr>
+    <tr>
+      <td>F7</td>
+      <td>New Folder</td>
+    </tr>
+    <tr>
+      <td>F2</td>
+      <td>Rename File</td>
+    </tr>
+    <tr>
+      <td>z</td>
+      <td>Zip selected files</td>
+    </tr>
+    <tr>
+      <td>u</td>
+      <td>Unzip current file</td>
+    </tr>
+    <tr>
+      <td>P</td>
+      <td>Copy full path of active panel</td>
+    </tr>
+    <tr>
+      <td>p</td>
+      <td>Copy full path of current file to clipboard</td>
+    </tr>
+    <tr>
+      <td>F5</td>
+      <td>Copy selected files</td>
+    </tr>
+    <tr>
+      <td>F6</td>
+      <td>Move selected files</td>
+    </tr>
+  </tbody>
 </table>
 <h5>Panels</h5>
 <table class='shortcuts bs'>
@@ -423,232 +409,188 @@
 </table>
 </section>
 <section class='special'>
-    <a name='Settings'></a>
-    <h3>
-        <i class='fa fa-cog'></i> Settings
-    </h3>
-    <p>All settings files are located under the <code>~/.jumpfm</code> directory. You
-        can edit the settings files to make JumpFm your own. You can also safely
-        delete the settings folder and restart JumpFm to restore the default settings.</p>
-    <h4>Default Settings:</h4>
-    <table id='settings'
-        class='bs'>
-        <thead>
-            <tr>
-                <th>Key</th>
-                <th>Default Value</th>
-                <th>Description</th>
-            </tr>
-            <tbody>
-                <tr>
-                    <td>jumpMaxDbSize</td>
-                    <td>300</td>
-                    <td>Set the maximum number of folders that JumpFm index for fast
-                        jumping
-                    </td>
-                </tr>
-                <tr>
-                    <td>jumpDbSaveInterval</td>
-                    <td>5</td>
-                    <td>Controls how often JumpFm update the jumps database
-                    </td>
-                </tr>
-                <tr>
-                    <td>historyMaxSize</td>
-                    <td>20</td>
-                    <td>Set the maximum history stack size
-                    </td>
-                </tr>
-                <tr>
-                    <td>flatModeMaxSize</td>
-                    <td>500</td>
-                    <td>Set the maximum number of files the flat mode can display
-                    </td>
-                </tr>
-                <tr>
-                    <td>dateFormat</td>
-                    <td>MM/DD/YYYY hh:mm:ss</td>
-                    <td>Sets the clock format
-                    </td>
-                </tr>
-                <tr>
-                    <td>editor</td>
-                    <td>gedit</td>
-                    <td>Default editor to edit files
-                    </td>
-                </tr>
-                <tr>
-                    <td>weatherLocation</td>
-                    <td>Haifa, IL</td>
-                    <td>Default weather location
-                    </td>
-                </tr>
-            </tbody>
-        </thead>
-    </table>
-
-</section>
-<section class='special'>
-    <a name='Plugins'></a>
-    <h3>
-        <i class='fa fa-plug'></i> Plugins
-    </h3>
-    <p>
-        Plugins control every aspect of JumpFm. You can enable/disable them, install new
-        once and also write your own.
-    </p>
-    <h4>Builtin plugins:</h4>
-    <table id='plugins'
-        class='bs'>
-        <thead>
-            <tr>
-                <th>Plugin</th>
-                <th>Enabled</th>
-                <th>Description</th>
-                <th>Safely Disable</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>version</td>
-                <td>true</td>
-                <td>Displays the current version of JumpFm.
-                </td>
-                <td>yes</td>
-            </tr>
-            <tr>
-                <td>clock</td>
-                <td>true</td>
-                <td>Displays the date and time.
-                </td>
-                <td>yes</td>
-            </tr>
-            <tr>
-                <td>weather</td>
-                <td>true</td>
-                <td>Displays local (need to set the <code>weatherLocation</code> value)
-                    weather
-                </td>
-                <td>yes</td>
-            </tr>
-            <tr>
-                <td>file system</td>
-                <td>true</td>
-                <td>List the files in the directory.
-                </td>
-                <td>no</td>
-            </tr>
-            <tr>
-                <td>key navigation</td>
-                <td>true</td>
-                <td>Enable keyboard shortcuts.
-                </td>
-                <td>no</td>
-            </tr>
-            <tr>
-                <td>file operations</td>
-                <td>true</td>
-                <td>Enable file operations such as renaming, editing, etc...
-                </td>
-                <td>no</td>
-            </tr>
-            <tr>
-                <td>copy</td>
-                <td>true</td>
-                <td>Enable file copying.
-                </td>
-                <td>no</td>
-            </tr>
-            <tr>
-                <td>jump</td>
-                <td>true</td>
-                <td>Enable directory jumping.
-                </td>
-                <td>yes (but why?)</td>
-            </tr>
-            <tr>
-                <td>history</td>
-                <td>true</td>
-                <td>Enable history navigation.
-                </td>
-                <td>yes (but why?)</td>
-            </tr>
-            <tr>
-                <td>flat mode</td>
-                <td>true</td>
-                <td>Enable flat mode.
-                </td>
-                <td>yes</td>
-            </tr>
-            <tr>
-                <td>zip</td>
-                <td>true</td>
-                <td>Enable zipping and unzipping files.
-                </td>
-                <td>yes</td>
-            </tr>
-            <tr>
-                <td>git status</td>
-                <td>true</td>
-                <td>Enable git status awareness. Might cause some
-                    <b>performance degradation</b> when browsing large git repositories.
-                </td>
-                <td>yes</td>
-            </tr>
-            <tr>
-                <td>gist</td>
-                <td>true</td>
-                <td>Allow sharing files via public gists. If you decide to enable this
-                    plugin make sure you know what <b>public</b> means.
-                </td>
-                <td>yes</td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-<section class='special'>
-  <a name='External Programs'></a>
+  <a name='Settings'></a>
   <h3>
-    <i class='fa fa-gavel'></i> External Programs
+    <i class='fa fa-cog'></i> Settings
   </h3>
-  <p>
-    You can bind hotkeys to trigger the execution of external applications. You can pass those applications arguments based on the current state.
-  </p>
-  <h4>Available Variables:</h4>
-  <table id='external'
+  <p>All settings files are located under the <code>~/.jumpfm</code> directory. You can edit the settings files to make JumpFm your own. You can also safely delete the settings folder and restart JumpFm to restore the default settings.</p>
+  <h4>Default Settings:</h4>
+  <table id='settings'
     class='bs'>
     <thead>
       <tr>
-        <th>Variable</th>
+        <th>Key</th>
+        <th>Default Value</th>
         <th>Description</th>
+      </tr>
+      <tbody>
+        <tr>
+          <td>timeFormat</td>
+          <td>HH:mm:ss</td>
+          <td>Set the time format (e.g. for the clock plugin)
+          </td>
+        </tr>
+        <tr>
+          <td>dateFormat</td>
+          <td>MM/DD/YYYY</td>
+          <td>Set the date format (e.g. for the clock plugin)
+          </td>
+        </tr>
+        <tr>
+          <td>flatModeMaxSize</td>
+          <td>200</td>
+          <td>Set the maximum number of files the flat mode can display
+          </td>
+        </tr>
+        <tr>
+          <td>historyMaxSize</td>
+          <td>20</td>
+          <td>Set the maximum history stack size
+          </td>
+        </tr>
+        <tr>
+          <td>jumpMaxDbSize</td>
+          <td>300</td>
+          <td>Set the maximum number of folders that JumpFm index for fast jumping
+          </td>
+        </tr>
+        <tr>
+          <td>jumpDbSaveInterval</td>
+          <td>5</td>
+          <td>Controls how often JumpFm update the jumps database
+          </td>
+        </tr>
+        <tr>
+          <td>weatherLocation</td>
+          <td>Haifa, IL</td>
+          <td>Default weather location
+          </td>
+        </tr>
+        <tr>
+          <td>editor</td>
+          <td>gedit</td>
+          <td>Default editor to edit files
+          </td>
+        </tr>
+      </tbody>
+    </thead>
+  </table>
+
+</section>
+<section class='special'>
+  <a name='Plugins'></a>
+  <h3>
+    <i class='fa fa-plug'></i> Plugins
+  </h3>
+  <p>
+    Plugins control every aspect of JumpFm. You can enable/disable them, install new once and also write your own. They are located under <code>~/.jumpfm/plugins</code> and are managed with npm/yarn.
+  </p>
+  <h4>Builtin plugins:</h4>
+  <table id='plugins'
+    class='bs'>
+    <thead>
+      <tr>
+        <th>Plugin</th>
+        <th>Enabled</th>
+        <th>Description</th>
+        <th>Safely Disable</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>{active_pwd}</td>
-        <td>The full path of the active panel</td>
+        <td>jumpfm-version</td>
+        <td>true</td>
+        <td>Displays the current version of JumpFm.
+        </td>
+        <td>yes</td>
       </tr>
       <tr>
-        <td>{active_cur}</td>
-        <td>The file under cursor on the active panel</td>
+        <td>jumpfm-clock</td>
+        <td>true</td>
+        <td>Displays the date and time.
+        </td>
+        <td>yes</td>
       </tr>
       <tr>
-        <td>{active_selected}</td>
-        <td>The list of selected files in the active panel</td>
+        <td>jumpfm-weather</td>
+        <td>true</td>
+        <td>Displays local (need to set the <code>weatherLocation</code> value) weather
+        </td>
+        <td>yes</td>
       </tr>
       <tr>
-        <td>{passive_pwd}</td>
-        <td>The full path of the active panel</td>
+        <td>jumpfm-fs</td>
+        <td>true</td>
+        <td>List the files in the directory.
+        </td>
+        <td>no</td>
       </tr>
       <tr>
-        <td>{passive_cur}</td>
-        <td>The file under cursor on the active panel</td>
+        <td>jumpfm-key-nav</td>
+        <td>true</td>
+        <td>Enable keyboard shortcuts.
+        </td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>jumpfm-file-ops</td>
+        <td>true</td>
+        <td>Enable file operations such as renaming, editing, etc...
+        </td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>jumpfm-copy</td>
+        <td>true</td>
+        <td>Enable file copying.
+        </td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>jumpfm-jump</td>
+        <td>true</td>
+        <td>Enable directory jumping.
+        </td>
+        <td>yes (but why?)</td>
+      </tr>
+      <tr>
+        <td>jumpfm-history</td>
+        <td>true</td>
+        <td>Enable history navigation.
+        </td>
+        <td>yes (but why?)</td>
+      </tr>
+      <tr>
+        <td>jumpfm-flat-mode</td>
+        <td>true</td>
+        <td>Enable flat mode.
+        </td>
+        <td>yes</td>
+      </tr>
+      <tr>
+        <td>jumpfm-zip</td>
+        <td>true</td>
+        <td>Enable zipping and unzipping files.
+        </td>
+        <td>yes</td>
+      </tr>
+      <tr>
+        <td>jumpfm-git-status</td>
+        <td>true</td>
+        <td>Enable git status awareness. Might cause some
+          <b>performance degradation</b> when browsing large git repositories.
+        </td>
+        <td>yes</td>
+      </tr>
+      <tr>
+        <td>jumpfm-gist</td>
+        <td>true</td>
+        <td>Allow sharing files via public gists. If you decide to enable this plugin make sure you know what <b>public</b> means.
+        </td>
+        <td>yes</td>
       </tr>
     </tbody>
   </table>
-  <h4>Examples:</h4>
-  <p><code>git difftool {selected}</code> will trigger the diff tool configured for git with the selected files passed as arguments to the program.</p>
-  <p><code>git difftool {active}</code> will trigger the diff tool configured for git with the full path of the active panel passed as an argument to the program.</p>
 </section>
 <section>
     <a name='Feature Request'></a>
@@ -660,28 +602,35 @@
     </p>
 </section>
 <section>
-    <a name='&lt;plugins/&gt;'></a>
-    <h3 class='mono'>&lt;plugins/&gt;</h3>
-    <p>Currently, there is no mechanism to distribute third party plugins. If you want
-        to write your own plugin for personal usage you can start with the following
-        code snippet:
-    </p>
-    <pre>
+  <a name='&lt;plugins/&gt;'></a>
+  <h3 class='mono'>&lt;plugins/&gt;</h3>
+  <p>Want to write your own plugin ? great, it is easy as writing an npm package. Here is the source code of the jumpfm-clock plugin and here is the <a href="https://github.com/Gilad-Kutiel-Lib/jumpfm-api/blob/master/index.ts"
+      target="_bliank">full API</a>.
+  </p>
+  <pre>
 <code class='language-js'>
-class MyPlugin {
-    constructor(jumpFm) {
-        this.jumpFm = jumpFm
+import { JumpFm } from 'jumpfm-api'
+
+import * as moment from 'moment'
+
+export const load = (jumpFm: JumpFm) => {
+    const update = () => {
+        const m = moment(Date.now())
+        jumpFm.statusBar.info('clock', {
+            txt: m.format(
+                jumpFm.settings.getStr('timeFormat', 'HH:mm:ss')
+            ),
+            dataTitle: m.format(
+                jumpFm.settings.getStr('dateFormat', 'MM/DD/YYYY ')
+            ),
+        })
     }
 
-    onLoad() {
-        this.jumpFm.statusBar.info('myPlugin', 'ʘ‿ʘ')
-    }
+    update()
+    setInterval(update, 1000)
 }
-
-module.exports = MyPlugin
 </code>
 </pre>
-    <p>* Also, don't forget to register your plugin in the <code>plugins.json</code>        file</p>
 </section>
 </div>
 <footer>

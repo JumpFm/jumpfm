@@ -76,8 +76,7 @@ table {
     padding: 5px; }
   table.shortcuts td:first-child {
     width: 18em;
-    font-family: monospace;
-    text-transform: capitalize; }
+    font-family: monospace; }
   table#settings th:first-child {
     width: 11em; }
   table#settings th:nth-child(2) {
