@@ -4,7 +4,6 @@ import { Dialog } from './ApiDialog'
 import {
     editableFiles,
     keyboard,
-    saveKeyboard,
     packageJson,
     root
 } from './files'
@@ -13,7 +12,6 @@ import { PanelView } from './ApiPanelView'
 import { Settings } from './ApiSettings'
 import { StatusBar } from './ApiStatusBar'
 
-import { clipboard } from 'electron'
 import * as homedir from 'homedir'
 import * as Mousetrap from 'mousetrap'
 import * as path from 'path'
@@ -25,7 +23,6 @@ export class JumpFm implements JumpFmApi {
     readonly settings = new Settings()
     readonly package = packageJson
     readonly root = root
-    readonly nodegit = require('nodegit')
     readonly electron = require('electron')
 
     private readonly pluginManager = new PluginManager(this)
@@ -126,7 +123,8 @@ export class JumpFm implements JumpFmApi {
             this.bindKeys('resetFontSize', ['ctrl+0'], () => this.model.fontSize = 14)
 
 
-            this.pluginManager.loadPlugins(e => {
+            this.panels.forEach(panel => panel.cd(homedir()))
+            this.pluginManager.loadPlugins((e) => {
                 if (e) {
                     this.statusBar.err('plugins', {
                         txt: 'Error loading plugins'
@@ -137,9 +135,7 @@ export class JumpFm implements JumpFmApi {
                 saveKeyboard(keyboard)
                 this.panels.forEach(panel => panel.cd(homedir()))
                 this.statusBar.clear('plugins')
-
             })
-
         }, 1)
     }
 }

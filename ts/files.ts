@@ -31,11 +31,11 @@ const save = <T>(path: string) => (obj: T) => {
 export const packageJson = require('../package.json')
 
 export const root = path.join(homedir(), ".jumpfm")
-export const pluginsRoot = path.join(root, 'plugins')
-if (!fs.existsSync(pluginsRoot))
-    fs.mkdirpSync(pluginsRoot)
+export const pluginsPath = path.join(root, 'plugins')
+if (!fs.existsSync(pluginsPath))
+    fs.mkdirpSync(pluginsPath)
 
-export const pluginsPath = path.join(pluginsRoot, 'package.json')
+export const pluginsPackageJson = path.join(pluginsPath, 'package.json')
 const settingsPath = path.join(root, 'settings.json')
 const keyboardPath = path.join(root, 'keyboard.json')
 
@@ -46,7 +46,7 @@ export const editableFiles: EditableFile[] = [
         icon: 'fa fa-key'
     },
     {
-        path: pluginsPath,
+        path: pluginsPackageJson,
         title: 'Plugins',
         icon: 'fa fa-plug'
     },
@@ -62,4 +62,4 @@ export const keyboard = load(keyboardPath)
 
 export const saveSettings = save(settingsPath)
 export const saveKeyboard = save(keyboardPath)
-export const savePlugins = save<Plugins>(pluginsPath)
+export const savePlugins = save<Plugins>(pluginsPackageJson)
