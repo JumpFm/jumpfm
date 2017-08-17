@@ -12,24 +12,29 @@ export class Panel implements PanelApi {
     view: PanelView
     readonly itemFromPath = itemFromPath
 
-    getCur = (): number => {
-        return Math.min(
-            this.getItems().length - 1,
-            Math.max(0, this.model.cur)
-        )
+    getItems(): Item[] {
+        return this.model.items
     }
 
-    getCurItem = (): Item => {
-        return this.getItems()[this.getCur()]
-    }
-
-    getItems = (): Item[] => {
+    getItemsFilter = (): Item[] => {
         return this.model.items
             .filter(item =>
                 item.name
                     .toLowerCase()
                     .indexOf(this.model.filter.toLowerCase()) > -1)
     }
+
+    getCur = (): number => {
+        return Math.min(
+            this.getItemsFilter().length - 1,
+            Math.max(0, this.model.cur)
+        )
+    }
+
+    getCurItem = (): Item => {
+        return this.getItemsFilter()[this.getCur()]
+    }
+
 
     clearFilter = () => {
         this.model.filter = ''
@@ -38,7 +43,7 @@ export class Panel implements PanelApi {
     private selectRange = (a, b) => {
         try {
             if (a > b) return this.selectRange(b, a)
-            const files = this.getItems()
+            const files = this.getItemsFilter()
             for (var i = a; i <= b; i++) files[i].sel = true
         } catch (e) {
             console.log(e, a, b)
@@ -59,11 +64,11 @@ export class Panel implements PanelApi {
     }
 
     selectAll = (): void => {
-        this.getItems().forEach(item => item.sel = true)
+        this.getItemsFilter().forEach(item => item.sel = true)
     }
 
     deselectAll = (): void => {
-        this.getItems().forEach(item => item.sel = false)
+        this.getItemsFilter().forEach(item => item.sel = false)
     }
 
     getUrl = (): Url => {
@@ -75,7 +80,7 @@ export class Panel implements PanelApi {
     }
 
     getSelectedItems = (): Item[] => {
-        return this.getItems().filter((item, i) => {
+        return this.getItemsFilter().filter((item, i) => {
             return item.sel || this.getCur() == i
         })
     }
@@ -86,6 +91,7 @@ export class Panel implements PanelApi {
 
     setItems(items: Item[]) {
         this.model.items = items
+        console.log(items.length, this.getItemsFilter().length)
         this.handlers
             .filter(handler => handler.onPanelItemsSet)
             .forEach(handler => handler.onPanelItemsSet())
@@ -144,6 +150,6 @@ export class Panel implements PanelApi {
 
         getTitle: this.getTitle,
         getCur: this.getCur,
-        getItems: this.getItems,
+        getItems: this.getItemsFilter,
     }
 }

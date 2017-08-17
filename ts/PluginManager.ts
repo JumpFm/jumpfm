@@ -50,7 +50,11 @@ export class PluginManager {
         try {
             return require(pluginsPackageJson)
         } catch (e) {
-            fs.writeJsonSync(pluginsPackageJson, defaultPlugins)
+            console.log('creating')
+            fs.writeFileSync(
+                pluginsPackageJson
+                , JSON.stringify(defaultPlugins, null, 4)
+            )
             return defaultPlugins
         }
     }
