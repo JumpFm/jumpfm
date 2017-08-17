@@ -46,7 +46,10 @@ class PluginsLoader {
 
     constructor(jumpFm: JumpFm, done: (err?) => void) {
         this.jumpFm = jumpFm
-        this.done = done
+        this.done = () => {
+            jumpFm.statusBar.clear('plugins')
+            done()
+        }
     }
 
     private loadCss = (href) => {
@@ -92,25 +95,25 @@ class PluginsLoader {
         }
     }
 
-    loadPlugins() {
+    loadPlugins(pkg) {
         try {
-            const pkg = this.getPackage()
-            console.log(JSON.stringify(this.getPackage(), null, 4))
             Object.keys(pkg.dependencies).forEach(name => {
                 this.loadPlugin(name)
             })
             this.done()
         } catch (e) {
+            console.log(e)
             this.done(e)
         }
     }
 
     load() {
+        const pkg = this.getPackage()
         const checkRes: checkRes = check.sync({
             packageDir: pluginsPath
         })
         if (checkRes.depsWereOk) {
-            this.loadPlugins()
+            this.loadPlugins(pkg)
         }
         process.chdir(pluginsPath)
         npm.load({
@@ -119,7 +122,7 @@ class PluginsLoader {
             if (err) return this.done(err)
             npm.commands.update([], (err, res) => {
                 if (err) return this.done(err)
-                if (!checkRes.depsWereOk) this.loadPlugins()
+                if (!checkRes.depsWereOk) this.loadPlugins(pkg)
             })
         })
     }

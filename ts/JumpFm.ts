@@ -123,7 +123,6 @@ export class JumpFm implements JumpFmApi {
             this.pluginManager.loadAndUpdatePlugins(() => {
                 saveKeyboard(keyboard)
                 this.panels.forEach(panel => panel.cd(homedir()))
-                this.statusBar.clear('plugins')
             })
         }, 1)
     }
