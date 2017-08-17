@@ -109,11 +109,6 @@ export class JumpFm implements JumpFmApi {
     }
 
     constructor() {
-        this.statusBar.info('plugins', {
-            txt: 'Installing plugins (can take a while)...',
-            dataTitle: 'This might take some time'
-        })
-
         setTimeout(() => {
             [0, 1].forEach(i => {
                 const view = this.panels[i].view = new PanelView(i)
@@ -125,14 +120,7 @@ export class JumpFm implements JumpFmApi {
 
 
             this.panels.forEach(panel => panel.cd(homedir()))
-            this.pluginManager.loadPlugins((e) => {
-                if (e) {
-                    this.statusBar.err('plugins', {
-                        txt: 'Error loading plugins'
-                        , dataTitle: e
-                    })
-                    return
-                }
+            this.pluginManager.loadAndUpdatePlugins(() => {
                 saveKeyboard(keyboard)
                 this.panels.forEach(panel => panel.cd(homedir()))
                 this.statusBar.clear('plugins')

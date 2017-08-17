@@ -7,10 +7,18 @@ import {
     savePlugins
 } from './files';
 
+import * as check from 'check-dependencies'
 import * as fs from 'fs-extra'
 import * as npm from 'npm'
 import * as path from 'path'
 import * as installIfNeeded from 'install-if-needed'
+
+interface checkRes {
+    status: number,      // 0 if successful, 1 otherwise 
+    depsWereOk: boolean, // true if dependencies were already satisfied 
+    log: string[],          // array of logged messages 
+    error: string[],        // array of logged errors 
+}
 
 const defaultPlugins = {
     dependencies: {
@@ -30,33 +38,23 @@ const defaultPlugins = {
     }
 }
 
-export class PluginManager {
-    readonly jumpFm: JumpFm
+class PluginsLoader {
+    jumpFm: JumpFm;
+    deps: string[];
+    done: (err?: any) => void;
 
-    constructor(jumpFm) {
+    constructor(jumpFm: JumpFm, deps: string[], done: (err?) => void) {
         this.jumpFm = jumpFm
+        this.deps = deps
+        this.done = done
     }
 
     private loadCss = (href) => {
         if (!href) return
-        console.log(href)
         const link = document.createElement('link')
         link.setAttribute('rel', 'stylesheet')
         link.setAttribute('href', href)
         document.head.appendChild(link)
-    }
-
-    private getPackage = () => {
-        try {
-            return require(pluginsPackageJson)
-        } catch (e) {
-            console.log('creating')
-            fs.writeFileSync(
-                pluginsPackageJson
-                , JSON.stringify(defaultPlugins, null, 4)
-            )
-            return defaultPlugins
-        }
     }
 
     private loadPlugin = (name: string) => {
@@ -75,26 +73,69 @@ export class PluginManager {
         }
     }
 
-    loadPlugins = (done: (err?) => void) => {
-        const pkg = this.getPackage()
+    loadPlugins() {
+        try {
+            this.deps.forEach(name => {
+                const s = Date.now()
+                this.loadPlugin(name)
+                console.log(`${name} in ${Date.now() - s} milliseconds`)
+            })
+            this.done()
+        } catch (e) {
+            this.done(e)
+        }
+    }
+
+    load() {
+        const checkRes: checkRes = check.sync({
+            packageDir: pluginsPath
+        })
+        if (checkRes.depsWereOk) {
+            this.loadPlugins()
+        }
         process.chdir(pluginsPath)
         npm.load({
             save: true
         }, (err, res) => {
-            if (err) return done(err)
+            if (err) return this.done(err)
             npm.commands.update([], (err, res) => {
-                if (err) return done(err)
-                try {
-                    Object.keys(pkg.dependencies).forEach(name => {
-                        const s = Date.now()
-                        this.loadPlugin(name)
-                        console.log(`${name} in ${Date.now() - s} milliseconds`)
-                    })
-                    done()
-                } catch (e) {
-                    done(e)
-                }
+                if (err) return this.done(err)
+                if (!checkRes.depsWereOk) this.loadPlugins()
             })
         })
+    }
+}
+
+export class PluginManager {
+    readonly jumpFm: JumpFm
+
+    constructor(jumpFm) {
+        this.jumpFm = jumpFm
+    }
+
+    private getPackage = () => {
+        try {
+            return require(pluginsPackageJson)
+        } catch (e) {
+            fs.writeFileSync(
+                pluginsPackageJson
+                , JSON.stringify(defaultPlugins, null, 4)
+            )
+            return defaultPlugins
+        }
+    }
+
+    loadAndUpdatePlugins = (done: (err?) => void) => {
+        this.jumpFm.statusBar.info('plugins', {
+            txt: 'Downloading plugins (can take a while)...',
+            dataTitle: 'This might take some time'
+        })
+
+
+        new PluginsLoader(
+            this.jumpFm
+            , Object.keys(this.getPackage().dependencies)
+            , done
+        ).load()
     }
 }

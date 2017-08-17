@@ -91,7 +91,6 @@ export class Panel implements PanelApi {
 
     setItems(items: Item[]) {
         this.model.items = items
-        console.log(items.length, this.getItemsFilter().length)
         this.handlers
             .filter(handler => handler.onPanelItemsSet)
             .forEach(handler => handler.onPanelItemsSet())

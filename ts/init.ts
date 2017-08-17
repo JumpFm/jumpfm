@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as Vue from 'vue/dist/vue.min.js';
 
 import { root } from './files';
-import { JumpFm } from './ApiJumpFm';
+import { JumpFm } from './JumpFm';
 import { opn } from './opn';
 
 document.addEventListener('DOMContentLoaded', () => {
