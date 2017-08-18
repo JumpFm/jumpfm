@@ -47,9 +47,14 @@
                 "**/*",
                 "build/icons/*"
             ],
-            "target": "AppImage",
+            "target": ["AppImage", "deb"],
             "category": "Utility",
             "publish": "github"
+        },
+        "win": {
+            "files": [
+                "**/*"
+            ]
         }
     },
     "scripts": {
