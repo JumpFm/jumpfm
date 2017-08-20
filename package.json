@@ -29,6 +29,7 @@
         "@types/npm": "^2.0.28",
         "@types/watch": "^1.0.0",
         "electron-builder": "^19.22.1",
+        "7zip-bin-win": "^2.1.0",
         "jumpfm-api": "^1.0.5",
         "request-debug": "^0.2.0"
     },
@@ -50,7 +51,10 @@
                 "**/*",
                 "build/icons/*"
             ],
-            "target": ["AppImage", "deb"],
+            "target": [
+                "AppImage",
+                "deb"
+            ],
             "category": "Utility",
             "publish": "github"
         },
