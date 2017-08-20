@@ -91,9 +91,11 @@ export class Panel implements PanelApi {
 
     setItems(items: Item[]) {
         this.model.items = items
-        this.handlers
-            .filter(handler => handler.onPanelItemsSet)
-            .forEach(handler => handler.onPanelItemsSet())
+        setTimeout(() => {
+            this.handlers
+                .filter(handler => handler.onPanelItemsSet)
+                .forEach(handler => handler.onPanelItemsSet())
+        }, 10)
         return this
     }
 
