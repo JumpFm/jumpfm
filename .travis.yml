@@ -5,6 +5,8 @@ node_js: 6
 
 before_install:
   - npm i -g npm@latest
+  - npm i -g typescript
+  - npm i -g node-sass
 
 install:
   - npm install
@@ -17,6 +19,10 @@ env:
   global:
     - secure: >-
         QdHr5mVFKOyS/SmQPd7X6TOGhi4XhlJU+2w0O+RubOo/h2i1wLXD/f0DbAjEc0XfpTBSt9IDtUtqSuTi1YIUbafrqUwLFBUZ5VGYsPcMA48pD6+nzflMuaaCf//+pM8WtIAfgOK1i5k30faRzRnvSIYgX/Yyf4vS9j9OmfwD6342d1eD2b+h24R9z+eLlG9QaoJx9EAYhr1UAFbERiBlN40ThGU7uSkehzuYtGaQil8J8cV/MRqPCTSMAcZvpiUM7yGri11AWxJ5bOmyn7yVTFRBVWZDb4XaREXVTaEIXhvi/g+NO0e9WFETkw2cR7/Q6lw3kr/DqGz6Ks9XCOGppb1xILbvkUID/7pW+UKuzt6hc4AdoJLR+p0QtMWQn51oh1npGXzaMwjGGQ36gr+rdzc3Lukh08URzAFC2kywCg1sCsNCfoEH0hVD8OUhNQIkVOz530isjkZ8q9S1Us0ib5uviSZeA9XmfPBKe7aRxMY98WUvaeDCRmHqtmWy0nl9+ys4aI0197+4XlXijWeezd/ESLcWlZozKysAvTavC+hZPIBYz3Hpd6JOVzDGDgxWTpF91nCOJ+/gz/kHztAcaIC/iIVwIH4NhovuZ8t0kCKraEOWCnVkrikw9yK8unxgQfGWqU38ywUR7dN5if+u6Y67ih4ASnJ/LCqvUQvzy1o=
+
+before_script:
+  - tsc
+  - node-sass scss -o css
 
 script:
   - npm run publish
