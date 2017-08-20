@@ -1,16 +1,22 @@
-platform:
-  - x64
-
+os: unstable
 cache:
   - node_modules
-  - '%APPDATA%\npm-cache'
-  - '%USERPROFILE%\.electron'
-
+environment:
+  GH_TOKEN:
+      secure: RcYdy07RY6uQXRBSJWfJfNG7FzZd7Y62IOTQ1n1pYjKTh9sgklNfNB9DBHZdOCzA
+  matrix:
+    - nodejs_version: 6
 install:
-  - ps: Install-Product node 7 x64
+  - ps: Install-Product node $env:nodejs_version
+  - set CI=true
+  - npm install -g npm@latest
+  - set PATH=%APPDATA%\npm;%PATH%
   - npm install
-
-build_script:
+matrix:
+  fast_finish: true
+build: off
+version: '{build}'
+shallow_clone: true
+clone_depth: 1
+test_script:
   - npm run dist
-
-test: off

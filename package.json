@@ -55,9 +55,7 @@
             "publish": "github"
         },
         "win": {
-            "files": [
-                "**/*"
-            ]
+            "target": "nsis"
         }
     },
     "scripts": {
