@@ -9,7 +9,7 @@ before_install:
   - npm i -g node-sass
 
 install:
-  - npm install
+  - npm update
 
 cache:
   directories:
