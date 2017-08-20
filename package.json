@@ -31,7 +31,9 @@
         "electron-builder": "^19.23.1",
         "jumpfm-api": "^1.0.7"
     },
-    "optionalDependencies": {},
+    "optionalDependencies": {
+        "7zip-bin-win": "^2.1.0"
+    },
     "homepage": "https://jumpfm.org",
     "repository": {
         "type": "git",
