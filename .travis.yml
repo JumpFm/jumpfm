@@ -1,9 +1,12 @@
 language: node_js
-node_js: node
+node_js: 6
 
 before_install:
   - npm i -g npm@latest
 
+install:
+  - npm install
+  
 cache:
   directories:
     - "node_modules"
