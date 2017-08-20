@@ -23,14 +23,16 @@
         "vue": "^2.4.2"
     },
     "devDependencies": {
+        "jumpfm-api": "^1.0.5",
         "@types/fs-extra": "^4.0.0",
         "@types/mousetrap": "^1.5.34",
         "@types/node": "^8.0.20",
         "@types/npm": "^2.0.28",
         "@types/watch": "^1.0.0",
-        "electron-builder": "^19.22.1",
+        "electron-builder": "^19.22.1"
+    },
+    "optionalDependencies": {
         "7zip-bin-win": "^2.1.0",
-        "jumpfm-api": "^1.0.5",
         "request-debug": "^0.2.0"
     },
     "homepage": "https://jumpfm.org",
