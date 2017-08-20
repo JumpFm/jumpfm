@@ -1,72 +1,72 @@
 {
-    "name": "jumpfm",
-    "version": "0.16.0",
-    "description": "A file manager that lets you jump",
-    "author": {
-        "name": "Gilad Kutiel",
-        "email": "gilad.kutiel@gmail.com"
+  "name": "jumpfm",
+  "version": "0.16.1",
+  "description": "A file manager that lets you jump",
+  "author": {
+    "name": "Gilad Kutiel",
+    "email": "gilad.kutiel@gmail.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "check-dependencies": "^1.1.0",
+    "electron-simple-updater": "^1.2.1",
+    "filesize": "^3.5.10",
+    "fs-extra": "^4.0.1",
+    "homedir": "^0.6.0",
+    "install-if-needed": "^1.0.3",
+    "moment": "^2.18.1",
+    "mousetrap": "^1.6.1",
+    "node-cmd": "^3.0.0",
+    "node-watch": "^0.5.5",
+    "node.os": "^1.2.4",
+    "npm": "^5.3.0",
+    "vue": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^4.0.0",
+    "@types/mousetrap": "^1.5.34",
+    "@types/node": "^8.0.24",
+    "@types/npm": "^2.0.28",
+    "@types/watch": "^1.0.0",
+    "electron-builder": "^19.23.1",
+    "jumpfm-api": "^1.0.7"
+  },
+  "optionalDependencies": {
+    "7zip-bin-win": "^2.1.0"
+  },
+  "homepage": "https://jumpfm.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gilad-Kutiel-App/jumpfm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Gilad-Kutiel-App/jumpfm/issues"
+  },
+  "main": "app.js",
+  "build": {
+    "appId": "com.github.gkutiel.jumpfm",
+    "compression": "maximum",
+    "electronVersion": "1.7.5",
+    "linux": {
+      "files": [
+        "**/*",
+        "build/icons/*"
+      ],
+      "target": [
+        "AppImage"
+      ],
+      "category": "Utility",
+      "publish": "github"
     },
-    "license": "ISC",
-    "dependencies": {
-        "check-dependencies": "^1.1.0",
-        "electron-simple-updater": "^1.2.1",
-        "filesize": "^3.5.10",
-        "fs-extra": "^4.0.1",
-        "homedir": "^0.6.0",
-        "install-if-needed": "^1.0.3",
-        "moment": "^2.18.1",
-        "mousetrap": "^1.6.1",
-        "node-cmd": "^3.0.0",
-        "node-watch": "^0.5.5",
-        "node.os": "^1.2.4",
-        "npm": "^5.3.0",
-        "vue": "^2.4.2"
-    },
-    "devDependencies": {
-        "@types/fs-extra": "^4.0.0",
-        "@types/mousetrap": "^1.5.34",
-        "@types/node": "^8.0.24",
-        "@types/npm": "^2.0.28",
-        "@types/watch": "^1.0.0",
-        "electron-builder": "^19.23.1",
-        "jumpfm-api": "^1.0.7"
-    },
-    "optionalDependencies": {
-        "7zip-bin-win": "^2.1.0"
-    },
-    "homepage": "https://jumpfm.org",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Gilad-Kutiel-App/jumpfm.git"
-    },
-    "bugs": {
-        "url": "https://github.com/Gilad-Kutiel-App/jumpfm/issues"
-    },
-    "main": "app.js",
-    "build": {
-        "appId": "com.github.gkutiel.jumpfm",
-        "compression": "maximum",
-        "electronVersion": "1.7.5",
-        "linux": {
-            "files": [
-                "**/*",
-                "build/icons/*"
-            ],
-            "target": [
-                "AppImage"
-            ],
-            "category": "Utility",
-            "publish": "github"
-        },
-        "win": {
-            "target": "nsis"
-        }
-    },
-    "scripts": {
-        "test": "mocha js",
-        "pack": "build --dir",
-        "dist": "build",
-        "publish": "build --publish always",
-        "postinstall": "electron-builder install-app-deps"
+    "win": {
+      "target": "nsis"
     }
+  },
+  "scripts": {
+    "test": "mocha js",
+    "pack": "build --dir",
+    "dist": "build",
+    "publish": "build --publish always",
+    "postinstall": "electron-builder install-app-deps"
+  }
 }
