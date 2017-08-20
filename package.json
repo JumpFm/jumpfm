@@ -2,7 +2,10 @@
     "name": "jumpfm",
     "version": "0.15.4",
     "description": "A file manager that lets you jump",
-    "author": "Gilad Kutiel",
+    "author": {
+        "name": "Gilad Kutiel",
+        "email": "gilad.kutiel@gmail.com"
+    },
     "license": "ISC",
     "dependencies": {
         "check-dependencies": "^1.1.0",
@@ -47,9 +50,14 @@
                 "**/*",
                 "build/icons/*"
             ],
-            "target": "AppImage",
+            "target": ["AppImage", "deb"],
             "category": "Utility",
             "publish": "github"
+        },
+        "win": {
+            "files": [
+                "**/*"
+            ]
         }
     },
     "scripts": {
