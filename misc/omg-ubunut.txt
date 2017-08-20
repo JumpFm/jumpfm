@@ -9,6 +9,8 @@ It is a completely open source project, and it is extremely easy (as easy as wri
 
 It can be downloaded from github as an AppImage (https://github.com/Gilad-Kutiel-App/jumpfm/releases).
 
+I also made some short videos (http://bit.ly/2wljs2L).
+
 Best,
 Gilad Kutiel
 
