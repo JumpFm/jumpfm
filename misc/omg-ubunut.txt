@@ -1,0 +1,14 @@
+Hi Joey,
+
+I'm the developer of JumpFm (http://jumpfm.org).
+Its an Electron based (I know, I know.. but its really not that bad) file manager inspired by fman (http://bit.ly/2x70Q39) and exa (https://the.exa.website/).
+
+It comes with some cool features like jumping, git status integration and more (see http://jumpfm.org for more details).
+
+It is a completely open source project, and it is extremely easy (as easy as writing NPM package) to extend its functionality via its plug-in system. 
+
+It can be downloaded from github as an AppImage (https://github.com/Gilad-Kutiel-App/jumpfm/releases).
+
+Best,
+Gilad Kutiel
+
