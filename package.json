@@ -54,8 +54,7 @@
                 "build/icons/*"
             ],
             "target": [
-                "AppImage",
-                "deb"
+                "AppImage"
             ],
             "category": "Utility",
             "publish": "github"
