@@ -2,103 +2,66 @@
 <html>
 
 <head>
-    <title>JumpFm</title>
-    <link rel="stylesheet"
-        href="static/font-awesome.css">
-    <link rel="stylesheet"
-        href="css/index.css">
+  <title>JumpFm</title>
+  <link rel="stylesheet"
+    href="static/font-awesome.css">
+  <link rel="stylesheet"
+    href="css/index.css">
 
-    <script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </head>
 
 <body>
-    <div id="app"
-        v-bind:style="{ fontSize: fontSize + 'px' }">
+  <div id="app"
+    v-bind:style="{ fontSize: fontSize + 'px' }">
 
-        <!-- DIALOG -->
-        <div id='dialog'>
-            <div id='dialog-content'>
-                <div id='dialog-left'>
-                    <div id='dialog-label'>{{dialog.label}}:</div>
-                </div>
-                <div id='dialog-right'>
-                    <input id="dialog-input"
-                        type="text" />
-                    <ol id='dialog-sug'
-                        class='border'>
-                        <li v-for="(sug, i) in dialog.sug"
-                            :cur="i == dialog.cur"
-                            v-html="sug.html" />
-                    </ol>
-                </div>
-            </div>
+    <!-- DIALOG -->
+    <div id='dialog'>
+      <div id='dialog-content'>
+        <div id='dialog-left'>
+          <div id='dialog-label'>{{dialog.label}}:</div>
         </div>
-        <!-- /DIALOG -->
-
-        <!-- PANELS  -->
-        <div id='panels'>
-            <div v-for="(panel, i) in panels"
-                class="panel"
-                :sel="activePanel == i">
-                <div class="title">{{panel.getTitle()}}</div>
-                <!--TABLE  -->
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Size</th>
-                            <th>Date Modified</th>
-                        </tr>
-                    </thead>
-                    <!--TBODY  -->
-                    <tbody :id="'tbody' + i">
-                        <tr v-for="(item, j) in panel.getItems()"
-                            :sel='item.sel'
-                            :cur='j == panel.getCur()'
-                            v-bind:class='item.classes'>
-                            <td>
-                                <img class='file-icon'
-                                    :src='item.icon' />
-                            </td>
-                            <td>{{item.name}}</td>
-                            <td>{{item.size | fileSize}}</td>
-                            <td>{{item.mtime | formatDate}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- FILTER  -->
-                <input :id="'filter' + i"
-                    v-model="panel.filter"
-                    class="filter"
-                    placeholder="Filter Files" />
-            </div>
+        <div id='dialog-right'>
+          <input id="dialog-input"
+            type="text" />
+          <ol id='dialog-sug'
+            class='border'>
+            <li v-for="(sug, i) in dialog.sug"
+              :cur="i == dialog.cur"
+              v-html="sug.html" />
+          </ol>
         </div>
-        <!-- /PANELS -->
-
-        <!-- STATUS BAR  -->
-        <footer id="statusbar">
-            <!-- MSG  -->
-            <div id="statusbar-msgs">
-                <div v-for="msg in status.msgs"
-                    class='msg'
-                    :class="msg.classes"
-                    :data-title='msg.dataTitle'>
-                    <div>{{msg.txt}}</div>
-                </div>
-            </div>
-            <!-- BUTTONS  -->
-            <div id="buttons">
-                <a v-for='file in editableFiles'
-                    v-on:click='edit(file.path)'
-                    class="btn"
-                    :data-title="file.title"><i :class="file.icon"></i></a>
-                <a class="btn"
-                    data-title="Help"
-                    href="https://gilad-kutiel-app.github.io/jumpfm/"
-                    target="about:blank"><i class="fa fa-question-circle"></i></a>
-            </div>
-        </footer>
-        <!-- /STATUS BAR  -->
+      </div>
     </div>
+    <!-- /DIALOG -->
+
+    <!-- PANELS  -->
+    <div id='panels'></div>
+    <!-- /PANELS -->
+
+    <!-- STATUS BAR  -->
+    <footer id="statusbar">
+      <!-- MSG  -->
+      <div id="statusbar-msgs">
+        <div v-for="msg in status.msgs"
+          class='msg'
+          :class="msg.classes"
+          :data-title='msg.dataTitle'>
+          <div>{{msg.txt}}</div>
+        </div>
+      </div>
+      <!-- BUTTONS  -->
+      <div id="buttons">
+        <a v-for='file in editableFiles'
+          v-on:click='edit(file.path)'
+          class="btn"
+          :data-title="file.title"><i :class="file.icon"></i></a>
+        <a class="btn"
+          data-title="Help"
+          href="https://gilad-kutiel-app.github.io/jumpfm/"
+          target="about:blank"><i class="fa fa-question-circle"></i></a>
+      </div>
+    </footer>
+    <!-- /STATUS BAR  -->
+  </div>
 </body>

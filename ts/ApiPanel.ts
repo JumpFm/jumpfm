@@ -2,95 +2,100 @@ import {
     Panel as PanelApi
     , Url
     , PanelListener
-    , Item
+    , ItemGet
+    , ItemSet
 } from 'jumpfm-api'
 
-import { PanelView } from './ApiPanelView'
-import { itemFromPath } from './itemFromPath'
+import { ApiItem } from './ApiItem'
+
+import { ViewPanel } from './ViewPanel'
+// import { itemFromPath } from './itemFromPath'
 
 export class Panel implements PanelApi {
-    view: PanelView
-    readonly itemFromPath = itemFromPath
+    readonly view: ViewPanel = new ViewPanel()
+    private url: Url
 
-    getItems(): Item[] {
-        return this.model.items
+    getItems(): ItemGet[] {
+        return this.items
     }
 
-    getItemsFilter = (): Item[] => {
-        return this.model.items
-            .filter(item =>
-                item.name
-                    .toLowerCase()
-                    .indexOf(this.model.filter.toLowerCase()) > -1)
-    }
+    // getItemsFilter = (): Item[] => {
+    //     return this.model.items
+    //         .filter(item =>
+    //             item.name
+    //                 .toLowerCase()
+    //                 .indexOf(this.model.filter.toLowerCase()) > -1)
+    // }
 
-    getCur = (): number => {
-        return Math.min(
-            this.getItemsFilter().length - 1,
-            Math.max(0, this.model.cur)
-        )
-    }
+    // getCur = (): number => {
+    //     return Math.min(
+    //         this.getItemsFilter().length - 1,
+    //         Math.max(0, this.model.cur)
+    //     )
+    // }
 
-    getCurItem = (): Item => {
-        return this.getItemsFilter()[this.getCur()]
-    }
+    // getCurItem = (): Item => {
+    //     return this.getItemsFilter()[this.getCur()]
+    // }
 
 
-    clearFilter = () => {
-        this.model.filter = ''
-    }
+    // clearFilter = () => {
+    //     this.model.filter = ''
+    // }
 
-    private selectRange = (a, b) => {
-        try {
-            if (a > b) return this.selectRange(b, a)
-            const files = this.getItemsFilter()
-            for (var i = a; i <= b; i++) files[i].sel = true
-        } catch (e) {
-            console.log(e, a, b)
-        }
-    }
+    // private selectRange = (a, b) => {
+    //     try {
+    //         if (a > b) return this.selectRange(b, a)
+    //         const files = this.getItemsFilter()
+    //         for (var i = a; i <= b; i++) files[i].sel = true
+    //     } catch (e) {
+    //         console.log(e, a, b)
+    //     }
+    // }
 
-    step = (d: number, select = false) => {
-        const i1 = this.getCur()
-        this.model.cur = this.getCur() + Math.floor(d)
+    // step = (d: number, select = false) => {
+    //     const i1 = this.getCur()
+    //     this.model.cur = this.getCur() + Math.floor(d)
 
-        if (select) this.selectRange(i1, this.getCur())
-        return this
-    }
+    //     if (select) this.selectRange(i1, this.getCur())
+    //     return this
+    // }
 
-    toggleSel = (): void => {
-        const f = this.getCurItem()
-        f.sel = !f.sel
-    }
+    // toggleSel = (): void => {
+    //     const f = this.getCurItem()
+    //     f.sel = !f.sel
+    // }
 
-    selectAll = (): void => {
-        this.getItemsFilter().forEach(item => item.sel = true)
-    }
+    // selectAll = (): void => {
+    //     this.getItemsFilter().forEach(item => item.sel = true)
+    // }
 
-    deselectAll = (): void => {
-        this.getItemsFilter().forEach(item => item.sel = false)
-    }
+    // deselectAll = (): void => {
+    //     this.getItemsFilter().forEach(item => item.sel = false)
+    // }
 
     getUrl = (): Url => {
-        return this.model.url
+        return this.url
     }
 
     getPath = (): string => {
-        return this.model.url.path
+        return this.url.path
     }
 
-    getSelectedItems = (): Item[] => {
-        return this.getItemsFilter().filter((item, i) => {
-            return item.sel || this.getCur() == i
-        })
-    }
+    // getSelectedItems = (): Item[] => {
+    //     return this.getItemsFilter().filter((item, i) => {
+    //         return item.sel || this.getCur() == i
+    //     })
+    // }
 
-    getSelectedItemsPaths = () => {
-        return this.getSelectedItems().map(item => item.path)
-    }
+    // getSelectedItemsPaths = () => {
+    //     return this.getSelectedItems().map(item => item.path)
+    // }
 
-    setItems(items: Item[]) {
-        this.model.items = items
+    items: ApiItem[]
+    setItems(items: ItemSet[]) {
+        this.items = items.map(item => new ApiItem(item))
+        this.view.setItems(this.items.map(item => item.view))
         setTimeout(() => {
             this.handlers
                 .filter(handler => handler.onPanelItemsSet)
@@ -117,40 +122,25 @@ export class Panel implements PanelApi {
         })
 
         const url = pathOrUrl as Url
-        this.model.url = url
+        this.url = url
         this.handlers
             .filter(handler => handler.onPanelCd)
             .forEach(handler => handler.onPanelCd(url))
     }
 
-    getTitle = () => {
-        const filter = this.model.filter
-        const protocol = this.model.url.protocol
-        return (
-            protocol ?
-                protocol + ':' :
-                ''
-        )
-            + this.model.url.path
-            + (filter ? ' [' + filter + ']' : '')
-    }
+    // getTitle = () => {
+    //     const filter = this.model.filter
+    //     const protocol = this.model.url.protocol
+    //     return (
+    //         protocol ?
+    //             protocol + ':' :
+    //             ''
+    //     )
+    //         + this.model.url.path
+    //         + (filter ? ' [' + filter + ']' : '')
+    // }
 
-    filter = (substr: string) => {
-        this.model.filter = substr
-    }
-
-    model = {
-        url: {
-            protocol: '',
-            path: '',
-            query: {}
-        },
-        filter: '',
-        cur: 0,
-        items: [],
-
-        getTitle: this.getTitle,
-        getCur: this.getCur,
-        getItems: this.getItemsFilter,
-    }
+    // filter = (substr: string) => {
+    //     this.model.filter = substr
+    // }
 }

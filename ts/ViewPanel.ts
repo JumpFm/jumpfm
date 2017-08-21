@@ -1,17 +1,20 @@
 import { PanelView as PanelViewApi } from 'jumpfm-api'
+import { ViewItem } from './ViewItem'
 
 import * as Mousetrap from 'mousetrap'
 
-export class PanelView implements PanelViewApi {
-    readonly tbody: HTMLElement
-    readonly filter: HTMLInputElement
-    readonly filterTrap
+export class ViewPanel implements PanelViewApi {
+    readonly panel: HTMLDivElement = document.createElement('div')
+    private readonly table: HTMLTableElement = document.createElement('table')
+    private readonly tbody: HTMLTableSectionElement = document.createElement('tbody')
+    readonly filter: HTMLInputElement = document.createElement('input')
+    readonly filterTrap = new Mousetrap(this.filter)
 
-    constructor(i) {
-        this.tbody = document.getElementById('tbody' + i)
-        this.filter = document.getElementById('filter' + i) as HTMLInputElement
-        this.filterTrap = new Mousetrap(this.filter)
-        this.filter.addEventListener('blur', this.hideFilter, false)
+    constructor() {
+        this.panel.className = 'panel'
+        this.panel.appendChild(this.table)
+        this.table.appendChild(this.tbody)
+        // this.filter.addEventListener('blur', this.hideFilter, false)
     }
 
     private clientHeight = () => this.tbody.clientHeight
@@ -39,6 +42,15 @@ export class PanelView implements PanelViewApi {
             this.tbody.scrollTop = Math.ceil(rowTop)
         if (rowBottom > this.bodyBottom())
             this.tbody.scrollTop = rowBottom - this.clientHeight()
+    }
+
+    clearItems = () => {
+        while (this.tbody.lastChild) this.tbody.removeChild(this.tbody.lastChild)
+    }
+
+    setItems = (items: ViewItem[]) => {
+        this.clearItems()
+        items.forEach(item => this.tbody.appendChild(item.tr))
     }
 }
 
