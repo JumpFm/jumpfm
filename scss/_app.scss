@@ -1,4 +1,22 @@
 @import 'colors';
+@font-face {
+    font-family: DroidSansMono;
+    src: url('../fonts/DroidSansMono.ttf');
+}
+
+* {
+    font-family: 'DroidSansMono';
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
 #app {
     position: absolute;
     top: 0;
@@ -7,4 +25,20 @@
     right: 0;
     display: flex;
     flex-direction: column;
+}
+
+html,
+body,
+table,
+input {
+    background-color: $color-bg;
+    color: $color-fg;
+}
+
+input {
+    font-size: inherit;
+    padding: .2em;
+    outline: none;
+    border: none;
+    background-color: $color-bg;
 }

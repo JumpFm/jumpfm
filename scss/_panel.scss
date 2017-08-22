@@ -5,13 +5,6 @@
     flex-direction: column;
     flex-grow: 1;
     width: 50%;
-    // 
-    .title {
-        @extend .txt-no-wrap;
-        flex-shrink: 0;
-        display: block;
-        width: 100%;
-    }
     border: 0 solid $color-border;
     &:first-child {
         border-right-width: 2px
@@ -19,79 +12,84 @@
     &:nth-child(2) {
         border-left-width: 2px
     }
-    // 
-    tr[cur] {
-        background-color: $color-border;
-        font-weight: bold;
+}
+
+.panel>title {
+    @extend .txt-no-wrap;
+    flex-shrink: 0;
+    display: block;
+    width: 100%;
+}
+
+.panel[active]>title {
+    background-color: darken($color-info, 20%);
+    font-weight: bold;
+}
+
+.panel tr[cur] {
+    background-color: $color-border;
+    font-weight: bold;
+}
+
+.panel[active] tr[cur] {
+    background-color: darken($color-warn, 45%);
+}
+
+.panel[active] tr[sel] {
+    background-color: darken($color-warn, 55%);
+}
+
+table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    table-layout: fixed;
+    flex-grow: 1;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead {
+    background-image: linear-gradient($color-border, $color-bg);
+}
+
+tbody {
+    display: block;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+thead,
+tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+th:first-child,
+td:first-child {
+    width: 1.5em;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 6em;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 10.5em;
+}
+
+th,
+td {
+    @extend .txt-no-wrap;
+    padding: .1em .2em;
+    &:first-child {
+        padding-left: .5em;
+        padding-right: 1.5em;
     }
-    // 
-    &[sel] {
-        .title {
-            background-color: darken($color-info, 20%);
-            font-weight: bold;
-        }
-        tr {
-            &[sel] {
-                background-color: darken($color-warn, 55%);
-            }
-            &[cur] {
-                background-color: darken($color-warn, 45%);
-            }
-        }
-    }
-    // 
-    table {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        table-layout: fixed;
-        flex-grow: 1;
-        border-collapse: collapse;
-        text-align: left;
-    }
-    // 
-    thead {
-        background-image: linear-gradient($color-border, $color-bg);
-    }
-    // 
-    tbody {
-        display: block;
-        overflow-y: auto;
-        flex-grow: 1;
-    }
-    // 
-    thead,
-    tbody tr {
-        display: table;
-        width: 100%;
-        table-layout: fixed;
-    }
-    th:first-child,
-    td:first-child {
-        width: 1.5em;
-    }
-    th:nth-child(3),
-    td:nth-child(3) {
-        width: 6em;
-    }
-    th:nth-child(4),
-    td:nth-child(4) {
-        width: 10.5em;
-    }
-    th,
-    td {
-        @extend .txt-no-wrap;
-        padding: .1em .2em;
-        &:first-child {
-            padding-left: .5em;
-            padding-right: 1.5em;
-        }
-        &:last-child {
-            padding-right: .5em;
-        }
-    }
-    .filter {
-        border-top: 2px solid $color-border;
-        display: none;
+    &:last-child {
+        padding-right: .5em;
     }
 }

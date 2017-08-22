@@ -1,30 +1,25 @@
 import { JumpFm as JumpFmApi } from 'jumpfm-api'
 import { PluginManager } from './PluginManager'
 // import { Dialog } from './ApiDialog'
-// import {
-//     editableFiles,
-//     keyboard,
-//     saveKeyboard,
-//     packageJson,
-//     root
-// } from './files'
-import { Panel } from './ApiPanel'
-import { ViewPanel } from './ViewPanel'
+import {
+    //     editableFiles,
+    keyboard,
+    //     saveKeyboard,
+    //     packageJson,
+    //     root
+} from './files'
+import { Panel } from './Panel'
 // import { Settings } from './ApiSettings'
 // import { StatusBar } from './ApiStatusBar'
 
 import * as homedir from 'homedir'
-// import * as Mousetrap from 'mousetrap'
+import * as mousetrap from 'mousetrap'
 // import * as path from 'path'
 
 export class JumpFm implements JumpFmApi {
+    readonly electron: any = require('electron')
     readonly panels = [new Panel(), new Panel()]
-    dialog: Dialog;
-    electron: any;
-    package: any;
-    root: string;
-    settings: Settings;
-    statusBar: StatusBar;
+    private active: 0 | 1 = 0
     // readonly dialog = new Dialog('dialog', 'dialog-input')
     // readonly statusBar = new StatusBar()
     // readonly settings = new Settings()
@@ -32,15 +27,10 @@ export class JumpFm implements JumpFmApi {
     // readonly root = root
     // readonly electron = require('electron')
 
-    bindKeys(name: string, keys?: string[], action?: () => void): { filterMode(differentKeys?: string[], differentAction?: () => void); } {
-        throw new Error("Method not implemented.");
+    getActivePanel = (): Panel => {
+        return this.panels[this.active]
     }
-    getActivePanel(): Panel {
-        throw new Error("Method not implemented.");
-    }
-    getActivePanelIndex(): 0 | 1 {
-        throw new Error("Method not implemented.");
-    }
+
     getPassivePanel(): Panel {
         throw new Error("Method not implemented.");
     }
@@ -54,19 +44,31 @@ export class JumpFm implements JumpFmApi {
     private readonly pluginManager = new PluginManager(this)
 
     constructor() {
+        // this.bindKeys('increaseFontSize', ['ctrl+='], () => this.model.fontSize++)
+        // this.bindKeys('decreaseFontSize', ['ctrl+-'], () => this.model.fontSize--)
+        // this.bindKeys('resetFontSize', ['ctrl+0'], () => this.model.fontSize = 14)
+
         setTimeout(() => {
-            this.panels.forEach(panel => document.getElementById('panels').appendChild(panel.view.panel))
-            // this.bindKeys('increaseFontSize', ['ctrl+='], () => this.model.fontSize++)
-            // this.bindKeys('decreaseFontSize', ['ctrl+-'], () => this.model.fontSize--)
-            // this.bindKeys('resetFontSize', ['ctrl+0'], () => this.model.fontSize = 14)
+            this.panels.forEach(panel =>
+                document
+                    .getElementById('panels')
+                    .appendChild(panel.divPanel))
 
 
             this.pluginManager.loadAndUpdatePlugins(() => {
                 // saveKeyboard(keyboard)
                 // this.panels.forEach(panel => panel.cd(homedir()))
                 this.panels.forEach(panel => panel.cd('/home/gilad/test'))
+                this.setActive(0)
             })
         }, 1)
+    }
+
+    private setActive = (i: 0 | 1) => {
+        const j = (i + 1) % 2
+        this.active = i
+        this.panels[i].divPanel.setAttribute('active', '')
+        this.panels[j].divPanel.removeAttribute('active')
     }
 
     // switchPanel = () =>
@@ -92,44 +94,41 @@ export class JumpFm implements JumpFmApi {
     //     this.switchPanel()
     // }
 
-    // private getKeys = (actionName: string, defaultKeys: string[]): string[] => {
-    //     const keys = keyboard[actionName]
-    //     if (keys && Array.isArray(keys)) return keys
-    //     keyboard[actionName] = defaultKeys
-    //     return defaultKeys
-    // }
+    private getKeys = (actionName: string, defaultKeys: string[]): string[] => {
+        const keys = keyboard[actionName]
+        if (keys && Array.isArray(keys)) return keys
+        keyboard[actionName] = defaultKeys
+        return defaultKeys
+    }
 
-    // private bind = (actionName: string,
-    //     defaultKeys: string[],
-    //     action: () => void,
-    //     trap = Mousetrap) => {
-    //     this.getKeys(actionName, defaultKeys).forEach(key =>
-    //         trap.bind(key, () => {
-    //             action()
-    //             return false
-    //         })
-    //     )
-    // }
+    private bind = (actionName: string, defaultKeys: string[], action: () => void) => {
+        this.getKeys(actionName, defaultKeys).forEach(key =>
+            mousetrap.bind(key, () => {
+                action()
+                return false
+            })
+        )
+    }
 
-    // bindKeys = (actionName: string,
-    //     defaultKeys: string[] = [],
-    //     action: () => void = undefined
-    // ) => {
-    //     if (defaultKeys.length && action)
-    //         this.bind(actionName, defaultKeys, action)
-    //     return {
-    //         filterMode: (filterDefaultKeys: string[] = defaultKeys,
-    //             filterAction: () => void = action,
-    //         ) => {
-    //             this.panels.forEach(panel =>
-    //                 this.bind(
-    //                     'filter:' + actionName,
-    //                     filterDefaultKeys,
-    //                     filterAction,
-    //                     panel.view.filterTrap
-    //                 )
-    //             )
-    //         }
-    //     }
-    // }
+    bindKeys = (actionName: string,
+        defaultKeys: string[] = [],
+        action: () => void = undefined
+    ) => {
+        if (defaultKeys.length && action)
+            this.bind(actionName, defaultKeys, action)
+        return {
+            filterMode: (filterDefaultKeys: string[] = defaultKeys,
+                filterAction: () => void = action,
+            ) => {
+                this.panels.forEach(panel =>
+                    this.bind(
+                        'filter:' + actionName,
+                        filterDefaultKeys,
+                        filterAction,
+                        // panel.view.filterTrap
+                    )
+                )
+            }
+        }
+    }
 }
