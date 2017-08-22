@@ -1,4 +1,4 @@
-// import { JumpFm as JumpFmApi } from 'jumpfm-api'
+import { JumpFm as JumpFmApi } from 'jumpfm-api'
 import { PluginManager } from './PluginManager'
 // import { Dialog } from './ApiDialog'
 // import {
@@ -17,14 +17,39 @@ import * as homedir from 'homedir'
 // import * as Mousetrap from 'mousetrap'
 // import * as path from 'path'
 
-export class JumpFm {
+export class JumpFm implements JumpFmApi {
+    readonly panels = [new Panel(), new Panel()]
+    dialog: Dialog;
+    electron: any;
+    package: any;
+    root: string;
+    settings: Settings;
+    statusBar: StatusBar;
     // readonly dialog = new Dialog('dialog', 'dialog-input')
     // readonly statusBar = new StatusBar()
-    readonly panels = [new Panel(), new Panel()]
     // readonly settings = new Settings()
     // readonly package = packageJson
     // readonly root = root
     // readonly electron = require('electron')
+
+    bindKeys(name: string, keys?: string[], action?: () => void): { filterMode(differentKeys?: string[], differentAction?: () => void); } {
+        throw new Error("Method not implemented.");
+    }
+    getActivePanel(): Panel {
+        throw new Error("Method not implemented.");
+    }
+    getActivePanelIndex(): 0 | 1 {
+        throw new Error("Method not implemented.");
+    }
+    getPassivePanel(): Panel {
+        throw new Error("Method not implemented.");
+    }
+    swapPanels(): void {
+        throw new Error("Method not implemented.");
+    }
+    switchPanel(): void {
+        throw new Error("Method not implemented.");
+    }
 
     private readonly pluginManager = new PluginManager(this)
 

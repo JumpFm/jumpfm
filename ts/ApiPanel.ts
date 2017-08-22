@@ -11,6 +11,12 @@ import { ApiItem } from './ApiItem'
 import { ViewPanel } from './ViewPanel'
 
 export class Panel implements PanelApi {
+    filterHide(): void {
+        throw new Error("Method not implemented.");
+    }
+    filterShow(): void {
+        throw new Error("Method not implemented.");
+    }
     private readonly handlers: PanelListener[] = []
     private readonly view: ViewPanel = new ViewPanel()
 
