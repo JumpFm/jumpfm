@@ -2,20 +2,68 @@ import {
     Panel as PanelApi
     , Url
     , PanelListener
-    , ItemGet
-    , ItemSet
+    , Item
+    , File
 } from 'jumpfm-api'
 
 import { ApiItem } from './ApiItem'
 
 import { ViewPanel } from './ViewPanel'
-// import { itemFromPath } from './itemFromPath'
 
 export class Panel implements PanelApi {
-    readonly view: ViewPanel = new ViewPanel()
-    private url: Url
+    private readonly handlers: PanelListener[] = []
+    private readonly view: ViewPanel = new ViewPanel()
 
-    getItems(): ItemGet[] {
+    private url: Url
+    private items: ApiItem[]
+    private cur: number = 0
+
+
+    private findNearestVisibleAbove = () => {
+        for (let i = this.cur; i >= 0; i--)
+            if (this.items[i].isVisible()) return i
+        return -1
+    }
+
+    private findNearestVisibleBelow = () => {
+        for (let i = this.cur; i < this.items.length; i++)
+            if (this.items[i].isVisible()) return i
+        return -1
+    }
+
+    deselectAll(): void {
+        this.items.forEach(item => item.deselect())
+    }
+
+    filter(substr: string): void {
+        throw new Error("Method not implemented.");
+    }
+
+    getCur(): number {
+        throw new Error("Method not implemented.");
+    }
+
+    getCurItem(): Item {
+        return this.items[this.cur]
+    }
+
+    getSelectedItems(): Item[] {
+        return this.items.filter((item, i) => i === this.cur || item.isSelected())
+    }
+
+    selectAll(): void {
+        this.items.forEach(item => item.select())
+    }
+
+    step(d: number, select?: boolean) {
+        throw new Error("Method not implemented.");
+    }
+
+    toggleCurSel(): void {
+        this.items[this.cur].toggleSelection()
+    }
+
+    getItems(): Item[] {
         return this.items
     }
 
@@ -92,8 +140,7 @@ export class Panel implements PanelApi {
     //     return this.getSelectedItems().map(item => item.path)
     // }
 
-    items: ApiItem[]
-    setItems(items: ItemSet[]) {
+    setItems(items: File[]) {
         this.items = items.map(item => new ApiItem(item))
         const addItemsAndHandle = (i) => {
             if (i > this.items.length) {
@@ -119,8 +166,6 @@ export class Panel implements PanelApi {
         return this
     }
 
-
-    readonly handlers: PanelListener[] = []
 
     listen(handler: PanelListener) {
         this.handlers.push(handler)

@@ -1,4 +1,4 @@
-import { ItemSet } from 'jumpfm-api'
+import { File } from 'jumpfm-api'
 
 import * as moment from 'moment'
 import * as fileSize from 'filesize'
@@ -10,7 +10,7 @@ export class ViewItem {
     private readonly size = document.createElement('td')
     private readonly time = document.createElement('td')
 
-    constructor(item: ItemSet) {
+    constructor(item: File) {
         this.tr.appendChild(this.icon)
         this.tr.appendChild(this.name)
         this.tr.appendChild(this.size)
@@ -19,6 +19,18 @@ export class ViewItem {
         this.name.textContent =
             item.name || '--'
     }
+
+    hide = () =>
+        this.tr.setAttribute('hidden', '')
+
+    show = () =>
+        this.tr.removeAttribute('hidden')
+
+    deselect = () =>
+        this.tr.removeAttribute('selected')
+
+    select = () =>
+        this.tr.setAttribute('selected', '')
 
     setIcon = (icon: string) =>
         this.icon.textContent = icon
