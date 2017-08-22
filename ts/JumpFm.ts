@@ -38,7 +38,8 @@ export class JumpFm {
 
             this.pluginManager.loadAndUpdatePlugins(() => {
                 // saveKeyboard(keyboard)
-                this.panels.forEach(panel => panel.cd(homedir()))
+                // this.panels.forEach(panel => panel.cd(homedir()))
+                this.panels.forEach(panel => panel.cd('/home/gilad/test'))
             })
         }, 1)
     }

@@ -95,12 +95,27 @@ export class Panel implements PanelApi {
     items: ApiItem[]
     setItems(items: ItemSet[]) {
         this.items = items.map(item => new ApiItem(item))
-        this.view.setItems(this.items.map(item => item.view))
-        setTimeout(() => {
-            this.handlers
-                .filter(handler => handler.onPanelItemsSet)
-                .forEach(handler => handler.onPanelItemsSet())
-        }, 10)
+        const addItemsAndHandle = (i) => {
+            if (i > this.items.length) {
+                this.handlers
+                    .filter(handler => handler.onPanelItemsSet)
+                    .forEach(handler =>
+                        setImmediate(() =>
+                            handler.onPanelItemsSet()
+                        )
+                    )
+                return
+            }
+            const j = i + 100
+            console.log(`adding ${i} - ${j}`)
+            this.view.addItems(this.items.slice(i, j))
+            setImmediate(() => {
+                addItemsAndHandle(j)
+            })
+        }
+
+        this.view.clearItems()
+        addItemsAndHandle(0)
         return this
     }
 

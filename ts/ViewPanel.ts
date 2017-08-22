@@ -1,9 +1,8 @@
-import { PanelView as PanelViewApi } from 'jumpfm-api'
-import { ViewItem } from './ViewItem'
+import { ApiItem } from './ApiItem'
 
 import * as Mousetrap from 'mousetrap'
 
-export class ViewPanel implements PanelViewApi {
+export class ViewPanel {
     readonly panel: HTMLDivElement = document.createElement('div')
     private readonly table: HTMLTableElement = document.createElement('table')
     private readonly tbody: HTMLTableSectionElement = document.createElement('tbody')
@@ -48,9 +47,8 @@ export class ViewPanel implements PanelViewApi {
         while (this.tbody.lastChild) this.tbody.removeChild(this.tbody.lastChild)
     }
 
-    setItems = (items: ViewItem[]) => {
-        this.clearItems()
-        items.forEach(item => this.tbody.appendChild(item.tr))
+    addItems = (items: ApiItem[]) => {
+        items.forEach(item => this.tbody.appendChild(item.view.tr))
     }
 }
 
