@@ -8,6 +8,7 @@
     "words": [
         "jumpfm",
         "keyboardjs",
+        "keycode",
         "pagedown",
         "pageup",
         "shortway"

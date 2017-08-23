@@ -62,7 +62,9 @@ const keyCodes: { [name: string]: number } = {
     f9: 120,
     f10: 121,
     f11: 122,
-    f12: 123
+    f12: 123,
+    '[': 219,
+    ']': 221
 }
 
 const includes = (array, item) => array.indexOf(item) > -1
@@ -75,6 +77,7 @@ export const shortway = (command, callback) => {
     const shift = keys.some(key => key === 'shift')
     const alt = keys.some(key => key === 'alt')
 
+    if (!keyCode) throw new Error(`can't find keycode for command ${command}`)
     return function (e) {
         if (e.ctrlKey === ctrl &&
             e.shiftKey === shift &&
