@@ -1,37 +1,48 @@
-import { StatusBar as StatusBarApi, Msg, StyledMsg } from 'jumpfm-api'
+import { StatusBar as StatusBarApi, Msg as MsgAPi } from 'jumpfm-api'
+
+class Msg implements MsgAPi {
+    readonly divMsg: HTMLDivElement = document.createElement('div')
+
+    setType = (type: "info" | "warn" | "err") => {
+        this.divMsg.className = type
+        return this
+    }
+
+    setText = (txt: string) => {
+        this.divMsg.textContent = txt
+        return this
+    }
+
+    setTooltip = (txt: string) => {
+        this.divMsg.setAttribute('data-title', txt)
+        return this
+    }
+
+    setClearTimeout = (timeout: number) => {
+        setTimeout(() => this.setText(''), timeout)
+        return this
+    }
+
+    setAttr = (name: string, b: boolean) => {
+        if (b)
+            this.divMsg.setAttribute(name, '')
+        else
+            this.divMsg.removeAttribute(name)
+
+        return this
+    }
+}
 
 export class StatusBar implements StatusBarApi {
-    model: { msgs: StyledMsg[] } = {
-        msgs: [],
-    }
+    private readonly divMsgs: HTMLDivElement
+    = document.getElementById('statusbar-msgs') as HTMLDivElement
 
-    readonly msgs: { [key: string]: StyledMsg } = {}
+    private readonly msgs: { [name: string]: Msg } = {}
 
-    private updateModel = () => {
-        this.model.msgs = Object.values(this.msgs)
-    }
-
-    msg = (classes: string[]) =>
-        (key: string, msg: Msg, clearTimeout: number = 0) => {
-            this.msgs[key] = {
-                classes: classes,
-                dataTitle: msg.dataTitle,
-                txt: msg.txt
-            }
-
-            this.updateModel()
-
-            if (clearTimeout) setTimeout(() =>
-                this.clear(key)
-                , clearTimeout);
-        }
-
-    info = this.msg(['info'])
-    warn = this.msg(['warn'])
-    err = this.msg(['err'])
-
-    clear = (key: string) => {
-        delete this.msgs[key]
-        this.updateModel()
+    msg = (name: string) => {
+        if (this.msgs[name]) return this.msgs[name]
+        const msg = new Msg()
+        this.msgs[name] = msg
+        this.divMsgs.appendChild(msg.divMsg)
     }
 }

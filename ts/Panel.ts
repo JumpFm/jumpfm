@@ -82,7 +82,7 @@ export class Panel implements PanelApi {
 
             console.time('prog')
             if (from > this.items.length) return done && done()
-            const to = from + 200
+            const to = from + 100
 
             process(this.items.slice(from, to))
 
