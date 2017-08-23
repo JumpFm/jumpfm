@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const time = Date.now()
+    console.time('main')
     new (require('./js/JumpFm.js').JumpFm)()
-    console.log(Date.now() - time, 'milliseconds')
+    console.timeEnd('main')
 }, false)

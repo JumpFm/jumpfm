@@ -1,6 +1,10 @@
 import { Filter as FilterApi } from 'jumpfm-api'
 
 export class Filter implements FilterApi {
+    bind(name: string, keys: string[], action: () => void) {
+        throw new Error("Method not implemented.");
+    }
+
     private readonly handlers: ((val: string) => void)[] = []
     readonly input: HTMLInputElement = document.createElement('input')
 
@@ -17,7 +21,7 @@ export class Filter implements FilterApi {
         });
     }
 
-    reset = () => {
+    clear = () => {
         this.input.value = ''
         // no notification
     }

@@ -6,7 +6,6 @@ import * as fileSize from 'filesize'
 type attr = 'cur' | 'hidden' | 'selected'
 
 export class Item implements ItemApi {
-
     private hidden: boolean = false
     private selected: boolean = false
 
@@ -33,25 +32,27 @@ export class Item implements ItemApi {
     readonly path: string;
     readonly name: string;
 
-    private set = (attr: attr) => {
-        this.tr.setAttribute(attr, '')
+    private readonly attrs: { [attr: string]: boolean } = {}
+
+    private set = (attr: attr) => (b: boolean) => {
+        this.attrs[attr] = b
+        if (b)
+            this.tr.setAttribute(attr, '')
+        else
+            this.tr.removeAttribute(attr)
         return this
     }
 
-    private rm = (attr: attr) => {
-        this.tr.removeAttribute(attr)
-        return this
-    }
+    private is = (attr: attr) => this.attrs[attr]
 
-    setCur = () => {
-        this.set('cur')
-        return this
-    }
+    setCur: (b: boolean) => void = this.set('cur')
+    setHidden: (b: boolean) => void = this.set('hidden')
+    setSelected: (b: boolean) => void = this.set('selected')
 
-    rmCur = () => {
-        this.rm('cur')
-        return this
-    }
+    hide = () => this.setHidden(true)
+    show = () => this.setHidden(false)
+
+    isSelected = () => this.is('selected')
 
     setIcon = (icon: string): Item => {
         this.tdIcon.textContent = icon
@@ -69,37 +70,4 @@ export class Item implements ItemApi {
             (size && fileSize(size) || '--')
         return this
     }
-
-    hide = (): Item => {
-        this.hidden = true
-        return this.set('hidden')
-    }
-
-    show = (): Item => {
-        this.hidden = false
-        return this.rm('hidden')
-    }
-
-    isHidden = () =>
-        this.hidden
-
-    isVisible = () =>
-        !this.hidden
-
-    select = () => {
-        this.selected = true
-        return this.set('selected')
-    }
-
-    deselect = () => {
-        this.selected = false
-        this.rm('selected')
-    }
-
-    toggleSelection = () => {
-        if (this.selected) return this.deselect()
-        return this.select()
-    }
-
-    isSelected = () => this.selected
 }

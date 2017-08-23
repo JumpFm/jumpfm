@@ -26,6 +26,10 @@
     font-weight: bold;
 }
 
+.panel tr[hidden] {
+    display: none;
+}
+
 .panel tr[cur] {
     background-color: $color-border;
     font-weight: bold;
