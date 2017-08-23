@@ -30,6 +30,7 @@ export class JumpFm implements JumpFmApi {
         this.panels[this.passive()]
 
     panelsSwap = () => {
+        this.active = this.passive()
         const tmp = this.panels[0]
         this.panels[0] = this.panels[1]
         this.panels[1] = tmp

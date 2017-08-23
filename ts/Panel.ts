@@ -62,9 +62,12 @@ export class Panel implements PanelApi {
     }
 
     private scrollToCur = () => {
-        const tr = this.visibleItems[this.cur].tr
+        const curItem = this.visibleItems[this.cur]
+        if (!curItem) return
+        const tr = curItem.tr
         const trRect = tr.getBoundingClientRect()
         const tbodyRect = this.tbody.getBoundingClientRect()
+        console.log(trRect, tbodyRect)
         if (trRect.bottom > tbodyRect.bottom)
             tr.scrollIntoView(false)
         if (trRect.top < tbodyRect.top)
@@ -125,6 +128,7 @@ export class Panel implements PanelApi {
         this.progressiveUpdateVisibility(0, () => {
             if (oldCur) oldCur.setCur(false)
             this.setCur(this.cur)
+            this.scrollToCur()
         })
     }
 
