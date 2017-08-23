@@ -3,8 +3,7 @@ import { Panel as PanelApi, Url, File } from 'jumpfm-api'
 import { Item } from './Item'
 import { Filter } from './Filter'
 import { getKeys } from "./files";
-
-import * as keyboardjs from 'keyboardjs'
+import { shortway } from "./shortway";
 
 export class Panel implements PanelApi {
     private readonly table: HTMLTableElement = document.createElement('table')
@@ -67,7 +66,6 @@ export class Panel implements PanelApi {
         const tr = curItem.tr
         const trRect = tr.getBoundingClientRect()
         const tbodyRect = this.tbody.getBoundingClientRect()
-        console.log(trRect, tbodyRect)
         if (trRect.bottom > tbodyRect.bottom)
             tr.scrollIntoView(false)
         if (trRect.top < tbodyRect.top)
@@ -251,12 +249,13 @@ export class Panel implements PanelApi {
     }
 
     bind = (actionName: string, defaultKeys: string[], action: () => void) => {
-        keyboardjs.bind(getKeys(actionName, defaultKeys), (e) => {
-            const el = e.target as HTMLElement
-            if (el.tagName === 'INPUT') return
-            if (!this.active) return
-            e.preventDefault()
-            action()
+        getKeys(actionName, defaultKeys).forEach(combo => {
+            const cb = shortway(combo, (e) => {
+                if (!this.active) return
+                e.preventDefault()
+                action()
+            })
+            document.addEventListener('keydown', cb, false)
         })
     }
 }

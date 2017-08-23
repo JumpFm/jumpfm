@@ -1,7 +1,6 @@
 import { Filter as FilterApi } from 'jumpfm-api'
 import { getKeys } from "./files";
-
-import * as keyboardjs from 'keyboardjs'
+import { shortway } from "./shortway";
 
 export class Filter implements FilterApi {
     readonly input: HTMLInputElement = document.createElement('input')
@@ -10,6 +9,7 @@ export class Filter implements FilterApi {
 
 
     constructor() {
+        this.input.addEventListener('keydown', e => e.stopPropagation(), false)
         this.input.addEventListener('input', () => {
             this.notifyAll()
         }, false)
@@ -22,11 +22,6 @@ export class Filter implements FilterApi {
         this.handlers.forEach(handler => {
             handler(this.input.value)
         });
-    }
-
-    clear = () => {
-        this.input.value = ''
-        // no notification
     }
 
     set = (val: string) => {
@@ -48,11 +43,12 @@ export class Filter implements FilterApi {
     hide = () => this.input.style.display = 'none'
 
     bind = (actionName: string, defaultKeys: string[], action: () => void) => {
-        keyboardjs.bind(getKeys(actionName, defaultKeys), (e) => {
-            if (this.input.style.display === 'none') return
-            e.preventDefault()
-            action()
+        getKeys(actionName, defaultKeys).forEach(combo => {
+            const cb = shortway(combo, (e) => {
+                e.preventDefault()
+                action()
+            })
+            this.input.addEventListener('keydown', cb, false)
         })
     }
-
 }

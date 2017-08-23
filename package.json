@@ -19,7 +19,8 @@
     "node-cmd": "^3.0.0",
     "node-watch": "^0.5.5",
     "node.os": "^1.2.4",
-    "npm": "^5.3.0"
+    "npm": "^5.3.0",
+    "shortway": "^0.3.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^4.0.0",

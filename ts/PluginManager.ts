@@ -62,7 +62,7 @@ class PluginsLoader {
 
     private loadPlugin = (name: string) => {
         try {
-            const s = Date.now()
+            console.time(name)
 
             if (this.loaded[name]) return
             this.loaded[name] = true
@@ -77,7 +77,7 @@ class PluginsLoader {
 
             plugin.load(this.jumpFm)
 
-            console.log(`${name} in ${Date.now() - s} milliseconds`)
+            console.timeEnd(name)
         } catch (e) {
             console.log(e)
         }

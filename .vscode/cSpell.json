@@ -7,7 +7,10 @@
     // words - list of words to be always considered correct
     "words": [
         "jumpfm",
-        "keyboardjs"
+        "keyboardjs",
+        "pagedown",
+        "pageup",
+        "shortway"
     ],
     // flagWords - list of words to be always considered incorrect
     // This is useful for offensive words and common spelling errors.

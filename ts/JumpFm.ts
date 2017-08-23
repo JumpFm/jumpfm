@@ -2,11 +2,12 @@ import { JumpFm as JumpFmApi } from 'jumpfm-api'
 import { Panel } from "./Panel"
 import { StatusBar } from "./StatusBar"
 import { PluginManager } from "./PluginManager";
+import { Dialog } from "./Dialog";
 import { getKeys } from "./files";
-
-import * as keyboardjs from 'keyboardjs'
+import { shortway } from "./shortway";
 
 export class JumpFm implements JumpFmApi {
+    readonly dialog = new Dialog()
     private readonly divPanels = document.getElementById('panels')
     private active: 0 | 1 = 0
     readonly panels: Panel[] = [new Panel(), new Panel()]
@@ -41,11 +42,12 @@ export class JumpFm implements JumpFmApi {
         this.setActive(this.passive())
 
     bind = (actionName: string, defaultKeys: string[], action: () => void) => {
-        keyboardjs.bind(getKeys(actionName, defaultKeys), e => {
-            const el = e.target as HTMLElement
-            if (el.tagName === 'INPUT') return
-            e.preventDefault()
-            action()
+        getKeys(actionName, defaultKeys).forEach(combo => {
+            const cb = shortway(combo, (e) => {
+                e.preventDefault()
+                action()
+            })
+            document.addEventListener('keydown', cb, false)
         })
     }
 
