@@ -63,3 +63,11 @@ export const keyboard = load(keyboardPath)
 export const saveSettings = save(settingsPath)
 export const saveKeyboard = save(keyboardPath)
 export const savePlugins = save<Plugins>(pluginsPackageJson)
+
+
+export const getKeys = (actionName: string, defaultKeys: string[]): string[] => {
+    const keys = keyboard[actionName]
+    if (keys && Array.isArray(keys)) return keys
+    keyboard[actionName] = defaultKeys
+    return defaultKeys
+}

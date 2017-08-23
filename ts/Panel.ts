@@ -2,6 +2,9 @@ import { Panel as PanelApi, Url, File } from 'jumpfm-api'
 
 import { Item } from './Item'
 import { Filter } from './Filter'
+import { getKeys } from "./files";
+
+import * as keyboardjs from 'keyboardjs'
 
 export class Panel implements PanelApi {
     private readonly table: HTMLTableElement = document.createElement('table')
@@ -17,6 +20,7 @@ export class Panel implements PanelApi {
     private readonly onCds: (() => void)[] = []
     private readonly onItemsAddeds: ((newItems: Item[]) => void)[] = []
 
+    private active = false
     private url: Url
     private cur: number = 0
     private items: Item[] = []
@@ -123,6 +127,7 @@ export class Panel implements PanelApi {
     }
 
     setActive = (b: boolean) => {
+        this.active = b
         if (b)
             this.divPanel.setAttribute('active', '')
         else
@@ -214,7 +219,11 @@ export class Panel implements PanelApi {
         this.updateVisibility()
     }
 
-    bind(name: string, keys: string[], action: () => void) {
-        throw new Error("Method not implemented.");
+    bind = (actionName: string, defaultKeys: string[], action: () => void) => {
+        keyboardjs.bind(getKeys(actionName, defaultKeys), (e) => {
+            if (!this.active) return
+            e.preventDefault()
+            action()
+        })
     }
 }
