@@ -39,6 +39,8 @@ export class Panel implements PanelApi {
         this.thead.appendChild(this.trHead)
         this.table.appendChild(this.thead)
         this.table.appendChild(this.tbody)
+        this.divPanel.appendChild(this.filterBox.input)
+
         this.filterBox.onChange(this.setTitle)
     }
 
@@ -129,7 +131,7 @@ export class Panel implements PanelApi {
     private selectRange = (from: number, to: number) => {
         if (from > to) return this.selectRange(to, from)
         for (let i = from
-            ; i < Math.min(to, this.visibleItems.length - 1)
+            ; i <= Math.min(to, this.visibleItems.length - 1)
             ; i++
         ) {
             const item = this.visibleItems[i]
@@ -246,6 +248,8 @@ export class Panel implements PanelApi {
 
     bind = (actionName: string, defaultKeys: string[], action: () => void) => {
         keyboardjs.bind(getKeys(actionName, defaultKeys), (e) => {
+            const el = e.target as HTMLElement
+            if (el.tagName === 'INPUT') return
             if (!this.active) return
             e.preventDefault()
             action()

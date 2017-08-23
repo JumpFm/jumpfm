@@ -37,6 +37,8 @@ export class JumpFm implements JumpFmApi {
 
     bind = (actionName: string, defaultKeys: string[], action: () => void) => {
         keyboardjs.bind(getKeys(actionName, defaultKeys), e => {
+            const el = e.target as HTMLElement
+            if (el.tagName === 'INPUT') return
             e.preventDefault()
             action()
         })
