@@ -1,6 +1,9 @@
 import { Dialog as DialogApi, DialogSpec, Suggestion } from 'jumpfm-api'
 import { shortway } from "./shortway";
 
+interface SuggestionLi extends Suggestion {
+    li: HTMLLIElement
+}
 
 export class Dialog implements DialogApi {
     private readonly divDialog: HTMLDivElement =
@@ -12,10 +15,13 @@ export class Dialog implements DialogApi {
     private readonly input: HTMLInputElement =
     document.getElementById('dialog-input') as HTMLInputElement
 
-    private suggestions: Suggestion[] = []
+    private readonly olSug: HTMLOListElement =
+    document.getElementById('dialog-sug') as HTMLOListElement
+
+    private suggestions: SuggestionLi[] = []
 
     private onAccept = (val: string, sug: Suggestion) => { }
-    private onChange = val => []
+    private suggest = val => []
     private cur: number
 
     constructor() {
@@ -23,7 +29,6 @@ export class Dialog implements DialogApi {
             this.input.addEventListener(type, action, capture)
 
         on('keydown', e => {
-            console.log('dialog')
             e.stopPropagation()
         })
         on('blur', this.close)
@@ -34,23 +39,49 @@ export class Dialog implements DialogApi {
                 this.input.value,
                 this.suggestions[this.cur]
             )
-            return false
         }))
 
-        // mousetrap.bind('down', () => {
-        //     this.cur = Math.min(this.cur + 1, this.suggestions.length - 1)
-        //     return false
-        // })
 
-        // mousetrap.bind('up', () => {
-        //     this.cur = Math.max(this.cur - 1, 0)
-        //     return false
-        // })
+        on('keydown', shortway('down', () =>
+            this.setCur(this.cur + 1)
+        ))
 
-        // this.input.addEventListener('input', () => {
-        //     this.suggestions = this.onChange(this.input.value)
-        // }, false)
+        on('keydown', shortway('up', () =>
+            this.setCur(this.cur - 1)
+        ))
+
+        on('input', this.updateSuggestions)
     }
+
+    private updateSuggestions = () => {
+        this.suggestions =
+            this.suggest(this.input.value)
+                .map(sug => {
+                    const li = document.createElement('li')
+                    li.innerHTML = sug.html
+                    sug.li = li
+                    return sug
+                })
+        this.clearSuggestions()
+        this.suggestions.forEach(sug => {
+            this.olSug.appendChild(sug.li)
+        })
+        const curSuggestion = this.suggestions[this.cur = 0]
+        if (curSuggestion) curSuggestion.li.setAttribute('cur', '')
+    }
+
+    private setCur = (i: number) => {
+        if (!this.suggestions.length) return
+        const curSug = this.suggestions[this.cur]
+        if (curSug) curSug.li.removeAttribute('cur')
+        this.cur = Math.max(0, Math.min(i, this.suggestions.length - 1))
+        this.suggestions[this.cur].li.setAttribute('cur', '')
+    }
+
+    private clearSuggestions = () => {
+        while (this.olSug.lastChild) this.olSug.removeChild(this.olSug.lastChild)
+    }
+
 
     private close = () => {
         this.divDialog.style.display = 'none'
@@ -66,7 +97,7 @@ export class Dialog implements DialogApi {
         this.input.select()
 
         spec.onOpen && spec.onOpen(this.input)
-        this.onChange = spec.onChange || (val => [])
+        this.suggest = spec.suggest || (val => [])
         this.onAccept = spec.onAccept
     }
 }

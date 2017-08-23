@@ -3,15 +3,17 @@ import { Panel } from "./Panel"
 import { StatusBar } from "./StatusBar"
 import { PluginManager } from "./PluginManager";
 import { Dialog } from "./Dialog";
-import { getKeys } from "./files";
 import { shortway } from "./shortway";
 import { Settings } from "./Settings";
+import { getKeys, saveKeyboard, root } from "./files";
+
 
 export class JumpFm implements JumpFmApi {
     private active: 0 | 1 = 0
     private readonly divPanels = document.getElementById('panels')
     private readonly pluginManager = new PluginManager(this)
 
+    readonly root = root
     readonly settings = new Settings()
     readonly dialog = new Dialog()
     readonly electron = require('electron')
@@ -47,7 +49,6 @@ export class JumpFm implements JumpFmApi {
     bind = (actionName: string, defaultKeys: string[], action: () => void) => {
         getKeys(actionName, defaultKeys).forEach(combo => {
             const cb = shortway(combo, (e) => {
-                console.log('jumpfm')
                 e.preventDefault()
                 action()
             })
@@ -62,7 +63,7 @@ export class JumpFm implements JumpFmApi {
 
 
         this.pluginManager.loadAndUpdatePlugins(() => {
-            // saveKeyboard(keyboard)
+            saveKeyboard()
             // this.panels.forEach(panel => panel.cd(homedir()))
             this.panels.forEach(panel => panel.cd('/home/gilad/test'))
             this.setActive(0)

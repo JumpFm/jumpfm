@@ -61,7 +61,7 @@ export const settings = load(settingsPath)
 export const keyboard = load(keyboardPath)
 
 export const saveSettings = save(settingsPath)
-export const saveKeyboard = save(keyboardPath)
+export const saveKeyboard = () => save(keyboardPath)(keyboard)
 export const savePlugins = save<Plugins>(pluginsPackageJson)
 
 

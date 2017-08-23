@@ -46,7 +46,7 @@ class PluginsLoader {
     constructor(jumpFm: JumpFm, done: (err?) => void) {
         this.jumpFm = jumpFm
         this.done = () => {
-            // jumpFm.statusBar.clear('plugins')
+            jumpFm.statusBar.msg('plugins').setText('')
             done()
         }
     }
@@ -135,10 +135,10 @@ export class PluginManager {
     }
 
     loadAndUpdatePlugins = (done: (err?) => void) => {
-        // this.jumpFm.statusBar.info('plugins', {
-        //     txt: 'Downloading plugins (can take a while)...',
-        //     dataTitle: 'This might take some time'
-        // })
+        this.jumpFm.statusBar.msg('plugins')
+            .setType('info')
+            .setText('Downloading plugins (can take a while)...')
+            .setTooltip('This might take some time')
 
         const pluginLoader = new PluginsLoader(this.jumpFm, done)
 
