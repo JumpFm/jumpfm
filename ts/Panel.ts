@@ -73,14 +73,12 @@ export class Panel implements PanelApi {
     private setCur = (i) => {
         this.safeSetCurrent(false)
         this.cur = Math.max(0, Math.min(i, this.visibleItems.length - 1))
-        console.log('setting cur', this.cur)
         this.safeSetCurrent(true)
     }
 
     private progressiveProcessItems = (process: (items: Item[]) => void) =>
         (from: number, done?: () => void) => {
 
-            console.time('prog')
             if (from > this.items.length) return done && done()
             const to = from + 100
 
@@ -89,7 +87,6 @@ export class Panel implements PanelApi {
             setImmediate(() => {
                 this.progressiveProcessItems(process)(to, done)
             })
-            console.timeEnd('prog')
         }
 
     private progressiveAddItems = this.progressiveProcessItems(items => {
@@ -123,6 +120,13 @@ export class Panel implements PanelApi {
             if (oldCur) oldCur.setCur(false)
             this.setCur(this.cur)
         })
+    }
+
+    setActive = (b: boolean) => {
+        if (b)
+            this.divPanel.setAttribute('active', '')
+        else
+            this.divPanel.removeAttribute('active')
     }
 
     cd(path: string): void;

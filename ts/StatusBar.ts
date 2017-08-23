@@ -39,10 +39,11 @@ export class StatusBar implements StatusBarApi {
 
     private readonly msgs: { [name: string]: Msg } = {}
 
-    msg = (name: string) => {
+    msg = (name: string): MsgAPi => {
         if (this.msgs[name]) return this.msgs[name]
         const msg = new Msg()
         this.msgs[name] = msg
         this.divMsgs.appendChild(msg.divMsg)
+        return msg
     }
 }

@@ -1,5 +1,5 @@
 @import 'colors';
-@import 'classes';
+// 
 #statusbar {
     display: flex;
     flex-shrink: 0;
@@ -32,4 +32,39 @@
     .btn {
         padding-right: .5em;
     }
+}
+
+.btn {
+    font-size: 1em;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    color: $color-natural;
+    border: none;
+    outline: none;
+    opacity: .5;
+    text-decoration: none;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.info,
+.info[data-title]:before {
+    color: $color-info;
+}
+
+.warn,
+.warn[data-title]:before {
+    color: $color-warn;
+}
+
+.err,
+.err[data-title]:before {
+    color: $color-err;
+}
+
+.del {
+    text-decoration: line-through;
 }
