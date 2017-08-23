@@ -2,7 +2,6 @@ node_modules/
 dist/
 .sass-cache/
 css
-.vscode
 _config.yml
 js
 *.swp
