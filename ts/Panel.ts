@@ -126,6 +126,27 @@ export class Panel implements PanelApi {
         })
     }
 
+    private selectRange = (from: number, to: number) => {
+        if (from > to) return this.selectRange(to, from)
+        for (let i = from
+            ; i < Math.min(to, this.visibleItems.length - 1)
+            ; i++
+        ) {
+            const item = this.visibleItems[i]
+            if (item) item.setSelected(true)
+        }
+    }
+
+    private rowsInView = () => {
+        return Math.floor(this.tbody.clientHeight / this.visibleItems[0].tr.scrollHeight)
+    }
+
+    private stepTo = (i, select: boolean = false) => {
+        if (select) this.selectRange(this.cur, i)
+        this.setCur(i)
+        this.scrollToCur()
+    }
+
     setActive = (b: boolean) => {
         this.active = b
         if (b)
@@ -155,24 +176,28 @@ export class Panel implements PanelApi {
         this.onItemsAddeds.push(then)
 
     step = (d: number, select?: boolean) => {
-        this.setCur(this.cur + d)
-        this.scrollToCur()
+        const newCur
+            = d < 0
+                ? Math.max(0, this.cur + d)
+                : Math.min(this.cur + d, this.visibleItems.length - 1)
+
+        this.stepTo(newCur, select)
     }
 
     stepPgUp = (select?: boolean) => {
-        throw new Error("Method not implemented.")
+        this.step(-this.rowsInView(), select)
     }
 
     stepPgDown = (select?: boolean) => {
-        throw new Error("Method not implemented.")
+        this.step(this.rowsInView(), select)
     }
 
     stepStart = (select?: boolean) => {
-        throw new Error("Method not implemented.")
+        this.stepTo(0, select)
     }
 
     stepEnd = (select?: boolean) => {
-        throw new Error("Method not implemented.")
+        this.stepTo(this.visibleItems.length - 1, select)
     }
 
     selectNone = () =>

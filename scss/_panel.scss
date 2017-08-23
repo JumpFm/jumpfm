@@ -35,12 +35,12 @@
     font-weight: bold;
 }
 
-.panel[active] tr[cur] {
-    background-color: darken($color-warn, 45%);
+.panel[active] tr[selected] {
+    background-color: darken($color-warn, 55%);
 }
 
-.panel[active] tr[sel] {
-    background-color: darken($color-warn, 55%);
+.panel[active] tr[cur] {
+    background-color: darken($color-warn, 45%);
 }
 
 table {
