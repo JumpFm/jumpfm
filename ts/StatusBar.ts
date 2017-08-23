@@ -3,8 +3,12 @@ import { StatusBar as StatusBarApi, Msg as MsgAPi } from 'jumpfm-api'
 class Msg implements MsgAPi {
     readonly divMsg: HTMLDivElement = document.createElement('div')
 
+    constructor() {
+        this.divMsg.className = 'msg'
+    }
+
     setType = (type: "info" | "warn" | "err") => {
-        this.divMsg.className = type
+        this.divMsg.setAttribute(type, '')
         return this
     }
 

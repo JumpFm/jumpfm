@@ -13,7 +13,7 @@ const keyCodes: { [name: string]: number } = {
     right: 39,
     down: 40,
     insert: 45,
-    delete: 46,
+    del: 46,
     slash: 191,
     0: 48,
     1: 49,

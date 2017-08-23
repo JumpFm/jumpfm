@@ -234,7 +234,6 @@ export class Panel implements PanelApi {
         this.clearItems()
         this.progressiveAddItems(0)
         this.updateVisibility()
-        this.setCur(0)
         return this
     }
 

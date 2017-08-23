@@ -5,15 +5,18 @@ import { PluginManager } from "./PluginManager";
 import { Dialog } from "./Dialog";
 import { getKeys } from "./files";
 import { shortway } from "./shortway";
+import { Settings } from "./Settings";
 
 export class JumpFm implements JumpFmApi {
-    readonly dialog = new Dialog()
-    private readonly divPanels = document.getElementById('panels')
     private active: 0 | 1 = 0
-    readonly panels: Panel[] = [new Panel(), new Panel()]
-    readonly electron = require('electron')
-    readonly statusBar: StatusBar = new StatusBar()
+    private readonly divPanels = document.getElementById('panels')
     private readonly pluginManager = new PluginManager(this)
+
+    readonly settings = new Settings()
+    readonly dialog = new Dialog()
+    readonly electron = require('electron')
+    readonly panels: Panel[] = [new Panel(), new Panel()]
+    readonly statusBar: StatusBar = new StatusBar()
 
     private passive = (): 0 | 1 => (this.active + 1) % 2 as 0 | 1
 
