@@ -7,6 +7,7 @@ import { getKeys } from "./files";
 import * as keyboardjs from 'keyboardjs'
 
 export class JumpFm implements JumpFmApi {
+    private readonly divPanels = document.getElementById('panels')
     private active: 0 | 1 = 0
     readonly panels: Panel[] = [new Panel(), new Panel()]
     readonly electron = require('electron')
@@ -29,7 +30,10 @@ export class JumpFm implements JumpFmApi {
         this.panels[this.passive()]
 
     panelsSwap = () => {
-        throw new Error("Method not implemented.")
+        const tmp = this.panels[0]
+        this.panels[0] = this.panels[1]
+        this.panels[1] = tmp
+        this.divPanels.insertBefore(this.panels[0].divPanel, this.panels[1].divPanel)
     }
 
     panelsSwitch = () =>
@@ -46,9 +50,7 @@ export class JumpFm implements JumpFmApi {
 
     constructor() {
         this.panels.forEach(panel => {
-            document
-                .getElementById('panels')
-                .appendChild(panel.divPanel)
+            this.divPanels.appendChild(panel.divPanel)
         })
 
 
