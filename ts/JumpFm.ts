@@ -44,6 +44,7 @@ export class JumpFm implements JumpFmApi {
     bind = (actionName: string, defaultKeys: string[], action: () => void) => {
         getKeys(actionName, defaultKeys).forEach(combo => {
             const cb = shortway(combo, (e) => {
+                console.log('jumpfm')
                 e.preventDefault()
                 action()
             })

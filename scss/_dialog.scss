@@ -1,64 +1,64 @@
 @import 'colors';
 @import 'classes';
 #dialog {
-    display: none;
-    position: absolute;
-    top: 20%;
-    left: 0;
-    right: 0;
-    width: 600px;
-    margin: 0 auto;
-    background-color: transparent;
+  display: none;
+  position: absolute;
+  top: 20%;
+  left: 0;
+  right: 0;
+  width: 600px;
+  margin: 0 auto;
+  background-color: transparent;
 }
 
 #dialog-label,
 #dialog-input {
-    padding: .8em;
+  padding: .8em;
 }
 
 #dialog-label,
 #dialog-input,
 #dialog-sug {
-    @extend .border;
-    background-color: $color-bg;
+  @extend .border;
+  background-color: $color-bg;
 }
 
 #dialog-input,
 #dialog-sug {
-    width: 100%;
+  width: 100%;
 }
 
 #dialog-content {
-    display: flex;
-    #dialog-label {
-        color: $color-info;
-        font-weight: bold;
-        border-right: none;
-    }
+  display: flex;
+  #dialog-label {
+    color: $color-info;
+    font-weight: bold;
+    border-right: none;
+  }
 }
 
 #dialog-right {
-    flex-grow: 1;
-    overflow: hidden;
-    #dialog-input {
-        border-left: none;
-        padding-left: 0;
+  flex-grow: 1;
+  overflow: hidden;
+  #dialog-input {
+    border-left: none;
+    padding-left: 0;
+  }
+  #dialog-sug {
+    border-top: none;
+    line-height: 1.5;
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
+    [cur] {
+      background-color: $color-border;
     }
-    #dialog-sug {
-        border-top: none;
-        line-height: 1.5;
-        padding: 0;
-        list-style-type: none;
-        margin: 0;
-        [cur] {
-            background-color: $color-border;
-        }
-        b {
-            color: $color-info;
-        }
-        li {
-            @extend .txt-no-wrap;
-            padding: 0 .2em;
-        }
+    b {
+      color: $color-info;
     }
+    li {
+      @extend .txt-no-wrap;
+      padding: 0 .2em;
+    }
+  }
 }

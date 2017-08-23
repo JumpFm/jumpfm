@@ -251,6 +251,7 @@ export class Panel implements PanelApi {
     bind = (actionName: string, defaultKeys: string[], action: () => void) => {
         getKeys(actionName, defaultKeys).forEach(combo => {
             const cb = shortway(combo, (e) => {
+                console.log('panel')
                 if (!this.active) return
                 e.preventDefault()
                 action()
