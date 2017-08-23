@@ -13,14 +13,11 @@
     "filesize": "^3.5.10",
     "fs-extra": "^4.0.1",
     "homedir": "^0.6.0",
-    "install-if-needed": "^1.0.3",
-    "keyboardjs": "^2.3.3",
     "moment": "^2.18.1",
     "node-cmd": "^3.0.0",
     "node-watch": "^0.5.5",
     "node.os": "^1.2.4",
-    "npm": "^5.3.0",
-    "shortway": "^0.3.0"
+    "npm": "^5.3.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^4.0.0",

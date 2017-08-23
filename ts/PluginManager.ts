@@ -11,7 +11,6 @@ import * as check from 'check-dependencies'
 import * as fs from 'fs-extra'
 import * as npm from 'npm'
 import * as path from 'path'
-import * as installIfNeeded from 'install-if-needed'
 import * as watch from 'node-watch'
 
 interface checkRes {
