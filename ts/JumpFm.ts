@@ -7,11 +7,14 @@ import { shortway } from "./shortway";
 import { Settings } from "./Settings";
 import { getKeys, saveKeyboard, root, packageJson } from "./files";
 
+import * as fs from 'fs'
+import * as watch from 'node-watch'
 
 export class JumpFm implements JumpFmApi {
     private active: 0 | 1 = 0
     private readonly divPanels = document.getElementById('panels')
     private readonly pluginManager = new PluginManager(this)
+    private readonly watchers: { [name: string]: fs.FSWatcher } = {}
 
     readonly package = packageJson
     readonly root = root
@@ -29,6 +32,20 @@ export class JumpFm implements JumpFmApi {
         this.panels[this.passive()].setActive(false)
     }
 
+    watchStart(name: string, path: string, then: () => void) {
+        this.watchStop(name)
+        setImmediate(() => {
+            let to
+            this.watchers[name] = watch(path, { recursive: false }, () => {
+                clearTimeout(to)
+                to = setTimeout(then)
+            })
+        })
+    }
+
+    watchStop(name: string) {
+        if (this.watchers[name]) this.watchers[name].close()
+    }
 
     getPanelActive = () =>
         this.panels[this.active]

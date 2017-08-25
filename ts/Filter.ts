@@ -25,10 +25,6 @@ export class Filter implements FilterApi {
         });
     }
 
-    clear = () => {
-        this.input.value = ''
-    }
-
     set = (val: string) => {
         this.input.value = val
         this.notifyAll()
@@ -48,10 +44,8 @@ export class Filter implements FilterApi {
     hide = () => this.input.style.display = 'none'
 
     bind = (actionName: string, defaultKeys: string[], action: () => void) => {
-        console.log('bind', defaultKeys, action)
         getKeys(actionName, defaultKeys).forEach(combo => {
             const cb = shortway(combo, (e) => {
-                console.log('trigger', action)
                 e.preventDefault()
                 action()
             })

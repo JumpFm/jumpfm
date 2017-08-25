@@ -60,7 +60,12 @@ export class Item implements ItemApi {
     isSelected = () => this.is('selected')
     isHidden = () => this.is('hidden')
 
-    setIcon = (src: string): Item => {
+    setAttribute(name: string, val: string = '') {
+        this.tr.setAttribute(name, val)
+        return this
+    }
+
+    setIcon = (src: string) => {
         this.icon.src = src
         return this
     }

@@ -18,6 +18,7 @@ export class Panel implements PanelApi {
     private readonly filters: { [name: string]: ((item: Item) => boolean) } = {}
     private readonly onCds: (() => void)[] = []
     private readonly onItemsAddeds: ((newItems: Item[]) => void)[] = []
+    private readonly onLoads: (() => void)[] = []
 
     private active = false
     private url: Url
@@ -83,7 +84,8 @@ export class Panel implements PanelApi {
         this.safeUpdateCurrent(true)
     }
 
-    private progressiveProcessItems = (process: (items: Item[]) => void) =>
+    private progressiveProcessItems =
+    (process: (items: Item[]) => void) =>
         (from: number, done?: () => void) => {
 
             if (from > this.items.length) return done && done()
@@ -121,9 +123,11 @@ export class Panel implements PanelApi {
 
 
     private updateVisibility = () => {
+        console.log('updateVisibility')
         this.safeUpdateCurrent(false)
         this.visibleItems = []
         this.progressiveUpdateVisibility(0, () => {
+            console.log('progressiveUpdateVisibility')
             this.setCur(this.cur)
             this.scrollToCur()
         })
@@ -168,6 +172,7 @@ export class Panel implements PanelApi {
         })
 
         this.url = pathOrUrl as Url
+        console.log('cd', this.url)
         this.setTitle()
         this.onCds.forEach(f => setImmediate(f))
     }
@@ -177,6 +182,10 @@ export class Panel implements PanelApi {
 
     onItemsAdded = (then: (newItems: Item[]) => void) =>
         this.onItemsAddeds.push(then)
+
+    onLoad = (then: () => void) => {
+        this.onLoads.push(then)
+    }
 
     step = (d: number, select?: boolean) => {
         const newCur
@@ -229,15 +238,21 @@ export class Panel implements PanelApi {
         this.visibleItems[this.cur]
 
     setItems = (items: File[]) => {
+        console.log('setItems')
         this.items = items.map(item => new Item(item))
 
         this.clearItems()
-        this.progressiveAddItems(0)
+        this.progressiveAddItems(0, () => {
+            this.onLoads.forEach(onLoad => {
+                setImmediate(onLoad)
+            })
+        })
         this.updateVisibility()
         return this
     }
 
     filterSet = (name: string, filter: (item: Item) => boolean) => {
+        console.log('filterSet', filter)
         this.filters[name] = filter
         this.updateVisibility()
     }
