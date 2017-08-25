@@ -50,17 +50,17 @@
   }
 }
 
-[info],
-[info][data-title]:before {
+[type=info],
+[type=info][data-title]:before {
   color: $color-info;
 }
 
-[warn],
-[warn][data-title]:before {
+[type=warn],
+[type=warn][data-title]:before {
   color: $color-warn;
 }
 
-[err],
-[err][data-title]:before {
+[type=err],
+[type=err][data-title]:before {
   color: $color-err;
 }

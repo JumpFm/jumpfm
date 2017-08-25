@@ -61,7 +61,7 @@ export class Panel implements PanelApi {
     }
 
     private scrollToCur = () => {
-        const curItem = this.visibleItems[this.cur]
+        const curItem = this.getCurrentItem()
         if (!curItem) return
         const tr = curItem.tr
         const trRect = tr.getBoundingClientRect()
@@ -72,15 +72,15 @@ export class Panel implements PanelApi {
             tr.scrollIntoView(true)
     }
 
-    private safeSetCurrent = (b: boolean) => {
-        const item = this.visibleItems[this.cur]
+    private safeUpdateCurrent = (b: boolean) => {
+        const item = this.getCurrentItem()
         if (item) item.setCur(b)
     }
 
     private setCur = (i) => {
-        this.safeSetCurrent(false)
+        this.safeUpdateCurrent(false)
         this.cur = Math.max(0, Math.min(i, this.visibleItems.length - 1))
-        this.safeSetCurrent(true)
+        this.safeUpdateCurrent(true)
     }
 
     private progressiveProcessItems = (process: (items: Item[]) => void) =>
@@ -121,10 +121,9 @@ export class Panel implements PanelApi {
 
 
     private updateVisibility = () => {
-        const oldCur = this.visibleItems[this.cur]
+        this.safeUpdateCurrent(false)
         this.visibleItems = []
         this.progressiveUpdateVisibility(0, () => {
-            if (oldCur) oldCur.setCur(false)
             this.setCur(this.cur)
             this.scrollToCur()
         })

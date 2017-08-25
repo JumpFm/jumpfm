@@ -8,7 +8,7 @@ class Msg implements MsgAPi {
     }
 
     setType = (type: "info" | "warn" | "err") => {
-        this.divMsg.setAttribute(type, '')
+        this.divMsg.setAttribute('type', type)
         return this
     }
 
