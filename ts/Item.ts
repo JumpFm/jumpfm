@@ -9,6 +9,8 @@ export class Item implements ItemApi {
     private hidden: boolean = false
     private selected: boolean = false
 
+    private readonly icon = document.createElement('img')
+
     private readonly tdIcon = document.createElement('td')
     private readonly tdName = document.createElement('td')
     private readonly tdSize = document.createElement('td')
@@ -17,6 +19,9 @@ export class Item implements ItemApi {
     readonly tr = document.createElement('tr')
 
     constructor(item: File) {
+        this.icon.className = 'file-icon'
+        this.tdIcon.appendChild(this.icon)
+
         this.tr.appendChild(this.tdIcon)
         this.tr.appendChild(this.tdName)
         this.tr.appendChild(this.tdSize)
@@ -54,8 +59,8 @@ export class Item implements ItemApi {
 
     isSelected = () => this.is('selected')
 
-    setIcon = (icon: string): Item => {
-        this.tdIcon.textContent = icon
+    setIcon = (src: string): Item => {
+        this.icon.src = src
         return this
     }
 

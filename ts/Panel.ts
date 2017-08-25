@@ -211,7 +211,8 @@ export class Panel implements PanelApi {
         this.items.forEach(item => item.setSelected(true))
 
     selectToggleCurrent = () => {
-        throw new Error("Method not implemented.")
+        const item = this.getCurrentItem()
+        item.setSelected(!item.isSelected())
     }
 
     getUrl = () =>
