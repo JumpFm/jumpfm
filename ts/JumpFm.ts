@@ -5,7 +5,7 @@ import { PluginManager } from "./PluginManager";
 import { Dialog } from "./Dialog";
 import { shortway } from "./shortway";
 import { Settings } from "./Settings";
-import { getKeys, saveKeyboard, root } from "./files";
+import { getKeys, saveKeyboard, root, packageJson } from "./files";
 
 
 export class JumpFm implements JumpFmApi {
@@ -13,6 +13,7 @@ export class JumpFm implements JumpFmApi {
     private readonly divPanels = document.getElementById('panels')
     private readonly pluginManager = new PluginManager(this)
 
+    readonly package = packageJson
     readonly root = root
     readonly settings = new Settings()
     readonly dialog = new Dialog()

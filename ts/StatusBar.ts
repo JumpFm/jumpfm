@@ -50,4 +50,10 @@ export class StatusBar implements StatusBarApi {
         this.divMsgs.appendChild(msg.divMsg)
         return msg
     }
+
+    clear = (name: string) => {
+        const msg = this.msgs[name]
+        if (!msg) return
+        msg.setText('')
+    }
 }

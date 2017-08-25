@@ -1,4 +1,4 @@
-import { Filter as FilterApi } from 'jumpfm-api'
+import { FilterBox as FilterApi } from 'jumpfm-api'
 import { getKeys } from "./files";
 import { shortway } from "./shortway";
 
@@ -9,6 +9,7 @@ export class Filter implements FilterApi {
 
 
     constructor() {
+        this.input.className = 'filter'
         this.input.addEventListener('keydown', e => e.stopPropagation(), false)
         this.input.addEventListener('input', () => {
             this.notifyAll()
@@ -22,6 +23,10 @@ export class Filter implements FilterApi {
         this.handlers.forEach(handler => {
             handler(this.input.value)
         });
+    }
+
+    clear = () => {
+        this.input.value = ''
     }
 
     set = (val: string) => {
@@ -43,8 +48,10 @@ export class Filter implements FilterApi {
     hide = () => this.input.style.display = 'none'
 
     bind = (actionName: string, defaultKeys: string[], action: () => void) => {
+        console.log('bind', defaultKeys, action)
         getKeys(actionName, defaultKeys).forEach(combo => {
             const cb = shortway(combo, (e) => {
+                console.log('trigger', action)
                 e.preventDefault()
                 action()
             })

@@ -22,6 +22,9 @@
     &:last-child {
       border-right: none;
     }
+    &:empty {
+      padding: 0;
+    }
   }
 }
 
