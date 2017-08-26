@@ -23,8 +23,9 @@ app.on('ready', function() {
     const w = parseInt(width * .8);
     const h = parseInt(height * .8);
 
-    // log.transports.file.level = 'debug';
-    // log.transports.console.level = 'debug';
+    global.argv = process.argv
+        // log.transports.file.level = 'debug';
+        // log.transports.console.level = 'debug';
 
     // Create the browser window.
     let mainWindow = new BrowserWindow({
