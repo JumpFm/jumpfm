@@ -4,107 +4,114 @@
 @import 'table';
 @import 'toc';
 * {
-    box-sizing: border-box;
-    margin: 0;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 html,
 body {
-    width: 100%;
-    font-family: 'Arimo', sans-serif;
-    line-height: 1.5;
-    overflow: auto;
-    padding: 0;
-    color: $color-txt;
+  width: 100%;
+  font-family: 'Arimo', sans-serif;
+  line-height: 1.5;
+  overflow: auto;
+  padding: 0;
+  color: $color-txt;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    font-size: 120%;
-    padding: 1em;
-    padding-top: 50px;
+  font-size: 120%;
+  padding: 1em;
+  padding-top: 50px;
 }
 
 h1,
 h2,
 h3,
 h4 {
-    color: $color-txt-dark;
-    font-weight: 400;
-    margin: .7em 0;
+  color: $color-txt-dark;
+  font-weight: 400;
+  margin: .7em 0;
 }
 
 p {
-    font-size: 14px;
-    text-align: justify;
-    &#about {
-        font-size: 100%;
-    }
+  font-size: 14px;
+  text-align: justify;
+  &#about {
+    font-size: 100%;
+  }
 }
 
 a {
-    color: #e81c4f;
-    text-decoration: none;
-    cursor: pointer;
-    &:hover {
-        color: #4db6ac;
-    }
+  color: #e81c4f;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    color: #4db6ac;
+  }
 }
 
 .alert {
-    display: flex;
-    font-size: 80%;
-    padding: 1em;
-    background-color: $color-warn;
-    border: 2px solid darken($color-warn, 15%);
-    margin: 1em 0;
-    i {
-        font-size: 200%;
-        padding-right: .3em;
-    }
+  display: flex;
+  font-size: 80%;
+  padding: 1em;
+  background-color: $color-warn;
+  border: 2px solid darken($color-warn, 15%);
+  margin: 1em 0;
+  i {
+    font-size: 200%;
+    padding-right: .3em;
+  }
 }
 
 .panic {
-    @extend .alert;
-    background-color: $color-err;
-    border: 2px solid darken($color-err, 15%);
+  @extend .alert;
+  background-color: $color-err;
+  border: 2px solid darken($color-err, 15%);
 }
 
 .bs {
-    box-shadow: 0px 0px 30px #666;
+  box-shadow: 0px 0px 30px #666;
 }
 
 img {
-    max-width: 100%;
-    display: block;
-    opacity: .85;
+  max-width: 100%;
+  display: block;
+  opacity: .85;
 }
 
 footer {
-    margin-top: 20px;
-    display: block;
-    text-align: center;
-    font-size: .7em;
-    padding: 3em;
-    font-family: monospace;
+  margin-top: 20px;
+  display: block;
+  text-align: center;
+  font-size: .7em;
+  padding: 3em;
+  font-family: monospace;
 }
 
 code {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .mono {
-    font-family: monospace;
+  font-family: monospace;
 }
 
 #shortcuts {
-    h5 {
-        margin-top: 1.2em;
-    }
-    table {
-        margin: 1.2em 0;
-    }
+  h5 {
+    margin-top: 1.2em;
+  }
+  table {
+    margin: 1.2em 0;
+  }
+}
+
+.notice {
+  background-color: $color-warn;
+  padding: 1em;
+  border: 1px solid darken($color-warn, 20%);
+  font-size: 80%;
 }

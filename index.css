@@ -181,4 +181,10 @@ code {
 #shortcuts table {
   margin: 1.2em 0; }
 
+.notice {
+  background-color: #FED37E;
+  padding: 1em;
+  border: 1px solid #fdb019;
+  font-size: 80%; }
+
 /*# sourceMappingURL=index.css.map */
