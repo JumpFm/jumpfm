@@ -89,6 +89,7 @@ export class Dialog implements DialogApi {
 
     open = (spec: DialogSpec) => {
         this.suggestions = []
+        this.clearSuggestions()
         this.divLabel.textContent = spec.label
         this.cur = 0
 

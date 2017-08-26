@@ -7,6 +7,7 @@ import { shortway } from "./shortway";
 import { Settings } from "./Settings";
 import { getKeys, saveKeyboard, root, packageJson } from "./files";
 
+import * as homedir from 'homedir'
 import * as fs from 'fs'
 import * as watch from 'node-watch'
 
@@ -23,6 +24,7 @@ export class JumpFm implements JumpFmApi {
     readonly electron = require('electron')
     readonly panels: Panel[] = [new Panel(), new Panel()]
     readonly statusBar: StatusBar = new StatusBar()
+    readonly argv: string[]
 
     private passive = (): 0 | 1 => (this.active + 1) % 2 as 0 | 1
 
@@ -74,7 +76,8 @@ export class JumpFm implements JumpFmApi {
         })
     }
 
-    constructor() {
+    constructor(argv: string[]) {
+        this.argv = argv
         this.panels.forEach(panel => {
             this.divPanels.appendChild(panel.divPanel)
         })
@@ -82,8 +85,7 @@ export class JumpFm implements JumpFmApi {
 
         this.pluginManager.loadAndUpdatePlugins(() => {
             saveKeyboard()
-            // this.panels.forEach(panel => panel.cd(homedir()))
-            this.panels.forEach(panel => panel.cd('/home/gilad/test'))
+            this.panels.forEach(panel => panel.cd(homedir()))
             this.setActive(0)
         })
     }
