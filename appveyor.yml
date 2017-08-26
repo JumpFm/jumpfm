@@ -1,4 +1,8 @@
 os: unstable
+branches:
+  only:
+  - master
+
 cache:
   - node_modules
 environment:

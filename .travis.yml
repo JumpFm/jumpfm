@@ -3,6 +3,10 @@ dist: trusty
 language: node_js
 node_js: 6
 
+branches:
+  only:
+  - master
+  
 before_install:
   - npm i -g npm@latest
   - npm i -g typescript
@@ -26,3 +30,4 @@ before_script:
 
 script:
   - npm run publish
+

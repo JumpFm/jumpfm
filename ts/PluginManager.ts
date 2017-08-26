@@ -22,21 +22,21 @@ interface checkRes {
 
 const defaultPlugins = {
     dependencies: {
-        "jumpfm-clock": "^1.0.5",
-        "jumpfm-copy": "^1.0.1",
-        "jumpfm-file-ops": "^1.0.2",
-        "jumpfm-filter": "^1.0.0",
-        "jumpfm-flat-mode": "^1.0.0",
-        "jumpfm-fs": "^1.0.0",
-        "jumpfm-gist": "^1.0.1",
-        "jumpfm-git-status": "^1.0.7",
-        "jumpfm-history": "^1.0.2",
-        "jumpfm-icons": "^1.0.0",
-        "jumpfm-jump": "^1.0.0",
-        "jumpfm-key-nav": "^1.0.0",
-        "jumpfm-version": "^1.0.2",
-        "jumpfm-weather": "^1.0.1",
-        "jumpfm-zip": "^1.0.0"
+        "jumpfm-clock": ">=1.0.0",
+        "jumpfm-copy": ">=1.0.0",
+        "jumpfm-file-ops": ">=1.0.0",
+        "jumpfm-filter": ">=1.0.0",
+        "jumpfm-flat-mode": ">=1.0.0",
+        "jumpfm-fs": ">=1.0.0",
+        "jumpfm-gist": ">=1.0.0",
+        "jumpfm-git-status": ">=1.0.0",
+        "jumpfm-history": ">=1.0.0",
+        "jumpfm-icons": ">=1.0.0",
+        "jumpfm-jump": ">=1.0.0",
+        "jumpfm-key-nav": ">=1.0.0",
+        "jumpfm-version": ">=1.0.0",
+        "jumpfm-weather": ">=1.0.0",
+        "jumpfm-zip": ">=1.0.0"
     }
 }
 
