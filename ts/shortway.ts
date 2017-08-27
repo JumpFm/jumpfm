@@ -2,6 +2,7 @@ const keyCodes: { [name: string]: number } = {
     backspace: 8,
     tab: 9,
     enter: 13,
+    pause: 19,
     esc: 27,
     space: 32,
     pageup: 33,
@@ -63,8 +64,19 @@ const keyCodes: { [name: string]: number } = {
     f10: 121,
     f11: 122,
     f12: 123,
+    numLock: 144,
+    scrollLock: 145,
+    ';': 186,
+    '=': 187,
+    ',': 188,
+    '-': 189,
+    '.': 190,
+    '/': 191,
+    '`': 192,
     '[': 219,
-    ']': 221
+    '\\': 220,
+    ']': 221,
+    "'": 221
 }
 
 const includes = (array, item) => array.indexOf(item) > -1

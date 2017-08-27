@@ -82,7 +82,6 @@ export class JumpFm implements JumpFmApi {
             this.divPanels.appendChild(panel.divPanel)
         })
 
-
         this.pluginManager.loadAndUpdatePlugins(() => {
             saveKeyboard()
             this.panels.forEach(panel => panel.cd(homedir()))
