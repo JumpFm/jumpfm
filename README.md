@@ -2,14 +2,21 @@
 
 # About
 
-JumpFm is a cross platform dual panel file manager with builtin superpowers. 
+JumpFm is a cross platform<sup>1,2</sup> dual panel file manager with builtin superpowers. 
 
-# Dev
+----
+<sup>1</sup>
+Windows built is not tested at all, install it at your own risk
+
+<sup>2</sup>
+For a Mac release see [this fork](https://github.com/heywoodlh/jumpfm)
+
+# \<dev/\>
 
 ## tl;dr.
 ```
-npm i -g typescript
 git clone git@github.com:Gilad-Kutiel-App/jumpfm.git
+npm i -g typescript electron
 cd jumpfm
 npm i
 tsc -w
