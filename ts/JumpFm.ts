@@ -34,13 +34,13 @@ export class JumpFm implements JumpFmApi {
         this.panels[this.passive()].setActive(false)
     }
 
-    watchStart(name: string, path: string, then: () => void) {
+    watchStart(name, path, then, recursive = false) {
         this.watchStop(name)
         setImmediate(() => {
             let to
-            this.watchers[name] = watch(path, { recursive: false }, () => {
+            this.watchers[name] = watch(path, { recursive: recursive }, () => {
                 clearTimeout(to)
-                to = setTimeout(then)
+                to = setTimeout(then, 10)
             })
         })
     }
