@@ -13,7 +13,7 @@ For a Mac release see [this fork](https://github.com/heywoodlh/jumpfm)
 
 # \<dev/\>
 
-## tl;dr.
+## tl;dr.<sup>1,2</sup>
 ```
 git clone git@github.com:Gilad-Kutiel-App/jumpfm.git
 npm i -g typescript electron
@@ -23,6 +23,14 @@ tsc -w
 sass --watch scss:css
 electron .
 ```
+---
+<sup>1</sup>
+You might want to [change npm's default directory](https://docs.npmjs.com/getting-started/fixing-npm-permissions#option-2-change-npms-default-directory-to-another-directory)
+
+<sup>2</sup>
+Use different terminal for each of  ```tsc -w```, ```sass --watch scss:css```, ```electron .```
+
+## More \<dev/\>
 
 JumpFm is an [Electron](https://electron.atom.io/) based app.
 It is written in [TypeScript](https://www.typescriptlang.org/).
