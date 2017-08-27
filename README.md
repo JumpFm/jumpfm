@@ -21,7 +21,7 @@ JumpFm is an [Electron](https://electron.atom.io/) based app.
 It is written in [TypeScript](https://www.typescriptlang.org/).
 To hack the code all you need is [node.js](https://nodejs.org/en/) a
 [decent editor](http://bit.ly/2wHIoSz) and a [sass compiler](http://sass-lang.com/).
-This is how your terminal should looked like:
+This is how your terminal should looks like:
 
 ![](/misc/dev.png)
 
