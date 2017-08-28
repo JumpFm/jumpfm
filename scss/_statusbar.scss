@@ -1,69 +1,70 @@
 @import 'colors';
 // 
 #statusbar {
-  display: flex;
-  flex-shrink: 0;
-  padding: .1em 0;
-  border-top: 3px solid $color-border;
+    display: flex;
+    flex-shrink: 0;
+    padding: .1em 0;
+    border-top: 3px solid $color-border;
 }
 
 #statusbar-msgs {
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-  font-size: 90%;
-  padding-right: 1em;
-  overflow: hidden;
-  .msg {
-    cursor: default;
-    flex-shrink: 0;
-    border-right: 1px solid $color-border;
-    padding: 0 .5em;
-    &:last-child {
-      border-right: none;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    font-size: 90%;
+    padding-right: 1em;
+    overflow: hidden;
+    .msg {
+        cursor: default;
+        flex-shrink: 0;
+        border-right: 1px solid $color-border;
+        padding: 0 .5em;
+        &:last-child {
+            border-right: none;
+        }
+        &:empty {
+            padding: 0;
+        }
     }
-    &:empty {
-      padding: 0;
-    }
-  }
 }
 
-#buttons {
-  display: flex;
-  flex-shrink: 0;
-  font-size: 120%;
-  .btn {
-    padding-right: .5em;
-  }
+#statusbar-buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-shrink: 0;
+    font-size: 120%;
+    .btn {
+        padding-right: .5em;
+    }
 }
 
 .btn {
-  font-size: 1em;
-  display: inline-block;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-  color: $color-natural;
-  border: none;
-  outline: none;
-  opacity: .5;
-  text-decoration: none;
-  &:hover {
-    opacity: 1;
-  }
+    font-size: 1em;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    color: $color-natural;
+    border: none;
+    outline: none;
+    opacity: .5;
+    text-decoration: none;
+    &:hover {
+        opacity: 1;
+    }
 }
 
 [type=info],
 [type=info][data-title]:before {
-  color: $color-info;
+    color: $color-info;
 }
 
 [type=warn],
 [type=warn][data-title]:before {
-  color: $color-warn;
+    color: $color-warn;
 }
 
 [type=err],
 [type=err][data-title]:before {
-  color: $color-err;
+    color: $color-err;
 }

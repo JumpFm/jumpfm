@@ -36,8 +36,8 @@ if (!fs.existsSync(pluginsPath))
     fs.mkdirpSync(pluginsPath)
 
 export const pluginsPackageJson = path.join(pluginsPath, 'package.json')
-const settingsPath = path.join(root, 'settings.json')
-const keyboardPath = path.join(root, 'keyboard.json')
+export const settingsPath = path.join(root, 'settings.json')
+export const keyboardPath = path.join(root, 'keyboard.json')
 
 export const editableFiles: EditableFile[] = [
     {

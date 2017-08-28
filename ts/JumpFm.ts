@@ -1,3 +1,4 @@
+import { } from 'electron'
 import { JumpFm as JumpFmApi } from 'jumpfm-api'
 import { Panel } from "./Panel"
 import { StatusBar } from "./StatusBar"
@@ -5,7 +6,7 @@ import { PluginManager } from "./PluginManager";
 import { Dialog } from "./Dialog";
 import { shortway } from "./shortway";
 import { Settings } from "./Settings";
-import { getKeys, saveKeyboard, root, packageJson } from "./files";
+import { getKeys, saveKeyboard, root, packageJson, keyboardPath, settingsPath } from "./files";
 
 import * as homedir from 'homedir'
 import * as fs from 'fs'
@@ -21,7 +22,7 @@ export class JumpFm implements JumpFmApi {
     readonly root = root
     readonly settings = new Settings()
     readonly dialog = new Dialog()
-    readonly electron = require('electron')
+    readonly electron: Electron.AllElectron = require('electron')
     readonly panels: Panel[] = [new Panel(), new Panel()]
     readonly statusBar: StatusBar = new StatusBar()
     readonly argv: string[]
@@ -34,7 +35,7 @@ export class JumpFm implements JumpFmApi {
         this.panels[this.passive()].setActive(false)
     }
 
-    watchStart(name, path, then, recursive = false) {
+    watchStart = (name, path, then, recursive = false) => {
         this.watchStop(name)
         setImmediate(() => {
             let to
@@ -45,7 +46,7 @@ export class JumpFm implements JumpFmApi {
         })
     }
 
-    watchStop(name: string) {
+    watchStop = (name: string) => {
         if (this.watchers[name]) this.watchers[name].close()
     }
 
@@ -87,5 +88,10 @@ export class JumpFm implements JumpFmApi {
             this.panels.forEach(panel => panel.cd(homedir()))
             this.setActive(0)
         })
+
+        const opn = (url) => () => this.electron.shell.openItem(url)
+        this.statusBar.buttonAdd('fa-info', 'About', opn('http://jumpfm.org'))
+        this.statusBar.buttonAdd('fa-key', 'Keyboard', opn(keyboardPath))
+        this.statusBar.buttonAdd('fa-gear', 'Settings', opn(settingsPath))
     }
 }

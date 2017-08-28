@@ -37,9 +37,25 @@ class Msg implements MsgAPi {
     }
 }
 
+class Button {
+    readonly a: HTMLAnchorElement = document.createElement('a')
+    private readonly i = document.createElement('i')
+
+    constructor(faIcon: string, tooltip: string) {
+        this.a.className = 'btn'
+        this.a.setAttribute('data-title', tooltip)
+        this.a.target = 'about:blank'
+        this.i.className = `fa ${faIcon}`
+        this.a.appendChild(this.i)
+    }
+}
+
 export class StatusBar implements StatusBarApi {
-    private readonly divMsgs: HTMLDivElement
-    = document.getElementById('statusbar-msgs') as HTMLDivElement
+    private readonly divMsgs: HTMLDivElement = document
+        .getElementById('statusbar-msgs') as HTMLDivElement
+
+    private readonly divButtons: HTMLDivElement = document
+        .getElementById('statusbar-buttons') as HTMLDivElement
 
     private readonly msgs: { [name: string]: Msg } = {}
 
@@ -55,5 +71,12 @@ export class StatusBar implements StatusBarApi {
         const msg = this.msgs[name]
         if (!msg) return
         msg.setText('')
+    }
+    msgClear = this.clear
+
+    buttonAdd(faIcon: string, tooltip: string, action: () => void) {
+        const a = new Button(faIcon, tooltip).a
+        this.divButtons.appendChild(a)
+        a.addEventListener('click', action, false)
     }
 }
