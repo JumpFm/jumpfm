@@ -22,6 +22,7 @@ interface checkRes {
 
 const defaultPlugins = {
     dependencies: {
+        "jumpfm-font-size": ">=1.0.0",
         "jumpfm-clock": ">=1.0.0",
         "jumpfm-copy": ">=1.0.0",
         "jumpfm-file-ops": ">=1.0.0",
