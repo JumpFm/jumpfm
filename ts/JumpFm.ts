@@ -6,7 +6,15 @@ import { PluginManager } from "./PluginManager";
 import { Dialog } from "./Dialog";
 import { shortway } from "./shortway";
 import { Settings } from "./Settings";
-import { getKeys, saveKeyboard, root, packageJson, keyboardPath, settingsPath } from "./files";
+import {
+    getKeys
+    , saveKeyboard
+    , root
+    , packageJson
+    , keyboardPath
+    , settingsPath
+    , pluginsPackageJson
+} from "./files";
 
 import * as homedir from 'homedir'
 import * as fs from 'fs'
@@ -93,5 +101,6 @@ export class JumpFm implements JumpFmApi {
         this.statusBar.buttonAdd('fa-info', 'About', opn('http://jumpfm.org'))
         this.statusBar.buttonAdd('fa-key', 'Keyboard', opn(keyboardPath))
         this.statusBar.buttonAdd('fa-gear', 'Settings', opn(settingsPath))
+        this.statusBar.buttonAdd('fa-plug', 'Plugins', opn(pluginsPackageJson))
     }
 }
