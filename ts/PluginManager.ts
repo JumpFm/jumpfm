@@ -22,22 +22,22 @@ interface checkRes {
 
 const defaultPlugins = {
     dependencies: {
-        "jumpfm-font-size": ">=1.0.0",
-        "jumpfm-clock": ">=1.0.0",
-        "jumpfm-copy": ">=1.0.0",
-        "jumpfm-file-ops": ">=1.0.0",
-        "jumpfm-filter": ">=1.0.0",
-        "jumpfm-flat-mode": ">=1.0.0",
-        "jumpfm-fs": ">=1.0.0",
-        "jumpfm-gist": ">=1.0.0",
-        "jumpfm-git-status": ">=1.0.0",
-        "jumpfm-history": ">=1.0.0",
-        "jumpfm-icons": ">=1.0.0",
-        "jumpfm-jump": ">=1.0.0",
-        "jumpfm-key-nav": ">=1.0.0",
-        "jumpfm-version": ">=1.0.0",
-        "jumpfm-weather": ">=1.0.0",
-        "jumpfm-zip": ">=1.0.0"
+        "jumpfm-font-size": "latest",
+        "jumpfm-clock": "latest",
+        "jumpfm-copy": "latest",
+        "jumpfm-file-ops": "latest",
+        "jumpfm-filter": "latest",
+        "jumpfm-flat-mode": "latest",
+        "jumpfm-fs": "latest",
+        "jumpfm-gist": "latest",
+        "jumpfm-git-status": "latest",
+        "jumpfm-history": "latest",
+        "jumpfm-icons": "latest",
+        "jumpfm-jump": "latest",
+        "jumpfm-key-nav": "latest",
+        "jumpfm-version": "latest",
+        "jumpfm-weather": "latest",
+        "jumpfm-zip": "latest"
     }
 }
 

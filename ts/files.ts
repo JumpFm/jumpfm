@@ -2,12 +2,6 @@ import * as fs from 'fs-extra';
 import * as homedir from 'homedir';
 import * as path from 'path';
 
-interface EditableFile {
-    path: string
-    title: string
-    icon: string
-}
-
 export interface Plugins {
     name: string
     version: string
@@ -38,24 +32,6 @@ if (!fs.existsSync(pluginsPath))
 export const pluginsPackageJson = path.join(pluginsPath, 'package.json')
 export const settingsPath = path.join(root, 'settings.json')
 export const keyboardPath = path.join(root, 'keyboard.json')
-
-export const editableFiles: EditableFile[] = [
-    {
-        path: keyboardPath,
-        title: 'Keyboard',
-        icon: 'fa fa-key'
-    },
-    {
-        path: pluginsPackageJson,
-        title: 'Plugins',
-        icon: 'fa fa-plug'
-    },
-    {
-        path: settingsPath,
-        title: 'Settings',
-        icon: 'fa fa-cog',
-    },
-]
 
 export const settings = load(settingsPath)
 export const keyboard = load(keyboardPath)

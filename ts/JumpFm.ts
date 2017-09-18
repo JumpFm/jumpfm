@@ -45,6 +45,7 @@ export class JumpFm implements JumpFmApi {
 
     watchStart = (name, path, then, recursive = false) => {
         this.watchStop(name)
+        console.log('WATCH START', name, path)
         setImmediate(() => {
             let to
             this.watchers[name] = watch(path, { recursive: recursive }, () => {
@@ -55,7 +56,10 @@ export class JumpFm implements JumpFmApi {
     }
 
     watchStop = (name: string) => {
-        if (this.watchers[name]) this.watchers[name].close()
+        if (this.watchers[name]) {
+            console.log('WATCH STOP', name)
+            this.watchers[name].close()
+        }
     }
 
     getPanelActive = () =>
@@ -91,16 +95,16 @@ export class JumpFm implements JumpFmApi {
             this.divPanels.appendChild(panel.divPanel)
         })
 
-        this.pluginManager.loadAndUpdatePlugins(() => {
-            saveKeyboard()
-            this.panels.forEach(panel => panel.cd(homedir()))
-            this.setActive(0)
-        })
-
         const opn = (url) => () => this.electron.shell.openItem(url)
         this.statusBar.buttonAdd('fa-info', 'About', opn('http://jumpfm.org'))
         this.statusBar.buttonAdd('fa-key', 'Keyboard', opn(keyboardPath))
         this.statusBar.buttonAdd('fa-gear', 'Settings', opn(settingsPath))
         this.statusBar.buttonAdd('fa-plug', 'Plugins', opn(pluginsPackageJson))
+
+        this.pluginManager.loadAndUpdatePlugins(() => {
+            saveKeyboard()
+            this.panels.forEach(panel => panel.cd(homedir()))
+            this.setActive(0)
+        })
     }
 }
