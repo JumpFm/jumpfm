@@ -51,6 +51,7 @@
                 "build/icons/*"
             ],
             "target": [
+                "AppImage",
                 "snap",
                 "deb"
             ],
