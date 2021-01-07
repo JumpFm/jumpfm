@@ -32,10 +32,16 @@ app.on('ready', function() {
         width: w,
         height: h,
         icon: path.join(__dirname, 'build/icons/64x64.png'),
+	webPreferences: {
+            nodeIntegration: true,
+	    enableRemoteModule: true
+	}
     });
 
     // mainWindow.setMenu(null);
     mainWindow.loadURL('file://' + __dirname + '/index.html');
+
+    //mainWindow.openDevTools()
 
     mainWindow.on('closed', function() {
         mainWindow = null;
